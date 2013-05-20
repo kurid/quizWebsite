@@ -5,5 +5,6 @@ public class ngtdh {
 		System.out.println("test");
 		String k = "";
 		double y = 9.343;
+		Integer asdf = 9;
 	}
 }
