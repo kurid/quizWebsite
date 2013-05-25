@@ -54,38 +54,42 @@ public class MyDB {
 	/*
 	 * abrunebs marto ricxvebs
 	 */
-	public int[] getNotification(){
+	public int[] getNotifications(){
 		//TODO:
 		return null;
 	}
 	
 	
-	public String getChelenge(int id){
+	public List getChallenges(int id){
 		//TODO:
 		return null;	
 	}
 	
 	
-	public String getMassage(int id){
+	public List getMassages(int id){
 		//TODO:
 		return null;
 	}
 	
 	
-	public void sendMassage(){
+	public List getRequest(int id){
+		//TODO:
+		return null;	
+	}
+	
+	public void sendMassage(int id1, int id2, String text){
 		//TODO:		
 	}
 	
 	
-	public void sendReques(){
+	public void sendFriendRequest(int id1, int id2){
 		//TODO:
 	}
 	
-	
-	public String Request(int id){
+	public void sendChallenge(int id1, int id2, int quizId){
 		//TODO:
-		return null;	
 	}
+	
 	
 	public static void close() {
 		try {
