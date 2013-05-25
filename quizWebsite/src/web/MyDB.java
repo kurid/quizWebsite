@@ -91,6 +91,13 @@ public class MyDB {
 	}
 	
 	
+	public List getQuiz(int QuizId){
+		//TODO:
+		return null;
+	}
+	
+	
+	
 	public static void close() {
 		try {
 			con.close();
