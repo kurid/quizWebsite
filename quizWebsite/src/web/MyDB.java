@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 public class MyDB {
 	private static final String MYSQL_USERNAME = "root";
 	private static final String MYSQL_PASSWORD = "1234";
@@ -25,9 +27,64 @@ public class MyDB {
 			System.err.println("CS108 student: Add the MySQL jar file to your build path!");
 		}
 	}
+
 	
-	public static Connection getConnection() {
-		return con;
+	public List getFriends(int id){
+		//TODO:
+		return null;
+	}
+	
+	public String getName(int id){
+		//TODO:
+		return null;
+	}	
+	
+	
+	public String getSurname(int id){
+		//TODO:
+		return null;
+	}
+		
+	public String getNickName(int id){
+		//TODO:
+		return null;
+	}
+	
+	
+	/*
+	 * abrunebs marto ricxvebs
+	 */
+	public int[] getNotification(){
+		//TODO:
+		return null;
+	}
+	
+	
+	public String getChelenge(int id){
+		//TODO:
+		return null;	
+	}
+	
+	
+	public String getMassage(int id){
+		//TODO:
+		return null;
+	}
+	
+	
+	public void sendMassage(){
+		//TODO:		
+	}
+	
+	
+	public void sendReques(){
+		//TODO:
+	}
+	
+	
+	public String Request(int id){
+		//TODO:
+		return null;	
 	}
 	
 	public static void close() {
@@ -37,6 +94,8 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
 
 
