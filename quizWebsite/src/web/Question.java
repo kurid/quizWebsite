@@ -1,6 +1,7 @@
 package web;
 
 public interface Question {
-
-	public void display();
+	
+	public void getQuestionText();
+	public boolean checkAnswer();
 }
