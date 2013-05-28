@@ -4,9 +4,22 @@ use quizWebsite;
 create dataBase quizWebsite;
 
 DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS friendships;
+DROP TABLE IF EXISTS friendRequests;
+DROP TABLE IF EXISTS quizes;
+DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS multipleChoice;
+DROP TABLE IF EXISTS answers;
+DROP TABLE IF EXISTS matching;
+DROP TABLE IF EXISTS tags;
+DROP TABLE IF EXISTS questionToQuiz;
+DROP TABLE IF EXISTS challenges;
+DROP TABLE IF EXISTS massages;
+DROP TABLE IF EXISTS takenQuizes;
+
 
 create table accounts(
-	accountID int primary key ,
+	accountID int primary key AUTO_INCREMENT,
 	nick varchar(64),
 	name varchar(64),
 	surname varchar(64),
@@ -33,7 +46,7 @@ create table friendRequests(
 
 
 create table quizes(
-	quizID int primary key,
+	quizID int primary key AUTO_INCREMENT not null,
 	authorID int,
 	name varchar(64),
 	quiz_date date, 
@@ -43,7 +56,7 @@ create table quizes(
 
 
 create table questions(
-	questionID int primary key,
+	questionID int primary key AUTO_INCREMENT not null,
 	type int,
 	questionText varchar(512),
 	score int
@@ -108,6 +121,7 @@ create table massages(
 	accountIdFrom int,
 	text varchar(64),
 	read_unread bool,
+	sendTime date,
 	foreign key (accountIDTo) references accounts (accountID),
 	foreign key (accountIDFrom) references accounts (accountID)
 );
