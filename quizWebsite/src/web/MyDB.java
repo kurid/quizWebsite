@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MyDB {
@@ -35,7 +38,7 @@ public class MyDB {
 	}
 
 	public static List<Integer> getFriends(int id) {
-		List<Integer> friends =  new ArrayList<Integer>();
+		List<Integer> friends = new ArrayList<Integer>();
 		Statement stat;
 		ResultSet res;
 		try {
@@ -43,13 +46,13 @@ public class MyDB {
 			res = stat
 					.executeQuery("SELECT accountID2 FROM friendships where accountID1 = \""
 							+ id + "\"");
-			while(res.next()){
+			while (res.next()) {
 				friends.add(res.getInt("accountID2"));
 			}
 			res = stat
 					.executeQuery("SELECT accountID1 FROM friendships where accountID2 = \""
 							+ id + "\"");
-			while(res.next()){
+			while (res.next()) {
 				friends.add(res.getInt("accountID1"));
 			}
 		} catch (SQLException e) {
@@ -62,14 +65,14 @@ public class MyDB {
 	public static String getName(int id) {
 		Statement stat;
 		ResultSet res;
-		String name="";
+		String name = "";
 		try {
 			stat = con.createStatement();
 			res = stat
 					.executeQuery("SELECT name FROM accounts where accountID = \""
 							+ id + "\"");
 			res.next();
-			name=res.getString("name");
+			name = res.getString("name");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,14 +83,14 @@ public class MyDB {
 	public static String getSurname(int id) {
 		Statement stat;
 		ResultSet res;
-		String surname="";
+		String surname = "";
 		try {
 			stat = con.createStatement();
 			res = stat
 					.executeQuery("SELECT surname FROM accounts where accountID = \""
 							+ id + "\"");
 			res.next();
-			surname=res.getString("surname");
+			surname = res.getString("surname");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,14 +101,14 @@ public class MyDB {
 	public static String getNickName(int id) {
 		Statement stat;
 		ResultSet res;
-		String nick="";
+		String nick = "";
 		try {
 			stat = con.createStatement();
 			res = stat
 					.executeQuery("SELECT nick FROM accounts where accountID = \""
 							+ id + "\"");
 			res.next();
-			nick=res.getString("nick");
+			nick = res.getString("nick");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -136,8 +139,23 @@ public class MyDB {
 		return null;
 	}
 
-	public void sendMassage(int id1, int id2, String text) {
-		// TODO:
+	public static void sendMassage(int idTo, int idFrom, String text) {
+		Statement stat;
+		int res;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		java.util.Date utilDate = new java.util.Date();		
+		String date = sdf.format(utilDate);
+		System.out.println(date);
+		try {
+			stat = con.createStatement();
+			res = stat
+					.executeUpdate("insert into massages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )values("+idTo+","+idFrom+",\""+text+"\",false,\""+date+"\")");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public void sendFriendRequest(int id1, int id2) {
