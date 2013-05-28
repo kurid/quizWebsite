@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.mbeans.UserMBean;
+
 /**
  * Servlet implementation class Enter
  */
@@ -33,7 +35,14 @@ public class Enter extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("shemovida");
+		String nickNameame = request.getParameter("userName");
+		String password = request.getParameter("password");
+		AccountManager manager  = new AccountManager();
+		if(manager.isCoreckt(nickName, Password)){
+			
+		}else{
+			
+		}
 	}
 
 }
