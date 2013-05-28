@@ -35,10 +35,10 @@ public class Enter extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nickNameame = request.getParameter("userName");
+		String nickName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		AccountManager manager  = new AccountManager();
-		if(manager.isCoreckt(nickName, Password)){
+		if(manager.isCorrect(nickName, password)){
 			
 		}else{
 			

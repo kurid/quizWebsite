@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS takenQuizes;
 
 
 create table accounts(
-	accountID int primary key AUTO_INCREMENT,
+	accountID int primary key AUTO_INCREMENT not null,
 	nick varchar(64),
 	name varchar(64),
 	surname varchar(64),
