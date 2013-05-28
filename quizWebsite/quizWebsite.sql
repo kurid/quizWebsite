@@ -136,3 +136,11 @@ create table takenQuizes(
 	foreign key (accountID) references accounts (accountID),
 	foreign key (quizID) references quizes (quizID)
 );
+
+insert into accounts(nick,name) values("saba","saba");
+insert into accounts(nick) values("gio");
+insert into accounts(nick) values("qeti");
+insert into accounts(nick,name,surname) values("saba9993","saba","gogolidze");
+
+insert into friendships(accountID1,accountID2) values(1,2);
+insert into friendships(accountID1,accountID2) values(3,1);

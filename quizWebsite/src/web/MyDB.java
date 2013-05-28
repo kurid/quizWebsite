@@ -2,101 +2,157 @@ package web;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyDB {
 	private static final String MYSQL_USERNAME = "root";
 	private static final String MYSQL_PASSWORD = "1234";
 	private static final String MYSQL_DATABASE_SERVER = "localhost";
 	private static final String MYSQL_DATABASE_NAME = "quizWebsite";
-	
+
 	private static Connection con;
-	
+
 	static {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://" + MYSQL_DATABASE_SERVER + "/" + MYSQL_DATABASE_NAME;
-			con = DriverManager.getConnection(url, MYSQL_USERNAME, MYSQL_PASSWORD);
+			String url = "jdbc:mysql://" + MYSQL_DATABASE_SERVER + "/"
+					+ MYSQL_DATABASE_NAME;
+			con = DriverManager.getConnection(url, MYSQL_USERNAME,
+					MYSQL_PASSWORD);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.err.println("CS108 student: Update the MySQL constants to correct values!");
+			System.err
+					.println("CS108 student: Update the MySQL constants to correct values!");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.err.println("CS108 student: Add the MySQL jar file to your build path!");
+			System.err
+					.println("CS108 student: Add the MySQL jar file to your build path!");
 		}
 	}
 
-	
-	public List getFriends(int id){
-		//TODO:
-		return null;
+	public static List<Integer> getFriends(int id) {
+		List<Integer> friends =  new ArrayList<Integer>();
+		Statement stat;
+		ResultSet res;
+		try {
+			stat = con.createStatement();
+			res = stat
+					.executeQuery("SELECT accountID2 FROM friendships where accountID1 = \""
+							+ id + "\"");
+			while(res.next()){
+				friends.add(res.getInt("accountID2"));
+			}
+			res = stat
+					.executeQuery("SELECT accountID1 FROM friendships where accountID2 = \""
+							+ id + "\"");
+			while(res.next()){
+				friends.add(res.getInt("accountID1"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return friends;
 	}
-	
-	public String getName(int id){
-		//TODO:
-		return null;
-	}	
-	
-	
-	public String getSurname(int id){
-		//TODO:
-		return null;
+
+	public static String getName(int id) {
+		Statement stat;
+		ResultSet res;
+		String name="";
+		try {
+			stat = con.createStatement();
+			res = stat
+					.executeQuery("SELECT name FROM accounts where accountID = \""
+							+ id + "\"");
+			res.next();
+			name=res.getString("name");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return name;
 	}
-		
-	public String getNickName(int id){
-		//TODO:
-		return null;
+
+	public static String getSurname(int id) {
+		Statement stat;
+		ResultSet res;
+		String surname="";
+		try {
+			stat = con.createStatement();
+			res = stat
+					.executeQuery("SELECT surname FROM accounts where accountID = \""
+							+ id + "\"");
+			res.next();
+			surname=res.getString("surname");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return surname;
 	}
-	
-	
+
+	public static String getNickName(int id) {
+		Statement stat;
+		ResultSet res;
+		String nick="";
+		try {
+			stat = con.createStatement();
+			res = stat
+					.executeQuery("SELECT nick FROM accounts where accountID = \""
+							+ id + "\"");
+			res.next();
+			nick=res.getString("nick");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nick;
+	}
+
 	/*
 	 * abrunebs marto ricxvebs
 	 */
-	public int[] getNotifications(){
-		//TODO:
+	public int[] getNotifications() {
+		// TODO:
 		return null;
 	}
-	
-	
-	public List getChallenges(int id){
-		//TODO:
-		return null;	
-	}
-	
-	
-	public List getMassages(int id){
-		//TODO:
+
+	public List getChallenges(int id) {
+		// TODO:
 		return null;
 	}
-	
-	
-	public List getRequest(int id){
-		//TODO:
-		return null;	
-	}
-	
-	public void sendMassage(int id1, int id2, String text){
-		//TODO:		
-	}
-	
-	
-	public void sendFriendRequest(int id1, int id2){
-		//TODO:
-	}
-	
-	public void sendChallenge(int id1, int id2, int quizId){
-		//TODO:
-	}
-	
-	
-	public List getQuiz(int QuizId){
-		//TODO:
+
+	public List getMassages(int id) {
+		// TODO:
 		return null;
 	}
-	
-	
+
+	public List getRequest(int id) {
+		// TODO:
+		return null;
+	}
+
+	public void sendMassage(int id1, int id2, String text) {
+		// TODO:
+	}
+
+	public void sendFriendRequest(int id1, int id2) {
+		// TODO:
+	}
+
+	public void sendChallenge(int id1, int id2, int quizId) {
+		// TODO:
+	}
+
+	public List getQuiz(int QuizId) {
+		// TODO:
+		return null;
+	}
+
 	public static void close() {
 		try {
 			con.close();
@@ -104,8 +160,5 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 }
-
-
