@@ -97,7 +97,6 @@ public class MyDB {
 	}
 	
 	
-	
 	public static void close() {
 		try {
 			con.close();
