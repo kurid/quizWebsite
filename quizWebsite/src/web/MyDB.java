@@ -145,7 +145,6 @@ public class MyDB {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date utilDate = new java.util.Date();		
 		String date = sdf.format(utilDate);
-		System.out.println(date);
 		try {
 			stat = con.createStatement();
 			res = stat
@@ -162,8 +161,19 @@ public class MyDB {
 		// TODO:
 	}
 
-	public void sendChallenge(int id1, int id2, int quizId) {
-		// TODO:
+	public static void sendChallenge(int idTo, int idFrom, int quizId) {
+		Statement stat;
+		int res;
+		try {
+			stat = con.createStatement();
+			res = stat
+					.executeUpdate("insert into challenges (accountIdTo,accountIdFrom,quizID )values("+idTo+","+idFrom+","+quizId+")");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public List getQuiz(int QuizId) {

@@ -144,3 +144,8 @@ insert into accounts(nick,name,surname) values("saba9993","saba","gogolidze");
 
 insert into friendships(accountID1,accountID2) values(1,2);
 insert into friendships(accountID1,accountID2) values(3,1);
+
+select * from massages;
+insert into massages (accountIdTo,accountIdFrom,text,read_unread  )values(1,2,"A",false);
+delete from massages where accountIdTo = 1;
+insert into quizes (authorid) values(1);
