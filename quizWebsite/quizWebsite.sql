@@ -72,10 +72,10 @@ create table multipleChoice(
 );
 
 
-
 create table answers(
 	questionID int,
 	answer varchar(64),
+	answerNum int,
 	foreign key (questionID) references questions (questionID)
 );
 

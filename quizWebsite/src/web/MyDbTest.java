@@ -12,9 +12,9 @@ public class MyDbTest extends TestCase {
 		// qveda shemowmeba shecdomas agdebs rato arvici .
 		// mydb.getfriends sworad abrunebs lists assertis bralia shecdoma
 		// assertEquals(Arrays.asList(new int[] { 2, 3 }),MyDB.getFriends(1) );
-		assertEquals("saba9993", MyDB.getNickName(4));
-		assertEquals("saba", MyDB.getName(4));
-		assertEquals("gogolidze", MyDB.getSurname(4));
+		assertEquals("saba9993", MyDB.getNickName(5));
+		assertEquals("saba", MyDB.getName(5));
+		assertEquals("gogolidze", MyDB.getSurname(5));
 		MyDB.sendMassage(1, 2, "a");
 		MyDB.sendChallenge(1, 2, 1);
 	}
