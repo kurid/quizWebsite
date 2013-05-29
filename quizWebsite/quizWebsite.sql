@@ -1,7 +1,6 @@
 
 use quizWebsite;
 
-create dataBase quizWebsite;
 
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS friendships;
@@ -14,7 +13,7 @@ DROP TABLE IF EXISTS matching;
 DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS questionToQuiz;
 DROP TABLE IF EXISTS challenges;
-DROP TABLE IF EXISTS massages;
+DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS takenQuizes;
 
 
@@ -72,10 +71,10 @@ create table multipleChoice(
 );
 
 
+
 create table answers(
 	questionID int,
 	answer varchar(64),
-	answerNum int,
 	foreign key (questionID) references questions (questionID)
 );
 
@@ -116,7 +115,7 @@ create table challenges(
 );
 
 
-create table massages(
+create table messages(
 	accountIdTo int,
 	accountIdFrom int,
 	text varchar(64),
@@ -145,7 +144,12 @@ insert into accounts(nick,name,surname) values("saba9993","saba","gogolidze");
 insert into friendships(accountID1,accountID2) values(1,2);
 insert into friendships(accountID1,accountID2) values(3,1);
 
-select * from massages;
-insert into massages (accountIdTo,accountIdFrom,text,read_unread  )values(1,2,"A",false);
-delete from massages where accountIdTo = 1;
+
+insert into messages (accountIdTo,accountIdFrom,text,read_unread  )values(1,2,"A",false);
+delete from messages where accountIdTo = 1;
+delete from accounts where accountId > 4;
 insert into quizes (authorid) values(1);
+select * from quizes;
+select * from friendships;
+select * from messages;
+select * from accounts;
