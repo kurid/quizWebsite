@@ -1,10 +1,19 @@
 package web;
 
-import java.util.ArrayList;
+import java.util.Set;
 
-public interface Question {
+public class Question implements QuestionInterface{
+	protected int index;
+	protected String questionText;
 	
-	public void getQuestionText();
-	public boolean checkAnswer(ArrayList<String> answers);
-	public void getType(int id);
+	@Override
+	public int getIndex() {
+		return index;
+	}
+
+	@Override
+	public String getQuestionText() {
+		return questionText;
+	}
+
 }
