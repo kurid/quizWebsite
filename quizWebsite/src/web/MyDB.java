@@ -104,10 +104,6 @@ public class MyDB {
 		return surname;
 	}
 
-	public static int getAccounId(String nick){
-		
-		//return ;		
-	}
 	
 	public static String getNickName(int id) {
 		ResultSet res;
