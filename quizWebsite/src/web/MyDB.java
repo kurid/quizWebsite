@@ -18,6 +18,8 @@ public class MyDB {
 	private static final String MYSQL_DATABASE_NAME = "quizWebsite";
 
 	private static Connection con;
+	private static Statement statement;
+	private static String query;
 
 	static {
 		try {
@@ -35,21 +37,27 @@ public class MyDB {
 			System.err
 					.println("CS108 student: Add the MySQL jar file to your build path!");
 		}
+		
+		try {
+			statement = con.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static List<Integer> getFriends(int id) {
 		List<Integer> friends = new ArrayList<Integer>();
-		Statement stat;
 		ResultSet res;
 		try {
-			stat = con.createStatement();
-			res = stat
+			statement = con.createStatement();
+			res = statement
 					.executeQuery("SELECT accountID2 FROM friendships where accountID1 = \""
 							+ id + "\"");
 			while (res.next()) {
 				friends.add(res.getInt("accountID2"));
 			}
-			res = stat
+			res = statement
 					.executeQuery("SELECT accountID1 FROM friendships where accountID2 = \""
 							+ id + "\"");
 			while (res.next()) {
@@ -63,12 +71,11 @@ public class MyDB {
 	}
 
 	public static String getName(int id) {
-		Statement stat;
 		ResultSet res;
 		String name = "";
 		try {
-			stat = con.createStatement();
-			res = stat
+			statement = con.createStatement();
+			res = statement
 					.executeQuery("SELECT name FROM accounts where accountID = \""
 							+ id + "\"");
 			res.next();
@@ -81,12 +88,11 @@ public class MyDB {
 	}
 
 	public static String getSurname(int id) {
-		Statement stat;
 		ResultSet res;
 		String surname = "";
 		try {
-			stat = con.createStatement();
-			res = stat
+			statement = con.createStatement();
+			res = statement
 					.executeQuery("SELECT surname FROM accounts where accountID = \""
 							+ id + "\"");
 			res.next();
@@ -99,12 +105,11 @@ public class MyDB {
 	}
 
 	public static String getNickName(int id) {
-		Statement stat;
 		ResultSet res;
 		String nick = "";
 		try {
-			stat = con.createStatement();
-			res = stat
+			statement = con.createStatement();
+			res = statement
 					.executeQuery("SELECT nick FROM accounts where accountID = \""
 							+ id + "\"");
 			res.next();
@@ -140,14 +145,13 @@ public class MyDB {
 	}
 
 	public static void sendMassage(int idTo, int idFrom, String text) {
-		Statement stat;
 		int res;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date utilDate = new java.util.Date();		
 		String date = sdf.format(utilDate);
 		try {
-			stat = con.createStatement();
-			res = stat
+			statement = con.createStatement();
+			res = statement
 					.executeUpdate("insert into massages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )values("+idTo+","+idFrom+",\""+text+"\",false,\""+date+"\")");
 
 		} catch (SQLException e) {
@@ -162,11 +166,10 @@ public class MyDB {
 	}
 
 	public static void sendChallenge(int idTo, int idFrom, int quizId) {
-		Statement stat;
 		int res;
 		try {
-			stat = con.createStatement();
-			res = stat
+			statement = con.createStatement();
+			res = statement
 					.executeUpdate("insert into challenges (accountIdTo,accountIdFrom,quizID )values("+idTo+","+idFrom+","+quizId+")");
 
 		} catch (SQLException e) {
@@ -181,6 +184,35 @@ public class MyDB {
 		return null;
 	}
 
+	
+	
+	public void addAccount(String name, String surname, String nickName,
+			String Password, String mail){
+		//TODO:
+	}
+	
+	
+	public static boolean nicknameExist(String nickname){
+		query = "select accountId from accounts where nick = \"" + nickname + "\" ;" ;
+		ResultSet set = null;
+		try {
+			set = statement.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("query is incorect.  method: nicknamExist");
+		}
+		System.out.println("set  " + set);
+		try {
+			return set.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	
+	
 	public static void close() {
 		try {
 			con.close();
