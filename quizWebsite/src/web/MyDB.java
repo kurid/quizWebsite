@@ -37,7 +37,7 @@ public class MyDB {
 			System.err
 					.println("CS108 student: Add the MySQL jar file to your build path!");
 		}
-		
+
 		try {
 			statement = con.createStatement();
 		} catch (SQLException e) {
@@ -104,7 +104,6 @@ public class MyDB {
 		return surname;
 	}
 
-	
 	public static String getNickName(int id) {
 		ResultSet res;
 		String nick = "";
@@ -122,6 +121,38 @@ public class MyDB {
 		return nick;
 	}
 
+	public static boolean nickNameExist(String nickName) {
+		ResultSet res;
+		boolean b = false;
+		try {
+			statement = con.createStatement();
+			res = statement
+					.executeQuery("SELECT * FROM accounts where nick = \""
+							+ nickName + "\"");
+			b = res.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return b;
+	}
+
+	public static boolean mailExist(String mail) {
+		ResultSet res;
+		boolean b = false;
+		try {
+			statement = con.createStatement();
+			res = statement
+					.executeQuery("SELECT * FROM accounts where mail = \""
+							+ mail + "\"");
+			b = res.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return b;
+	}
+
 	/*
 	 * abrunebs marto ricxvebs
 	 */
@@ -135,7 +166,7 @@ public class MyDB {
 		return null;
 	}
 
-	public List getMassages(int id) {
+	public List getMessages(int id) {
 		// TODO:
 		return null;
 	}
@@ -145,15 +176,21 @@ public class MyDB {
 		return null;
 	}
 
-	public static void sendMassage(int idTo, int idFrom, String text) {
+	public static void sendMessage(int idTo, int idFrom, String text) {
 		int res;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		java.util.Date utilDate = new java.util.Date();		
+		java.util.Date utilDate = new java.util.Date();
 		String date = sdf.format(utilDate);
 		try {
 			statement = con.createStatement();
 			res = statement
-					.executeUpdate("insert into massages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )values("+idTo+","+idFrom+",\""+text+"\",false,\""+date+"\")");
+					.executeUpdate("insert into messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )values("
+							+ idTo
+							+ ","
+							+ idFrom
+							+ ",\""
+							+ text
+							+ "\",false,\"" + date + "\")");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -171,7 +208,8 @@ public class MyDB {
 		try {
 			statement = con.createStatement();
 			res = statement
-					.executeUpdate("insert into challenges (accountIdTo,accountIdFrom,quizID )values("+idTo+","+idFrom+","+quizId+")");
+					.executeUpdate("insert into challenges (accountIdTo,accountIdFrom,quizID )values("
+							+ idTo + "," + idFrom + "," + quizId + ")");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -184,36 +222,66 @@ public class MyDB {
 		// TODO:
 		return null;
 	}
-
 	
-	
-	public void addAccount(String name, String surname, String nickName,
-			String Password, String mail){
-		//TODO:
-	}
-	
-	
-	public static boolean nicknameExist(String nickname){
-		query = "select accountId from accounts where nick = \"" + nickname + "\" ;" ;
-		ResultSet set = null;
+	public static int getId(String nickName){
+		ResultSet res;
+		int id = 0;
 		try {
-			set = statement.executeQuery(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("query is incorect.  method: nicknamExist");
-		}
-		System.out.println("set  " + set);
-		try {
-			return set.next();
+			statement = con.createStatement();
+			res = statement
+					.executeQuery("SELECT accountID FROM accounts where nick = \""
+							+ nickName + "\"");
+			res.next();
+			id = res.getInt("accountID");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return true;
+		return id;
+	}
+	public static String getPassword(int id){
+		ResultSet res;
+		String pass="";
+		try {
+			statement = con.createStatement();
+			res = statement
+					.executeQuery("SELECT password FROM accounts where accountID = \""
+							+ id + "\"");
+			res.next();
+			pass = res.getString("password");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pass;
+	}
+	
+	public static void addAccount(String name, String surName, String nickName,
+			String password, String mail) {
+		int res;
+		String Achievements ="Glexi";
+		try {
+			statement = con.createStatement();
+			res = statement
+					.executeUpdate("insert into accounts (nick,name,surname,password,mail,Achievements) values(\""
+							+ nickName
+							+ "\",\""
+							+ name
+							+ "\",\""
+							+ surName
+							+ "\",\""
+							+ password
+							+ "\",\""
+							+ mail
+							+ "\",\""
+							+ Achievements + "\")");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	
-	
 	public static void close() {
 		try {
 			con.close();

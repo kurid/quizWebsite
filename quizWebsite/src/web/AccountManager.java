@@ -8,13 +8,12 @@ public class AccountManager implements Manager{
 	}
 
 	private boolean nickNameExist(String nickName){
-		//TODO:
-		return false;
+		return MyDB.nickNameExist(nickName);
 	}
 	
 	private boolean passwordIsCorrect(String nickName, String password){
-		//TODO:
-		return false;
+		String realPass = MyDB.getPassword(MyDB.getId(nickName));
+		return realPass.equals(password);
 	}
 	
 	@Override
@@ -22,14 +21,14 @@ public class AccountManager implements Manager{
 		return nickNameExist(nickName) && passwordIsCorrect(nickName, password);
 	}
 	
-	private int addInDataBase(String name, String surname, String nickName,
-			String Password, String mail) {
-		return 0;
+	private int addInDataBase(String name, String surName, String nickName,
+			String password, String mail) {
+		 MyDB.addAccount(name, surName, nickName, password, mail);
+		 return MyDB.getId(nickName);
 	}
 	
-	private boolean mailExists(String mail) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean mailExists(String mail) {		
+		return MyDB.mailExist(mail);
 	}
 	
 	
