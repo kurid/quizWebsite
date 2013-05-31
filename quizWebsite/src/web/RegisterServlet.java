@@ -52,13 +52,13 @@ public class RegisterServlet extends HttpServlet {
 		int result = m.addAccount(name, surname, nickname, password, mail);
 		String jsp = "Registration.jsp";
 		String errorText = "";
-		if (result == AccountManager.NICKNAME_EXISTS) {
+		if (result == Manager.NICKNAME_EXISTS) {
 			errorText = "Such nickname already exists. "
 					+ "Please try another one";
-		}else if (result == AccountManager.MAIL_EXISTS) {
+		}else if (result == Manager.MAIL_EXISTS) {
 			errorText = "Such mail already exists. "
 					+ "Please try another one";		
-		}else if (result == AccountManager.INCORRECT_MAIL) {
+		}else if (result == Manager.INCORRECT_MAIL) {
 			errorText = "Email addres is not valid.";		
 		}else{		
 			request.getSession(true).setAttribute("account", new Account(result));

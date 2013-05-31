@@ -19,7 +19,7 @@ public class MyDB {
 
 	private static Connection con;
 	private static Statement statement;
-	private static String query;
+	private static ResultSet res;
 
 	static {
 		try {
@@ -28,6 +28,7 @@ public class MyDB {
 					+ MYSQL_DATABASE_NAME;
 			con = DriverManager.getConnection(url, MYSQL_USERNAME,
 					MYSQL_PASSWORD);
+			statement = con.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err
@@ -48,9 +49,8 @@ public class MyDB {
 
 	public static List<Integer> getFriends(int id) {
 		List<Integer> friends = new ArrayList<Integer>();
-		ResultSet res;
+
 		try {
-			statement = con.createStatement();
 			res = statement
 					.executeQuery("SELECT accountID2 FROM friendships where accountID1 = \""
 							+ id + "\"");
@@ -71,10 +71,8 @@ public class MyDB {
 	}
 
 	public static String getName(int id) {
-		ResultSet res;
 		String name = "";
 		try {
-			statement = con.createStatement();
 			res = statement
 					.executeQuery("SELECT name FROM accounts where accountID = \""
 							+ id + "\"");
@@ -88,10 +86,8 @@ public class MyDB {
 	}
 
 	public static String getSurname(int id) {
-		ResultSet res;
 		String surname = "";
 		try {
-			statement = con.createStatement();
 			res = statement
 					.executeQuery("SELECT surname FROM accounts where accountID = \""
 							+ id + "\"");
@@ -105,10 +101,8 @@ public class MyDB {
 	}
 
 	public static String getNickName(int id) {
-		ResultSet res;
 		String nick = "";
 		try {
-			statement = con.createStatement();
 			res = statement
 					.executeQuery("SELECT nick FROM accounts where accountID = \""
 							+ id + "\"");
@@ -122,10 +116,8 @@ public class MyDB {
 	}
 
 	public static boolean nickNameExist(String nickName) {
-		ResultSet res;
 		boolean b = false;
 		try {
-			statement = con.createStatement();
 			res = statement
 					.executeQuery("SELECT * FROM accounts where nick = \""
 							+ nickName + "\"");
@@ -138,10 +130,8 @@ public class MyDB {
 	}
 
 	public static boolean mailExist(String mail) {
-		ResultSet res;
 		boolean b = false;
 		try {
-			statement = con.createStatement();
 			res = statement
 					.executeQuery("SELECT * FROM accounts where mail = \""
 							+ mail + "\"");
@@ -177,13 +167,12 @@ public class MyDB {
 	}
 
 	public static void sendMessage(int idTo, int idFrom, String text) {
-		int res;
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date utilDate = new java.util.Date();
 		String date = sdf.format(utilDate);
 		try {
-			statement = con.createStatement();
-			res = statement
+			statement
 					.executeUpdate("insert into messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )values("
 							+ idTo
 							+ ","
@@ -204,10 +193,9 @@ public class MyDB {
 	}
 
 	public static void sendChallenge(int idTo, int idFrom, int quizId) {
-		int res;
+
 		try {
-			statement = con.createStatement();
-			res = statement
+			statement
 					.executeUpdate("insert into challenges (accountIdTo,accountIdFrom,quizID )values("
 							+ idTo + "," + idFrom + "," + quizId + ")");
 
@@ -222,12 +210,10 @@ public class MyDB {
 		// TODO:
 		return null;
 	}
-	
-	public static int getId(String nickName){
-		ResultSet res;
+
+	public static int getId(String nickName) {
 		int id = 0;
 		try {
-			statement = con.createStatement();
 			res = statement
 					.executeQuery("SELECT accountID FROM accounts where nick = \""
 							+ nickName + "\"");
@@ -239,11 +225,11 @@ public class MyDB {
 		}
 		return id;
 	}
-	public static String getPassword(int id){
-		ResultSet res;
-		String pass="";
+
+	public static String getPassword(int id) {
+		String pass = "";
 		try {
-			statement = con.createStatement();
+			// statement = con.createStatement();
 			res = statement
 					.executeQuery("SELECT password FROM accounts where accountID = \""
 							+ id + "\"");
@@ -255,14 +241,12 @@ public class MyDB {
 		}
 		return pass;
 	}
-	
+
 	public static void addAccount(String name, String surName, String nickName,
 			String password, String mail) {
-		int res;
-		String Achievements ="Glexi";
+		String Achievements = "Glexi";
 		try {
-			statement = con.createStatement();
-			res = statement
+			statement
 					.executeUpdate("insert into accounts (nick,name,surname,password,mail,Achievements) values(\""
 							+ nickName
 							+ "\",\""

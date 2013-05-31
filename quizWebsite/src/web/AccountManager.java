@@ -4,11 +4,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class AccountManager implements Manager{
-	
+
 	private int id;
 	private static MessageDigest messageDigest;
-	
-	
+
+
 	public AccountManager() {
 		// TODO Auto-generated constructor stub
 	}
@@ -16,7 +16,7 @@ public class AccountManager implements Manager{
 	private boolean nickNameExist(String nickName){
 		return MyDB.nickNameExist(nickName);
 	}
-	
+
 	private boolean passwordIsCorrect(String nickName, String password){
 		try {
 			messageDigest = MessageDigest.getInstance("SHA");
@@ -29,16 +29,16 @@ public class AccountManager implements Manager{
 		System.out.println("hash code" + passwordHash);
 		return realPass.equals(passwordHash);
 	}
-	
-	
-	
+
+
+
 	@Override
 	public boolean isCorrect(String nickName, String password) {
 		return nickNameExist(nickName) && passwordIsCorrect(nickName, password);
 	}
-	
-	
-	
+
+
+
 	private int addInDataBase(String name, String surName, String nickName,
 		String password, String mail) {
 		try {
@@ -52,8 +52,8 @@ public class AccountManager implements Manager{
 		MyDB.addAccount(name, surName, nickName, passwordHash, mail);
 		return MyDB.getId(nickName);
 	}
-	
-	
+
+
 	/*
 	 * Given a byte[] array, produces a hex String, such as "234a6f". with 2
 	 * chars for each byte in the array. (provided code)
@@ -70,17 +70,12 @@ public class AccountManager implements Manager{
 		return buff.toString();
 	}
 
-	
+
 	private boolean mailExists(String mail) {		
 		return MyDB.mailExist(mail);
-	}
-	
-	
-	public static final int NICKNAME_EXISTS = -2;
-	public static final int INCORRECT_MAIL = -3;
-	public static final int MAIL_EXISTS = -4;
+	}	
 
-	
+
 	/*
 	 *  shegvidzlia davamatot damatebiti shemowmebebi
 	 *   imis dasadgenad maili validuria tu ara
@@ -88,16 +83,16 @@ public class AccountManager implements Manager{
 	private boolean mailIsValid(String mail){
 		return mail.contains("@");
 	}
-	
-	
-	
+
+
+
 	@Override
 	public int addAccount(String name, String surname, String nickName,
 			String Password, String mail) {
 		if(mailIsValid(mail)) return INCORRECT_MAIL;
 		if(nickNameExist(nickName)) return NICKNAME_EXISTS;
 		if(mailExists(mail))return MAIL_EXISTS;
-		
+
 		return addInDataBase(name, surname, nickName, Password, mail);
 	}
 
@@ -106,6 +101,6 @@ public class AccountManager implements Manager{
 		return true;
 	}
 
-	
+
 
 }
