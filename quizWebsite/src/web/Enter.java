@@ -17,13 +17,13 @@ import com.sun.xml.internal.ws.client.dispatch.MessageDispatch;
  * Servlet implementation class Enter
  */
 @WebServlet(description = "when user enters", urlPatterns = { "/Enter" })
-public class EnterServlet extends HttpServlet {
+public class Enter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnterServlet() {
+    public Enter() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title> Home Page</title>
+<%
+	request.getSession().setAttribute("RegisterText", "Registration");
+	request.getSession().setAttribute("EnterText", "Enter");
+%>
 </head>
 <body>
-
+	<a href="http://localhost:8080/quizWebsite/enter.jsp"> Enter</a>
+	<a href="http://localhost:8080/quizWebsite/Registration.jsp"> Registration </a>
 </body>
 </html>
