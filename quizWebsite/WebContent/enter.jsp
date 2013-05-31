@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <% 
-	String text = request.getParameter("EnterText");
+	String text = (String)session.getAttribute("enterText");
 %>
 <title> Enter </title>
 </head>
@@ -14,7 +14,7 @@
 	<h> <%= text %></h>
 	<form action="Enter" method="post">
 		<p>
-		User Name: <input type="text" name="userName" />		
+		User Name: <input type="text" name="nickname" />		
 			<br /><br />
 			Password: <input type="text" name="password" /> <input type="submit"
 				value="Enter" />

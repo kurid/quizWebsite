@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.Session;
 import org.apache.catalina.mbeans.UserMBean;
 
 import com.sun.xml.internal.ws.client.dispatch.MessageDispatch;
@@ -47,7 +48,7 @@ public class Enter extends HttpServlet {
 			jsp = "HomePage.jsp";
 			request.getSession(true).setAttribute("account", new Account(MyDB.getId(nickname)));
 		}else{
-			request.setAttribute("enterError", "Username or password is incorrect.");
+			request.getSession(true).setAttribute("enterText", "Username or password is incorrect.");
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
 		dispatcher.forward(request, response);

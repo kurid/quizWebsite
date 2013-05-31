@@ -23,6 +23,8 @@ public class AccountManager implements Manager{
 	
 	private int addInDataBase(String name, String surName, String nickName,
 			String password, String mail) {
+		
+		
 		 MyDB.addAccount(name, surName, nickName, password, mail);
 		 return MyDB.getId(nickName);
 	}
