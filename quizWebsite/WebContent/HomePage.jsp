@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title> Home Page</title>
 <%
-	request.getSession().setAttribute("RegisterText", "Registration");
+	request.getSession().setAttribute("RegisterText", "Please Register");
 	request.getSession().setAttribute("EnterText", "Enter");
 %>
 </head>

@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <% 
-	String text = request.getParameter("text");
+	String text = request.getParameter("EnterText");
 %>
 <title> Enter </title>
 </head>

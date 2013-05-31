@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<% String registerText = (String)session.getAttribute("RegisterText"); %>
+<title> Registration </title>
 </head>
 <body>
+	<h1> <%= registerText %></h1>
 	<form action="RegisterServlet" method = "post">
 		First name: <input type="text" name="name"><br> 
 		Surname: <input type="text" name="surname"><br> 
