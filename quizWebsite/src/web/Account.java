@@ -27,7 +27,6 @@ public class Account {
 	public String getNickname() {
 		return nickname;
 	}
-	
-	
+		
 	
 }
