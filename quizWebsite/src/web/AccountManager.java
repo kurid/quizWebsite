@@ -80,14 +80,30 @@ public class AccountManager implements Manager{
 	public static final int INCORRECT_MAIL = -3;
 	public static final int MAIL_EXISTS = -4;
 
+	
+	/*
+	 *  shegvidzlia davamatot damatebiti shemowmebebi
+	 *   imis dasadgenad maili validuria tu ara
+	 */
+	private boolean mailIsValid(String mail){
+		return mail.contains("@");
+	}
+	
+	
+	
 	@Override
 	public int addAccount(String name, String surname, String nickName,
 			String Password, String mail) {
-		if(!mail.contains("@")) return INCORRECT_MAIL;
+		if(mailIsValid(mail)) return INCORRECT_MAIL;
 		if(nickNameExist(nickName)) return NICKNAME_EXISTS;
 		if(mailExists(mail))return MAIL_EXISTS;
 		
 		return addInDataBase(name, surname, nickName, Password, mail);
+	}
+
+	@Override
+	public boolean deleteAccount(String nickName, String Password) {	
+		return true;
 	}
 
 	
