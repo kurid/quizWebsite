@@ -41,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// HttpSession ses = request.getSession(true);
-		System.out.println("s");
+		
 		// Account acc = new Account(request.getParameter("id"));
 		AccountManager m = new AccountManager();
 		String name = request.getParameter("name");
@@ -64,7 +64,7 @@ public class RegisterServlet extends HttpServlet {
 			request.getSession(true).setAttribute("account", new Account(result));
 			jsp = "HomePage.jsp";		
 		}
-		System.out.println(errorText);
+		
 		request.getSession(true).setAttribute("RegisterError", errorText);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
 		dispatcher.forward(request, response);
