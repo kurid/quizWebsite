@@ -42,10 +42,12 @@ public class Enter extends HttpServlet {
 		String nickname = request.getParameter("nickname");
 		String password = request.getParameter("password");
 		AccountManager manager  = new AccountManager();
-		String jsp = "unknownUser.jsp";//es jsp etyvis users rom arasworad sheiyvana da axlidan scados
+		String jsp = "enter.jsp";
 		if(manager.isCorrect(nickname, password)){
 			jsp = "HomePage.jsp";
 			request.getSession(true).setAttribute("account", new Account(MyDB.getId(nickname)));
+		}else{
+			request.setAttribute("enterError", "Username or password is incorrect.");
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
 		dispatcher.forward(request, response);
