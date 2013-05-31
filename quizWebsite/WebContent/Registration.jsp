@@ -7,11 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form>
-		First name: <input type="text" name="firstname"><br> 
-		Surname: <input type="text" name="lastname">
-		Password: <input type="password" name="pwd">
-		mail: <input type="text" name="lastname">
+	<form action="RegisterServlet" method = "post">
+		First name: <input type="text" name="name"><br> 
+		Surname: <input type="text" name="surname"><br> 
+		Nickname: <input type="text" name="nickname"><br> 
+		Password: <input type="password" name="password"><br> 
+		mail: <input type="text" name="mail"><br> 
+		<button type="submit">Register</button>
 	</form>
 </body>
 </html>

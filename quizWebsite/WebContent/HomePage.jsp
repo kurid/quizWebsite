@@ -11,7 +11,7 @@
 %>
 </head>
 <body>
-	<a href="http://localhost:8080/quizWebsite/enter.jsp"> Enter</a>
-	<a href="http://localhost:8080/quizWebsite/Registration.jsp"> Registration </a>
+	<a href="enter.jsp"> Enter</a>
+	<a href="Registration.jsp"> Registration </a>
 </body>
 </html>
