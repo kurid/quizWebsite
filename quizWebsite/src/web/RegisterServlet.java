@@ -43,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
 		// HttpSession ses = request.getSession(true);
 		
 		// Account acc = new Account(request.getParameter("id"));
-		AccountManager m = new AccountManager();
+		Manager m = new AccountManager();
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		String nickname = request.getParameter("nickname");
