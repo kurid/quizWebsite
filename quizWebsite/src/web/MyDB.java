@@ -17,7 +17,7 @@ public class MyDB {
 	private static final String MYSQL_DATABASE_SERVER = "localhost";
 	private static final String MYSQL_DATABASE_NAME = "quizWebsite";
 
-	private static Connection con;
+	private static Connection connection;
 	private static Statement statement;
 	private static ResultSet res;
 
@@ -26,23 +26,23 @@ public class MyDB {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://" + MYSQL_DATABASE_SERVER + "/"
 					+ MYSQL_DATABASE_NAME;
-			con = DriverManager.getConnection(url, MYSQL_USERNAME,
+			connection = DriverManager.getConnection(url, MYSQL_USERNAME,
 					MYSQL_PASSWORD);
-			statement = con.createStatement();
+			statement = connection.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err
-					.println("CS108 student: Update the MySQL constants to correct values!");
+					.println("Update the MySQL constants to correct values!");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			System.err
-					.println("CS108 student: Add the MySQL jar file to your build path!");
+					.println("Add the MySQL jar file to your build path!");
 		}
 
 		try {
-			statement = con.createStatement();
+			statement = connection.createStatement();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("connection can't create statement");
 			e.printStackTrace();
 		}
 	}
@@ -143,6 +143,16 @@ public class MyDB {
 		return b;
 	}
 
+	
+	public static void deleteAccount(String nickName){
+		try {
+			statement.executeUpdate("delete from accounts where nick = \""  + nickName + "\";");					
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	/*
 	 * abrunebs marto ricxvebs
 	 */
@@ -268,7 +278,7 @@ public class MyDB {
 
 	public static void close() {
 		try {
-			con.close();
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

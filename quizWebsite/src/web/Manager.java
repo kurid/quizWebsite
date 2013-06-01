@@ -15,6 +15,6 @@ public interface Manager {
 	 */
 	public int addAccount(String name, String surname, String nickName, String password, String mail);
 	
-	public boolean deleteAccount(String nickName, String Password);
+	public void deleteAccount(String nickName);
 	
 }

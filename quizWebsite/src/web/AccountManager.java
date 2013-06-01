@@ -89,7 +89,7 @@ public class AccountManager implements Manager{
 	@Override
 	public int addAccount(String name, String surname, String nickName,
 			String Password, String mail) {
-		if(mailIsValid(mail)) return INCORRECT_MAIL;
+		if(!mailIsValid(mail)) return INCORRECT_MAIL;
 		if(nickNameExist(nickName)) return NICKNAME_EXISTS;
 		if(mailExists(mail))return MAIL_EXISTS;
 
@@ -97,8 +97,8 @@ public class AccountManager implements Manager{
 	}
 
 	@Override
-	public boolean deleteAccount(String nickName, String Password) {	
-		return true;
+	public void deleteAccount(String nickName) {
+		MyDB.deleteAccount(nickName);
 	}
 
 
