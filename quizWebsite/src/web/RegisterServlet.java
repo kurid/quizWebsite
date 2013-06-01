@@ -64,8 +64,8 @@ public class RegisterServlet extends HttpServlet {
 			request.getSession(true).setAttribute("account", new Account(result));
 			jsp = "HomePage.jsp";		
 		}
-		System.out.println(errorText);
-		request.getSession(true).setAttribute("RegisterText", errorText);
+		//System.out.println(errorText);
+		request.getSession(true).setAttribute("registerText", errorText);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
 		dispatcher.forward(request, response);
 	}

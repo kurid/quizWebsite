@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<% String registerText = (String)session.getAttribute("registerText"); %>
+<% String registerText = (String)session.getAttribute("registerText"); 
+System.out.println(registerText);%>
 <title> Registration </title>
 </head>
 <body>

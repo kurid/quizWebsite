@@ -16,7 +16,7 @@
 		<p>
 		User Name: <input type="text" name="nickname" />		
 			<br /><br />
-			Password: <input type="text" name="password" /> <input type="submit"
+			Password: <input type="password" name="password" /> <input type="submit"
 				value="Enter" />
 		</p>
 	
