@@ -47,6 +47,7 @@ public class Enter extends HttpServlet {
 		if(manager.isCorrect(nickname, password)){
 			jsp = "HomePage.jsp";
 			request.getSession(true).setAttribute("account", new Account(MyDB.getId(nickname)));
+			request.getSession(true).setAttribute("isLoggedIn", true);	
 		}else{
 			request.getSession(true).setAttribute("enterText", "Username or password is incorrect.");
 		}

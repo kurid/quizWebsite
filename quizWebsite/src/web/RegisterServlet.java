@@ -62,6 +62,7 @@ public class RegisterServlet extends HttpServlet {
 			errorText = "Email addres is not valid.";		
 		}else{		
 			request.getSession(true).setAttribute("account", new Account(result));
+			request.getSession(true).setAttribute("isLoggedIn", true);			
 			jsp = "HomePage.jsp";		
 		}
 		//System.out.println(errorText);

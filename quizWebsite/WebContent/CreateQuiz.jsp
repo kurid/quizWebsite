@@ -4,16 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> Home Page</title>
-<%
-	session.setAttribute("registerText", "Please Register");
-	session.setAttribute("enterText", "Enter");
-%>
-
+<title>Insert title here</title>
 </head>
 <body>
-	<a href="enter.jsp"> Enter</a>
-	<a href="Registration.jsp"> Registration </a>
-	<a class = "disabled" href="CreateQuiz"> QreateQuiz </a>
+
 </body>
 </html>
