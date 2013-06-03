@@ -1,7 +1,5 @@
 package Question;
 
-import java.util.List;
-
 public interface QuestionInterface {
 	public static final int QUESTION_RESPONCE = 1;
 	public static final int MULTIPLE_CHOICE = 2;

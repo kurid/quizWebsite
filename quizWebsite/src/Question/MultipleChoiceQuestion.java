@@ -1,7 +1,5 @@
 package Question;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class MultipleChoiceQuestion extends Question 

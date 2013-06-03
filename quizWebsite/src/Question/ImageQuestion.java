@@ -1,8 +1,5 @@
 package Question;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ImageQuestion extends Question{
 	
 	private String URL;
@@ -12,6 +9,10 @@ public class ImageQuestion extends Question{
 		this.questionText = questionText;
 		this.correctAnswer = correctAnswer;
 		this.URL = URL;
+	}
+	
+	public String getURL(){
+		return URL;
 	}
 	
 	@Override
@@ -26,12 +27,12 @@ public class ImageQuestion extends Question{
 
 	@Override
 	public int getType() {
-		return 0;
+		return IMAGE;
 	}
 
 	@Override
 	public CorrectAnswer getCorrectAnswer() {
-		return null;
+		return correctAnswer;
 	}
 
 }

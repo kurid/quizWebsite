@@ -1,7 +1,5 @@
 package Question;
 
-import java.util.List;
-
 public class Question implements QuestionInterface{
 	protected int index;
 	protected String questionText;
