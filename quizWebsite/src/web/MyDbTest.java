@@ -2,26 +2,108 @@ package web;
 
 import junit.framework.TestCase;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MyDbTest extends TestCase {
-
-//	public void testGetFriends() {
-//		// qveda shemowmeba shecdomas agdebs rato arvici .
-//		// mydb.getfriends sworad abrunebs lists assertis bralia shecdoma
-//		// assertEquals(Arrays.asList(new int[] { 2, 3 }),MyDB.getFriends(1) );
-//	
-//		assertEquals("saba9993", MyDB.getNickName(5));
-//		assertEquals("saba", MyDB.getName(5));
-//		assertEquals("gogolidze", MyDB.getSurname(5));
-//		MyDB.sendMessage(1, 2, "a");
-//		MyDB.sendChallenge(1, 2, 1);
-//	}
 	
-	public void testCreateQuiz(){
-		MyDB.createQuiz("saxeli", "agwera", 1);
-		assertEquals(3,MyDB.getQuizId("askc", 1) );
+	
+	public static String hexToString(byte[] bytes) {
+		StringBuffer buff = new StringBuffer();
+		for (int i = 0; i < bytes.length; i++) {
+			int val = bytes[i];
+			val = val & 0xff; // remove higher bits, sign
+			if (val < 16)
+				buff.append('0'); // leading 0
+			buff.append(Integer.toString(val, 16));
+		}
+		return buff.toString();
 	}
+	
+	public void testNewAccount() {
+		String name = "vaska";
+		String surName = "kutuxovi";
+		String nickName = "vaska19";
+		String password = "123456";
+		String mail = "vaska12@kvernadzeuni.edu.ge";
+		MyDB.addAccount(name, surName, nickName, password, mail);
+		assertEquals(true, MyDB.nickNameExist(nickName));
+		MyDB.deleteAccount(nickName);
+	}
+	
+	public void testNewAccount2() {
+		assertEquals(false, MyDB.nickNameExist("Yoda"));
+	}
+	
+	public void testMail() {
+		String name = "vaska";
+		String surName = "kutuxovi";
+		String nickName = "vaska19";
+		String password = "123456";
+		String mail = "vaska12@kvernadzeuni.edu.ge";
+		MyDB.addAccount(name, surName, nickName, password, mail);
+		assertEquals(true, MyDB.mailExist(mail));
+		MyDB.deleteAccount(nickName);
+	}
+	
+	public void testGetter() {
+		String name = "vaska";
+		String surName = "kutuxovi";
+		String nickName = "vaska19";
+		String password = "123456";
+		String mail = "vaska12@kvernadzeuni.edu.ge";
+		MyDB.addAccount(name, surName, nickName, password, mail);
+		int id = MyDB.getId(nickName);
+		assertEquals(name, MyDB.getName(id));
+		assertEquals(surName, MyDB.getSurname(id));
+		assertEquals(nickName, MyDB.getNickName(id));
+		assertEquals(mail, MyDB.getMail(id));
+		MyDB.deleteAccount(nickName);
+	}
+	
+	public void testSendMessage(){
+		MyDB.addAccount("Deidara", "surname1", "nickName1", "password1", "mail1@gmail.com");
+		MyDB.addAccount("Sasori", "surname2", "nickName2", "password2", "mail2@gmail.com");
+		int id1 = MyDB.getId("nickName1");
+		int id2 = MyDB.getId("nickName2");
+		MyDB.sendMessage(id2, id1, "Hello, my man Sasori!");
+		MyDB.sendMessage(id1, id2, "Where have you been Deidara?");
+		MyDB.sendMessage(id2, id1, "Demonstrating art, Sasori my man!");
+		assertEquals(1, MyDB.getNotifications(id1)[0]);
+		assertEquals(2, MyDB.getNotifications(id2)[0]);
+		MyDB.deleteAccount("nickName1");
+		MyDB.deleteAccount("nickName2");
+	}
+	
+	public void testPasswordHash(){
+		String name = "Kakashi";
+		String surName = "Hatake";
+		String nickName = "CopyNinja";
+		String password = "123456";
+		String mail = "khatake@mail.ko";
+		Manager mng = new AccountManager();
+		mng.addAccount(name, surName, nickName, password, mail);
+		MessageDigest messageDigest;
+		try {
+			messageDigest = MessageDigest.getInstance("SHA");
+			messageDigest.update(password.getBytes());
+			String passwordHash = hexToString(messageDigest.digest());
+			String realPass = MyDB.getPassword(MyDB.getId(nickName));
+			assertEquals(realPass, passwordHash);
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("Error");
+		}
+		MyDB.deleteAccount(nickName);
+	}
+	
+	
+	
+	
+//	public void testCreateQuiz(){
+//		MyDB.createQuiz("saxeli", "agwera", 1);
+//		assertEquals(3,MyDB.getQuizId("askc", 1) );
+//	}
 }
