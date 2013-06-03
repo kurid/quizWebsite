@@ -9,7 +9,8 @@
 <body>
 	<form action="AddSingleAnswerQuestion" method = "post">
 		QuestionText: <input type="text" name="questionText"><br> 
-		Answer: <input type="text" name="Answer"><br> 
+		Answer: <input type="text" name="answer"><br> 
+		<button type="submit">Submit</button>
 	</form>
 </body>
 </html>

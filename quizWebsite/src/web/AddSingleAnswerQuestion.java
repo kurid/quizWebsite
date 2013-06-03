@@ -33,7 +33,10 @@ public class AddSingleAnswerQuestion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String questionText = request.getParameter("questionText");
+		String answer = request.getParameter("answer");
+		System.out.println("Kitxwa : "+questionText+" answer :  "+answer);
+		//ai aq ukve mwirdeba MyDB s metodi romelic chaamatebs bazashi aset kitxvas . 
 	}
 
 }
