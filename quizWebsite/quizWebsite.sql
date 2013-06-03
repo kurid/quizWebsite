@@ -147,4 +147,3 @@ create table takenQuizes(
 	quiz_date datetime,
 	foreign key (accountID) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE
-);
