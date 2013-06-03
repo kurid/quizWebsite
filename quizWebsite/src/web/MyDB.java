@@ -121,7 +121,7 @@ public class MyDB {
 	private static boolean exist(String type, String stringToSearch){
 		boolean b = false;
 		try {
-			String query = "SELECT * FROM accounts where" + type + " = \"" + stringToSearch + "\"";
+			String query = "SELECT * FROM accounts where " + type + " = \"" + stringToSearch + "\" ;";
 			res = statement .executeQuery(query);
 			b = res.next();
 		} catch (SQLException e) {
@@ -285,8 +285,13 @@ public class MyDB {
 		}
 	}	
 	
-	public void sendFriendRequest(int idTo, int idFrom) {
-		String query = 
+	public static void sendFriendRequest(int idTo, int idFrom) {
+		String query = "INSERT INTO  friendrequests VALUES (" + idTo + "," + idFrom + ");";
+		try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
