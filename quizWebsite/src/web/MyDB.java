@@ -261,6 +261,28 @@ public class MyDB {
 		return null;
 	}
 	
+	public static ResultSet MultipleChoice(int questionId){
+		String query = "select * from multiplechoice where questionID =" + questionId + ";" ;
+		try {
+			res = statement.executeQuery(query);
+			return res;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static ResultSet answers(int questionId){
+		String query = "select * from multiplechoice where questionID =" + questionId + ";" ;
+		try {
+			res = statement.executeQuery(query);
+			return res;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public static void sendChallenge(int idTo, int idFrom, int quizId) {
 
 		try {
@@ -307,10 +329,8 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-
-
-
-
+	
+	
 	public static void close() {
 		try {
 			connection.close();
