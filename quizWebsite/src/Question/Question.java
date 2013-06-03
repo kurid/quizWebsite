@@ -1,7 +1,8 @@
 package Question;
 
-public class Question implements QuestionInterface{
+public class Question implements QuestionInterface, QuestionFinals{
 	protected int index;
+	protected int score;
 	protected String questionText;
 	protected CorrectAnswer correctAnswer;
 	
@@ -23,6 +24,11 @@ public class Question implements QuestionInterface{
 	@Override
 	public CorrectAnswer getCorrectAnswer() {
 		return null;
+	}
+
+	@Override
+	public int getScore() {
+		return 0;
 	}
 
 }

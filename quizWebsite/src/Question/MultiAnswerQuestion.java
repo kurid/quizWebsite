@@ -2,10 +2,11 @@ package Question;
 
 public class MultiAnswerQuestion extends Question{
 
-	public MultiAnswerQuestion(int index, String questionText, CorrectAnswer correctAnswer){
+	public MultiAnswerQuestion(int index, String questionText, CorrectAnswer correctAnswer, int score){
 		this.index = index;
 		this.questionText = questionText;
 		this.correctAnswer = correctAnswer;
+		this.score = score;
 	}
 	
 	@Override
@@ -26,6 +27,11 @@ public class MultiAnswerQuestion extends Question{
 	@Override
 	public CorrectAnswer getCorrectAnswer() {
 		return correctAnswer;
+	}
+	
+	@Override
+	public int getScore() {
+		return score;
 	}
 	
 }

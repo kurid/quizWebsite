@@ -4,11 +4,12 @@ public class ImageQuestion extends Question{
 	
 	private String URL;
 	
-	public ImageQuestion(int index, String questionText, String URL, CorrectAnswer correctAnswer){
+	public ImageQuestion(int index, String questionText, String URL, CorrectAnswer correctAnswer, int score){
 		this.index = index;
 		this.questionText = questionText;
-		this.correctAnswer = correctAnswer;
 		this.URL = URL;
+		this.correctAnswer = correctAnswer;
+		this.score = score;
 	}
 	
 	public String getURL(){
@@ -33,6 +34,11 @@ public class ImageQuestion extends Question{
 	@Override
 	public CorrectAnswer getCorrectAnswer() {
 		return correctAnswer;
+	}
+	
+	@Override
+	public int getScore() {
+		return score;
 	}
 
 }

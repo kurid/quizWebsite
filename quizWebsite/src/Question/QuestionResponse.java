@@ -1,14 +1,12 @@
 package Question;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class QuestionResponse extends Question{
 
-	public QuestionResponse(int index, String questionText, CorrectAnswer correctAnswer){
+	public QuestionResponse(int index, String questionText, CorrectAnswer correctAnswer, int score){
 		this.index = index;
 		this.questionText = questionText;
 		this.correctAnswer = correctAnswer;
+		this.score = score;
 	}
 	
 	@Override
@@ -29,6 +27,11 @@ public class QuestionResponse extends Question{
 	@Override
 	public int getType() {
 		return QUESTION_RESPONCE;
+	}
+
+	@Override
+	public int getScore() {
+		return score;
 	}
 
 }

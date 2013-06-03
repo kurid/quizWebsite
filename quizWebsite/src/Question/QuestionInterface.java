@@ -1,14 +1,6 @@
 package Question;
 
-public interface QuestionInterface {
-	public static final int QUESTION_RESPONCE = 1;
-	public static final int MULTIPLE_CHOICE = 2;
-	public static final int MULTIPLE_ANSWER = 3;
-	public static final int MCMA = 4;
-	public static final int IMAGE = 5;
-	public static final int MATCHING = 6;
-	public static final int AUTO_GENERATED = 7;
-	
+public interface QuestionInterface{
 	int getIndex();
 	
 	String getQuestionText();
@@ -16,4 +8,6 @@ public interface QuestionInterface {
 	int getType();
 	
 	CorrectAnswer getCorrectAnswer();
+	
+	int getScore();
 }

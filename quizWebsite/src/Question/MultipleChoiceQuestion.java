@@ -7,12 +7,13 @@ public class MultipleChoiceQuestion extends Question
 	
 	private Set<String> possibleAnswers;
 	
-	public MultipleChoiceQuestion(String questionText, int index,
-			Set<String> possibleAnswers, CorrectAnswer correctAnswer){
+	public MultipleChoiceQuestion(int index, String questionText,
+			Set<String> possibleAnswers, CorrectAnswer correctAnswer, int score){
 		this.questionText = questionText;
 		this.index = index;
 		this.possibleAnswers = possibleAnswers;
 		this.correctAnswer = correctAnswer;
+		this.score = score;
 	}
 	
 	@Override
@@ -28,6 +29,11 @@ public class MultipleChoiceQuestion extends Question
 	@Override
 	public int getType() {
 		return MULTIPLE_CHOICE;
+	}
+	
+	@Override
+	public int getScore() {
+		return score;
 	}
 
 }

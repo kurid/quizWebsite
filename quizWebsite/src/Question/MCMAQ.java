@@ -7,11 +7,12 @@ public class MCMAQ extends Question implements ChooseQuestion{
 	private Set<String> possibleAnswers;
 	
 	public MCMAQ(int index, String questionText, Set<String> possibleAnswers,
-				CorrectAnswer correctAnswer){
+				CorrectAnswer correctAnswer, int score){
 		this.questionText = questionText;
 		this.index = index;
 		this.correctAnswer = correctAnswer;
 		this.possibleAnswers = possibleAnswers;
+		this.score = score;
 	}
 	
 	@Override
@@ -27,6 +28,11 @@ public class MCMAQ extends Question implements ChooseQuestion{
 	@Override
 	public String getQuestionText() {
 		return questionText;
+	}
+	
+	@Override
+	public int getScore() {
+		return score;
 	}
 
 	@Override
