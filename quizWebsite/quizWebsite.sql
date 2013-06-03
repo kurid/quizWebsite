@@ -37,7 +37,7 @@ create table friendships(
 create table friendRequests(
 	accountIdTo int,
 	accountIdFrom int,
-	sendTime date,
+	sendTime datetime,
 	foreign key (accountIDTo) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (accountIDFrom) references accounts (accountID) ON DELETE CASCADE
 );
@@ -47,7 +47,7 @@ create table quizes(
 	quizID int primary key AUTO_INCREMENT not null,
 	authorID int,
 	name varchar(64),
-	quiz_date date, 
+	quiz_date datetime, 
 	description varchar(1024),
 	foreign key (authorID) references accounts (accountID) ON DELETE CASCADE
 );
@@ -107,7 +107,7 @@ create table challenges(
 	accountIdTo int,
 	accountIdFrom int,
 	quizID int,
-	sendTime date,
+	sendTime datetime,
 	foreign key (accountIDTo) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (accountIDFrom) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (quizID) references quizes (quizID)	 ON DELETE CASCADE
@@ -119,7 +119,7 @@ create table messages(
 	accountIdFrom int,
 	text varchar(64),
 	read_unread bool,
-	sendTime date,
+	sendTime datetime,
 	foreign key (accountIDTo) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (accountIDFrom) references accounts (accountID)  ON DELETE CASCADE
 );
@@ -130,7 +130,7 @@ create table takenQuizes(
 	quizID int,
 	total_score int,
 	quiz_time time,
-	quiz_date date,
+	quiz_date datetime,
 	foreign key (accountID) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE
 );
