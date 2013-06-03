@@ -38,11 +38,7 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// HttpSession ses = request.getSession(true);
-		
-		// Account acc = new Account(request.getParameter("id"));
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Manager m = new AccountManager();
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
@@ -52,7 +48,9 @@ public class RegisterServlet extends HttpServlet {
 		int result = m.addAccount(name, surname, nickname, password, mail);
 		String jsp = "Registration.jsp";
 		String errorText = "";
-		if (result == Manager.NICKNAME_EXISTS) {
+		if(result == Manager.EMPTY_FIELD){
+			errorText = "text field is empty";
+		}else if (result == Manager.NICKNAME_EXISTS) {
 			errorText = "Such nickname already exists. "
 					+ "Please try another one";
 		}else if (result == Manager.MAIL_EXISTS) {
@@ -60,12 +58,15 @@ public class RegisterServlet extends HttpServlet {
 					+ "Please try another one";		
 		}else if (result == Manager.INCORRECT_MAIL) {
 			errorText = "Email addres is not valid.";		
+		}else if(result == Manager.SHORT_NICKNAME){
+			errorText = "Nickname is too short";
+		}else if(result == Manager.LONG_NICKNAME){
+			errorText = "Nickname is too long";
 		}else{		
 			request.getSession(true).setAttribute("account", new Account(result));
 			request.getSession(true).setAttribute("isLoggedIn", true);			
 			jsp = "HomePage.jsp";		
 		}
-		//System.out.println(errorText);
 		request.getSession(true).setAttribute("registerText", errorText);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
 		dispatcher.forward(request, response);
