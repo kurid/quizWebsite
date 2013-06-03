@@ -1,6 +1,8 @@
 package web;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,9 +36,11 @@ public class CreateQuiz extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String quizName = request.getParameter("quizName");
-		String descciption = request.getParameter("description");
-		System.out.println(quizName);
-		System.out.println(descciption);
+		String description = request.getParameter("description");
+		request.getSession(true).setAttribute("quizName",quizName);
+		request.getSession(true).setAttribute("quizDescription",description);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ChooseQuestionToAdd.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
