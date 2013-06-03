@@ -1,16 +1,14 @@
 package Question;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class MCMAQ extends Question implements ChooseQuestion{
 	
 	private Set<String> possibleAnswers;
-	private List<CorrectAnswer> correctAnswer;
 	
 	public MCMAQ(int index, String questionText, Set<String> possibleAnswers,
-				List<CorrectAnswer> correctAnswer){
+				CorrectAnswer correctAnswer){
 		this.questionText = questionText;
 		this.index = index;
 		this.correctAnswer = correctAnswer;
@@ -38,7 +36,7 @@ public class MCMAQ extends Question implements ChooseQuestion{
 	}
 
 	@Override
-	public List<CorrectAnswer> getCorrectAnswer() {
+	public CorrectAnswer getCorrectAnswer() {
 		return correctAnswer;
 	}
 

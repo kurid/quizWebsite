@@ -1,14 +1,11 @@
 package Question;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class MultiAnswerQuestion extends Question{
 
-	List<CorrectAnswer> correctAnswer;
-	
-	public MultiAnswerQuestion(int index, String questionText, List<CorrectAnswer> correctAnswer){
+	public MultiAnswerQuestion(int index, String questionText, CorrectAnswer correctAnswer){
 		this.index = index;
 		this.questionText = questionText;
 		this.correctAnswer = correctAnswer;
@@ -30,7 +27,7 @@ public class MultiAnswerQuestion extends Question{
 	}
 
 	@Override
-	public List<CorrectAnswer> getCorrectAnswer() {
+	public CorrectAnswer getCorrectAnswer() {
 		return correctAnswer;
 	}
 	

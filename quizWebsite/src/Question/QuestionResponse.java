@@ -1,20 +1,19 @@
 package Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionResponse extends Question{
-	
-	List<CorrectAnswer> correctAnswers;
-	
-	public QuestionResponse(int index, String questionText, List<CorrectAnswer> correctAnswers){
+
+	public QuestionResponse(int index, String questionText, CorrectAnswer correctAnswer){
 		this.index = index;
 		this.questionText = questionText;
-		this.correctAnswers = correctAnswers;
+		this.correctAnswer = correctAnswer;
 	}
 	
 	@Override
-	public List<CorrectAnswer> getCorrectAnswer() {
-		return correctAnswers;
+	public CorrectAnswer getCorrectAnswer() {
+		return correctAnswer;
 	}
 	
 	@Override

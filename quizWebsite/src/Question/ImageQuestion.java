@@ -1,11 +1,18 @@
 package Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Question implements QuestionInterface{
-	protected int index;
-	protected String questionText;
-	protected CorrectAnswer correctAnswer;
+public class ImageQuestion extends Question{
+	
+	private String URL;
+	
+	public ImageQuestion(int index, String questionText, String URL, CorrectAnswer correctAnswer){
+		this.index = index;
+		this.questionText = questionText;
+		this.correctAnswer = correctAnswer;
+		this.URL = URL;
+	}
 	
 	@Override
 	public int getIndex() {

@@ -1,7 +1,6 @@
 package Question;
 
 import java.util.List;
-import java.util.Set;
 
 public interface QuestionInterface {
 	public static final int QUESTION_RESPONCE = 1;
@@ -18,5 +17,5 @@ public interface QuestionInterface {
 	
 	int getType();
 	
-	List<CorrectAnswer> getCorrectAnswer();
+	CorrectAnswer getCorrectAnswer();
 }
