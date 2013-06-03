@@ -158,13 +158,9 @@ public class MyDB {
 	 */
 	public static int[] getNotifications(int id) {
 		int[] arr = new int[3];
-		try {
-			arr[0] = getNotificationCount(id, "messages");
-			arr[1] = getNotificationCount(id, "friendRequests");
-			arr[2] = getNotificationCount(id, "challenges");
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		arr[0] = getNotificationCount(id, "messages");
+		arr[1] = getNotificationCount(id, "friendRequests");
+		arr[2] = getNotificationCount(id, "challenges");
 		return arr;
 	}
 	
@@ -219,6 +215,43 @@ public class MyDB {
 		}
 	}
 
+	public static int createQuiz(String name, String description, int accountId){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		java.util.Date utilDate = new java.util.Date();
+		String date = sdf.format(utilDate);
+		String query = "INSERT INTO quizes(authorID,name,quiz_date,description) values(" + accountId + ",\"" + name + "\",\""  + date + "\",\"" + description + "\" );" ;
+		System.out.println(query);
+		try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return getQuizId(name, accountId);
+	}
+
+	
+	
+	
+	
+	public static int getQuizId(String name, int accountId) {
+		try {
+			res = statement.executeQuery("SELECT quizID from quizes" +
+								" where name = \"askc\" and authorID = 1; ");
+			if(res.next()){
+			return res.getInt(1);
+			}else return 0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+
+	
+	
 	public void sendFriendRequest(int id1, int id2) {
 		// TODO:
 	}
