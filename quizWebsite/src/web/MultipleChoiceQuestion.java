@@ -1,25 +1,28 @@
 package web;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MultipleChoiceQuestion extends Question 
-	implements SingleAnswerQuestion, ChooseQuestion{
+	implements ChooseQuestion{
 	
 	private Set<String> possibleAnswers;
-	private String correctAnswer;
+	private List<CorrectAnswer> answer;
 	
 	public MultipleChoiceQuestion(String questionText, int index,
-			Set<String> possibleAnswers, String correctAnswer){
+			Set<String> possibleAnswers, CorrectAnswer answer){
 		this.questionText = questionText;
 		this.index = index;
 		this.possibleAnswers = possibleAnswers;
-		this.correctAnswer = correctAnswer;
+		this.answer = new ArrayList<CorrectAnswer>();
+		this.answer.add(answer);
 	}
 	
 	@Override
-	public String getCorrectAnswer() {
-		return correctAnswer;
+	public List<CorrectAnswer> getCorrectAnswer() {
+		return answer;
 	}
 
 	@Override
@@ -27,4 +30,9 @@ public class MultipleChoiceQuestion extends Question
 		return possibleAnswers;
 	}
 	
+	@Override
+	public int getType() {
+		return MULTIPLE_CHOICE;
+	}
+
 }

@@ -4,21 +4,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class MultiAnswerQuestion extends Question implements SameAnswerQuestion{
+public class MultiAnswerQuestion extends Question{
 
-	List< List<String> > correctAnswers;
+	List<CorrectAnswer> correctAnswer;
 	
-	public MultiAnswerQuestion(int index, String questionText, List< List< String> > correctAnswers){
+	public MultiAnswerQuestion(int index, String questionText, List<CorrectAnswer> correctAnswer){
 		this.index = index;
 		this.questionText = questionText;
-		this.correctAnswers = correctAnswers;
-		
+		this.correctAnswer = correctAnswer;
 	}
 	
 	@Override
-	public List< List<String>> getCorrectAnswers() {
-		return correctAnswers;
+	public int getIndex() {
+		return index;
 	}
-	
+
+	@Override
+	public String getQuestionText() {
+		return questionText;
+	}
+
+	@Override
+	public int getType() {
+		return MULTIPLE_ANSWER;
+	}
+
+	@Override
+	public List<CorrectAnswer> getCorrectAnswer() {
+		return correctAnswer;
+	}
 	
 }
