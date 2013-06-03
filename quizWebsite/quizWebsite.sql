@@ -1,18 +1,5 @@
 use quizWebsite;
 
-select * from accounts;
-select * from messages where accountIdTo = 2;
-select * from messages;
-
-
-INSERT INTO challenges (accountIdTo,accountIdFrom,quizID )VALUES(2,1,1);
-
-
-INSERT INTO messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )VALUES(2,3,"a",false,"2013/06/03 02:24:07");
-INSERT INTO messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )VALUES(2,3,"ab",false,"2013/06/03 02:24:09");
-INSERT INTO messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )VALUES(2,3,"a",false,"2013/06/03 02:45:57");
-
-select * from messages;
 
 DROP TABLE IF EXISTS friendships;
 DROP TABLE IF EXISTS friendRequests;
@@ -59,17 +46,17 @@ create table quizes(
 	quizID int primary key AUTO_INCREMENT not null,
 	authorID int,
 	name varchar(64),
-	quiz_date datetime, 
+	quiz_date date, 
 	description varchar(1024),
 	foreign key (authorID) references accounts (accountID) ON DELETE CASCADE
 );
-
 
 create table questions(
 	questionID int primary key AUTO_INCREMENT not null,
 	type int,
 	questionText varchar(512),
-	score int
+	score int,
+	num int
 );
 
 
@@ -82,7 +69,6 @@ create table multipleChoice(
 );
 
 
--- 
 create table answers(
 	questionID int,
 	answer varchar(64),
@@ -110,7 +96,6 @@ create table questionToQuiz(
 	questionToQuizID int,
 	quizID int,
 	questionID int,
-	num int,
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE,
 	foreign key (questionID) references questions (questionID)  ON DELETE CASCADE
 );
@@ -127,13 +112,12 @@ create table challenges(
 );
 
 
-
 create table messages(
 	accountIdTo int,
 	accountIdFrom int,
 	text varchar(64),
 	read_unread bool,
-	sendTime datetime,
+	sendTime date,
 	foreign key (accountIDTo) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (accountIDFrom) references accounts (accountID)  ON DELETE CASCADE
 );
@@ -144,6 +128,7 @@ create table takenQuizes(
 	quizID int,
 	total_score int,
 	quiz_time time,
-	quiz_date datetime,
+	quiz_date date,
 	foreign key (accountID) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE
+);
