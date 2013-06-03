@@ -5,10 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MyDB {
@@ -49,7 +47,6 @@ public class MyDB {
 
 	public static List<Integer> getFriends(int id) {
 		List<Integer> friends = new ArrayList<Integer>();
-
 		try {
 			res = statement
 					.executeQuery("SELECT accountID2 FROM friendships where accountID1 = \""
@@ -64,83 +61,82 @@ public class MyDB {
 				friends.add(res.getInt("accountID1"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("getFriends-is dros moxda shecdoma. query-s gashvebisas");
 			e.printStackTrace();
 		}
 		return friends;
 	}
 
-	public static String getName(int id) {
-		String name = "";
+	/*
+	 * svadasxva type-ebis( name, surname, nickname...) geteri.
+	 */
+	private static String getter(int id, String type){
+		String result = "";
 		try {
-			res = statement
-					.executeQuery("SELECT name FROM accounts where accountID = \""
-							+ id + "\"");
+			String query = "SELECT "+type +" FROM accounts where accountID = \"" + id + "\"" ;
+			res = statement.executeQuery(query);
 			res.next();
-			name = res.getString("name");
+			result = res.getString(type);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println( "query-s gashvebisas moxda shecdoma. (get" + type+ ")");
 			e.printStackTrace();
 		}
-		return name;
+		
+		return result;
+	}
+	
+	
+	public static String getName(int id) {
+		return getter(id, "getName");
 	}
 
 	public static String getSurname(int id) {
-		String surname = "";
-		try {
-			res = statement
-					.executeQuery("SELECT surname FROM accounts where accountID = \""
-							+ id + "\"");
-			res.next();
-			surname = res.getString("surname");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return surname;
+		return getter(id, "surname");
 	}
 
 	public static String getNickName(int id) {
-		String nick = "";
+		return getter(id, "nick");
+	}
+	
+	public static String getPassword(int id) {
+		
+		return getter(id, "password");
+	}
+	
+	public static int getId(String nickName) {
+		int id = 0;
 		try {
-			res = statement
-					.executeQuery("SELECT nick FROM accounts where accountID = \""
-							+ id + "\"");
+			String query = "SELECT accountID FROM accounts where nick = \"" + nickName + "\"";
+			res = statement.executeQuery(query);
 			res.next();
-			nick = res.getString("nick");
+			id = res.getInt("accountID");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println( "query-s gashvebisas moxda shecdoma. (getId");
 			e.printStackTrace();
 		}
-		return nick;
+		return id;
 	}
-
-	public static boolean nickNameExist(String nickName) {
+	
+	
+	private static boolean exist(String type, String stringToSearch){
 		boolean b = false;
 		try {
-			res = statement
-					.executeQuery("SELECT * FROM accounts where nick = \""
-							+ nickName + "\"");
+			String query = "SELECT * FROM accounts where" + type + " = \"" + stringToSearch + "\"";
+			res = statement .executeQuery(query);
 			b = res.next();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println( "query-s gashvebisas moxda shecdoma. (exist" + type+ ")");
 			e.printStackTrace();
 		}
 		return b;
+	}
+	
+	public static boolean nickNameExist(String nickName) {
+		return exist("nick", nickName);
 	}
 
 	public static boolean mailExist(String mail) {
-		boolean b = false;
-		try {
-			res = statement
-					.executeQuery("SELECT * FROM accounts where mail = \""
-							+ mail + "\"");
-			b = res.next();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return b;
+		return exist("mail", mail);
 	}
 
 	
@@ -148,6 +144,7 @@ public class MyDB {
 		try {
 			statement.executeUpdate("delete from accounts where nick = \""  + nickName + "\";");					
 		} catch (SQLException e) {
+			System.out.println( "query-s gashvebisas moxda shecdoma. (deleteAccount).");
 			e.printStackTrace();
 		}
 	}
@@ -167,13 +164,12 @@ public class MyDB {
 	private static int getNotificationCount(int id, String table){
 		int count = 0;
 		try {
-			ResultSet rs = 
-					statement.executeQuery
-					("SELECT COUNT(*) FROM "+ table + " WHERE accountIdTo = " + id + ";");
-			rs.next();
-			count = Integer.parseInt(rs.getString(1));
+			String query = "SELECT COUNT(*) FROM "+ table + " WHERE accountIdTo = " + id + ";";
+			res = statement.executeQuery(query);
+			res.next();
+			count = Integer.parseInt(res.getString(1));
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println( "query-s gashvebisas moxda shecdoma. (getNotifications).");
 		}
 		return count;
 	}
@@ -209,7 +205,7 @@ public class MyDB {
 			statement.executeUpdate(query);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println( "query-s gashvebisas moxda shecdoma. (sendMessage).");
 			e.printStackTrace();
 			return;
 		}
@@ -219,43 +215,38 @@ public class MyDB {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date utilDate = new java.util.Date();
 		String date = sdf.format(utilDate);
-		String query = "INSERT INTO quizes(authorID,name,quiz_date,description) values(" + accountId + ",\"" + name + "\",\""  + date + "\",\"" + description + "\" );" ;
-		System.out.println(query);
+		String query = "INSERT INTO quizes(authorID,name,quiz_date,description) values(" 
+				+ accountId + ",\"" + name + "\",\""  + date + "\",\"" + description + "\" );" ;
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println( "query-s gashvebisas moxda shecdoma. (createQuiz).");
 			e.printStackTrace();
 		}
 		return getQuizId(name, accountId);
 	}
 
 	
-	
-	
-	
 	public static int getQuizId(String name, int accountId) {
 		try {
 			res = statement.executeQuery("SELECT quizID from quizes" +
-								" where name = \"askc\" and authorID = 1; ");
+								"where name = \"askc\" and authorID = 1; ");
 			if(res.next()){
 			return res.getInt(1);
 			}else return 0;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println( "query-s gashvebisas moxda shecdoma. (getQuizId).");
 			e.printStackTrace();
 		}
-		
 		return 0;
 	}
 
 
-	
-	
-	public void sendFriendRequest(int id1, int id2) {
+	public List getQuiz(int QuizId) {
 		// TODO:
+		return null;
 	}
-
+	
 	public static void sendChallenge(int idTo, int idFrom, int quizId) {
 
 		try {
@@ -264,47 +255,10 @@ public class MyDB {
 			statement.executeUpdate(query);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("shesabamisi id-is qvizi an accounti ar aris sheqmnili");
-//			e.printStackTrace();
-		}
-
-	}
-
-	public List getQuiz(int QuizId) {
-		// TODO:
-		return null;
-	}
-
-	public static int getId(String nickName) {
-		int id = 0;
-		try {
-			res = statement
-					.executeQuery("SELECT accountID FROM accounts where nick = \""
-							+ nickName + "\"");
-			res.next();
-			id = res.getInt("accountID");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return id;
-	}
 
-	public static String getPassword(int id) {
-		String pass = "";
-		try {
-			// statement = con.createStatement();
-			res = statement
-					.executeQuery("SELECT password FROM accounts where accountID = \""
-							+ id + "\"");
-			res.next();
-			pass = res.getString("password");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return pass;
 	}
 
 	public static void addAccount(String name, String surName, String nickName,
@@ -326,10 +280,17 @@ public class MyDB {
 							+ Achievements + "\")");
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println( "query-s gashvebisas moxda shecdoma. (addAccount).");
 			e.printStackTrace();
 		}
+	}	
+	
+	public void sendFriendRequest(int idTo, int idFrom) {
+		String query = 
 	}
+
+
+
 
 	public static void close() {
 		try {
