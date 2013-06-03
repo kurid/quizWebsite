@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<select>
-		<option value="QuestionResponse">Single answer question</option>
-	</select>
+	<form action="ChooseQuestionToAdd" method="post">
+		<select name = "question">
+			<option value="SingleAnsver">Single answer question</option>
+		</select>
+		<input type="submit" value="CreateQestion" />
+	</form>
 </body>
 </html>
