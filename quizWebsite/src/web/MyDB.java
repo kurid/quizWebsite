@@ -87,7 +87,7 @@ public class MyDB {
 	
 	
 	public static String getName(int id) {
-		return getter(id, "getName");
+		return getter(id, "name");
 	}
 
 	public static String getSurname(int id) {
@@ -103,6 +103,9 @@ public class MyDB {
 		return getter(id, "password");
 	}
 	
+	public static String getMail(int id){
+		return getter(id, "mail");
+	}
 	public static int getId(String nickName) {
 		int id = 0;
 		try {
@@ -244,6 +247,17 @@ public class MyDB {
 
 	public List getQuiz(int QuizId) {
 		// TODO:
+		return null;
+	}
+	
+	public static ResultSet getQuestionInfo(int questionId){
+		String query ="select * from questions where questionID =" + questionId +";" ;
+		try {
+			res = statement.executeQuery(query);
+			return res;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
