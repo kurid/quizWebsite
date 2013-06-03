@@ -14,6 +14,6 @@
 <body>
 	<a href="enter.jsp"> Enter</a>
 	<a href="Registration.jsp"> Registration </a>
-	<a class = "disabled" href="CreateQuiz"> QreateQuiz </a>
+	<a class = "disabled" href="StartCreatingQuiz"> QreateQuiz </a>
 </body>
 </html>
