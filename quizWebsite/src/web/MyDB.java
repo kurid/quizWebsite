@@ -176,9 +176,6 @@ public class MyDB {
 					("SELECT COUNT(*) FROM "+ table + " WHERE accountIdTo = " + id + ";");
 			rs.next();
 			count = Integer.parseInt(rs.getString(1));
-			//while(rs.next()){
-				//System.out.println(rs.getString(3));
-//			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -213,7 +210,6 @@ public class MyDB {
 					+ ",\""
 					+ text
 					+ "\",false,\"" + date + "\");";
-			System.out.println(query);
 			statement.executeUpdate(query);
 
 		} catch (SQLException e) {
@@ -232,7 +228,6 @@ public class MyDB {
 		try {
 			String query = "INSERT INTO challenges (accountIdTo,accountIdFrom,quizID )VALUES("
 					+ idTo + "," + idFrom + "," + quizId + ");";
-			System.out.println(query);
 			statement.executeUpdate(query);
 
 		} catch (SQLException e) {
