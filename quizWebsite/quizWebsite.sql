@@ -4,9 +4,7 @@ select * from accounts;
 select * from messages where accountIdTo = 2;
 select * from messages;
 
-INSERT INTO accounts VALUES(1, "shotaboy", "shota", "gvinepadze", "12345", "shota@mail.ru", "glexi");
-INSERT INTO accounts VALUES(2, "gio", "giorgi", "gvinepadze", "2345", "shota3@mail.ru", "glexi");
-INSERT INTO accounts VALUES(3, "vaso", "vasili", "kakauridze", "123445", "shot22a@mail.ru", "glexi");
+
 INSERT INTO challenges (accountIdTo,accountIdFrom,quizID )VALUES(2,1,1);
 
 
