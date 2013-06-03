@@ -1,7 +1,6 @@
 package Question;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,20 +8,18 @@ public class MultipleChoiceQuestion extends Question
 	implements ChooseQuestion{
 	
 	private Set<String> possibleAnswers;
-	private List<CorrectAnswer> answer;
 	
 	public MultipleChoiceQuestion(String questionText, int index,
-			Set<String> possibleAnswers, CorrectAnswer answer){
+			Set<String> possibleAnswers, CorrectAnswer correctAnswer){
 		this.questionText = questionText;
 		this.index = index;
 		this.possibleAnswers = possibleAnswers;
-		this.answer = new ArrayList<CorrectAnswer>();
-		this.answer.add(answer);
+		this.correctAnswer = correctAnswer;
 	}
 	
 	@Override
-	public List<CorrectAnswer> getCorrectAnswer() {
-		return answer;
+	public CorrectAnswer getCorrectAnswer() {
+		return correctAnswer;
 	}
 
 	@Override

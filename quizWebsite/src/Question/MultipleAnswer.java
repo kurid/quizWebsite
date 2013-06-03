@@ -5,15 +5,15 @@ import java.util.ArrayList;
 
 public class MultipleAnswer extends CorrectAnswer{
 	
-	private List<String> correctAnswers;
+	private List<String> correctAnswer;
 		
-	public MultipleAnswer(ArrayList<String> correctAnswers){
-		this.correctAnswers = correctAnswers;
+	public MultipleAnswer(List<String> correctAnswer){
+		this.correctAnswer = correctAnswer;
 	}
 	
 	@Override
 	public List<String> getAnswer(){
-		return correctAnswers;
+		return correctAnswer;
 	}
 	
 }
