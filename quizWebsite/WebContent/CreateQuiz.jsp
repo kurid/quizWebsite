@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<form action="CreateQuiz" method="post">
+		Enter quiz name: <input type="text" name="quizName"><br> 
+		Enter description: <input type="text" name="description"><br>
+		<button type="submit">Create quiz, start adding questions</button>
+	</form>
 </body>
 </html>
