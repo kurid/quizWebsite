@@ -156,9 +156,33 @@ public class MyDB {
 	/*
 	 * abrunebs marto ricxvebs
 	 */
-	public int[] getNotifications() {
-		// TODO:
-		return null;
+	public static int[] getNotifications(int id) {
+		int[] arr = new int[3];
+		try {
+			arr[0] = getNotificationCount(id, "messages");
+			arr[1] = getNotificationCount(id, "friendRequests");
+			arr[2] = getNotificationCount(id, "challenges");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return arr;
+	}
+	
+	private static int getNotificationCount(int id, String table){
+		int count = 0;
+		try {
+			ResultSet rs = 
+					statement.executeQuery
+					("SELECT COUNT(*) FROM "+ table + " WHERE accountIdTo = " + id + ";");
+			rs.next();
+			count = Integer.parseInt(rs.getString(1));
+			//while(rs.next()){
+				//System.out.println(rs.getString(3));
+//			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return count;
 	}
 
 	public List getChallenges(int id) {
@@ -182,20 +206,21 @@ public class MyDB {
 		java.util.Date utilDate = new java.util.Date();
 		String date = sdf.format(utilDate);
 		try {
-			statement
-					.executeUpdate("insert into messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )values("
-							+ idTo
-							+ ","
-							+ idFrom
-							+ ",\""
-							+ text
-							+ "\",false,\"" + date + "\")");
+			String query = "INSERT INTO messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )VALUES("
+					+ idTo
+					+ ","
+					+ idFrom
+					+ ",\""
+					+ text
+					+ "\",false,\"" + date + "\");";
+			System.out.println(query);
+			statement.executeUpdate(query);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
 		}
-
 	}
 
 	public void sendFriendRequest(int id1, int id2) {
@@ -205,13 +230,15 @@ public class MyDB {
 	public static void sendChallenge(int idTo, int idFrom, int quizId) {
 
 		try {
-			statement
-					.executeUpdate("insert into challenges (accountIdTo,accountIdFrom,quizID )values("
-							+ idTo + "," + idFrom + "," + quizId + ")");
+			String query = "INSERT INTO challenges (accountIdTo,accountIdFrom,quizID )VALUES("
+					+ idTo + "," + idFrom + "," + quizId + ");";
+			System.out.println(query);
+			statement.executeUpdate(query);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("shesabamisi id-is qvizi an accounti ar aris sheqmnili");
+//			e.printStackTrace();
 		}
 
 	}

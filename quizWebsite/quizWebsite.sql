@@ -1,5 +1,20 @@
 use quizWebsite;
 
+select * from accounts;
+select * from messages where accountIdTo = 2;
+select * from messages;
+
+INSERT INTO accounts VALUES(1, "shotaboy", "shota", "gvinepadze", "12345", "shota@mail.ru", "glexi");
+INSERT INTO accounts VALUES(2, "gio", "giorgi", "gvinepadze", "2345", "shota3@mail.ru", "glexi");
+INSERT INTO accounts VALUES(3, "vaso", "vasili", "kakauridze", "123445", "shot22a@mail.ru", "glexi");
+INSERT INTO challenges (accountIdTo,accountIdFrom,quizID )VALUES(2,1,1);
+
+
+INSERT INTO messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )VALUES(2,3,"a",false,"2013/06/03 02:24:07");
+INSERT INTO messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )VALUES(2,3,"ab",false,"2013/06/03 02:24:09");
+INSERT INTO messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )VALUES(2,3,"a",false,"2013/06/03 02:45:57");
+
+select * from messages;
 
 DROP TABLE IF EXISTS friendships;
 DROP TABLE IF EXISTS friendRequests;
@@ -46,7 +61,7 @@ create table quizes(
 	quizID int primary key AUTO_INCREMENT not null,
 	authorID int,
 	name varchar(64),
-	quiz_date date, 
+	quiz_date datetime, 
 	description varchar(1024),
 	foreign key (authorID) references accounts (accountID) ON DELETE CASCADE
 );
@@ -114,12 +129,13 @@ create table challenges(
 );
 
 
+
 create table messages(
 	accountIdTo int,
 	accountIdFrom int,
 	text varchar(64),
 	read_unread bool,
-	sendTime date,
+	sendTime datetime,
 	foreign key (accountIDTo) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (accountIDFrom) references accounts (accountID)  ON DELETE CASCADE
 );
@@ -130,7 +146,7 @@ create table takenQuizes(
 	quizID int,
 	total_score int,
 	quiz_time time,
-	quiz_date date,
+	quiz_date datetime,
 	foreign key (accountID) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE
 );
