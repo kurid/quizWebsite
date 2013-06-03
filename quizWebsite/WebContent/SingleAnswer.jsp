@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,11 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="ChooseQuestionToAdd" method="post">
-		<select name = "question">
-			<option value="SingleAnswer">Single answer question</option>
-		</select>
-		<input type="submit" value="CreateQestion" />
+	<form action="AddSingleAnswerQuestion" method = "post">
+		QuestionText: <input type="text" name="questionText"><br> 
+		Answer: <input type="text" name="Answer"><br> 
 	</form>
 </body>
 </html>
