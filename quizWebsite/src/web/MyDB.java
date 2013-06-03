@@ -177,19 +177,47 @@ public class MyDB {
 		return count;
 	}
 
-	public List getChallenges(int id) {
-		// TODO:
-		return null;
+	public static List<Challenge> getChallenges(int idTo) {
+		String query = "select * from challenges where accountIdTo = " + idTo + ";";
+		List<Challenge> challanges = new ArrayList<Challenge>();
+		try {
+			res = statement.executeQuery(query);
+			while(res.next()){
+				challanges.add(new Challenge(idTo, res.getInt("accountIdFrom"), res.getDate("sendTime"), res.getInt("quizID")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return challanges;
 	}
 
-	public List getMessages(int id) {
-		// TODO:
-		return null;
+	public static List<Message> getMessages(int idTo) {
+		String query = "select * from messages where accountIdTo = " + idTo + ";";
+		List<Message> messages = new ArrayList<Message>();
+		try {
+			res = statement.executeQuery(query);
+			while(res.next()){
+				messages.add(new Message(idTo, res.getInt("accountIdFrom"), res.getDate("sendTime"), res.getString("text")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return messages;
 	}
 
-	public List getRequest(int id) {
-		// TODO:
-		return null;
+	public List<FriendRequest> getRequest(int idTo) {
+		String query = "select * from messages where accountIdTo = " + idTo + ";";
+		List<FriendRequest> friendRequests = new ArrayList<FriendRequest>();
+		try {
+			res = statement.executeQuery(query);
+			while(res.next()){
+				friendRequests.add(new FriendRequest(idTo, res.getInt("accountIdFrom"), res.getDate("sendTime")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return friendRequests;
 	}
 
 	public static void sendMessage(int idTo, int idFrom, String text) {
@@ -283,11 +311,16 @@ public class MyDB {
 		return null;
 	}
 	
+//	public static ResultSet 
+	
 	public static void sendChallenge(int idTo, int idFrom, int quizId) {
-
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		java.util.Date utilDate = new java.util.Date();
+		String date = sdf.format(utilDate);
 		try {
-			String query = "INSERT INTO challenges (accountIdTo,accountIdFrom,quizID )VALUES("
-					+ idTo + "," + idFrom + "," + quizId + ");";
+			String query = "INSERT INTO challenges (accountIdTo,accountIdFrom,quizID,sendDate )VALUES("
+					+ idTo + "," + idFrom + "," + quizId + date +");";
 			statement.executeUpdate(query);
 
 		} catch (SQLException e) {
@@ -314,12 +347,12 @@ public class MyDB {
 							+ mail
 							+ "\",\""
 							+ Achievements + "\")");
-
 		} catch (SQLException e) {
 			System.out.println( "query-s gashvebisas moxda shecdoma. (addAccount).");
 			e.printStackTrace();
 		}
 	}	
+	
 	
 	public static void sendFriendRequest(int idTo, int idFrom) {
 		String query = "INSERT INTO  friendrequests VALUES (" + idTo + "," + idFrom + ");";
@@ -338,5 +371,4 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-
 }

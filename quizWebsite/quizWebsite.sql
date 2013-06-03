@@ -37,6 +37,7 @@ create table friendships(
 create table friendRequests(
 	accountIdTo int,
 	accountIdFrom int,
+	sendTime date,
 	foreign key (accountIDTo) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (accountIDFrom) references accounts (accountID) ON DELETE CASCADE
 );
@@ -106,6 +107,7 @@ create table challenges(
 	accountIdTo int,
 	accountIdFrom int,
 	quizID int,
+	sendTime date,
 	foreign key (accountIDTo) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (accountIDFrom) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (quizID) references quizes (quizID)	 ON DELETE CASCADE
@@ -132,3 +134,4 @@ create table takenQuizes(
 	foreign key (accountID) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE
 );
+
