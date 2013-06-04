@@ -79,8 +79,8 @@ create table answers(
 
 create table matching(
 	questionID int,
-	answerId1 int,
-	answerId2 int,
+	answer1 varchar(64),
+	answer2 varchar(64),
 	foreign key (questionID) references questions (questionID)  ON DELETE CASCADE
 );
 

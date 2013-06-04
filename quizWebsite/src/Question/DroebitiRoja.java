@@ -92,8 +92,16 @@ public class DroebitiRoja implements QuestionFinals{
 			q = new ImageQuestion(num,text,URL,ca,score);
 		case MATCHING:
 			resHelper = MyDB.getMatching(questionID);
-			
-		case AUTO_GENERATED:
+			answers = new ArrayList<List<String> >();
+			while (resHelper.next()){
+				ArrayList<String> tmp = new ArrayList<String>();
+				tmp.add(resHelper.getString("answer1"));
+				tmp.add(resHelper.getString("answer2"));
+				answers.add(tmp);
+			}
+			ca = new MMAnswer(answers);
+			q = new MatchingQuestion(num,text,ca,score);
+		case AUTO_GENERATED: 
 		default: q=null;
 		}
 		
