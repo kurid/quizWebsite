@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.CallableStatement;
+
 public class MyDB {
 	private static final String MYSQL_USERNAME = "root";
 	private static final String MYSQL_PASSWORD = "1234";
@@ -382,6 +384,18 @@ public class MyDB {
 	public static String getURL(int questionId){
 		return "";
 		
+	}
+	
+	public static void addFriend(int id1, int id2){
+		try {
+			CallableStatement cs = (CallableStatement) connection.prepareCall("{call addFriend(?,?)}");
+			cs.setInt(1, id1);
+			cs.setInt(2, id2);
+			cs.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

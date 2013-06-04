@@ -143,3 +143,20 @@ create table imigeQuestion(
 	url varchar(512),
 	foreign key (questionID) references questions (questionID)  ON DELETE CASCADE
 );
+
+
+DELIMITER $$
+CREATE PROCEDURE addFriend(id1 int, id2 int)
+BEGIN
+	INSERT INTO friendships(accountID1, accountID2) VALUES (id1, id2);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE removeFriend(id1 int, id2 int)
+BEGIN
+	Delete from friendships
+	where (accountID1 = id1 and accountID2 = id2) or (accountID1 = id2 and accountID2 = id1);
+END$$
+DELIMITER ;

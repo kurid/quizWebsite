@@ -8,6 +8,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.mysql.jdbc.CallableStatement;
+import com.mysql.jdbc.Connection;
+
 public class MyDbTest extends TestCase {
 	
 	
@@ -100,6 +103,35 @@ public class MyDbTest extends TestCase {
 	}
 	
 	
+	public void testGetMessages(){
+		MyDB.addAccount("Itachi", "Uchiha", "nickName1", "password1", "mail1@gmail.com");
+		MyDB.addAccount("Sasuke", "Uchiha", "nickName2", "password2", "mail2@gmail.com");
+		int itachi = MyDB.getId("nickName1");
+		int sasuke = MyDB.getId("nickName2");
+		String message = "Forgive me Sasuke… …It ends with this.";
+		MyDB.sendMessage(sasuke, itachi, message);
+		List<Message> chat = MyDB.getMessages(sasuke);
+		assertEquals(1, chat.size());
+		assertTrue(chat.get(0).getText().equals(message));
+		MyDB.deleteAccount("nickName1");
+		MyDB.deleteAccount("nickName2");
+	}
+	
+	public void testAddAndGetFriend(){
+		MyDB.addAccount("Shikamaru", "Nara", "nickName1", "password1", "mail1@gmail.com");
+		MyDB.addAccount("Choji", "Akimichi", "nickName2", "password2", "mail2@gmail.com");
+		MyDB.addAccount("Ino", "Yamanaka", "nickName3", "password3", "mail3@gmail.com");
+		int shika = MyDB.getId("nickName1");
+		int cho = MyDB.getId("nickName2");
+		int ino =  MyDB.getId("nickName3");
+		MyDB.addFriend(shika, cho);
+		MyDB.addFriend(ino, shika);
+		assertEquals(2,  MyDB.getFriends(shika).size());
+		assertEquals(1,  MyDB.getFriends(ino).size());
+		assertEquals(1,  MyDB.getFriends(cho).size());
+		MyDB.deleteAccount("nickName1");
+		MyDB.deleteAccount("nickName2");
+	}
 	
 	
 //	public void testCreateQuiz(){
