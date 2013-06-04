@@ -135,3 +135,11 @@ create table takenQuizes(
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE
 );
 
+
+
+
+create table imigeQuestion(
+	questionID int,
+	url varchar(512),
+	foreign key (questionID) references questions (questionID)  ON DELETE CASCADE
+);

@@ -17,7 +17,6 @@ public class MyDB {
 
 	private static Connection connection;
 	private static Statement statement;
-	private static ResultSet res;
 
 	static {
 		try {
@@ -47,6 +46,7 @@ public class MyDB {
 
 	public static List<Integer> getFriends(int id) {
 		List<Integer> friends = new ArrayList<Integer>();
+		 ResultSet res;
 		try {
 			res = statement
 					.executeQuery("SELECT accountID2 FROM friendships where accountID1 = \""
@@ -72,6 +72,7 @@ public class MyDB {
 	 */
 	private static String getter(int id, String type){
 		String result = "";
+		ResultSet res;
 		try {
 			String query = "SELECT "+type +" FROM accounts where accountID = \"" + id + "\"" ;
 			res = statement.executeQuery(query);
@@ -108,6 +109,7 @@ public class MyDB {
 	}
 	public static int getId(String nickName) {
 		int id = 0;
+		ResultSet res;
 		try {
 			String query = "SELECT accountID FROM accounts where nick = \"" + nickName + "\"";
 			res = statement.executeQuery(query);
@@ -123,6 +125,7 @@ public class MyDB {
 	
 	private static boolean exist(String type, String stringToSearch){
 		boolean b = false;
+		ResultSet res;
 		try {
 			String query = "SELECT * FROM accounts where " + type + " = \"" + stringToSearch + "\" ;";
 			res = statement .executeQuery(query);
@@ -166,6 +169,7 @@ public class MyDB {
 	
 	private static int getNotificationCount(int id, String table){
 		int count = 0;
+		ResultSet res;
 		try {
 			String query = "SELECT COUNT(*) FROM "+ table + " WHERE accountIdTo = " + id + ";";
 			res = statement.executeQuery(query);
@@ -179,6 +183,7 @@ public class MyDB {
 
 	public static List<Challenge> getChallenges(int idTo) {
 		String query = "select * from challenges where accountIdTo = " + idTo + ";";
+		ResultSet res;
 		List<Challenge> challanges = new ArrayList<Challenge>();
 		try {
 			res = statement.executeQuery(query);
@@ -193,6 +198,7 @@ public class MyDB {
 	}
 
 	public static List<Message> getMessages(int idTo) {
+		ResultSet res;
 		String query = "select * from messages where accountIdTo = " + idTo + ";";
 		List<Message> messages = new ArrayList<Message>();
 		try {
@@ -207,6 +213,7 @@ public class MyDB {
 	}
 
 	public List<FriendRequest> getRequest(int idTo) {
+		ResultSet res;
 		String query = "select * from messages where accountIdTo = " + idTo + ";";
 		List<FriendRequest> friendRequests = new ArrayList<FriendRequest>();
 		try {
@@ -259,6 +266,7 @@ public class MyDB {
 
 	
 	public static int getQuizId(String name, int accountId) {
+		ResultSet res;
 		try {
 			res = statement.executeQuery("SELECT quizID from quizes" +
 								"where name = \"askc\" and authorID = 1; ");
@@ -279,6 +287,7 @@ public class MyDB {
 	}
 	
 	public static ResultSet getQuestionInfo(int questionId){
+		ResultSet res;
 		String query ="select * from questions where questionID =" + questionId +";" ;
 		try {
 			res = statement.executeQuery(query);
@@ -290,6 +299,7 @@ public class MyDB {
 	}
 	
 	public static ResultSet MultipleChoice(int questionId){
+		ResultSet res;
 		String query = "select * from multiplechoice where questionID =" + questionId + ";" ;
 		try {
 			res = statement.executeQuery(query);
@@ -301,6 +311,7 @@ public class MyDB {
 	}
 	
 	public static ResultSet answers(int questionId){
+		ResultSet res;
 		String query = "select * from multiplechoice where questionID =" + questionId + ";" ;
 		try {
 			res = statement.executeQuery(query);
@@ -361,6 +372,16 @@ public class MyDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static ResultSet getMatching(){
+		ResultSet res;
+		return null;
+	}
+	
+	public static String getURl(int questionId){
+		return "";
+		
 	}
 	
 	
