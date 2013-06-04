@@ -81,6 +81,15 @@ public class DroebitiRoja implements QuestionFinals{
 			ca = new MultipleAnswer(arrCorrect);
 			q = new MCMAQ(num,text,new HashSet<String>(arr),ca,score);			
 		case IMAGE:
+			resHelper = MyDB.answers(questionID);
+			arr = new ArrayList<String>();
+			while(resHelper.next()){
+				String tmp = resHelper.getString("answer");
+				arr.add(tmp);
+			}
+			ca = new MultipleAnswer(arr);
+			String URL = MyDB.getURL(questionID);
+			q = new ImageQuestion(num,text,URL,ca,score);
 		case MATCHING:
 		case AUTO_GENERATED:
 		default: q=null;
