@@ -3,7 +3,10 @@ package Question;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
 import web.MyDB;
 
@@ -40,6 +43,31 @@ public class DroebitiRoja implements QuestionFinals{
 			ca = new SingleAnswer(answer);
 			q = new MultipleChoiceQuestion(num,text,new HashSet<String>(arr),ca,score);
 		case MULTIPLE_ANSWER:
+			resHelper = MyDB.answers(questionID);
+			arr = new ArrayList<String>();
+			ArrayList<Integer> arrHelper = new ArrayList<Integer>();
+			while (resHelper.next()){
+				String tmp = resHelper.getString("answer");
+				arr.add(tmp);
+				int tmp2 = resHelper.getInt("answerNum");
+				arrHelper.add(tmp2);
+			}
+			HashMap<Integer, ArrayList<String> > hm = new HashMap<Integer, ArrayList<String> >();
+			for (int i=0; i<arr.size(); i++){
+				ArrayList<String> tmp;
+				if (hm.containsKey(arrHelper.get(i)))
+					tmp = hm.get(arrHelper.get(i));
+				else
+					tmp = new ArrayList<String>();
+				tmp.add(arr.get(i));
+				hm.put(arrHelper.get(i), tmp);
+			}
+			Iterator<Integer> it = hm.keySet().iterator();
+			List<List<String>> answers = new ArrayList<List<String> >();
+			while (it.hasNext())
+				answers.add(hm.get(it.next()));
+			ca = new MMAnswer(answers);
+			q = new MultiAnswerQuestion(num,text,ca,score);
 		case MCMA:
 		case IMAGE:
 		case MATCHING:
