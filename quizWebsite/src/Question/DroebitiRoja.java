@@ -91,6 +91,8 @@ public class DroebitiRoja implements QuestionFinals{
 			String URL = MyDB.getURL(questionID);
 			q = new ImageQuestion(num,text,URL,ca,score);
 		case MATCHING:
+			resHelper = MyDB.getMatching(questionID);
+			
 		case AUTO_GENERATED:
 		default: q=null;
 		}

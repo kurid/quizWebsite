@@ -374,12 +374,12 @@ public class MyDB {
 		}
 	}
 	
-	public static ResultSet getMatching(){
+	public static ResultSet getMatching(int questionId){
 		ResultSet res;
 		return null;
 	}
 	
-	public static String getURl(int questionId){
+	public static String getURL(int questionId){
 		return "";
 		
 	}
