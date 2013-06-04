@@ -69,6 +69,17 @@ public class DroebitiRoja implements QuestionFinals{
 			ca = new MMAnswer(answers);
 			q = new MultiAnswerQuestion(num,text,ca,score);
 		case MCMA:
+			resHelper = MyDB.MultipleChoice(questionID);
+			arr = new ArrayList<String>();
+			ArrayList<String> arrCorrect = new ArrayList<String>();
+			while (resHelper.next()){
+				String ans = resHelper.getString("answer");
+				boolean isCorrect = resHelper.getBoolean("isCorrect");
+				if (isCorrect) arrCorrect.add(ans);
+				arr.add(ans);
+			}
+			ca = new MultipleAnswer(arrCorrect);
+			q = new MCMAQ(num,text,new HashSet<String>(arr),ca,score);			
 		case IMAGE:
 		case MATCHING:
 		case AUTO_GENERATED:
