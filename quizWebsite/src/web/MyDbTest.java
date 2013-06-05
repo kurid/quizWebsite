@@ -131,8 +131,13 @@ public class MyDbTest extends TestCase {
 		assertEquals(1,  MyDB.getFriends(cho).size());
 		MyDB.deleteAccount("nickName1");
 		MyDB.deleteAccount("nickName2");
+		MyDB.deleteAccount("nickName3");
 	}
 	
+//	public void testGetURl(){
+//		assertEquals("asd", MyDB.getURL(1));
+//		MyDB.getMatching(1);
+//	}
 	
 //	public void testCreateQuiz(){
 //		MyDB.createQuiz("saxeli", "agwera", 1);

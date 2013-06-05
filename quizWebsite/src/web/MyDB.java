@@ -377,13 +377,31 @@ public class MyDB {
 	}
 	
 	public static ResultSet getMatching(int questionId){
-		ResultSet res;
-		return null;
+		ResultSet res = null;
+		String query ="select * from matching  where questionID = " + questionId +" ;";
+		try {
+			res = statement.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res; 
 	}
 	
 	public static String getURL(int questionId){
+		ResultSet res = null;
+		String query ="select url from imigeQuestion  where questionID = " + questionId +" ;";
+		try {
+			res = statement.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			res.next();
+			return res.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return "";
-		
 	}
 	
 	public static void addFriend(int id1, int id2){
