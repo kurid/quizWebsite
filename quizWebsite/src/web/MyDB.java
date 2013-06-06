@@ -446,6 +446,15 @@ public class MyDB {
 		return -1;
 	}
 	
+	public static void addQuestionToQuiz(int quizId,int questionId ){
+		try {
+			statement.executeUpdate("insert into questiontoquiz(quizID, questionID) values(" + quizId +" ," + questionId + ");");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public static void close() {
 		try {
