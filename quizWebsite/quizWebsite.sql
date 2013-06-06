@@ -145,6 +145,8 @@ create table imigeQuestion(
 );
 
 
+
+-- addFriend PROCEDURE --
 DELIMITER $$
 CREATE PROCEDURE addFriend(id1 int, id2 int)
 BEGIN
@@ -152,11 +154,31 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- removeFriend PROCEDURE --
 DELIMITER $$
-
 CREATE PROCEDURE removeFriend(id1 int, id2 int)
 BEGIN
 	Delete from friendships
 	where (accountID1 = id1 and accountID2 = id2) or (accountID1 = id2 and accountID2 = id1);
+END$$
+DELIMITER ;
+
+-- addQuestion FUNCTION --
+DELIMITER $$
+CREATE FUNCTION addQuestion(qType int, qText varchar(512), qScore int, qNum int)
+returns int
+BEGIN
+	DECLARE last_insert_id int;
+	INSERT INTO questions (type, questionText, score, num) VALUES(qType, qText, qScore, qNum);
+	SET last_insert_id = LAST_INSERT_ID();
+	return last_insert_id;
+END$$
+DELIMITER ;
+
+-- addAnswer PROCEDURE --
+DELIMITER $$
+CREATE PROCEDURE addAnswer(nAnswer int, answer varchar(64), questionID int)
+BEGIN
+	INSERT INTO answers VALUES (questionID, answer, nAnswer);
 END$$
 DELIMITER ;

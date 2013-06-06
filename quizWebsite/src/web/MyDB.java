@@ -9,6 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import Question.CorrectAnswer;
+import Question.MultipleAnswer;
+import Question.Question;
+
 import com.mysql.jdbc.CallableStatement;
 
 public class MyDB {
@@ -270,11 +274,11 @@ public class MyDB {
 	public static int getQuizId(String name, int accountId) {
 		ResultSet res;
 		try {
-			res = statement.executeQuery("SELECT quizID from quizes" +
-								"where name = \"askc\" and authorID = 1; ");
-			if(res.next()){
-			return res.getInt(1);
-			}else return 0;
+			res = statement.executeQuery("SELECT quizID FROM quizes" +
+								"WHERE name = \"" + name + "\" AND authorID = " + accountId + "; ");
+			if (res.next()) 
+				return res.getInt(1);
+			else return 0;
 		} catch (SQLException e) {
 			System.out.println( "query-s gashvebisas moxda shecdoma. (getQuizId).");
 			e.printStackTrace();
@@ -414,6 +418,32 @@ public class MyDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static int addQuestionResponse(Question q){
+		MultipleAnswer answer = (MultipleAnswer) q.getCorrectAnswer();
+		try{
+		String query = 
+				"Select addQuestion("+ q.getType() + ", \"" + 
+						q.getQuestionText() +"\", "+ q.getScore() + ", " + q.getIndex() +");";
+		ResultSet res = statement.executeQuery(query);
+		res.next();
+		int questionID = res.getInt(1);
+		List<String> answers = answer.getAnswer();
+		CallableStatement cs;
+		for(int i = 0; i < answers.size(); i++){
+			cs = (CallableStatement) connection.prepareCall("{call addAnswer(?,?,?)}");
+			cs.setInt(1,1);
+			cs.setString(2, answers.get(i));
+			cs.setInt(3, questionID);
+			cs.execute();
+		}
+		return questionID;
+		} catch (SQLException e) {
+			System.out.println("Error in adding QuestionResponse");
+			e.printStackTrace();
+		}
+		return -1;
 	}
 	
 	

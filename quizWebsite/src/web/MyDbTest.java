@@ -8,6 +8,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import Question.MultipleAnswer;
+import Question.Question;
+import Question.QuestionResponse;
+
 import com.mysql.jdbc.CallableStatement;
 import com.mysql.jdbc.Connection;
 
@@ -133,6 +137,17 @@ public class MyDbTest extends TestCase {
 		MyDB.deleteAccount("nickName2");
 		MyDB.deleteAccount("nickName3");
 	}
+	
+//	public void test123(){
+//		List<String> l = new ArrayList<String>();
+//		l.add("txai");
+//		l.add("txai2");
+//		l.add("txai3");
+//		MultipleAnswer a = new MultipleAnswer(l);
+//		Question q = new QuestionResponse(1, "rai?", a, 13);
+//		MyDB.addQuestionResponse(q);
+//		System.out.println("chavamate");
+//	}
 	
 //	public void testGetURl(){
 //		assertEquals("asd", MyDB.getURL(1));
