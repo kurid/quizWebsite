@@ -1,8 +1,10 @@
 package web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Question.CorrectAnswer;
+import Question.MultipleAnswer;
 import Question.Question;
 import Question.QuestionResponse;
 import Question.SingleAnswer;
@@ -54,13 +57,22 @@ public class AddSingleAnswerQuestion extends HttpServlet {
 		int numberOfQuestions = (Integer) session
 				.getAttribute("numberOfQuestions");
 		List<Question> questions = (List<Question>) session.getAttribute("questions");
-		CorrectAnswer correctAnswer = new SingleAnswer(answer);
+		List<String> answers = new ArrayList<String>();
+		answers.add(answer);
+		CorrectAnswer correctAnswer = new MultipleAnswer(answers);
 		Question question = new QuestionResponse(currentNumberOfQuestion,
 				questionText, correctAnswer, 1);
 		questions.add(question);
+		String jsp = "ChooseQuestionToAdd.jsp";
 		if(currentNumberOfQuestion==numberOfQuestions){
-			
+			jsp = "addingFinihed.jsp";
+		}else{
+			currentNumberOfQuestion++;
+			session.setAttribute("currentNumberOfQuestion", currentNumberOfQuestion);
 		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
+		System.out.println(jsp);
+		//dispatcher.forward(request, response);
 		// System.out.println("Kitxwa : "+questionText+" answer :  "+answer);
 		// ai aq ukve mwirdeba MyDB s metodi romelic chaamatebs bazashi aset
 		// kitxvas .
