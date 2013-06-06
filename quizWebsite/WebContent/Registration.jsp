@@ -11,11 +11,31 @@ System.out.println(registerText);%>
 <body>
 	<h1> <%= registerText %></h1>
 	<form action="RegisterServlet" method = "post">
-		First name: <input type="text" name="name"><br> 
-		Surname: <input type="text" name="surname"><br> 
-		Nickname: <input type="text" name="nickname"><br> 
-		Password: <input type="password" name="password"><br> 
-		mail: <input type="text" name="mail"><br> 
+	
+		<table>
+			<tr>
+				<td> First name: </td>
+				<td> <input type="text" name="name"> </td>
+			</tr>
+			<tr>
+				<td> Surname: </td>
+				<td> <input type="text" name="surname"> </td>
+			</tr>
+			<tr>
+				<td> Nickname: </td>
+				<td> <input type="text" name="nickname"> </td>
+			</tr>
+			<tr>
+				<td> Password: </td>
+				<td>  <input type="password" name="password"> </td>
+			</tr>
+			<tr>
+				<td> mail: </td>
+				<td> <input type="text" name="mail"> </td>
+			</tr>
+			
+		</table>
+		 
 		<button type="submit">Register</button>
 	</form>
 </body>

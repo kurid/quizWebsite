@@ -12,14 +12,20 @@
 <body>
 	<!-- text -shi jer araferi ar weria shesabamisi teqtebi gadmoecema servletidan an homePage-dan  -->
 	<h> <%= text %></h>
-	<form action="Enter" method="post">
-		<p>
-		User Name: <input type="text" name="nickname" />		
-			<br /><br />
-			Password: <input type="password" name="password" /> <input type="submit"
-				value="Enter" />
-		</p>
 	
+	<form action="Enter" method="post">
+		<table>
+			<tr>
+				<td> User Name: </td>
+				<td> <input type="text" name="nickname" /> </td>
+			<tr>
+			<tr>
+				<td> Password: </td>
+				<td> <input type="password" name="password" />  </td>
+			<tr>
+			<tr> <td> <input type="submit" value="Enter" /> </td> </tr>
+			
+		</table>
 	</form>
 </body>
 </html>
