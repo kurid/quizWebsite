@@ -13,7 +13,9 @@ DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS takenQuizes;
 DROP TABLE IF EXISTS quizes;
 DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS imigeQuestion;
 DROP TABLE IF EXISTS questions;
+
 
 create table accounts(
 	accountID int primary key AUTO_INCREMENT,
