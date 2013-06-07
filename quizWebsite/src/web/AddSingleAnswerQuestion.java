@@ -65,14 +65,14 @@ public class AddSingleAnswerQuestion extends HttpServlet {
 		questions.add(question);
 		String jsp = "ChooseQuestionToAdd.jsp";
 		if(currentNumberOfQuestion==numberOfQuestions){
-			jsp = "addingFinihed.jsp";
+			jsp = "AddingFinished.jsp";
 		}else{
 			currentNumberOfQuestion++;
 			session.setAttribute("currentNumberOfQuestion", currentNumberOfQuestion);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
-		System.out.println(jsp);
-		//dispatcher.forward(request, response);
+		//System.out.println(jsp);
+		dispatcher.forward(request, response);
 		// System.out.println("Kitxwa : "+questionText+" answer :  "+answer);
 		// ai aq ukve mwirdeba MyDB s metodi romelic chaamatebs bazashi aset
 		// kitxvas .

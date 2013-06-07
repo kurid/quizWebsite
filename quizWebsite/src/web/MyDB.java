@@ -274,7 +274,7 @@ public class MyDB {
 	public static int getQuizId(String name, int accountId) {
 		ResultSet res;
 		try {
-			res = statement.executeQuery("SELECT quizID FROM quizes" +
+			res = statement.executeQuery("SELECT quizID FROM quizes " +
 								"WHERE name = \"" + name + "\" AND authorID = " + accountId + "; ");
 			if (res.next()) 
 				return res.getInt(1);

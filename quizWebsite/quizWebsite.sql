@@ -1,6 +1,5 @@
 use quizWebsite;
 
-
 DROP TABLE IF EXISTS friendships;
 DROP TABLE IF EXISTS friendRequests;
 DROP TABLE IF EXISTS multipleChoice;
@@ -96,7 +95,6 @@ create table tags(
 
 -- num sheidzleba saxeli shevucvalot
 create table questionToQuiz(
-	questionToQuizID int,
 	quizID int,
 	questionID int,
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE,

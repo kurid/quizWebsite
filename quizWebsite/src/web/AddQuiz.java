@@ -17,7 +17,7 @@ import Question.QuestionFinals;
 /**
  * Servlet implementation class AddQuize
  */
-@WebServlet("/AddQuize")
+@WebServlet("/AddQuiz")
 public class AddQuiz extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,8 +44,8 @@ public class AddQuiz extends HttpServlet {
 		List<Question> questions = (List<Question>) session.getAttribute("questions");
 		String quizName = (String) session.getAttribute("quizName");
 		String description = (String) session.getAttribute("quizDescription");
-		int author = (Integer) session.getAttribute("account");
-		int quizId = MyDB.createQuiz(quizName, description, author);
+		Account author = (Account) session.getAttribute("account");
+		int quizId = MyDB.createQuiz(quizName, description, author.getId());
 		addQuestions(questions, quizId);
 	}
 
@@ -55,7 +55,6 @@ public class AddQuiz extends HttpServlet {
 				int questionId = MyDB.addQuestionResponse(questions.get(i));
 				MyDB.addQuestionToQuiz(quizId, questionId);
 			}
-			
 		}
 	}
 
