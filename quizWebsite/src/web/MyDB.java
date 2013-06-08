@@ -266,27 +266,27 @@ public class MyDB {
 		}
 	}
 
-	public static int createQuiz(String name, String description, int accountId){
+	public static int createQuiz(String name, String description, int accountID){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date utilDate = new java.util.Date();
 		String date = sdf.format(utilDate);
 		String query = "INSERT INTO quizes(authorID,name,quiz_date,description) values(" 
-				+ accountId + ",\"" + name + "\",\""  + date + "\",\"" + description + "\" );" ;
+				+ accountID + ",\"" + name + "\",\""  + date + "\",\"" + description + "\" );" ;
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
 			System.out.println( "query-s gashvebisas moxda shecdoma. (createQuiz).");
 			e.printStackTrace();
 		}
-		return getQuizId(name, accountId);
+		return getQuizId(name, accountID);
 	}
 
 	
-	public static int getQuizId(String name, int accountId) {
+	public static int getQuizId(String name, int accountID) {
 		ResultSet res;
 		try {
 			res = statement.executeQuery("SELECT quizID FROM quizes " +
-								"WHERE name = \"" + name + "\" AND authorID = " + accountId + "; ");
+								"WHERE name = \"" + name + "\" AND authorID = " + accountID + "; ");
 			if (res.next()) 
 				return res.getInt(1);
 			else return 0;
@@ -298,14 +298,14 @@ public class MyDB {
 	}
 
 
-	public List getQuiz(int QuizId) {
+	public List getQuiz(int QuizID) {
 		// TODO:
 		return null;
 	}
 	
-	public static ResultSet getQuestionInfo(int questionId){
+	public static ResultSet getQuestionInfo(int questionID){
 		ResultSet res;
-		String query ="select * from questions where questionID =" + questionId +";" ;
+		String query ="select * from questions where questionID =" + questionID +";" ;
 		try {
 			res = statement.executeQuery(query);
 			return res;
@@ -315,9 +315,9 @@ public class MyDB {
 		return null;
 	}
 	
-	public static ResultSet MultipleChoice(int questionId){
+	public static ResultSet MultipleChoice(int questionID){
 		ResultSet res;
-		String query = "select * from multiplechoice where questionID =" + questionId + ";" ;
+		String query = "select * from multiplechoice where questionID =" + questionID + ";" ;
 		try {
 			res = statement.executeQuery(query);
 			return res;
@@ -327,9 +327,9 @@ public class MyDB {
 		return null;
 	}
 	
-	public static ResultSet answers(int questionId){
+	public static ResultSet answers(int questionID){
 		ResultSet res;
-		String query = "select * from multiplechoice where questionID =" + questionId + ";" ;
+		String query = "select * from multiplechoice where questionID =" + questionID + ";" ;
 		try {
 			res = statement.executeQuery(query);
 			return res;
@@ -341,14 +341,14 @@ public class MyDB {
 	
 //	public static ResultSet 
 	
-	public static void sendChallenge(int idTo, int idFrom, int quizId) {
+	public static void sendChallenge(int idTo, int idFrom, int quizID) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date utilDate = new java.util.Date();
 		String date = sdf.format(utilDate);
 		try {
 			String query = "INSERT INTO challenges (accountIdTo,accountIdFrom,quizID,sendDate )VALUES("
-					+ idTo + "," + idFrom + "," + quizId + date +");";
+					+ idTo + "," + idFrom + "," + quizID + date +");";
 			statement.executeUpdate(query);
 
 		} catch (SQLException e) {
@@ -498,9 +498,9 @@ public class MyDB {
 		}
 	}
 	
-	public static void addQuestionToQuiz(int quizId,int questionId ){
+	public static void addQuestionToQuiz(int quizID, int questionID ){
 		try {
-			statement.executeUpdate("insert into questiontoquiz(quizID, questionID) values(" + quizId +" ," + questionId + ");");
+			statement.executeUpdate("insert into questiontoquiz(quizID, questionID) values(" + quizID +" ," + questionID + ");");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

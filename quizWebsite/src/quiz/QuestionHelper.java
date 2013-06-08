@@ -23,7 +23,7 @@ import Question.SingleAnswer;
 
 import web.MyDB;
 
-public class DroebitiRoja implements QuestionFinals{
+public class QuestionHelper implements QuestionFinals{
 	public static Question getFullQuestionFromID(int questionID) throws SQLException{
 		ResultSet res = MyDB.getQuestionInfo(questionID);
 		int type = res.getInt("type");

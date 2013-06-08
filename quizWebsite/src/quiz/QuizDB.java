@@ -45,7 +45,7 @@ public class QuizDB implements QuizInterface{
 		ArrayList<Integer> questionIDs = (ArrayList<Integer>) MyDB.getQuestions(quizID);
 		for (int i=0; i<questionIDs.size(); i++)
 			try {
-				questions.add(DroebitiRoja.getFullQuestionFromID(questionIDs.get(i)));
+				questions.add(QuestionHelper.getFullQuestionFromID(questionIDs.get(i)));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
