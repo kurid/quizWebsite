@@ -1,5 +1,7 @@
 package Question;
 
+import web.MyDB;
+
 public class MatchingQuestion extends Question {
 	
 	public MatchingQuestion(int index, String questionText, CorrectAnswer correctAsnwer, int score){
@@ -34,4 +36,8 @@ public class MatchingQuestion extends Question {
 		return score;
 	}
 
+	@Override
+	public void addToDB() {
+		MyDB.addMatchingQuestion(this);
+	}
 }

@@ -9,11 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import Question.CorrectAnswer;
-import Question.ImageQuestion;
-import Question.MMAnswer;
-import Question.MultipleAnswer;
-import Question.Question;
+import Question.*;
 
 import com.mysql.jdbc.CallableStatement;
 
@@ -444,7 +440,7 @@ public class MyDB {
 
 	}
 	
-	public static int addMultioleChoiceQuestion(Question q){
+	public static int addMultipleChoiceQuestion(Question q){
 		int questionID = addQuestion(q);
 		MMAnswer answer = (MMAnswer) q.getCorrectAnswer();
 		List<List<String> > correctAnswers = answer.getAnswer();
@@ -523,5 +519,21 @@ public class MyDB {
 	public static List<Integer> getQuestions(int quizID) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static void addMatchingQuestion(MatchingQuestion matchingQuestion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void addMultiAnswerQuestion(
+			MultiAnswerQuestion multiAnswerQuestion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void addMCMAQuestion(MCMAQ mcmaq) {
+		// TODO Auto-generated method stub
+		
 	}
 }

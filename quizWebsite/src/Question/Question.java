@@ -31,4 +31,7 @@ public class Question implements QuestionInterface, QuestionFinals{
 		return 0;
 	}
 
+	@Override
+	public void addToDB() {}
+
 }

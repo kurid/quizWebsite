@@ -10,4 +10,6 @@ public interface QuestionInterface{
 	CorrectAnswer getCorrectAnswer();
 	
 	int getScore();
+	
+	void addToDB();
 }

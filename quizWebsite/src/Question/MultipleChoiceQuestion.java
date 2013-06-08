@@ -2,6 +2,8 @@ package Question;
 
 import java.util.Set;
 
+import web.MyDB;
+
 public class MultipleChoiceQuestion extends Question 
 	implements ChooseQuestion{
 	
@@ -36,4 +38,8 @@ public class MultipleChoiceQuestion extends Question
 		return score;
 	}
 
+	@Override
+	public void addToDB() {
+		MyDB.addMultipleChoiceQuestion(this);
+	}
 }

@@ -1,5 +1,7 @@
 package Question;
 
+import web.MyDB;
+
 public class ImageQuestion extends Question{
 	
 	private String URL;
@@ -39,6 +41,11 @@ public class ImageQuestion extends Question{
 	@Override
 	public int getScore() {
 		return score;
+	}
+	
+	@Override
+	public void addToDB() {
+		MyDB.addImageQuestion(this);
 	}
 
 }

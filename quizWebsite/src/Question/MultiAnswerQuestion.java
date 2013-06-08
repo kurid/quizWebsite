@@ -1,5 +1,7 @@
 package Question;
 
+import web.MyDB;
+
 public class MultiAnswerQuestion extends Question{
 
 	public MultiAnswerQuestion(int index, String questionText, CorrectAnswer correctAnswer, int score){
@@ -34,4 +36,8 @@ public class MultiAnswerQuestion extends Question{
 		return score;
 	}
 	
+	@Override
+	public void addToDB() {
+		MyDB.addMultiAnswerQuestion(this);
+	}
 }

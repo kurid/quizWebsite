@@ -2,6 +2,8 @@ package Question;
 
 import java.util.Set;
 
+import web.MyDB;
+
 public class MCMAQ extends Question implements ChooseQuestion{
 	
 	private Set<String> possibleAnswers;
@@ -43,6 +45,11 @@ public class MCMAQ extends Question implements ChooseQuestion{
 	@Override
 	public CorrectAnswer getCorrectAnswer() {
 		return correctAnswer;
+	}
+	
+	@Override
+	public void addToDB() {
+		MyDB.addMCMAQuestion(this);
 	}
 
 }
