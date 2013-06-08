@@ -519,4 +519,9 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
+
+	public static List<Integer> getQuestions(int quizID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

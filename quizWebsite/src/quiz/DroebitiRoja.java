@@ -1,4 +1,4 @@
-package Question;
+package quiz;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,10 +8,23 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import Question.CorrectAnswer;
+import Question.ImageQuestion;
+import Question.MCMAQ;
+import Question.MMAnswer;
+import Question.MatchingQuestion;
+import Question.MultiAnswerQuestion;
+import Question.MultipleAnswer;
+import Question.MultipleChoiceQuestion;
+import Question.Question;
+import Question.QuestionFinals;
+import Question.QuestionResponse;
+import Question.SingleAnswer;
+
 import web.MyDB;
 
 public class DroebitiRoja implements QuestionFinals{
-	public Question getFullQuestionFromID(int questionID) throws SQLException{
+	public static Question getFullQuestionFromID(int questionID) throws SQLException{
 		ResultSet res = MyDB.getQuestionInfo(questionID);
 		int type = res.getInt("type");
 		String text = res.getString("questionText");

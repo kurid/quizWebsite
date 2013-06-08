@@ -1,7 +1,10 @@
 package quiz;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import Question.Question;
 
 import web.MyDB;
 
@@ -10,13 +13,14 @@ public class QuizDB implements QuizInterface{
 	private String description;
 	private int authorID;
 	private List questions;
-	private int quizId;
+	private int quizID;
 	
 	public QuizDB(String quizName, String description,int authorID) {
 		this.quizName = quizName;
 		this.description = description;
 		this.authorID = authorID;
-		quizId = MyDB.getQuizId(quizName, authorID);
+		quizID = MyDB.getQuizId(quizName, authorID);
+		questions = new ArrayList<Question>();
 	}
 
 
@@ -37,20 +41,20 @@ public class QuizDB implements QuizInterface{
 	}
 
 	@Override
-	public void getQuestions() {
-		// TODO Auto-generated method stub
+	public List<Question> generateQuestions(){
+		ArrayList<Integer> questionIDs = (ArrayList<Integer>) MyDB.getQuestions(quizID);
+		for (int i=0; i<questionIDs.size(); i++)
+			try {
+				questions.add(DroebitiRoja.getFullQuestionFromID(questionIDs.get(i)));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return questions;
 	}
-
-	@Override
-	public void generateQuestions() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	@Override
 	public int getId() {
-		return quizId;
+		return quizID;
 	}
 
 }
