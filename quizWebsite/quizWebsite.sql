@@ -54,6 +54,7 @@ create table quizes(
 	name varchar(64),
 	quiz_date datetime, 
 	description varchar(1024),
+	UNIQUE KEY(authorID, name),
 	foreign key (authorID) references accounts (accountID) ON DELETE CASCADE
 );
 
