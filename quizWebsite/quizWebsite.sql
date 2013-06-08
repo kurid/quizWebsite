@@ -187,3 +187,8 @@ BEGIN
 	INSERT INTO answers VALUES (questionID, answer, nAnswer);
 END$$
 DELIMITER ;
+
+create VIEW popularQuizes as
+select quizID, 
+count(quizID) as count FROM takenquizes 
+GROUP BY quizID desc limit 0,5;

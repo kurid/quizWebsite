@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import web.MyDB;
+
 /**
  * Servlet implementation class PopularQuizzes
  */
@@ -41,14 +43,14 @@ public class PopularQuizzes extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ResultSet resultset = null;
+		ResultSet resultset = MyDB.popularQuizzes();
 		List<QuizDB> quizzes = new ArrayList<QuizDB>();
 		for (int i = 0; i < 10 ; i ++){
 			try {
 				resultset.next();
-				String quizName = resultset.getString("");
-				String description = resultset.getString("");
-				int authorID = resultset.getInt("");
+				String quizName = resultset.getString("name");
+				String description = resultset.getString("description");
+				int authorID = resultset.getInt("authorID");
 				quizzes.add(new QuizDB(quizName, description, authorID));
 			} catch (SQLException e) {
 				e.printStackTrace();

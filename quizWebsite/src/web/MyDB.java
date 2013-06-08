@@ -63,8 +63,8 @@ public class MyDB {
 	public static ResultSet popularQuizzes(){
 		ResultSet res = null;
 		try {
-			statement.executeQuery("select accountID, quizID, count(quizID) as count FROM" +
-					" takenquizes GROUP BY quizID desc limit 0,5;");
+			statement.executeQuery("select authorID, name,description from quizes, popularQuizes " +
+					"where quizes.quizID = popularQuizes.quizID;");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
