@@ -50,6 +50,19 @@ public class MyDB {
 		}
 	}
 
+	public static ResultSet newQuizzes(){
+		ResultSet res = null;
+		try {
+			res  = statement.executeQuery("select * from quizes order by quiz_date;");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	
+	
 	public static List<Integer> getFriends(int id) {
 		List<Integer> friends = new ArrayList<Integer>();
 		 ResultSet res;

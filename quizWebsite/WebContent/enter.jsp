@@ -16,7 +16,7 @@
 	<form action="Enter" method="post">
 		<table>
 			<tr>
-				<td> User Name: </td>
+				<td> Nick Name: </td>
 				<td> <input type="text" name="nickname" /> </td>
 			<tr>
 			<tr>
