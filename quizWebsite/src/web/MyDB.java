@@ -60,7 +60,17 @@ public class MyDB {
 		return res;
 	}
 	
-	
+	public static ResultSet popularQuizzes(){
+		ResultSet res = null;
+		try {
+			statement.executeQuery("select accountID, quizID, count(quizID) as count FROM" +
+					" takenquizes GROUP BY quizID desc limit 0,5;");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 	public static List<Integer> getFriends(int id) {
 		List<Integer> friends = new ArrayList<Integer>();
@@ -299,9 +309,15 @@ public class MyDB {
 	}
 
 
-	public List getQuiz(int QuizID) {
-		// TODO:
-		return null;
+	public static ResultSet getQuizInfo(int quizID) {
+		ResultSet res = null;
+		try {
+			statement.executeQuery("SELECT * from quizes where quizID = " + quizID+ ";");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 	public static ResultSet getQuestionInfo(int questionID){
