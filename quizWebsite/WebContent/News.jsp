@@ -6,21 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-
 <body>
 
-	
-	<ol>
-		<%@ page import="java.util.ArrayList" %>
-		<%
-		ArrayList<String> quizzes = new ArrayList<String>();
-			//(ArrayList<String>) session.getAttribute("newQuizzes");
-		quizzes.add("aham");
-		quizzes.add("beham");
-		for(int i = 0; i < quizzes.size(); i++){
-			out.println("<li> " + quizzes.get(i) + " </li>");
-		}
-		%>	
-	</ol>
 </body>
 </html>

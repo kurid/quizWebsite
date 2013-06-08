@@ -4,16 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> Home Page</title>
-<%
-	session.setAttribute("registerText", "Please Register");
-	session.setAttribute("enterText", "Enter");
-%>
+<title>Quizz Website</title>
 
 </head>
-<body>
-	<a href="enter.jsp"> Enter</a>
-	<a href="Registration.jsp"> Registration </a>
-	<a href="StartCreatingQuiz"> QreateQuiz </a>
-</body>
+	<frameset rows="5%,20%,*"  frameborder="no" border="0" framespacing="0">
+		<frame src="BlankPage.jsp">
+		<frame src="UpperAlignment.jsp" scrolling=no name="UpperAlignment">
+		<frame src="LowerAlignment.jsp"	scrolling=no name="LowerAlignment">
+	</frameset>
+
 </html>

@@ -5,11 +5,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+ 
 </head>
+		<% 
+			String name = (String)session.getAttribute("name");
+			String JspName = new String();
+			if(name == null) { JspName = "LoginRegister.jsp"; }
+			else { JspName = "AccountControlPanel.jsp"; }
+		%>
+		
 		<frameset cols="10%, 60%,*, 10%" frameborder="no" border="0" framespacing="0">
 			<frame src="BlankPage.jsp">
-			<frame src="Header.jsp"/>
-			<frame src="AccountControlPanel.jsp"/>
+			<frame src="Header.jsp">
+			<frame src= <%=JspName %>>
 			<frame src="BlankPage.jsp">
 		</frameset>
 </html>

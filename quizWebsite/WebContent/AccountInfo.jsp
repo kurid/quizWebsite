@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+		
 		<table align="center"> 
 			<tr> 
 				<td width="20%"> <a href="Home.jsp" target="ActualInfo">Home</a>  </td>

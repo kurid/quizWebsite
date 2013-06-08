@@ -6,12 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-	
+	<%
+		Boolean isLogged = (Boolean)session.getAttribute("isLoggedIn");
+		
+		String name = (String)session.getAttribute("name");
+		String JspName = new String();
+		if(name == null) { JspName = "News.jsp"; }
+		else { JspName = "AccountInfo.jsp"; }
+	%>
 	<frameset cols="10%, 60%,*, 10%" frameborder="no" border="0" framespacing="0">
 		<frame src="BlankPage.jsp">
-		<frame src="AccountWindow.jsp"> 
+		<frame src=<%=JspName%> name="AccountWindow"> 
 		<frame src="Statistics.jsp" name="ActualInfo">
 		<frame src="BlankPage.jsp">
 	</frameset>
+
 
 </html>

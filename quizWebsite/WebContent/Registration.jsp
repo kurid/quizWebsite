@@ -4,15 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<% String registerText = (String)session.getAttribute("registerText"); 
-System.out.println(registerText);%>
+
 <title> Registration </title>
 </head>
 <body>
-	<h1> <%= registerText %></h1>
+
+<% 
+	String errorText = (String) session.getAttribute("registerText");
+	if(errorText == "") errorText = "Registration Form:";
+%>
 	<form action="RegisterServlet" method = "post">
 	
-		<table>
+		<h2 align="center"> <%=errorText %>	</h2>
+		<table align="center">
 			<tr>
 				<td> First name: </td>
 				<td> <input type="text" name="name"> </td>
@@ -30,13 +34,14 @@ System.out.println(registerText);%>
 				<td>  <input type="password" name="password"> </td>
 			</tr>
 			<tr>
-				<td> mail: </td>
+				<td> Mail: </td>
 				<td> <input type="text" name="mail"> </td>
 			</tr>
-			
+			<tr> 
+				<td> <input type="submit" name="Submit" value="Submit"/> </td>
+				<td> <input type="reset" name="Reset" value="Reset form"/> </td>
+			</tr>
 		</table>
-		 
-		<button type="submit">Register</button>
 	</form>
 </body>
 </html>

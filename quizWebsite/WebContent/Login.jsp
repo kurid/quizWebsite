@@ -4,25 +4,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<style type="text/css">
-	p {color:grey}
-</style>
-
-
+<% 
+	String welcomeText = (String)session.getAttribute("enterText");
+%>
+<title> Enter </title>
 </head>
 <body>
-	<jsp:include page="Header.jsp">
-
-	<form action="LoginServlet" method="POST" >
-      <p> enter your username and password: </p>
-      <p> username:  <input type="text" name="username" /> </p>
-      <p> password:  <input type="password" name="password" /> </p>
-      <p>
-        <input type="submit" name="Submit" value="Submit name" />
-        <input type="reset" name="Reset" value="Reset form" />
-      </p>
+	<!-- text -shi jer araferi ar weria shesabamisi teqtebi gadmoecema servletidan an homePage-dan  -->
+	<h2 align="center"> <%= welcomeText %></h2>
+	
+	<form action="Login" method="POST" >
+      <table align="center">
+			<tr>
+				<td> Nickname: </td>
+				<td> <input type="text" name="nickname" /> </td>
+			</tr>
+			<tr>
+				<td> Password: </td>
+				<td> <input type="password" name="password"/> </td>
+			</tr>
+			<tr> 
+				<td> <input type="submit" name="Submit" value="Submit" /> </td>
+				<td> <input type="reset" name="Reset" value="Reset form" /> </td>
+			</tr>
+			
+		</table>
     </form>
-
 </body>
 </html>

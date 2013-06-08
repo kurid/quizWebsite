@@ -7,12 +7,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%-- 
+	
 	<%
 		String accountName = (String) session.getAttribute("name");
-	%> --%>
+		
+	%>
+	<table>
+		<tr> 
+			<td>
+				<a href="LowerAlignment.jsp" target="LowerAlignment"> <%=accountName %> </a>
+			</td>
+		</tr> 
+		<tr> 
+			<td>
+				<form action="LogoutServlet">
+					<input type="submit" name="logout" value="Log Out">
+				</form>
+			</td>
+			<td> 
+				<form action="createQuizzServlet">
+					<input type="submit" name="createQuizzServlet" value="Create Quizz">
+				</form>
+			</td>
+		</tr>
+	</table>
 	
-	<a href="LowerAlignment.jsp" target="LowerAlignment"> Saba gogolidze </a>
 	
 </body>
 </html>
