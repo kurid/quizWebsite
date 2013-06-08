@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Question.CorrectAnswer;
+import Question.ImageQuestion;
+import Question.MMAnswer;
 import Question.MultipleAnswer;
 import Question.Question;
 
@@ -433,30 +435,71 @@ public class MyDB {
 		}
 	}
 	
-	public static int addQuestionResponse(Question q){
+	public static int addQuestionResponse(Question q) {
+		int questionID = addQuestion(q);
 		MultipleAnswer answer = (MultipleAnswer) q.getCorrectAnswer();
-		try{
-		String query = 
-				"Select addQuestion("+ q.getType() + ", \"" + 
-						q.getQuestionText() +"\", "+ q.getScore() + ", " + q.getIndex() +");";
-		ResultSet res = statement.executeQuery(query);
-		res.next();
-		int questionID = res.getInt(1);
 		List<String> answers = answer.getAnswer();
-		CallableStatement cs;
-		for(int i = 0; i < answers.size(); i++){
-			cs = (CallableStatement) connection.prepareCall("{call addAnswer(?,?,?)}");
-			cs.setInt(1,1);
-			cs.setString(2, answers.get(i));
-			cs.setInt(3, questionID);
-			cs.execute();
+		addAnswers(answers, questionID, 1);
+		return questionID;
+
+	}
+	
+	public static int addMultioleChoiceQuestion(Question q){
+		int questionID = addQuestion(q);
+		MMAnswer answer = (MMAnswer) q.getCorrectAnswer();
+		List<List<String> > correctAnswers = answer.getAnswer();
+		for(int i = 0; i < correctAnswers.size(); i++){
+			addAnswers(correctAnswers.get(i), questionID, i+1);
 		}
 		return questionID;
+	}
+	
+	public static int addImageQuestion(ImageQuestion q){
+		int questionID = addQuestion(q);
+		MultipleAnswer answer = (MultipleAnswer) q.getCorrectAnswer();
+		List<String> answers = answer.getAnswer();
+		addAnswers(answers, questionID, 1);
+		String url = q.getURL();
+		try {
+			statement.executeUpdate("INSERT INTO imageQuestion VALUES("+questionID+", \""+url+"\");" );
 		} catch (SQLException e) {
-			System.out.println("Error in adding QuestionResponse");
+			System.out.println("Error in a addImageQuestion");
 			e.printStackTrace();
 		}
-		return -1;
+		return questionID;
+	}
+	
+	private static int addQuestion(Question q) {
+		int questionID = -1;
+		try {
+			String query = "Select addQuestion(" + q.getType() + ", \""
+					+ q.getQuestionText() + "\", " + q.getScore() + ", "
+					+ q.getIndex() + ");";
+			ResultSet res = statement.executeQuery(query);
+			res.next();
+			questionID = res.getInt(1);
+		} catch (SQLException e) {
+			System.out.println("Error in adding addQuestion");
+			e.printStackTrace();
+		}
+		return questionID;
+	}
+	
+	private static void addAnswers(List<String> answers, int questionID, int answerNumber){
+		try {
+			CallableStatement cs;
+			for (int i = 0; i < answers.size(); i++) {
+				cs = (CallableStatement) connection
+						.prepareCall("{call addAnswer(?,?,?)}");
+				cs.setInt(1, answerNumber);
+				cs.setString(2, answers.get(i));
+				cs.setInt(3, questionID);
+				cs.execute();
+			}
+		} catch (SQLException e) {
+			System.out.println("Error in addAnswers.");
+			e.printStackTrace();
+		}
 	}
 	
 	public static void addQuestionToQuiz(int quizId,int questionId ){
