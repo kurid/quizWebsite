@@ -12,7 +12,7 @@ public class QuizDB implements QuizInterface{
 	private String quizName;
 	private String description;
 	private int authorID;
-	private List questions;
+	private List<Question> questions;
 	private int quizID;
 	
 	public QuizDB(String quizName, String description,int authorID) {
