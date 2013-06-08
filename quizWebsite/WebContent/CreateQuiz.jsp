@@ -10,7 +10,13 @@
 	<form action="CreateQuiz" method="post">
 		Enter quiz name: <input type="text" name="quizName"><br> 
 		Enter description: <input type="text" name="description"><br>
-		Enter number of questions: <input type="text" name="numberOfQuestions"><br>
+		Number Of Questions: <select name = "numberOfQuestions">
+			<%
+				for(int i=5;i<=15;i++){
+					out.println("<option value=\""+i+"\">"+i+"</option>");
+				}
+			%>
+		</select>
 		<button type="submit">Start adding questions</button>
 	</form>
 </body>
