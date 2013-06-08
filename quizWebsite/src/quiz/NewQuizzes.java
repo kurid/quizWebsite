@@ -1,11 +1,19 @@
 package quiz;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import web.MyDB;
 
 import Question.Question;
 
@@ -35,7 +43,23 @@ public class NewQuizzes extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		ResultSet resultset = MyDB.newQuizzes();
+		List<QuizDB> quizzes = new ArrayList<QuizDB>();
+		for (int i = 0; i < 10 ; i ++){
+			try {
+				resultset.next();
+				String quizName = resultset.getString("");
+				String description = resultset.getString("");
+				int authorID = resultset.getInt("");
+				quizzes.add(new QuizDB(quizName, description, authorID));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		request.setAttribute("quizzes", quizzes);
+		String jsp = "";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp );
+		dispatcher.forward(request, response);
 	}	
 
 }

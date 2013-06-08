@@ -39,7 +39,6 @@ public class QuizDB implements QuizInterface{
 	@Override
 	public void getQuestions() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
