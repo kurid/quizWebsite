@@ -12,9 +12,13 @@ DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS takenQuizes;
 DROP TABLE IF EXISTS quizes;
 DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS imageQuestion;
 DROP TABLE IF EXISTS imigeQuestion;
 DROP TABLE IF EXISTS questions;
-
+DROP PROCEDURE IF EXISTS addFriend;
+DROP PROCEDURE IF EXISTS removeFriend;
+DROP PROCEDURE IF EXISTS addAnswer;
+DROP FUNCTION IF EXISTS addQuestion;
 
 create table accounts(
 	accountID int primary key AUTO_INCREMENT,
@@ -138,7 +142,7 @@ create table takenQuizes(
 
 
 
-create table imigeQuestion(
+create table imageQuestion(
 	questionID int,
 	url varchar(512),
 	foreign key (questionID) references questions (questionID)  ON DELETE CASCADE
