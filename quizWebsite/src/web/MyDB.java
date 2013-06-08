@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import Question.*;
 
@@ -440,7 +441,7 @@ public class MyDB {
 
 	}
 	
-	public static int addMultipleChoiceQuestion(Question q){
+	public static int addMultiAnswerQuestion(Question q){
 		int questionID = addQuestion(q);
 		MMAnswer answer = (MMAnswer) q.getCorrectAnswer();
 		List<List<String> > correctAnswers = answer.getAnswer();
@@ -463,6 +464,51 @@ public class MyDB {
 			e.printStackTrace();
 		}
 		return questionID;
+	}
+	
+	public static void addMatchingQuestion(Question q) {
+		int questionID = addQuestion(q);
+		MMAnswer answer = (MMAnswer) q.getCorrectAnswer();
+		List<List<String> > correctMatches = answer.getAnswer();
+		for(int i = 0; i < correctMatches.size(); i++){
+			try{
+				String answer1 = correctMatches.get(i).get(0);
+				String answer2 = correctMatches.get(i).get(1);
+				String query = "INSERT INTO matching VALUES (" + questionID + ", "
+						+ answer1 + ", " + answer2 + ");";
+				statement.executeUpdate(query);
+			} catch (SQLException e){
+				System.out.println("Error in addMatchingQuestion");
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void addMultipleChoiceQuestion(MultipleChoiceQuestion q) {
+		int questionID = addQuestion(q);
+		SingleAnswer ans = (SingleAnswer) q.getCorrectAnswer();
+		Set<String> possibleAnswers = q.getPossibleAnswers();
+		String answer = ans.getAnswer();
+		String isCorrect = "true";
+		String query = "INSERT INTO multipleChoice VALUES (" + questionID
+				+ ", " + answer + ", " + isCorrect + ");";
+		try {
+			statement.executeUpdate(query);
+			isCorrect = "false";
+			for(String possibleAnswer: possibleAnswers){
+				answer = possibleAnswer;
+				query = "INSERT INTO multipleChoice VALUES (" + questionID
+						+ ", " + answer + ", " + isCorrect + ");";
+				statement.executeUpdate(query);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error in addMultipleChoiceQuestion");
+			e.printStackTrace();
+		}
+	}
+
+	public static void addMCMAQuestion(MCMAQ mcmaq) {
+		// TODO Auto-generated catch block
 	}
 	
 	private static int addQuestion(Question q) {
@@ -517,23 +563,19 @@ public class MyDB {
 	}
 
 	public static List<Integer> getQuestions(int quizID) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Integer> result = new ArrayList<Integer>();
+		try {
+			String query = "SELECT questionID FROM questionToQuiz WHERE quizID = " + quizID + ";";
+			ResultSet res = statement.executeQuery(query);
+			while(res.next()){
+				result.add(res.getInt(1));
+			}
+			return result;
+		} catch (SQLException e) {
+			System.out.println("Error in getQuestions");
+		}
+		return result;
 	}
 
-	public static void addMatchingQuestion(MatchingQuestion matchingQuestion) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void addMultiAnswerQuestion(
-			MultiAnswerQuestion multiAnswerQuestion) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void addMCMAQuestion(MCMAQ mcmaq) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
