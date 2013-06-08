@@ -53,7 +53,7 @@ public class MyDB {
 	public static ResultSet newQuizzes(){
 		ResultSet res = null;
 		try {
-			res  = statement.executeQuery("select * from quizes order by quiz_date;");
+			res  = statement.executeQuery("select * from quizes order by quiz_date limit 0,5;");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
