@@ -11,6 +11,7 @@
 		<select name = "question">
 			<option value="SingleAnswer">Single answer question</option>
 			<option value="ImageQuestion">Image question</option>
+			<option value="AddMultipleChoiceQuestion">Multiple choice</option>
 		</select>
 		<input type="submit" value="CreateQestion" />
 	</form>

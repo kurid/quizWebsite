@@ -16,15 +16,21 @@
 		<table>
 			<tr>
 				<td> 
-					<a href="Login.jsp" target="AccountWindow"> Login </a>
+					<a href="Login.jsp" target="_top"> Login </a>
 				</td>
 				<td> 
-					<a href="Registration.jsp" target="AccountWindow"> Register</a>
+					<a href="Registration.jsp" target="_top"> Register</a>
 				</td>
 			</tr>
 			<tr>
 				<td> 
-					<a href="StartCreatingQuiz" target ="AccountWindow"> Create Quiz! </a>
+					<% if((Boolean)session.getAttribute("isLoggedIn")){
+						out.println("<a href=\"StartCreatingQuiz\" target =\"AccountWindow\"> Create Quiz! </a>");
+					}else{
+						out.println("<a href=\"StartCreatingQuiz\" target =\"_top\"> Create Quiz! </a>");
+					}%>
+					
+					
 				</td>
 			</tr>
 		</table>

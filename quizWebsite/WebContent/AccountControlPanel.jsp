@@ -16,7 +16,7 @@
 	<table>
 		<tr>
 			<td><a href="AccountWindow.jsp" target="AccountWindow"> <%=accountName %> </a></td>
-			<td><a href="LogoutServlet" target="AccountWindow">
+			<td><a href="LogoutServlet" target="_top">
 					Logout</a></td>
 		</tr>
 		<tr>
