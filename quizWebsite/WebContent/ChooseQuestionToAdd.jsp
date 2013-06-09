@@ -10,6 +10,7 @@
 	<form action="ChooseQuestionToAdd" method="post">
 		<select name = "question">
 			<option value="SingleAnswer">Single answer question</option>
+			<option value="ImageQuestion">Image question</option>
 		</select>
 		<input type="submit" value="CreateQestion" />
 	</form>

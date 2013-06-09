@@ -39,7 +39,7 @@ public class MultipleChoiceQuestion extends Question
 	}
 
 	@Override
-	public void addToDB() {
-		MyDB.addMultipleChoiceQuestion(this);
+	public int addToDB() {
+		return MyDB.addMultipleChoiceQuestion(this);
 	}
 }

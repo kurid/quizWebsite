@@ -37,7 +37,7 @@ public class QuestionResponse extends Question{
 	}
 
 	@Override
-	public void addToDB() {
-		MyDB.addQuestionResponse(this);
+	public int addToDB() {
+		return MyDB.addQuestionResponse(this);
 	}
 }

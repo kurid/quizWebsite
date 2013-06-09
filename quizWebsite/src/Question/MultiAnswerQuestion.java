@@ -37,7 +37,7 @@ public class MultiAnswerQuestion extends Question{
 	}
 	
 	@Override
-	public void addToDB() {
-		MyDB.addMultiAnswerQuestion(this);
+	public int addToDB() {
+		return MyDB.addMultiAnswerQuestion(this);
 	}
 }

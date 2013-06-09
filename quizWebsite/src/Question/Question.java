@@ -1,11 +1,11 @@
 package Question;
 
-public class Question implements QuestionInterface, QuestionFinals{
+public class Question implements QuestionInterface, QuestionFinals {
 	protected int index;
 	protected int score;
 	protected String questionText;
 	protected CorrectAnswer correctAnswer;
-	
+
 	@Override
 	public int getIndex() {
 		return index;
@@ -32,6 +32,8 @@ public class Question implements QuestionInterface, QuestionFinals{
 	}
 
 	@Override
-	public void addToDB() {}
+	public int addToDB() {
+		return 0;
+	}
 
 }

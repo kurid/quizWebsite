@@ -44,8 +44,8 @@ public class ImageQuestion extends Question{
 	}
 	
 	@Override
-	public void addToDB() {
-		MyDB.addImageQuestion(this);
+	public int addToDB() {
+		return MyDB.addImageQuestion(this);
 	}
 
 }

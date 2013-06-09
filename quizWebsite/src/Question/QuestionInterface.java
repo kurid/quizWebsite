@@ -11,5 +11,5 @@ public interface QuestionInterface{
 	
 	int getScore();
 	
-	void addToDB();
+	int addToDB();
 }

@@ -483,7 +483,7 @@ public class MyDB {
 		return questionID;
 	}
 	
-	public static void addMatchingQuestion(Question q) {
+	public static int addMatchingQuestion(Question q) {
 		int questionID = addQuestion(q);
 		MMAnswer answer = (MMAnswer) q.getCorrectAnswer();
 		List<List<String> > correctMatches = answer.getAnswer();
@@ -499,9 +499,10 @@ public class MyDB {
 				e.printStackTrace();
 			}
 		}
+		return questionID;
 	}
 
-	public static void addMultipleChoiceQuestion(MultipleChoiceQuestion q) {
+	public static int addMultipleChoiceQuestion(MultipleChoiceQuestion q) {
 		int questionID = addQuestion(q);
 		SingleAnswer ans = (SingleAnswer) q.getCorrectAnswer();
 		Set<String> possibleAnswers = q.getPossibleAnswers();
@@ -522,10 +523,12 @@ public class MyDB {
 			System.out.println("Error in addMultipleChoiceQuestion");
 			e.printStackTrace();
 		}
+		return questionID;
 	}
 
-	public static void addMCMAQuestion(MCMAQ mcmaq) {
-		// TODO Auto-generated catch block
+	public static int addMCMAQuestion(MCMAQ mcmaq) {
+		//TODO
+		return 0;
 	}
 	
 	private static int addQuestion(Question q) {

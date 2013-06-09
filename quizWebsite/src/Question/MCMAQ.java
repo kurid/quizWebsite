@@ -48,8 +48,8 @@ public class MCMAQ extends Question implements ChooseQuestion{
 	}
 	
 	@Override
-	public void addToDB() {
-		MyDB.addMCMAQuestion(this);
+	public int addToDB() {
+		return MyDB.addMCMAQuestion(this);
 	}
 
 }

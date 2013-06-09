@@ -37,7 +37,7 @@ public class MatchingQuestion extends Question {
 	}
 
 	@Override
-	public void addToDB() {
-		MyDB.addMatchingQuestion(this);
+	public int addToDB() {
+		return MyDB.addMatchingQuestion(this);
 	}
 }

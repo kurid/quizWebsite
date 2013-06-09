@@ -51,10 +51,12 @@ public class AddQuiz extends HttpServlet {
 
 	private void addQuestions(List<Question> questions, int quizId) {
 		for(int i = 0; i < questions.size(); i++){
-			if(questions.get(i).getType() == QuestionFinals.QUESTION_RESPONCE){	
-				int questionId = MyDB.addQuestionResponse(questions.get(i));
-				MyDB.addQuestionToQuiz(quizId, questionId);
-			}
+//			if(questions.get(i).getType() == QuestionFinals.QUESTION_RESPONCE){	
+//				int questionId = MyDB.addQuestionResponse(questions.get(i));
+//				MyDB.addQuestionToQuiz(quizId, questionId);
+//			}
+			int questionId = questions.get(i).addToDB();
+			MyDB.addQuestionToQuiz(quizId, questionId);
 		}
 	}
 
