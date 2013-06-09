@@ -592,7 +592,7 @@ public class MyDB {
 		}
 	}
 	
-	public static List<Integer> search(String subName){
+	public static List<Integer> searchUser(String subName){
 		List<Integer> result = new ArrayList<Integer>();
 		String query = "SELECT accountID FROM accounts WHERE nick like \"%" + subName + "%\";";
 		ResultSet res;
@@ -601,8 +601,20 @@ public class MyDB {
 			while(res.next())
 				result.add(res.getInt(1));
 		} catch (SQLException e) {
-			System.out.println("Error in search.");
+			System.out.println("Error in searchUser.");
 			System.out.println("Search query: " + query);
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static ResultSet searchQuiz(String subName){
+		ResultSet result = null;
+		try {
+			String query = "SELECT * FROM quizes WHERE name LIKE \"%" + subName + "%\";";
+			result = statement.executeQuery(query);
+		} catch (SQLException e) {
+			System.out.println("Error in searchQuiz.");
 			e.printStackTrace();
 		}
 		return result;
