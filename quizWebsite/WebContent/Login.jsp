@@ -27,8 +27,10 @@
 			<tr> 							
 				<td> <input type="submit"  name="Submit" value="Submit"  /> </td>
 				<td> <input type="reset" name="Reset" value="Reset form" /> </td>
+				
 			</tr>			
 		</table>		
     </form>	
+    <p align="center"> <a href="HomePage.jsp" target="_top" > HomePage </a> </p>
 </body>
 </html>

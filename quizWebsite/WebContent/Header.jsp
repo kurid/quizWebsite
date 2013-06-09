@@ -24,8 +24,8 @@
 
 </head>
 <body>
- 	<h1 class="headline"> <b class="headline"> Quiz Website </b> </h1>
-	<h2 class="underHeader"> <i> Take our quizzes everyday and add your own! </i> </h2>
+ 	<h1 class="headline"> <b class="headline"> <blink> Quiz Website </blink> </b> </h1>
+	<h2 class="underHeader"> <i>  Take our quizzes everyday and add your own! </i> </h2>
 	<hr color="white">	
 	
 </body>

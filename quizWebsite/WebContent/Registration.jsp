@@ -43,5 +43,6 @@
 			</tr>
 		</table>
 	</form>
+	<p align="center"> <a href="HomePage.jsp" target="_top" > HomePage </a> </p>
 </body>
 </html>
