@@ -21,8 +21,10 @@
 			<td> <input type="submit" name="search" value="Search"/> </td> 
 		</tr>
 	</table>
-	<% if(searchedQuizzes != null){
+	<% 
+	if(searchedQuizzes != null){
 				for(QuizDB quiz : searchedQuizzes){
+					System.out.println(quiz.getName());
 				out.println("<li><a href=\"http://localhost:8080/quizWebsite/test1.jsp?ID="); 
 				out.println(quiz.getId() + "\">" + quiz.getName()+ "</a></li>");
 			}

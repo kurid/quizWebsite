@@ -58,7 +58,6 @@ public class ContextListener implements ServletContextListener {
 		try {
 			while (resultset.next()) {
 				String quizName = resultset.getString("name");
-				System.out.println(quizName);
 				String description = resultset.getString("description");
 				int authorID = resultset.getInt("authorID");
 				quizzes.add(new QuizDB(quizName, description, authorID));
@@ -68,7 +67,6 @@ public class ContextListener implements ServletContextListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("morcha");
 		context.setAttribute("popularQuizzes", quizzes);
 	}
 

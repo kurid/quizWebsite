@@ -41,11 +41,12 @@ public class SearchQuiz extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ResultSet resultset = MyDB.searchQuiz((String)request.getParameter("searchQuiz"));
+		ResultSet resultset = MyDB.searchQuiz((String)request.getParameter("quizzName"));
 		List<QuizDB> searchesQuizzes = new ArrayList<QuizDB>();
 		try {
 			while(resultset.next()){
 				String quizName = resultset.getString("name");
+				System.out.println(quizName);
 				String description = resultset.getString("description");
 				int authorID = resultset.getInt("authorID");
 				searchesQuizzes.add(new QuizDB(quizName, description, authorID));
