@@ -8,9 +8,9 @@
  
 </head>
 		<% 
-			String name = (String)session.getAttribute("name");
+			boolean isLoggedIn = (Boolean)session.getAttribute("isLoggedIn");
 			String JspName = new String();
-			if(name == null) { JspName = "LoginRegister.jsp"; }
+			if(!isLoggedIn) { JspName = "LoginRegister.jsp"; }
 			else { JspName = "AccountControlPanel.jsp"; }
 		%>
 		
