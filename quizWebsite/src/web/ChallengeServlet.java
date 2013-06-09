@@ -38,7 +38,7 @@ public class ChallengeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Account user = (Account)request.getSession(true).getAttribute("account");
 		List<Challenge> challenges = MyDB.getChallenges(user.getId());
-		request.getSession(true).setAttribute("challenges", challenges);
+		request.setAttribute("challenges", challenges);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowChallenges.jsp");
 		dispatcher.forward(request, response);
 	}

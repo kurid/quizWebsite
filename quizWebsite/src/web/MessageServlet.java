@@ -38,7 +38,7 @@ public class MessageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Account user = (Account)request.getSession(true).getAttribute("account");
 		List<Message> messages = MyDB.getMessages(user.getId());
-		request.getSession(true).setAttribute("messages", messages);
+		request.setAttribute("messages", messages);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowMessages.jsp");
 		dispatcher.forward(request, response);
 	}

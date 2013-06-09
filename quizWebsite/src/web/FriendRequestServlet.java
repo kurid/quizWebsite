@@ -38,7 +38,7 @@ public class FriendRequestServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Account user = (Account)request.getSession(true).getAttribute("account");
 		List<FriendRequest> requests = MyDB.getRequest(user.getId());
-		request.getSession(true).setAttribute("friendRequests", requests);
+		request.setAttribute("friendRequests", requests);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowFriendRequests.jsp");
 		dispatcher.forward(request, response);
 	}
