@@ -587,9 +587,25 @@ public class MyDB {
 		try {
 			statement.executeUpdate("insert into questiontoquiz(quizID, questionID) values(" + quizID +" ," + questionID + ");");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error in addQuestionToQuiz");
 			e.printStackTrace();
 		}
+	}
+	
+	public static List<Integer> search(String subName){
+		List<Integer> result = new ArrayList<Integer>();
+		String query = "SELECT accountID FROM accounts WHERE nick like \"%" + subName + "%\";";
+		ResultSet res;
+		try {
+			res = statement.executeQuery(query);
+			while(res.next())
+				result.add(res.getInt(1));
+		} catch (SQLException e) {
+			System.out.println("Error in search.");
+			System.out.println("Search query: " + query);
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	
