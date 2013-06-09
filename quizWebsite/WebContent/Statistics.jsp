@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 
-	<frameset rows="50%,*">
+	<frameset rows="50%,*"   frameborder="no" border="0" framespacing="0">
 		<frame src="PopularQuizes.jsp">
 		<frame src="NewQuizes.jsp">
 	</frameset>
