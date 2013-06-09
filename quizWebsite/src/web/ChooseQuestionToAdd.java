@@ -36,6 +36,7 @@ public class ChooseQuestionToAdd extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String question = request.getParameter("question");
+		request.getSession(true).setAttribute("errorText", "");
 		RequestDispatcher dispatcher = request.getRequestDispatcher(question+".jsp");
 		dispatcher.forward(request, response);
 	}
