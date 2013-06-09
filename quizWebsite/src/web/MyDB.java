@@ -63,9 +63,10 @@ public class MyDB {
 	public static ResultSet popularQuizzes(){
 		ResultSet res = null;
 		try {
-			statement.executeQuery("select authorID, name,description,count from quizes, popularQuizes" +
-					"where quizes.quizID = popularQuizes.quizID" +
-					"order by count desc;");
+			String query = "select authorID, name,description from quizes, popularQuizes " +
+					" where quizes.quizID = popularQuizes.quizID " +
+					" order by count desc;";
+			res = statement.executeQuery(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

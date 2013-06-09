@@ -19,7 +19,6 @@ public class QuizDB implements QuizInterface{
 		this.quizName = quizName;
 		this.description = description;
 		this.authorID = authorID;
-		quizID = MyDB.getQuizId(quizName, authorID);
 		questions = new ArrayList<Question>();
 	}
 
@@ -54,6 +53,9 @@ public class QuizDB implements QuizInterface{
 
 	@Override
 	public int getId() {
+		if(quizID == 0){
+			quizID = MyDB.getQuizId(quizName, authorID);
+		}
 		return quizID;
 	}
 
