@@ -13,7 +13,7 @@
 	<!-- text -shi jer araferi ar weria shesabamisi teqtebi gadmoecema servletidan an homePage-dan  -->
 	<h2 align="center"> <%= welcomeText %></h2>
 	
-	<form action="Login" method="POST" >
+	<form action="Enter" method="POST" >
       <table align="center">
 			<tr>
 				<td> Nickname: </td>

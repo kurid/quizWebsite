@@ -32,7 +32,7 @@ public class StartCreatingQuiz extends HttpServlet {
 		String jsp="CreateQuiz.jsp";
 		if(isLoggedIn == false){
 			request.getSession().setAttribute("enterText", "To create quez you have to log in.");
-			jsp="enter.jsp";
+			jsp="Login.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
 		dispatcher.forward(request, response);

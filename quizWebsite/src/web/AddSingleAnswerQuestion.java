@@ -50,7 +50,8 @@ public class AddSingleAnswerQuestion extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String questionText = request.getParameter("questionText");
 		String answer = request.getParameter("answer");
-		
+		String score = request.getParameter("Score");
+		System.out.println(score);
 		HttpSession session = request.getSession(true);
 		int currentNumberOfQuestion = (Integer) session
 				.getAttribute("currentNumberOfQuestion");

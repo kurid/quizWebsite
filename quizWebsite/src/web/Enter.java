@@ -43,9 +43,9 @@ public class Enter extends HttpServlet {
 		String nickname = request.getParameter("nickname");
 		String password = request.getParameter("password");
 		AccountManager manager  = new AccountManager();
-		String jsp = "enter.jsp";
+		String jsp = "Login.jsp";
 		if(manager.isCorrect(nickname, password)){
-			jsp = "HomePage.jsp";
+			jsp = "Home.jsp";
 			request.getSession(true).setAttribute("account", new Account(MyDB.getId(nickname)));
 			request.getSession(true).setAttribute("isLoggedIn", true);	
 		}else{

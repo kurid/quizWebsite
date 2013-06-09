@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td> 
-					<a href="Login.jsp" target ="AccountWindow"> Create Quizz! </a>
+					<a href="StartCreatingQuiz" target ="AccountWindow"> Create Quiz! </a>
 				</td>
 			</tr>
 		</table>

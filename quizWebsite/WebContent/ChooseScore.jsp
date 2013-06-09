@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,11 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="AddSingleAnswerQuestion" method = "post">
-		QuestionText: <input type="text" name="questionText"><br> 
-		Answer: <input type="text" name="answer"><br> 
-		<%@include file="ChooseScore.jsp" %>
-		<button type="submit">Submit</button>
-	</form>
+	Choose Score:
+	<select name="Score">
+		<%
+			for (int i = 1; i <= 10; i++) {
+				out.println("<option value=\"" + i + "\">" + i + "</option>");
+			}
+		%>
+	</select>
 </body>
 </html>

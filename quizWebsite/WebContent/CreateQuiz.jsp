@@ -12,7 +12,7 @@
 		Enter description: <input type="text" name="description"><br>
 		Number Of Questions: <select name = "numberOfQuestions">
 			<%
-				for(int i=5;i<=15;i++){
+				for(int i=2;i<=15;i++){
 					out.println("<option value=\""+i+"\">"+i+"</option>");
 				}
 			%>
