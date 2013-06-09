@@ -508,16 +508,15 @@ public class MyDB {
 		SingleAnswer ans = (SingleAnswer) q.getCorrectAnswer();
 		Set<String> possibleAnswers = q.getPossibleAnswers();
 		String answer = ans.getAnswer();
-		String isCorrect = "true";
-		String query = "INSERT INTO multipleChoice VALUES (" + questionID
-				+ ", " + answer + ", " + isCorrect + ");";
+		String isCorrect = "false";
 		try {
-			statement.executeUpdate(query);
-			isCorrect = "false";
 			for(String possibleAnswer: possibleAnswers){
-				answer = possibleAnswer;
-				query = "INSERT INTO multipleChoice VALUES (" + questionID
-						+ ", " + answer + ", " + isCorrect + ");";
+				if (answer.equals(possibleAnswer))
+					isCorrect = "true";
+				else
+					isCorrect = "false";
+				String query = "INSERT INTO multipleChoice VALUES (" + questionID
+						+ ", " + possibleAnswer + ", " + isCorrect + ");";
 				statement.executeUpdate(query);
 			}
 		} catch (SQLException e) {
@@ -527,9 +526,28 @@ public class MyDB {
 		return questionID;
 	}
 
-	public static int addMCMAQuestion(MCMAQ mcmaq) {
-		//TODO
-		return 0;
+	public static int addMCMAQuestion(MCMAQ q) {
+		int questionID = addQuestion(q);
+		MultipleAnswer ma = (MultipleAnswer) q.getCorrectAnswer();
+		Set<String> possibleAnswers = q.getPossibleAnswers();
+		String isCorrect = "false";
+		List<String> correctAnswers = ma.getAnswer();
+		try {
+			for (String possibleAnswer : possibleAnswers) {
+				if (correctAnswers.contains(possibleAnswer))
+					isCorrect = "true";
+				else
+					isCorrect = "false";
+				String query = "INSERT INTO multipleChoice VALUES ("
+						+ questionID + ", " + possibleAnswer + ", " + isCorrect
+						+ ");";
+				statement.executeUpdate(query);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error in addMCMAQuestion");
+			e.printStackTrace();
+		}
+		return questionID;
 	}
 	
 	private static int addQuestion(Question q) {
@@ -542,7 +560,7 @@ public class MyDB {
 			res.next();
 			questionID = res.getInt(1);
 		} catch (SQLException e) {
-			System.out.println("Error in adding addQuestion");
+			System.out.println("Error in addQuestion");
 			e.printStackTrace();
 		}
 		return questionID;
