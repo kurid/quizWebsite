@@ -242,7 +242,7 @@ public class MyDB {
 		return messages;
 	}
 
-	public List<FriendRequest> getRequest(int idTo) {
+	public static List<FriendRequest> getRequest(int idTo) {
 		ResultSet res;
 		String query = "select * from messages where accountIdTo = " + idTo + ";";
 		List<FriendRequest> friendRequests = new ArrayList<FriendRequest>();
