@@ -46,7 +46,6 @@ public class SearchQuiz extends HttpServlet {
 		try {
 			while(resultset.next()){
 				String quizName = resultset.getString("name");
-				System.out.println(quizName);
 				String description = resultset.getString("description");
 				int authorID = resultset.getInt("authorID");
 				searchesQuizzes.add(new QuizDB(quizName, description, authorID));
