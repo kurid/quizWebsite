@@ -14,12 +14,14 @@ public class QuizDB implements QuizInterface{
 	private int authorID;
 	private List<Question> questions;
 	private int quizID;
+	private int totalScore;
 	
 	public QuizDB(String quizName, String description,int authorID) {
 		this.quizName = quizName;
 		this.description = description;
 		this.authorID = authorID;
 		questions = new ArrayList<Question>();
+		totalScore=-1;
 	}
 
 
@@ -38,13 +40,18 @@ public class QuizDB implements QuizInterface{
 		return authorID; 
 		
 	}
+	
+	
 
 	@Override
 	public List<Question> generateQuestions(){
 		ArrayList<Integer> questionIDs = (ArrayList<Integer>) MyDB.getQuestions(quizID);
+		totalScore=0;
 		for (int i=0; i<questionIDs.size(); i++)
 			try {
-				questions.add(QuestionHelper.getFullQuestionFromID(questionIDs.get(i)));
+				Question q = QuestionHelper.getFullQuestionFromID(questionIDs.get(i));
+				questions.add(q);
+				totalScore+=q.getScore();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -57,6 +64,12 @@ public class QuizDB implements QuizInterface{
 			quizID = MyDB.getQuizId(quizName, authorID);
 		}
 		return quizID;
+	}
+
+
+	@Override
+	public int getTotalScore() {
+		return totalScore;
 	}
 
 }

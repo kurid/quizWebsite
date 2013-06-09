@@ -36,4 +36,9 @@ public class Question implements QuestionInterface, QuestionFinals {
 		return 0;
 	}
 
+	@Override
+	public String getJspName() {
+		return null;
+	}
+
 }

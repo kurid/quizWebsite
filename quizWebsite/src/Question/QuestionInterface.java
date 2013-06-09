@@ -12,4 +12,6 @@ public interface QuestionInterface{
 	int getScore();
 	
 	int addToDB();
+	
+	String getJspName();
 }

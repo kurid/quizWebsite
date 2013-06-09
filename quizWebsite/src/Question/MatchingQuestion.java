@@ -40,4 +40,9 @@ public class MatchingQuestion extends Question {
 	public int addToDB() {
 		return MyDB.addMatchingQuestion(this);
 	}
+	
+	@Override
+	public String getJspName() {
+		return MATCHING_JSP;
+	}
 }

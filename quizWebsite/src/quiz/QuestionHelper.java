@@ -93,7 +93,7 @@ public class QuestionHelper implements QuestionFinals{
 			}
 			ca = new MultipleAnswer(arrCorrect);
 			q = new MCMAQ(num,text,new HashSet<String>(arr),ca,score);			
-		case IMAGE:
+		case IMAGE_QUESTION:
 			resHelper = MyDB.answers(questionID);
 			arr = new ArrayList<String>();
 			while(resHelper.next()){

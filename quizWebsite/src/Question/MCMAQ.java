@@ -51,5 +51,10 @@ public class MCMAQ extends Question implements ChooseQuestion{
 	public int addToDB() {
 		return MyDB.addMCMAQuestion(this);
 	}
+	
+	@Override
+	public String getJspName() {
+		return MCMA_JSP;
+	}
 
 }

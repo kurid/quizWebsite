@@ -644,5 +644,11 @@ public class MyDB {
 		return result;
 	}
 
+	public static void addQuizResult(int accountID, int quizID, int score,
+			long quizTimeInSeconds, String date) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

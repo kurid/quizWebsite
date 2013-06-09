@@ -30,7 +30,7 @@ public class ImageQuestion extends Question{
 
 	@Override
 	public int getType() {
-		return IMAGE;
+		return IMAGE_QUESTION;
 	}
 
 	@Override
@@ -47,5 +47,9 @@ public class ImageQuestion extends Question{
 	public int addToDB() {
 		return MyDB.addImageQuestion(this);
 	}
-
+	
+	@Override
+	public String getJspName() {
+		return IMAGE_QUESTION_JSP;
+	}
 }

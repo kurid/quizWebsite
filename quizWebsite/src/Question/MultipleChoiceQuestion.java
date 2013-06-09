@@ -42,4 +42,9 @@ public class MultipleChoiceQuestion extends Question
 	public int addToDB() {
 		return MyDB.addMultipleChoiceQuestion(this);
 	}
+	
+	@Override
+	public String getJspName() {
+		return MULTIPLE_CHOICE_JSP;
+	}
 }

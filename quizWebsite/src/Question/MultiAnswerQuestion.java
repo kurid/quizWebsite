@@ -40,4 +40,9 @@ public class MultiAnswerQuestion extends Question{
 	public int addToDB() {
 		return MyDB.addMultiAnswerQuestion(this);
 	}
+	
+	@Override
+	public String getJspName() {
+		return MULTIPLE_ANSWER_JSP;
+	}
 }

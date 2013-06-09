@@ -11,4 +11,5 @@ public interface QuizInterface {
 	public String getDescription();
 	public int getAuthor();
 	public List<Question> generateQuestions();
+	public int getTotalScore();
 }

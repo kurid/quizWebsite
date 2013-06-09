@@ -40,4 +40,9 @@ public class QuestionResponse extends Question{
 	public int addToDB() {
 		return MyDB.addQuestionResponse(this);
 	}
+	
+	@Override
+	public String getJspName() {
+		return QUESTION_RESPONCE_JSP;
+	}
 }
