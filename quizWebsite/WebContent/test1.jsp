@@ -9,7 +9,7 @@
 <body>
 <a> <% Integer text = (Integer)request.getAttribute("ID"); %></a>
 	<h1> <%= text %> 
-		aq aidis mixedvit shegidzlia gaageneriro shekitxva.
+		dasatesti gverdi 
 	</h1>
 </body>
 </html>

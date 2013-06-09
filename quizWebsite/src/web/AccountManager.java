@@ -25,7 +25,6 @@ public class AccountManager implements Manager {
 		messageDigest.update(password.getBytes());
 		String passwordHash = hexToString(messageDigest.digest());
 		String realPass = MyDB.getPassword(MyDB.getId(nickName));
-		System.out.println("hash code" + passwordHash);
 		return realPass.equals(passwordHash);
 	}
 

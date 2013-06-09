@@ -48,7 +48,6 @@ public class ContextListener implements ServletContextListener {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(quizzes + "  asd");
 		context.setAttribute("newQuizzes", quizzes);
 
 	}
@@ -57,7 +56,6 @@ public class ContextListener implements ServletContextListener {
 		ResultSet resultset = MyDB.popularQuizzes();
 		List<QuizDB> quizzes = new ArrayList<QuizDB>();
 		try {
-			System.out.println("while-mde");
 			while (resultset.next()) {
 				String quizName = resultset.getString("name");
 				System.out.println(quizName);
@@ -70,6 +68,7 @@ public class ContextListener implements ServletContextListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("morcha");
 		context.setAttribute("popularQuizzes", quizzes);
 	}
 
