@@ -51,8 +51,12 @@ public class Enter extends HttpServlet {
 		}else{
 			request.getSession(true).setAttribute("enterText", "Username or password is incorrect.");
 		}
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
+		//response.setHeader("Refresh", "4");
+		//response.setHeader("Refresh", "4; URL=UpperAlignment.jsp target=UpperAlignment");
 		dispatcher.forward(request, response);
+		
 	}
 
 }

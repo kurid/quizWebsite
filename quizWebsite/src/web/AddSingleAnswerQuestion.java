@@ -49,9 +49,11 @@ public class AddSingleAnswerQuestion extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String questionText = request.getParameter("questionText");
-		String answer = request.getParameter("answer");
-		String score = request.getParameter("Score");
-		System.out.println(score);
+		String answer1 = request.getParameter("answer1");
+		String answer2 = request.getParameter("answer2");
+		String answer3 = request.getParameter("answer3");
+		String answer4 = request.getParameter("answer4");
+		int score = Integer.parseInt(request.getParameter("Score"));		
 		HttpSession session = request.getSession(true);
 		int currentNumberOfQuestion = (Integer) session
 				.getAttribute("currentNumberOfQuestion");
@@ -59,10 +61,13 @@ public class AddSingleAnswerQuestion extends HttpServlet {
 				.getAttribute("numberOfQuestions");
 		List<Question> questions = (List<Question>) session.getAttribute("questions");
 		List<String> answers = new ArrayList<String>();
-		answers.add(answer);
+		if(!answer1.equals(""))answers.add(answer1);
+		if(!answer2.equals(""))answers.add(answer2);
+		if(!answer3.equals(""))answers.add(answer3);
+		if(!answer4.equals(""))answers.add(answer4);
 		CorrectAnswer correctAnswer = new MultipleAnswer(answers);
 		Question question = new QuestionResponse(currentNumberOfQuestion,
-				questionText, correctAnswer, 1);
+				questionText, correctAnswer, score);
 		questions.add(question);
 		String jsp = "ChooseQuestionToAdd.jsp";
 		if(currentNumberOfQuestion==numberOfQuestions){

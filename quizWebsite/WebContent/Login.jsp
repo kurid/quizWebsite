@@ -8,6 +8,7 @@
 	String welcomeText = (String)session.getAttribute("enterText");
 %>
 <title> Enter </title>
+
 </head>
 <body>
 	<!-- text -shi jer araferi ar weria shesabamisi teqtebi gadmoecema servletidan an homePage-dan  -->
@@ -23,12 +24,11 @@
 				<td> Password: </td>
 				<td> <input type="password" name="password"/> </td>
 			</tr>
-			<tr> 
-				<td> <input type="submit" name="Submit" value="Submit" /> </td>
+			<tr> 							
+				<td> <input type="submit"  name="Submit" value="Submit"  /> </td>
 				<td> <input type="reset" name="Reset" value="Reset form" /> </td>
-			</tr>
-			
-		</table>
-    </form>
+			</tr>			
+		</table>		
+    </form>	
 </body>
 </html>
