@@ -54,8 +54,8 @@ public class SearchQuiz extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.setAttribute("searchesQuizzes", searchesQuizzes);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("test1.jsp");
+		request.setAttribute("searchedQuizzes", searchesQuizzes);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Quizzes.jsp");
 		dispatcher.forward(request, response);
 	}
 }

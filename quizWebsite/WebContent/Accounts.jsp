@@ -18,13 +18,13 @@
 			<td> <input type="text" name="accountName"/> </td>
 			<td> <input type="submit" name="search" value="Search"/> </td> 
 		</tr>
-		<% if(searchedAccounts != null){
+	</table>
+	<% if(searchedAccounts != null){
 				for(Account account : searchedAccounts){
 				out.println("<li><a href=\"http://localhost:8080/quizWebsite/test1.jsp?ID="); 
-				out.println(account.getId() + "\">" + account.getName()+ "</a></li>");
+				out.println(account.getId() + "\">" + account.getNickname()+ "</a></li>");
 			}
 		}%>
-	</table>
 	</form>
 	
 </body>
