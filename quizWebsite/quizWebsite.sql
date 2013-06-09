@@ -188,7 +188,10 @@ BEGIN
 END$$
 DELIMITER ;
 
+
+drop view if exists popularQuizes;
+
 create VIEW popularQuizes as
 select quizID, 
-count(quizID) as count FROM takenquizes 
-GROUP BY quizID desc limit 0,5;
+count(quizID) as count FROM takenquizes
+GROUP BY quizID ORDER BY count desc limit 0,5;

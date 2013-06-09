@@ -43,7 +43,6 @@ public class AccountManager implements Manager {
 		}
 		messageDigest.update(password.getBytes());
 		String passwordHash = hexToString(messageDigest.digest());
-		System.out.println("hash code" + passwordHash);
 		MyDB.addAccount(name, surName, nickName, passwordHash, mail);
 		return MyDB.getId(nickName);
 	}
