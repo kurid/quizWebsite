@@ -8,7 +8,7 @@
 </head>
 
 	<frameset rows="41,*" >
-		<frame src="AccountInfo.jsp"> 
+		<frame src="AccountInfo.jsp" name = "AccountInfo"> 
 		<frame src="ActualInfo.jsp" name="ActualInfo">
 	</frameset>
 

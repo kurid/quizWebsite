@@ -15,7 +15,7 @@
 	%>
 	<table>
 		<tr>
-			<td><a href="AccountInfo.jsp" target="AccountWindow"> <%=accountName %> </a></td>
+			<td><a href="AccountWindow.jsp" target="AccountWindow"> <%=accountName %> </a></td>
 			<td><a href="LogoutServlet" target="AccountWindow">
 					Logout</a></td>
 		</tr>
