@@ -51,9 +51,6 @@ public class TakeQuizServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		/*
-		 * 
-		 */
 		int qIndex = (Integer) session.getAttribute("qIndex");
 		String jsp=null;
 		if (qIndex == 0) {
@@ -80,7 +77,6 @@ public class TakeQuizServlet extends HttpServlet {
 			session.setAttribute("startTime", System.currentTimeMillis());
 		} else {
 			List<Question> qList = (ArrayList<Question>) session.getAttribute("qList");
-			checkAnswer(qList,request);
 			if (qIndex == qList.size()){
 				Account account = (Account) session.getAttribute("account");
 				int accountID = (account).getId();
@@ -103,7 +99,9 @@ public class TakeQuizServlet extends HttpServlet {
 				session.removeAttribute("qList");
 				session.removeAttribute("qIndex");
 				session.removeAttribute("quiz");
+				jsp = "quizDone.jsp";
 			} else {
+				checkAnswer(qList,request,qIndex);
 				jsp = qList.get(qIndex).getJspName();
 			}
 		}
@@ -118,8 +116,7 @@ public class TakeQuizServlet extends HttpServlet {
 		return count;
 	}
 
-	private void checkAnswer(List<Question> qList, HttpServletRequest request) {
-		
+	private void checkAnswer(List<Question> qList, HttpServletRequest request, int qIndex) {
 		
 		
 	}

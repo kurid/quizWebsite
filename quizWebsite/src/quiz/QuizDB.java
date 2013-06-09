@@ -41,8 +41,6 @@ public class QuizDB implements QuizInterface{
 		
 	}
 	
-	
-
 	@Override
 	public List<Question> generateQuestions(){
 		ArrayList<Integer> questionIDs = (ArrayList<Integer>) MyDB.getQuestions(quizID);
