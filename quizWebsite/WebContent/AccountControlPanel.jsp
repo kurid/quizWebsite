@@ -1,5 +1,6 @@
+<%@page import="web.Account"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,31 +8,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+
 	<%
-		String accountName = (String) session.getAttribute("name");
-		
+		Account account  = (Account)session.getAttribute("account");
+		String accountName = account.getName();
 	%>
 	<table>
-		<tr> 
-			<td>
-				<a href="LowerAlignment.jsp" target="LowerAlignment"> <%=accountName %> </a>
-			</td>
-		</tr> 
-		<tr> 
-			<td>
-				<form action="LogoutServlet">
-					<input type="submit" name="logout" value="Log Out">
-				</form>
-			</td>
-			<td> 
-				<form action="createQuizzServlet">
-					<input type="submit" name="createQuizzServlet" value="Create Quizz">
-				</form>
-			</td>
+		<tr>
+			<td><a href="AccountInfo.jsp" target="AccountWindow"> <%=accountName %> </a></td>
+			<td><a href="LogoutServlet" target="AccountWindow">
+					Logout</a></td>
+		</tr>
+		<tr>
+			<td><a href="StartCreatingQuiz" target="AccountWindow">
+					Create Quiz! </a></td>
 		</tr>
 	</table>
-	
-	
+
+
 </body>
 </html>
