@@ -28,7 +28,7 @@ public class Notifications extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doPost(request, response);
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Notifications extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Account user = (Account) request.getSession(true).getAttribute("account");
-		request.getSession(true).setAttribute("notifications", MyDB.getNotifications(user.getId()));
+		request.setAttribute("notifications", MyDB.getNotifications(user.getId()));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Notifications.jsp");
 		dispatcher.forward(request, response);
 	}

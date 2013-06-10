@@ -8,10 +8,10 @@
 </head>
 <body>
 	<% 
-	int[] notifications = (int[])request.getSession().getAttribute("notifications"); 
-	String messages = "New messages " + notifications[0];
-	String requests = "New friend requests " + notifications[1];
-	String challanges = "New challenges " + notifications[2];
+	int[] notifications = (int[])request.getAttribute("notifications"); 
+	String messages = "New messages(" + notifications[0]+ ")";
+	String requests = "New friend requests(" + notifications[1] + ")";
+	String challanges = "New challenges( " + notifications[2] + ")";
 	%>
 	<a href="MessageServlet"><%= messages %></a>
 	<br>
