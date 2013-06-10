@@ -33,13 +33,15 @@ public class StartTackingQuiz extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("ID"));
-		int quizID = Integer.parseInt(request.getParameter("ID"));
+		
+		int quizID = (Integer)request.getSession(true).getAttribute("ID");
 		HttpSession session = request.getSession(true);
 		ResultSet rs = MyDB.getQuizInfo(quizID);
 		int authorID = -1;
+		System.out.println(quizID);
 		String name = null, description = null;
 		try {
+			rs.next();
 			authorID = rs.getInt("authorID");
 			name = rs.getString("name");
 			description = rs.getString("description");

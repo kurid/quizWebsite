@@ -20,8 +20,9 @@
 			for (QuizDB quiz: newQuizzes){
     			//out.print("<li><a href=\"StartTackingQuiz\" "+"target=\"AccountWindow\""+"?ID=\""); 
    	 			//out.println(quiz.getId() + "\">" + quiz.getName()+ "</a></li>");
-   	 			System.out.println(quiz.getId());
-   	 		out.println("<a href=\"StartTackingQuiz\" target =\"AccountWindow\" ?ID=\""+quiz.getId()+"\"> Create Quiz! </a>");
+   	 			//System.out.println(quiz.getId());
+   	 			session.setAttribute("ID", quiz.getId());
+   	 			out.println("<a href=\"StartTackingQuiz\" target =\"AccountWindow\"> " +quiz.getName()+ "</a></li>");
    			}
   		%> 
  	</ol>
