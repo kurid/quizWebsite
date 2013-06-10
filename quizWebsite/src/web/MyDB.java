@@ -660,6 +660,4 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-
-	
 }
