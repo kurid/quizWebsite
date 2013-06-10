@@ -43,7 +43,10 @@ public class QuizDB implements QuizInterface{
 	
 	@Override
 	public List<Question> generateQuestions(){
-		ArrayList<Integer> questionIDs = (ArrayList<Integer>) MyDB.getQuestions(quizID);
+		ArrayList<Integer> questionIDs = (ArrayList<Integer>) MyDB.getQuestions(getID());
+		System.out.println(quizID+" quizID");
+		System.out.println(questionIDs.size()+" amdenicalia generateQuestions-shi");
+		
 		totalScore=0;
 		for (int i=0; i<questionIDs.size(); i++)
 			try {
@@ -57,7 +60,7 @@ public class QuizDB implements QuizInterface{
 	}
 
 	@Override
-	public int getId() {
+	public int getID() {
 		if(quizID == 0){
 			quizID = MyDB.getQuizId(quizName, authorID);
 		}

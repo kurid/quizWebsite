@@ -61,6 +61,7 @@ public class TakeQuizServlet extends HttpServlet {
 			QuizDB quiz = (QuizDB) session.getAttribute("quizDB");
 			List<Question> qList = (ArrayList<Question>) quiz.generateQuestions();
 			session.setAttribute("qList", qList);
+			System.out.println(qList.size()+"  amdeni cali kitxvaa");
 			jsp = qList.get(qIndex).getJspName();
 			ArrayList<Integer> answersCorrectness = new ArrayList<Integer>();
 			session.setAttribute("answersCorrectness", answersCorrectness);
