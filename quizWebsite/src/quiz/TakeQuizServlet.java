@@ -68,6 +68,7 @@ public class TakeQuizServlet extends HttpServlet {
 			session.setAttribute("startTime", System.currentTimeMillis());
 		} else {
 			List<Question> qList = (ArrayList<Question>) session.getAttribute("qList");
+			checkAnswer(qList,request,qIndex);
 			if (qIndex == qList.size()){
 				Account account = (Account) session.getAttribute("account");
 				int accountID = account.getId();
@@ -88,9 +89,8 @@ public class TakeQuizServlet extends HttpServlet {
 				session.removeAttribute("qList");
 				session.removeAttribute("qIndex");
 				session.removeAttribute("quizDB");
-				jsp = "quizDone.jsp";
+				jsp = "QuizDone.jsp";
 			} else {
-				checkAnswer(qList,request,qIndex);
 				jsp = qList.get(qIndex).getJspName();
 			}
 		}
@@ -107,6 +107,7 @@ public class TakeQuizServlet extends HttpServlet {
 
 	@SuppressWarnings({ "unchecked"})
 	private void checkAnswer(List<Question> qList, HttpServletRequest request, int qIndex) {
+		qIndex--;
 		Question q = qList.get(qIndex);
 		ArrayList<Integer> answersCorrectness = (ArrayList<Integer>) request.getSession(true).getAttribute("answersCorrectness");
 		int score=0;
@@ -115,7 +116,9 @@ public class TakeQuizServlet extends HttpServlet {
 		case QuestionFinals.IMAGE_QUESTION:
 			String answer = (String) request.getParameter("field1");
 			ArrayList<String> correctAnswers = (ArrayList<String>) q.getCorrectAnswer().getAnswer();
+			System.out.println("amdeni shesadzlo swori pasuxi maqvs: "+correctAnswers.size());
 			for (int i=0; i<correctAnswers.size(); i++){
+				System.out.println(correctAnswers.get(i)+" 213moi1nuvenb98fbaw987dba");
 				if (correctAnswers.get(i).equals(answer)){
 					score = q.getScore();
 					break;
@@ -159,7 +162,9 @@ public class TakeQuizServlet extends HttpServlet {
 			break;
 		default:;
 		}
+		System.out.println(qIndex+ " am kitxvaze "+score+" es score aighe");
 		answersCorrectness.add(score);
+		request.getSession().setAttribute("answersCorrectness", answersCorrectness);
 	}
 
 }
