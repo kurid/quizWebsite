@@ -1,14 +1,14 @@
 package Question;
 
 public interface QuestionFinals {
-	public static final int QUESTION_RESPONCE = 1;
+	public static final int QUESTION_RESPONSE = 1;
 	public static final int MULTIPLE_CHOICE = 2;
 	public static final int MULTIPLE_ANSWER = 3;
 	public static final int MCMA = 4;
 	public static final int IMAGE_QUESTION = 5;
 	public static final int MATCHING = 6;
 	public static final int AUTO_GENERATED = 7;
-	public static final String QUESTION_RESPONCE_JSP = "QuestionResponce.jsp";
+	public static final String QUESTION_RESPONSE_JSP = "QuestionResponse.jsp";
 	public static final String MULTIPLE_CHOICE_JSP = "MultipleChoice.jsp";
 	public static final String MULTIPLE_ANSWER_JSP = "MultipleAnswer.jsp";
 	public static final String MCMA_JSP = "MCMA.jsp";

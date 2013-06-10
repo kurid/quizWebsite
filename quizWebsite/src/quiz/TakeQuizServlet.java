@@ -110,7 +110,7 @@ public class TakeQuizServlet extends HttpServlet {
 		ArrayList<Integer> answersCorrectness = (ArrayList<Integer>) request.getSession(true).getAttribute("answersCorrectness");
 		int score=0;
 		switch(q.getType()){
-		case QuestionFinals.QUESTION_RESPONCE:
+		case QuestionFinals.QUESTION_RESPONSE:
 		case QuestionFinals.IMAGE_QUESTION:
 			String answer = (String) request.getAttribute("answer");
 			ArrayList<String> correctAnswers = (ArrayList<String>) q.getCorrectAnswer().getAnswer();

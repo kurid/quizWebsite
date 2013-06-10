@@ -28,7 +28,7 @@ public class QuestionResponse extends Question{
 
 	@Override
 	public int getType() {
-		return QUESTION_RESPONCE;
+		return QUESTION_RESPONSE;
 	}
 
 	@Override
@@ -43,6 +43,6 @@ public class QuestionResponse extends Question{
 	
 	@Override
 	public String getJspName() {
-		return QUESTION_RESPONCE_JSP;
+		return QUESTION_RESPONSE_JSP;
 	}
 }

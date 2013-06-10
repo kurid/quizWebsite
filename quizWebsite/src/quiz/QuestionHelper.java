@@ -34,7 +34,7 @@ public class QuestionHelper implements QuestionFinals{
 		Question q;
 		ResultSet resHelper;		
 		switch(type){
-		case QUESTION_RESPONCE:
+		case QUESTION_RESPONSE:
 			resHelper = MyDB.answers(questionID);
 			ArrayList<String> arr = new ArrayList<String>();
 			while(resHelper.next()){
