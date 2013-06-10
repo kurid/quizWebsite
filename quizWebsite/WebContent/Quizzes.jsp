@@ -12,9 +12,10 @@
 
 </head>
 <body>
-	
+	<hr>
+	<h2 align="center"> Quizzes </h2>
 	<form action="SearchQuiz" method=POST>
-	<table>
+	<table align="center">
 		<tr>
 			<td> Enter quiz name: </td>
 			<td> <input type="text" name="quizzName"/> </td>

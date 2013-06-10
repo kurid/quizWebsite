@@ -18,7 +18,7 @@
 		<%  
  			List <QuizDB> newQuizzes  = (List<QuizDB>)request.getServletContext().getAttribute("newQuizzes");
 			for (QuizDB quiz: newQuizzes){
-    			out.println("<li><a href=\"http://localhost:8080/quizWebsite/test1.jsp?ID="); 
+    			out.println("<li><a href=\"http://localhost:8080/quizWebsite/test1.jsp"); 
    	 			out.println(quiz.getId() + "\">" + quiz.getName()+ "</a></li>");
    			}
   		%> 

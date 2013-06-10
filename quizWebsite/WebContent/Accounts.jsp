@@ -10,9 +10,10 @@
 </head>
 <% List<Account> searchedAccounts = (List<Account>)request.getAttribute("searchedAccount"); %>
 <body>
-
+	<hr>
+	<h2 align="center"> Accounts </h2>
 	<form action="SearchAccount" method=POST>
-	<table>
+	<table align="center">
 		<tr>
 			<td> Enter account name: </td>
 			<td> <input type="text" name="accountName"/> </td>

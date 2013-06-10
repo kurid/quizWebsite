@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1> egre raaaaaaaa</h1>
+		<hr>
+		<h2 align="center"> Quizzes History </h2>
 </body>
 </html>

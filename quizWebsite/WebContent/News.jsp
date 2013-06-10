@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	 <h2 align="center"> Quiz Website News </h2>
 </body>
 </html>

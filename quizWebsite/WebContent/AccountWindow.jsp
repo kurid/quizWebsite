@@ -9,7 +9,7 @@
 
 	<frameset rows="41,*"  frameborder="no" border="0" framespacing="0">
 		<frame src="AccountInfo.jsp" name = "AccountInfo"> 
-		<frame src="ActualInfo.jsp" name="ActualInfo">
+		<frame src="Home.jsp" name="ActualInfo">
 	</frameset>
 
 

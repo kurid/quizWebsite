@@ -7,7 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<p> me var saba gogolidze </p>
+		<%
+			String accountInfo = (String)session.getAttribute("accountInfo");
+		%>
+		<hr>
+		<h2 align="center"> Home </h2>
+		<p> <%=accountInfo %> </p>
 		
 </body>
 </html>
