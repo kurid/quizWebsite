@@ -25,7 +25,7 @@
 	if(searchedQuizzes != null){
 				for(QuizDB quiz : searchedQuizzes){
 				out.println("<li><a href=\"http://localhost:8080/quizWebsite/test1.jsp?ID="); 
-				out.println(quiz.getId() + "\">" + quiz.getName()+ "</a></li>");
+				out.println(quiz.getID() + "\">" + quiz.getName()+ "</a></li>");
 			}
 		}%>
 	

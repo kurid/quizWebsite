@@ -6,7 +6,7 @@ import Question.Question;
 
 public interface QuizInterface {
 
-	public int getId();
+	public int getID();
 	public String getName();
 	public String getDescription();
 	public int getAuthor();
