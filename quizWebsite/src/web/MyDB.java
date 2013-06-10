@@ -646,7 +646,7 @@ public class MyDB {
 	}
 
 	public static void addQuizResult(int accountID, int quizID, int score,
-			long quizTimeInSeconds, String date) {
+			long quizTimeInSeconds) {
 		
 		
 	}
