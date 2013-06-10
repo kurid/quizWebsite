@@ -12,7 +12,7 @@
 <body>
 	<%
 		
-		int index = (Integer)session.getAttribute("pIndex");	
+		int index = (Integer) session.getAttribute("qIndex");	
 		List<Question> qList = (ArrayList<Question>) session.getAttribute("qList");
 		String questionText = qList.get(index).getQuestionText();
 		
