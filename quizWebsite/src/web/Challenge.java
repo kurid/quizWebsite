@@ -18,12 +18,15 @@ public class Challenge extends Notification{
 	
 	private void createQuiz(int quizID){
 		ResultSet rs = MyDB.getQuizInfo(quizID);
+		System.out.println(rs);
 		int authorID = -1;
 		String name = null, description = null;
 		try {
-			authorID = rs.getInt("authorID");
-			name = rs.getString("name");
-			description = rs.getString("description");
+			if(rs.next()){
+				authorID = rs.getInt("authorID");
+				name = rs.getString("name");
+				description = rs.getString("description");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
