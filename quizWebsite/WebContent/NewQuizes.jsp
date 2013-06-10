@@ -21,7 +21,7 @@
     			//out.print("<li><a href=\"StartTackingQuiz\" "+"target=\"AccountWindow\""+"?ID=\""); 
    	 			//out.println(quiz.getId() + "\">" + quiz.getName()+ "</a></li>");
    	 			//System.out.println(quiz.getId());
-   	 			session.setAttribute("ID", quiz.getId());
+   	 			session.setAttribute("ID", quiz.getID());
    	 			out.println("<a href=\"StartTackingQuiz\" target =\"AccountWindow\"> " +quiz.getName()+ "</a></li>");
    			}
   		%> 
