@@ -234,7 +234,8 @@ public class MyDB {
 		try {
 			res = statement.executeQuery(query);
 			while(res.next()){
-				messages.add(new Message(idTo, res.getInt("accountIdFrom"), res.getDate("sendTime"), res.getString("text")));
+				messages.add(new Message(idTo, res.getInt("accountIdFrom"), 
+						res.getDate("sendTime"), res.getString("text"), res.getBoolean("read_unread")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -646,7 +647,7 @@ public class MyDB {
 
 	public static void addQuizResult(int accountID, int quizID, int score,
 			long quizTimeInSeconds, String date) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
