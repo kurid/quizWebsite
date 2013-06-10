@@ -11,7 +11,6 @@
 </head>
 <body>
 
-	<hr>
 	<h2 align="center"> Friends </h2>
 	<%
 		

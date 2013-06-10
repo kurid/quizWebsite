@@ -12,7 +12,6 @@
 
 </head>
 <body>
-	<hr>
 	<h2 align="center"> Quizzes </h2>
 	<form action="SearchQuiz" method=POST>
 	<table align="center">

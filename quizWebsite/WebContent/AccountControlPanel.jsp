@@ -14,7 +14,7 @@
 		Account account  = (Account)session.getAttribute("account");
 		String accountName = account.getNickname();
 	%>
-	<table align="center">
+	<table>
 		<tr>
 			<td><a href="AccountWindow.jsp" target="AccountWindow"> <%=accountName %> </a></td>
 		</tr>
@@ -26,7 +26,8 @@
 			<td><a href="LogoutServlet" target="_top">  Logout</a></td>
 		</tr>
 	</table>
-
+	<hr>
+	<hr>
 
 </body>
 </html>

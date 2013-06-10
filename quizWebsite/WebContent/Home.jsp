@@ -10,7 +10,6 @@
 		<%
 			String accountInfo = (String)session.getAttribute("accountInfo");
 		%>
-		<hr>
 		<h2 align="center"> Home </h2>
 		<p> <%=accountInfo %> </p>
 		

@@ -18,5 +18,6 @@
 				<td width="20%"> <a href="QuizzesDone.jsp" target="ActualInfo"> Quizzes Done </a> </td>
 			</tr>
 		</table>
+		<hr>
 </body>
 </html>
