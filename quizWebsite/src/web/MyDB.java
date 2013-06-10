@@ -52,7 +52,7 @@ public class MyDB {
 	public static ResultSet newQuizzes(){
 		ResultSet res = null;
 		try {
-			res  = statement.executeQuery("select * from quizes order by quiz_date limit 0,5;");
+			res  = statement.executeQuery("SELECT * FROM quizes ORDER BY quiz_date LIMIT 0,5;");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,9 +63,9 @@ public class MyDB {
 	public static ResultSet popularQuizzes(){
 		ResultSet res = null;
 		try {
-			String query = "select authorID, name,description from quizes, popularQuizes " +
-					" where quizes.quizID = popularQuizes.quizID " +
-					" order by count desc;";
+			String query = "SELECT authorID, name,description FROM quizes, popularQuizes " +
+					" WHERE quizes.quizID = popularQuizes.quizID " +
+					" ORDER BY count DESC;";
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -212,7 +212,7 @@ public class MyDB {
 	}
 
 	public static List<Challenge> getChallenges(int idTo) {
-		String query = "select * from challenges where accountIdTo = " + idTo + ";";
+		String query = "SELECT * FROM challenges WHERE accountIdTo = " + idTo + ";";
 		ResultSet res;
 		List<Challenge> challanges = new ArrayList<Challenge>();
 		try {
@@ -229,7 +229,7 @@ public class MyDB {
 
 	public static List<Message> getMessages(int idTo) {
 		ResultSet res;
-		String query = "select * from messages where accountIdTo = " + idTo + ";";
+		String query = "SELECT * FROM messages WHERE accountIdTo = " + idTo + ";";
 		List<Message> messages = new ArrayList<Message>();
 		try {
 			res = statement.executeQuery(query);
@@ -245,7 +245,7 @@ public class MyDB {
 
 	public static List<FriendRequest> getRequest(int idTo) {
 		ResultSet res;
-		String query = "select * from messages where accountIdTo = " + idTo + ";";
+		String query = "SELECT * FROM messages WHERE accountIdTo = " + idTo + ";";
 		List<FriendRequest> friendRequests = new ArrayList<FriendRequest>();
 		try {
 			res = statement.executeQuery(query);
@@ -259,10 +259,7 @@ public class MyDB {
 	}
 
 	public static void sendMessage(int idTo, int idFrom, String text) {
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		java.util.Date utilDate = new java.util.Date();
-		String date = sdf.format(utilDate);
+		String date = getCurrentTime();
 		try {
 			String query = "INSERT INTO messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )VALUES("
 					+ idTo
@@ -281,9 +278,7 @@ public class MyDB {
 	}
 
 	public static int createQuiz(String name, String description, int accountID){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		java.util.Date utilDate = new java.util.Date();
-		String date = sdf.format(utilDate);
+		String date = getCurrentTime();
 		String query = "INSERT INTO quizes(authorID,name,quiz_date,description) values(" 
 				+ accountID + ",\"" + name + "\",\""  + date + "\",\"" + description + "\" );" ;
 		try {
@@ -315,9 +310,9 @@ public class MyDB {
 	public static ResultSet getQuizInfo(int quizID) {
 		ResultSet res = null;
 		try {
-			statement.executeQuery("SELECT * from quizes where quizID = " + quizID+ ";");
+			statement.executeQuery("SELECT * FROM quizes WHERE quizID = " + quizID+ ";");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error in getQuizInfo");
 			e.printStackTrace();
 		}
 		return res;
@@ -325,7 +320,7 @@ public class MyDB {
 	
 	public static ResultSet getQuestionInfo(int questionID){
 		ResultSet res;
-		String query ="select * from questions where questionID =" + questionID +";" ;
+		String query ="SELECT * FROM questions WHERE questionID =" + questionID +";" ;
 		try {
 			res = statement.executeQuery(query);
 			return res;
@@ -337,7 +332,7 @@ public class MyDB {
 	
 	public static ResultSet MultipleChoice(int questionID){
 		ResultSet res;
-		String query = "select * from multiplechoice where questionID =" + questionID + ";" ;
+		String query = "SELECT * FROM multiplechoice WHERE questionID =" + questionID + ";" ;
 		try {
 			res = statement.executeQuery(query);
 			return res;
@@ -349,7 +344,7 @@ public class MyDB {
 	
 	public static ResultSet answers(int questionID){
 		ResultSet res;
-		String query = "select * from multiplechoice where questionID =" + questionID + ";" ;
+		String query = "SELECT * FROM multiplechoice WHERE questionID =" + questionID + ";" ;
 		try {
 			res = statement.executeQuery(query);
 			return res;
@@ -383,7 +378,7 @@ public class MyDB {
 		String Achievements = "Glexi";
 		try {
 			statement
-					.executeUpdate("insert into accounts (nick,name,surname,password,mail,Achievements) values(\""
+					.executeUpdate("INSERT INTO accounts (nick,name,surname,password,mail,Achievements) values(\""
 							+ nickName
 							+ "\",\""
 							+ name
@@ -413,7 +408,7 @@ public class MyDB {
 	
 	public static ResultSet getMatching(int questionId){
 		ResultSet res = null;
-		String query ="select * from matching  where questionID = " + questionId +" ;";
+		String query ="SELECT * FROM matching  WHERE questionID = " + questionId +" ;";
 		try {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
@@ -424,7 +419,7 @@ public class MyDB {
 	
 	public static String getURL(int questionId){
 		ResultSet res = null;
-		String query ="select url from imigeQuestion  where questionID = " + questionId +" ;";
+		String query ="SELECT url FROM imigeQuestion  WHERE questionID = " + questionId +" ;";
 		try {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
@@ -554,7 +549,7 @@ public class MyDB {
 	private static int addQuestion(Question q) {
 		int questionID = -1;
 		try {
-			String query = "Select addQuestion(" + q.getType() + ", \""
+			String query = "SELECT addQuestion(" + q.getType() + ", \""
 					+ q.getQuestionText() + "\", " + q.getScore() + ", "
 					+ q.getIndex() + ");";
 			ResultSet res = statement.executeQuery(query);
@@ -586,7 +581,7 @@ public class MyDB {
 	
 	public static void addQuestionToQuiz(int quizID, int questionID ){
 		try {
-			statement.executeUpdate("insert into questiontoquiz(quizID, questionID) values(" + quizID +" ," + questionID + ");");
+			statement.executeUpdate("INSERT INTO questiontoquiz(quizID, questionID) VALUES (" + quizID +" ," + questionID + ");");
 		} catch (SQLException e) {
 			System.out.println("Error in addQuestionToQuiz");
 			e.printStackTrace();
@@ -644,11 +639,26 @@ public class MyDB {
 		}
 		return result;
 	}
+	
+	private static String getCurrentTime(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		java.util.Date utilDate = new java.util.Date();
+		String date = sdf.format(utilDate);
+		return date;
+	}
 
 	public static void addQuizResult(int accountID, int quizID, int score,
 			long quizTimeInSeconds) {
-		
-		
+		String date = getCurrentTime();
+		String update = "INSERT INTO takenQuizes VALUES " +
+				"(" + accountID + ", " + quizID + ", " + score 
+					+ ", " + quizTimeInSeconds + ", " + date + ");";
+		try {
+			statement.executeUpdate(update);
+		} catch (SQLException e) {
+			System.out.println("Error in addQuizResult");
+			e.printStackTrace();
+		}
 	}
 
 	
