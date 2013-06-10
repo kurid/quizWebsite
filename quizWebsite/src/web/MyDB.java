@@ -310,7 +310,7 @@ public class MyDB {
 	public static ResultSet getQuizInfo(int quizID) {
 		ResultSet res = null;
 		try {
-			statement.executeQuery("SELECT * FROM quizes WHERE quizID = " + quizID+ ";");
+			res = statement.executeQuery("SELECT * FROM quizes WHERE quizID = " + quizID+ ";");
 		} catch (SQLException e) {
 			System.out.println("Error in getQuizInfo");
 			e.printStackTrace();
