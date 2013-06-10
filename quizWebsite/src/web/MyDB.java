@@ -319,7 +319,7 @@ public class MyDB {
 	}
 	
 	public static ResultSet getQuestionInfo(int questionID){
-		ResultSet res;
+		ResultSet res = null;
 		String query ="SELECT * FROM questions WHERE questionID =" + questionID +";" ;
 		try {
 			res = statement.executeQuery(query);
@@ -327,11 +327,11 @@ public class MyDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return res;
 	}
 	
 	public static ResultSet MultipleChoice(int questionID){
-		ResultSet res;
+		ResultSet res = null;
 		String query = "SELECT * FROM multiplechoice WHERE questionID =" + questionID + ";" ;
 		try {
 			res = statement.executeQuery(query);
@@ -339,11 +339,11 @@ public class MyDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return res;
 	}
 	
 	public static ResultSet answers(int questionID){
-		ResultSet res;
+		ResultSet res = null;
 		String query = "SELECT * FROM multiplechoice WHERE questionID =" + questionID + ";" ;
 		try {
 			res = statement.executeQuery(query);
@@ -351,7 +351,7 @@ public class MyDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return res;
 	}
 	
 //	public static ResultSet 
