@@ -4,12 +4,13 @@ import java.util.Date;
 
 public class Notification implements NotificationInterface{
 	
-	protected int senderID, recieverID;
+	protected int recieverID;
+	protected Account sender;
 	protected Date date;
 	
 	@Override
-	public int sender() {
-		return senderID;
+	public Account sender() {
+		return sender;
 	}
 
 	@Override
