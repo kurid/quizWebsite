@@ -75,7 +75,7 @@ public class AddMultipleChoiceQuestion extends HttpServlet {
 				}else if (c == i) {
 					correctAnswer = new SingleAnswer(choice);
 				}
-				choices.add(choice);
+				if(!choice.equals(""))choices.add(choice);
 			}
 			String questionText = request.getParameter("questionText");
 			List<Question> questions = (List<Question>) session

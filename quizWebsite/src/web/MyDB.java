@@ -509,7 +509,8 @@ public class MyDB {
 				else
 					isCorrect = "false";
 				String query = "INSERT INTO multipleChoice VALUES (" + questionID
-						+ ", " + possibleAnswer + ", " + isCorrect + ");";
+						+ ",\"" + possibleAnswer + "\", " + isCorrect + ");";
+				System.out.println("query " + query);
 				statement.executeUpdate(query);
 			}
 		} catch (SQLException e) {
