@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Question.Question;
-
+import Question.*;
 import web.*;
 
 /**
@@ -84,11 +83,8 @@ public class TakeQuizServlet extends HttpServlet {
 				long endTime = System.currentTimeMillis();
 				long startTime = (Long) session.getAttribute("startTime");
 				long quizTimeInSeconds = TimeUnit.MILLISECONDS.toSeconds(endTime - startTime);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-				java.util.Date utilDate = new java.util.Date();
-				String date = sdf.format(utilDate);
 				int score = countCorrectAnswers((ArrayList<Integer>) session.getAttribute("answersCorrectness"));
-				MyDB.addQuizResult(accountID,quizID,score,quizTimeInSeconds,date);
+				MyDB.addQuizResult(accountID,quizID,score,quizTimeInSeconds);
 				QuizDB quiz = (QuizDB) session.getAttribute("quiz");
 				request.setAttribute("quiz", quiz);
 				request.setAttribute("score", score);
@@ -117,8 +113,30 @@ public class TakeQuizServlet extends HttpServlet {
 	}
 
 	private void checkAnswer(List<Question> qList, HttpServletRequest request, int qIndex) {
-		
-		
+		Question q = qList.get(qIndex);
+		ArrayList<Integer> answersCorrectness = (ArrayList<Integer>) request.getSession(true).getAttribute("answersCorrectness");
+		int score=0;
+		switch(q.getType()){
+		case QuestionFinals.QUESTION_RESPONCE:
+			String answer = (String) request.getAttribute("answer");
+			ArrayList<String> answers = (ArrayList<String>) q.getCorrectAnswer().getAnswer();
+			for (int i=0; i<answers.size(); i++){
+				if (answers.get(i).equals(answer)){
+					score = q.getScore();
+					break;
+				}
+			}
+		case QuestionFinals.MULTIPLE_CHOICE:
+			answer = (String) request.getAttribute("answer");
+			if (((String)q.getCorrectAnswer().getAnswer()).equals(answer))
+				score=q.getScore();
+		case QuestionFinals.MULTIPLE_ANSWER:
+		case QuestionFinals.IMAGE_QUESTION:
+		case QuestionFinals.MCMA:
+		case QuestionFinals.MATCHING:
+		default:;
+		}
+		answersCorrectness.add(score);
 	}
 
 }
