@@ -19,7 +19,7 @@
  			List <QuizDB> popularQuizzes  = (List<QuizDB>)request.getServletContext().getAttribute("popularQuizzes");
 			for (QuizDB quiz: popularQuizzes){
     			out.println("<li><a href=\"StartTackingQuiz?ID="); 
-   	 			out.println(quiz.getID() +"target=\"AccountWindow\""+ "\">" + quiz.getName()+ "</a></li>");
+    			out.println(quiz.getID() +"target=\"AccountWindow\""+ "\">" + quiz.getName()+ "</a></li>");
    			}
   		%> 
  	</ol>
