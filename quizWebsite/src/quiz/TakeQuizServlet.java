@@ -126,9 +126,9 @@ public class TakeQuizServlet extends HttpServlet {
 			}
 			break;
 		case QuestionFinals.MULTIPLE_CHOICE:
-			answer = (String) request.getAttribute("answer");
-			if (((String)q.getCorrectAnswer().getAnswer()).equals(answer))
-				score=q.getScore();
+			answer = request.getParameter("answer");
+			if (answer != null && ((String)q.getCorrectAnswer().getAnswer()).equals(answer))
+					score=q.getScore();
 			break;
 		case QuestionFinals.MULTIPLE_ANSWER:
 			ArrayList<String> answers = (ArrayList<String>) request.getAttribute("answer");
