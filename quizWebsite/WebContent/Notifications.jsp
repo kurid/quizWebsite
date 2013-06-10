@@ -8,15 +8,17 @@
 </head>
 <body>
 	<% 
-	int[] notifications = (int[])request.getAttribute("notifications"); 
-	String messages = "New messages(" + notifications[0]+ ")";
-	String requests = "New friend requests(" + notifications[1] + ")";
-	String challanges = "New challenges( " + notifications[2] + ")";
+		int[] notifications = (int[])request.getAttribute("notifications"); 
+		String messages = "New messages(" + notifications[0]+ ")";
+		String requests = "New friend requests(" + notifications[1] + ")";
+		String challanges = "New challenges( " + notifications[2] + ")";
 	%>
-	<a href="MessageServlet"><%= messages %></a>
-	<br>
-	<a href="FriendRequestServlet"><%= requests %></a>
-	<br>
-	<a href="ChallengeServlet"><%= challanges %></a>
-</body>
+	<h2 align="center">Notifications</h2>
+	<table align="center">
+		<tr><td> <a href="MessageServlet"><%= messages %></a> </td> </tr>
+		<tr><td> <a href="FriendRequestServlet"><%= requests %></a> </td></tr>
+		<tr><td> <a href="ChallengeServlet"><%= challanges %></a> </td></tr>
+	</table>
+	
+<body>
 </html>

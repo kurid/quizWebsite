@@ -13,7 +13,7 @@
 	%></a>
 	<h1> <%= text %> 
 		dasatesti gverdi
-		<a href="Notifications"> notifications </a> 
+		<a href="Notifications" target="Notifications.jsp"> notifications </a> 
 		
 	</h1>
 </body>

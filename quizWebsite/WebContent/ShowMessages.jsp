@@ -10,11 +10,14 @@
 <% List<Message> messages  = (List<Message>)request.getAttribute("messages");%>
 </head>
 <body>
-	<% for(Message message : messages ){
-		Account sender = message.sender();
-		String name = sender.getNickname();
-		out.println("From: "+ name + "</br> message: "+ message.getText());
-	}%>
-
+	<table>
+		<% 
+		for(Message message : messages ){
+			Account sender = message.sender();
+			String name = sender.getNickname();
+			out.println("<tr><td> From: "+ name + "</br> message: "+ message.getText() + "<td><tr> ");
+		}
+		%>
+	</table>
 </body>
 </html>

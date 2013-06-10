@@ -7,17 +7,29 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<hr>
+	<h2 align="center"> Quiz Creation </h2>
 	<form action="CreateQuiz" method="post">
-		Enter quiz name: <input type="text" name="quizName"><br> 
-		Enter description: <input type="text" name="description"><br>
-		Number Of Questions: <select name = "numberOfQuestions">
-			<%
-				for(int i=2;i<=15;i++){
-					out.println("<option value=\""+i+"\">"+i+"</option>");
-				}
-			%>
-		</select>
-		<button type="submit">Start adding questions</button>
+		<table align="center">
+			<tr>
+				<td> Enter quiz name: </td>
+				<td> <input type="text" name="quizName"> </td>
+			<tr>
+			<tr>
+				<td> Enter description: </td>
+				<td> <input type="text" name="description"> </td>
+			<tr>
+			<tr>
+				<td> Number Of Questions: </td>
+				<td> <select name = "numberOfQuestions"> 
+				<%
+					for(int i=2;i<=15;i++){
+						out.println("<option value=\""+i+"\">"+i+"</option>");
+					}
+				%> </select> </td>
+				<td> <button type="submit">Start adding questions</button> </td>
+			<tr>
+		</table>
 	</form>
 </body>
 </html>
