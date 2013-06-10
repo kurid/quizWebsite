@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Question.*" %>
+<%@page import="quiz.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,14 +16,14 @@
 		int index = (Integer) session.getAttribute("qIndex");	
 		List<Question> qList = (ArrayList<Question>) session.getAttribute("qList");
 		String questionText = qList.get(index).getQuestionText();
-		
+		session.setAttribute("qIndex", index+1);
 	%>
 		<h2 align="center"> Question <%=(index + 1) %> </h2>
 		<p> <%=questionText %> </p>
 		<br>
-		<form action="TakeQuizServlet" method="post">
+		<form action="TakeQuizServlet" method="POST">
 			<input type="text" name="field1">
-			<input type="button" value="submit">	
+			<input type="submit" name="but" value="submit">	
 		</form>
 </body>
 </html>

@@ -56,12 +56,12 @@ public class TakeQuizServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		int qIndex = (Integer) session.getAttribute("qIndex");
+		System.out.println(qIndex);
 		String jsp=null;
 		if (qIndex == 0) {
 			QuizDB quiz = (QuizDB) session.getAttribute("quizDB");
 			List<Question> qList = (ArrayList<Question>) quiz.generateQuestions();
 			session.setAttribute("qList", qList);
-			System.out.println(qList.size()+"  amdeni cali kitxvaa");
 			jsp = qList.get(qIndex).getJspName();
 			ArrayList<Integer> answersCorrectness = new ArrayList<Integer>();
 			session.setAttribute("answersCorrectness", answersCorrectness);
@@ -70,12 +70,13 @@ public class TakeQuizServlet extends HttpServlet {
 			List<Question> qList = (ArrayList<Question>) session.getAttribute("qList");
 			if (qIndex == qList.size()){
 				Account account = (Account) session.getAttribute("account");
-				int accountID = (account).getId();
-				int quizID = (Integer) session.getAttribute("quizID");
+				int accountID = account.getId();
+				int quizID = ((QuizDB) session.getAttribute("quizDB")).getID();
 				long endTime = System.currentTimeMillis();
 				long startTime = (Long) session.getAttribute("startTime");
 				long quizTimeInSeconds = TimeUnit.MILLISECONDS.toSeconds(endTime - startTime);
 				int score = countCorrectAnswers((ArrayList<Integer>) session.getAttribute("answersCorrectness"));
+				System.out.println(score+" scoreeeeee");
 				MyDB.addQuizResult(accountID,quizID,score,quizTimeInSeconds);
 				QuizDB quiz = (QuizDB) session.getAttribute("quiz");
 				request.setAttribute("quiz", quiz);
@@ -112,7 +113,7 @@ public class TakeQuizServlet extends HttpServlet {
 		switch(q.getType()){
 		case QuestionFinals.QUESTION_RESPONSE:
 		case QuestionFinals.IMAGE_QUESTION:
-			String answer = (String) request.getAttribute("answer");
+			String answer = (String) request.getParameter("field1");
 			ArrayList<String> correctAnswers = (ArrayList<String>) q.getCorrectAnswer().getAnswer();
 			for (int i=0; i<correctAnswers.size(); i++){
 				if (correctAnswers.get(i).equals(answer)){

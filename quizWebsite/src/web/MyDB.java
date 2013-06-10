@@ -649,6 +649,7 @@ public class MyDB {
 
 	public static void addQuizResult(int accountID, int quizID, int score,
 			long quizTimeInSeconds) {
+		System.out.println(accountID+ " # "+quizID+" # "+score+" # "+quizTimeInSeconds);
 		String date = getCurrentTime();
 		String update = "INSERT INTO takenQuizes VALUES " +
 				"(" + accountID + ", " + quizID + ", " + score 
