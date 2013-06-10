@@ -8,15 +8,15 @@
 </head>
 <body>
 		<%
-			String quizName = (String)session.getAttribute("quizName");
-			int score = (Integer)session.getAttribute("score");
-			int maxScore = (Integer)session.getAttribute("fullScore");
-			int time = (Integer)session.getAttribute("quizTimeInSeconds");
+			String quizName = (String) request.getAttribute("quizName");
+			int score = (Integer) request.getAttribute("score");
+			int maxScore = (Integer) request.getAttribute("fullScore");
+			long time = (Long) request.getAttribute("quizTimeInSeconds");
 		%>
 		
 		<h2 align="center">  You Completed <%=quizName %>!</h2>
 		<p align="center"> For completing this quiz you spent <%=time %> seconds! </p>
-		<p align="center"> You had <%=score %> correct answers out of <%=maxScore %>! </p>
-		<p align="center"> We hope you enjoyed our quizz! </p>
+		<p align="center"> You had <%=score %> points out of <%=maxScore %>! </p>
+		<p align="center"> We hope you enjoyed our quiz! </p>
 </body>
 </html>
