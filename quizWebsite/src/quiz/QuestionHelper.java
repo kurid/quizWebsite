@@ -26,12 +26,13 @@ import web.MyDB;
 public class QuestionHelper implements QuestionFinals{
 	public static Question getFullQuestionFromID(int questionID) throws SQLException{
 		ResultSet res = MyDB.getQuestionInfo(questionID);
+		res.next();
 		int type = res.getInt("type");
 		String text = res.getString("questionText");
 		int score = res.getInt("score");
 		int num = res.getInt("num");
 		Question q;
-		ResultSet resHelper;
+		ResultSet resHelper;		
 		switch(type){
 		case QUESTION_RESPONCE:
 			resHelper = MyDB.answers(questionID);

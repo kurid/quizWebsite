@@ -44,9 +44,6 @@ public class QuizDB implements QuizInterface{
 	@Override
 	public List<Question> generateQuestions(){
 		ArrayList<Integer> questionIDs = (ArrayList<Integer>) MyDB.getQuestions(getID());
-		System.out.println(quizID+" quizID");
-		System.out.println(questionIDs.size()+" amdenicalia generateQuestions-shi");
-		
 		totalScore=0;
 		for (int i=0; i<questionIDs.size(); i++)
 			try {
