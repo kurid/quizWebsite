@@ -12,7 +12,7 @@
 
 <body>
 
-	
+	<h3>New Quizzes</h3>	
 	<ol>
 		
 		<%  

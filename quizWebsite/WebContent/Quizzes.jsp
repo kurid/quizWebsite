@@ -22,12 +22,13 @@
 		</tr>
 	</table>
 	<% 
-	if(searchedQuizzes != null){
-				for(QuizDB quiz : searchedQuizzes){
-				out.println("<li><a href=\"http://localhost:8080/quizWebsite/test1.jsp?ID="); 
-				out.println(quiz.getID() + "\">" + quiz.getName()+ "</a></li>");
-			}
-		}%>
+		if(searchedQuizzes != null){
+			for (QuizDB quiz: searchedQuizzes){
+    			out.println("<li><a href=\"StartTackingQuiz?ID="); 
+    			out.println(quiz.getID() +"target=\"AccountWindow\""+ "\">" + quiz.getName()+ "</a></li>");
+   			}
+		}
+	%>
 	
 	</form>
 

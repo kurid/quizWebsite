@@ -12,7 +12,7 @@
 
 <body>
 
-	
+	<h3> Popular Quizzes</h3>
 	<ol>
 		
 		<%  
