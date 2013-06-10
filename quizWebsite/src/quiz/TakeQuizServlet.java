@@ -56,7 +56,6 @@ public class TakeQuizServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		int qIndex = (Integer) session.getAttribute("qIndex");
-		System.out.println(qIndex);
 		String jsp=null;
 		if (qIndex == 0) {
 			QuizDB quiz = (QuizDB) session.getAttribute("quizDB");
@@ -78,7 +77,7 @@ public class TakeQuizServlet extends HttpServlet {
 				long quizTimeInSeconds = TimeUnit.MILLISECONDS.toSeconds(endTime - startTime);
 				int score = countCorrectAnswers((ArrayList<Integer>) session.getAttribute("answersCorrectness"));
 				System.out.println(score+" scoreeeeee");
-				//MyDB.addQuizResult(accountID,quizID,score,quizTimeInSeconds);
+				MyDB.addQuizResult(accountID,quizID,score,quizTimeInSeconds);
 				QuizDB quiz = (QuizDB) session.getAttribute("quizDB");
 				request.setAttribute("quizName", quiz.getName());
 				request.setAttribute("score", score);
