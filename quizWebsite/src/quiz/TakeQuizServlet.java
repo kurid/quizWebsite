@@ -80,7 +80,7 @@ public class TakeQuizServlet extends HttpServlet {
 				System.out.println(score+" scoreeeeee");
 				MyDB.addQuizResult(accountID,quizID,score,quizTimeInSeconds);
 				QuizDB quiz = (QuizDB) session.getAttribute("quiz");
-				request.setAttribute("quiz", quiz);
+				request.setAttribute("quizName", quiz.getName());
 				request.setAttribute("score", score);
 				request.setAttribute("fullScore", quiz.getTotalScore());
 				request.setAttribute("quizTimeInSeconds", quizTimeInSeconds);
