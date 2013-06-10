@@ -660,4 +660,17 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
+	
+	public static ResultSet getTakenQuizes(int accountID){
+		ResultSet res = null;
+		String query = "SELECT * FROM quizes q, takenQuizes tq"+
+				 " WHERE q.quizID = tq.quizID AND tq.accountID = " + accountID + ";";
+		try {
+			res = statement.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 }
