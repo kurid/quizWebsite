@@ -18,8 +18,10 @@
 		<%  
  			List <QuizDB> newQuizzes  = (List<QuizDB>)request.getServletContext().getAttribute("newQuizzes");
 			for (QuizDB quiz: newQuizzes){
-    			out.println("<li><a href=\"StartTackingQuiz?ID="); 
-   	 			out.println(quiz.getId() + "target=\"AccountWindow\""+"\">" + quiz.getName()+ "</a></li>");
+    			//out.print("<li><a href=\"StartTackingQuiz\" "+"target=\"AccountWindow\""+"?ID=\""); 
+   	 			//out.println(quiz.getId() + "\">" + quiz.getName()+ "</a></li>");
+   	 			System.out.println(quiz.getId());
+   	 		out.println("<a href=\"StartTackingQuiz\" target =\"AccountWindow\" ?ID=\""+quiz.getId()+"\"> Create Quiz! </a>");
    			}
   		%> 
  	</ol>

@@ -55,6 +55,7 @@ public class QuestionHelper implements QuestionFinals{
 			}
 			ca = new SingleAnswer(answer);
 			q = new MultipleChoiceQuestion(num,text,new HashSet<String>(arr),ca,score);
+			break;
 		case MULTIPLE_ANSWER:
 			resHelper = MyDB.answers(questionID);
 			arr = new ArrayList<String>();
@@ -77,10 +78,25 @@ public class QuestionHelper implements QuestionFinals{
 			}
 			Iterator<Integer> it = hm.keySet().iterator();
 			List<List<String>> answers = new ArrayList<List<String> >();
-			while (it.hasNext())
-				answers.add(hm.get(it.next()));
+			ArrayList<Integer> keys = new ArrayList<Integer>();
+			while (it.hasNext()){
+				keys.add(it.next());
+				answers.add(hm.get(keys.get(keys.size()-1)));
+			}
+			for (int i=0; i<keys.size(); i++){
+				for (int j=i; j<keys.size(); j++)
+					if (keys.get(i)>keys.get(j)){
+						int tmp = keys.get(i);
+						keys.set(i, keys.get(j));
+						keys.set(j, tmp);
+						List<String> tmpL = answers.get(i);
+						answers.set(i,answers.get(j));
+						answers.set(j, tmpL);
+					}
+			}
 			ca = new MMAnswer(answers);
 			q = new MultiAnswerQuestion(num,text,ca,score);
+			break;
 		case MCMA:
 			resHelper = MyDB.MultipleChoice(questionID);
 			arr = new ArrayList<String>();
@@ -92,7 +108,8 @@ public class QuestionHelper implements QuestionFinals{
 				arr.add(ans);
 			}
 			ca = new MultipleAnswer(arrCorrect);
-			q = new MCMAQ(num,text,new HashSet<String>(arr),ca,score);			
+			q = new MCMAQ(num,text,new HashSet<String>(arr),ca,score);
+			break;
 		case IMAGE_QUESTION:
 			resHelper = MyDB.answers(questionID);
 			arr = new ArrayList<String>();
@@ -103,6 +120,7 @@ public class QuestionHelper implements QuestionFinals{
 			ca = new MultipleAnswer(arr);
 			String URL = MyDB.getURL(questionID);
 			q = new ImageQuestion(num,text,URL,ca,score);
+			break;
 		case MATCHING:
 			resHelper = MyDB.getMatching(questionID);
 			answers = new ArrayList<List<String> >();
@@ -114,6 +132,7 @@ public class QuestionHelper implements QuestionFinals{
 			}
 			ca = new MMAnswer(answers);
 			q = new MatchingQuestion(num,text,ca,score);
+			break;
 		case AUTO_GENERATED: 
 		default: q=null;
 		}
