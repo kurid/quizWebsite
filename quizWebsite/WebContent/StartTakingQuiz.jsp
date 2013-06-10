@@ -11,7 +11,10 @@
 String name = quiz.getName();
 String description = quiz.getDescription();%>
 <body>
-	<p><%=name %><br>
-	<%=description %></p>
+	<p><%=name %></p>
+	<p><%=description %></p>
+	<form action="TakeQuizServlet" method = "post">
+		<input type="submit" name="Submit" value="Start Quiz!"/>
+	</form>
 </body>
 </html>

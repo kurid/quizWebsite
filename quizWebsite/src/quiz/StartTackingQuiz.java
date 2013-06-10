@@ -51,6 +51,7 @@ public class StartTackingQuiz extends HttpServlet {
 		}	
 		QuizDB quiz = new QuizDB(name, description, authorID);
 		session.setAttribute("quizDB", quiz);
+		session.setAttribute("qIndex", 0);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("StartTakingQuiz.jsp");
 		dispatcher.forward(request, response);
 	}
