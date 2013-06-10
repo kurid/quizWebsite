@@ -11,11 +11,12 @@
 		
 		<table align="center"> 
 			<tr> 
-				<td width="20%"> <a href="Home.jsp" target="ActualInfo">Home</a>  </td>
-				<td width="20%"> <a href="Quizzes.jsp" target="ActualInfo"> Quizzes</a> </td>
-				<td width="20%"> <a href="Accounts.jsp" target="ActualInfo"> Accounts</a>  </td>
-				<td width="20%"> <a href="Friends.jsp" target="ActualInfo"> Friends </a> </td>
-				<td width="20%"> <a href="QuizzesDone.jsp" target="ActualInfo"> Quizzes Done </a> </td>
+				<td width="15%"> <a href="News.jsp" target="ActualInfo">News</a>  </td>
+				<td width="15%"> <a href="Home.jsp" target="ActualInfo">Home</a>  </td>
+				<td width="15%"> <a href="Quizzes.jsp" target="ActualInfo"> Quizzes</a> </td>
+				<td width="15%"> <a href="Accounts.jsp" target="ActualInfo"> Accounts</a>  </td>
+				<td width="15%"> <a href="Friends.jsp" target="ActualInfo"> Friends </a> </td>
+				<td width="15%"> <a href="QuizzesDone.jsp" target="ActualInfo"> Quizzes Done </a> </td>
 			</tr>
 		</table>
 		<hr>
