@@ -47,6 +47,7 @@ public class AddQuiz extends HttpServlet {
 		Account author = (Account) session.getAttribute("account");
 		int quizId = MyDB.createQuiz(quizName, description, author.getId());
 		addQuestions(questions, quizId);
+		response.sendRedirect("HomePage");
 	}
 
 	private void addQuestions(List<Question> questions, int quizId) {

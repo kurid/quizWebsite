@@ -9,12 +9,16 @@
 </head>
 <%QuizDB quiz = (QuizDB)session.getAttribute("quizDB"); 
 String name = quiz.getName();
+String target = "AccountWindow";
+if(!(Boolean)session.getAttribute("isLoggedIn")){
+	target = "_top";
+}
 String description = quiz.getDescription();%>
 <body>
 	<p><%=name %></p>
 	<p><%=description %></p>
-	<form action="TakeQuizServlet" method = "post">
-		<input type="submit" name="Submit" value="Start Quiz!"/>
+	<form action="TakeQuizServlet" method = "post" target = <%=target %>>
+		<input type="submit" name="Submit"  value="Start Quiz!"/>
 	</form>
 </body>
 </html>

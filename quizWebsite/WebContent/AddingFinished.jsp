@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="AddQuiz" method = "post">
+	<form action="AddQuiz" method = "post" target="_top">
 		Congratulations, you have successfully created a new quiz. 
 		<button type="submit">Save Quiz</button>
 	</form>

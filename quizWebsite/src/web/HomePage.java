@@ -2,24 +2,26 @@ package web;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import quiz.QuizHelper;
+
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class HomePage
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/HomePage")
+public class HomePage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public HomePage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,8 +37,9 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession(true).setAttribute("isLoggedIn", false);
-		request.getSession(true).removeAttribute("account");
-		response.sendRedirect("HomePage");
+		ServletContext context = request.getServletContext();
+		QuizHelper.updatePopularQuizes(context);
+		QuizHelper.updateNewQuizes(context);
+		response.sendRedirect("HomePage.jsp");
 	}
 }

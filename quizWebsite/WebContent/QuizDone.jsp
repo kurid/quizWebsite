@@ -18,5 +18,8 @@
 		<p align="center"> For completing this quiz you spent <%=time %> seconds! </p>
 		<p align="center"> You had <%=score %> points out of <%=maxScore %>! </p>
 		<p align="center"> We hope you enjoyed our quiz! </p>
+		<form action="HomePage" target="_top">
+			<button type="submit">Ok!</button>
+		</form>
 </body>
 </html>
