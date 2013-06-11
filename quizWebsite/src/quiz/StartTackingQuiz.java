@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.INTERNAL;
+
 import web.MyDB;
 
 /**
@@ -34,7 +36,7 @@ public class StartTackingQuiz extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int quizID = (Integer)request.getSession(true).getAttribute("ID");
+		int quizID = Integer.parseInt(request.getParameter("ID"));//(Integer)request.getSession(true).getAttribute("ID");
 		HttpSession session = request.getSession(true);
 		ResultSet rs = MyDB.getQuizInfo(quizID);
 		int authorID = -1;

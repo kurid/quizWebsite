@@ -54,10 +54,15 @@ public class TakeQuizServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession session = request.getSession(true);
+		
 		int qIndex = (Integer) session.getAttribute("qIndex");
 		String jsp=null;
-		if (qIndex == 0) {
+		if(!(Boolean)session.getAttribute("isLoggedIn")){
+			jsp = "Login.jsp";
+			session.setAttribute("enterText", "You have to log in before you take a quiz.");
+		}else if (qIndex == 0) {
 			QuizDB quiz = (QuizDB) session.getAttribute("quizDB");
 			List<Question> qList = (ArrayList<Question>) quiz.generateQuestions();
 			session.setAttribute("qList", qList);
