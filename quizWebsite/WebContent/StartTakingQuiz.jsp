@@ -17,7 +17,7 @@ String description = quiz.getDescription();%>
 <body>
 	<p><%=name %></p>
 	<p><%=description %></p>
-	<form action="TakeQuizServlet" method = "post" target = <%=target %>>
+	<form action="BeforeFirstQuestion" method = "post" target = <%=target %>>
 		<input type="submit" name="Submit"  value="Start Quiz!"/>
 	</form>
 </body>
