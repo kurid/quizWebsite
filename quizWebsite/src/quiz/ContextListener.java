@@ -31,44 +31,13 @@ public class ContextListener implements ServletContextListener {
 	 */
 	public void contextInitialized(ServletContextEvent request) {
 		ServletContext context = request.getServletContext();
-		popularQuizzes(context);
-		newQuizzes(context);
+		QuizHelper.updatePopularQuizes(context);
+		QuizHelper.updateNewQuizes(context);
 	}
 
-	private void newQuizzes(ServletContext context) {
-		ResultSet resultset = MyDB.newQuizzes();
-		List<QuizDB> quizzes = new ArrayList<QuizDB>();
-		try {
-			while (resultset.next()) {
-				String quizName = resultset.getString("name");
-				String description = resultset.getString("description");
-				int authorID = resultset.getInt("authorID");
-				quizzes.add(new QuizDB(quizName, description, authorID));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		context.setAttribute("newQuizzes", quizzes);
+	
 
-	}
-
-	private void popularQuizzes(ServletContext context) {
-		ResultSet resultset = MyDB.popularQuizzes();
-		List<QuizDB> quizzes = new ArrayList<QuizDB>();
-		try {
-			while (resultset.next()) {
-				String quizName = resultset.getString("name");
-				String description = resultset.getString("description");
-				int authorID = resultset.getInt("authorID");
-				quizzes.add(new QuizDB(quizName, description, authorID));
-			}
-		} catch (SQLException e) {
-			System.out.println("exeption");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		context.setAttribute("popularQuizzes", quizzes);
-	}
+	
 
 	/**
 	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
