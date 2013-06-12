@@ -16,7 +16,6 @@
 		Answer4: <input type="text" name="answer4"><br>  
 		<%@include file="ChooseScore.jsp" %>
 		<button type="submit" name = "answersNum" value ="one">AddQuestion</button>
-		<button type="submit" name = "answersNum" value ="multiple">AddMoreAnswersToQuestion</button>
 	</form>
 </body>
 </html>
