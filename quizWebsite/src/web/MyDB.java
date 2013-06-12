@@ -49,6 +49,20 @@ public class MyDB {
 		}
 	}
 
+	
+	public static ResultSet quizzesDone(int accountID){
+		ResultSet res = null;
+		String query = "select * from takenquizes where accountID = "+ accountID +" order by quiz_date desc ;";
+		try {
+			res = statement.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	
+	
 	public static ResultSet newQuizzes(){
 		ResultSet res = null;
 		try {
@@ -296,6 +310,7 @@ public class MyDB {
 		try {
 			res = statement.executeQuery("SELECT quizID FROM quizes " +
 								"WHERE name = \"" + name + "\" AND authorID = " + accountID + "; ");
+			System.out.println(res);
 			if (res.next()) 
 				return res.getInt(1);
 			else return 0;
