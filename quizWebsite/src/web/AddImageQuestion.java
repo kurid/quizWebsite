@@ -50,7 +50,6 @@ public class AddImageQuestion extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("BB");
 		String questionText = request.getParameter("questionText");
-		String answer = request.getParameter("answer");
 		int score = Integer.parseInt(request.getParameter("Score"));
 		String answersNum = request.getParameter("answersNum");
 		String url = request.getParameter("imageUrl");
@@ -63,7 +62,14 @@ public class AddImageQuestion extends HttpServlet {
 		List<Question> questions = (List<Question>) session
 				.getAttribute("questions");
 		List<String> answers = new ArrayList<String>();
-		answers.add(answer);
+		String answer1 = request.getParameter("answer1");
+		String answer2 = request.getParameter("answer2");
+		String answer3 = request.getParameter("answer3");
+		String answer4 = request.getParameter("answer4");
+		if(!answer1.equals(""))answers.add(answer1);
+		if(!answer2.equals(""))answers.add(answer2);
+		if(!answer3.equals(""))answers.add(answer3);
+		if(!answer4.equals(""))answers.add(answer4);
 		CorrectAnswer correctAnswer = new MultipleAnswer(answers);
 		session.setAttribute("answers", answers);
 		Question question = new ImageQuestion(currentNumberOfQuestion,
