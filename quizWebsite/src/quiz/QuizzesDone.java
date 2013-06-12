@@ -60,7 +60,7 @@ public class QuizzesDone extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("quizzesDone",quizzesDone);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QuzzesDone.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizzesDone.jsp");
 		dispatcher.forward(request, response);
 	}
 
