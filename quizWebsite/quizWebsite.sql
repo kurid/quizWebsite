@@ -195,3 +195,13 @@ create VIEW popularQuizes as
 select quizID, 
 count(quizID) as count FROM takenquizes
 GROUP BY quizID ORDER BY count desc limit 0,5;
+
+
+
+drop view if EXISTS doneQuizzes;
+
+create view doneQuizzes as
+select accountID, quiz_time, quiz_take_date,total_score,
+quizes.quizID, authorID, name, description
+from takenquizes, quizes
+where quizes.quizID = takenquizes.quizID;
