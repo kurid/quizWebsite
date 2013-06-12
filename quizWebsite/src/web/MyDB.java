@@ -50,16 +50,16 @@ public class MyDB {
 	}
 
 	
-//	public static ResultSet getDoneQuizzes(int accountID){
-//		ResultSet res = null;
-//		String query = "select * from takenquizes where accountID = "+ accountID +" order by quiz_date desc ;";
-//		try {
-//			res = statement.executeQuery(query);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return res;
-//	}
+	public static ResultSet getDoneQuizzes(int accountID){
+		ResultSet res = null;
+		String query = "select * from takenquizes where accountID = "+ accountID +" order by quiz_date desc ;";
+		try {
+			res = statement.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 	
 	
@@ -293,7 +293,7 @@ public class MyDB {
 
 	public static int createQuiz(String name, String description, int accountID){
 		String date = getCurrentTime();
-		String query = "INSERT INTO quizes(authorID,name,quiz_date,description) values(" 
+		String query = "INSERT INTO quizes(authorID,name,quiz_create_date,description) values(" 
 				+ accountID + ",\"" + name + "\",\""  + date + "\",\"" + description + "\" );" ;
 		try {
 			statement.executeUpdate(query);
