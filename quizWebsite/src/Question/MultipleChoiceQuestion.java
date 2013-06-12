@@ -1,5 +1,6 @@
 package Question;
 
+import java.util.List;
 import java.util.Set;
 
 import web.MyDB;
@@ -47,4 +48,15 @@ public class MultipleChoiceQuestion extends Question
 	public String getJspName() {
 		return MULTIPLE_CHOICE_JSP;
 	}
+	
+	@Override
+	public int checkAnswer(RecievedAnswer answer) {
+		SingleAnswer sa = (SingleAnswer)correctAnswer;
+		String correctAnswer = sa.getAnswer();
+		String recieved = (String) answer.getRecievedAnswer();
+		if(correctAnswer.equals(recieved))
+			return score;
+		return 0;
+	}
+	
 }
