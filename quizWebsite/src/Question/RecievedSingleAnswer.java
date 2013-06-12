@@ -8,7 +8,7 @@ public class RecievedSingleAnswer extends RecievedAnswer{
 	}
 	
 	@Override
-	public Object getRecievedAnswer() {
+	public String getRecievedAnswer() {
 		return recivedAnswer;
 	}
 	

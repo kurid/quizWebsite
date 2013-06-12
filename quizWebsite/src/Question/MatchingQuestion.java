@@ -1,5 +1,8 @@
 package Question;
 
+import java.util.List;
+
+import sun.reflect.generics.visitor.Reifier;
 import web.MyDB;
 
 public class MatchingQuestion extends Question {
@@ -44,5 +47,31 @@ public class MatchingQuestion extends Question {
 	@Override
 	public String getJspName() {
 		return MATCHING_JSP;
+	}
+	
+	@Override
+	public int checkAnswer(RecievedAnswer answer){
+		MMAnswer mma = (MMAnswer)correctAnswer;
+		List<List<String> > correctAnswers = mma.getAnswer();
+		List<List<String> > recieved = (List<List<String> >) answer.getRecievedAnswer();
+		int finalScore = 0;
+		for(int i = 0; i < recieved.size(); i++){
+			if(pairIsCorrect(correctAnswers, recieved.get(i))){
+				finalScore += score;
+			}
+		}
+		
+		return finalScore;
+	}
+
+	private boolean pairIsCorrect(List<List<String>> correctAnswers,
+			List<String> pair) {
+		for(int i = 0; i < correctAnswers.size(); i++){
+			if(correctAnswers.get(i).equals(pair.get(0)) 
+					&& correctAnswers.get(i).equals(pair.get(1))){
+				return true;
+			}
+		}
+		return false;
 	}
 }
