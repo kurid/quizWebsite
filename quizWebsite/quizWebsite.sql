@@ -52,7 +52,7 @@ create table quizes(
 	quizID int primary key AUTO_INCREMENT not null,
 	authorID int,
 	name varchar(64),
-	quiz_date datetime, 
+	quiz_create_date datetime, 
 	description varchar(1024),
 	UNIQUE KEY(authorID, name),
 	foreign key (authorID) references accounts (accountID) ON DELETE CASCADE
@@ -135,7 +135,7 @@ create table takenQuizes(
 	quizID int,
 	total_score int,
 	quiz_time time,
-	quiz_date datetime,
+	quiz_take_date datetime,
 	foreign key (accountID) references accounts (accountID)  ON DELETE CASCADE,
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE
 );

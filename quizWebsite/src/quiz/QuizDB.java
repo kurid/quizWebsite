@@ -17,14 +17,19 @@ public class QuizDB implements QuizInterface{
 	private int totalScore;
 	
 	public QuizDB(String quizName, String description,int authorID) {
+		this(quizName,description,authorID,0);
+	}
+	
+	public QuizDB(String quizName, String description,int authorID, int quizID) {
+		this.quizID = quizID;
 		this.quizName = quizName;
 		this.description = description;
 		this.authorID = authorID;
 		questions = new ArrayList<Question>();
 		totalScore=-1;
 	}
-
-
+	
+	
 	@Override
 	public String getName() {
 		return quizName;

@@ -50,23 +50,23 @@ public class MyDB {
 	}
 
 	
-	public static ResultSet quizzesDone(int accountID){
-		ResultSet res = null;
-		String query = "select * from takenquizes where accountID = "+ accountID +" order by quiz_date desc ;";
-		try {
-			res = statement.executeQuery(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return res;
-	}
+//	public static ResultSet getDoneQuizzes(int accountID){
+//		ResultSet res = null;
+//		String query = "select * from takenquizes where accountID = "+ accountID +" order by quiz_date desc ;";
+//		try {
+//			res = statement.executeQuery(query);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return res;
+//	}
 	
 	
 	
 	public static ResultSet newQuizzes(){
 		ResultSet res = null;
 		try {
-			res  = statement.executeQuery("SELECT * FROM quizes ORDER BY quiz_date DESC LIMIT 0,5;");
+			res  = statement.executeQuery("SELECT * FROM quizes ORDER BY quiz_create_date DESC LIMIT 0,5;");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class MyDB {
 	public static ResultSet popularQuizzes(){
 		ResultSet res = null;
 		try {
-			String query = "SELECT authorID, name,description FROM quizes, popularQuizes " +
+			String query = "SELECT quizes.quizID,authorID, name,description FROM quizes, popularQuizes " +
 					" WHERE quizes.quizID = popularQuizes.quizID " +
 					" ORDER BY count DESC;";
 			res = statement.executeQuery(query);
@@ -310,7 +310,6 @@ public class MyDB {
 		try {
 			res = statement.executeQuery("SELECT quizID FROM quizes " +
 								"WHERE name = \"" + name + "\" AND authorID = " + accountID + "; ");
-			System.out.println(res);
 			if (res.next()) 
 				return res.getInt(1);
 			else return 0;
@@ -500,8 +499,8 @@ public class MyDB {
 			try{
 				String answer1 = correctMatches.get(i).get(0);
 				String answer2 = correctMatches.get(i).get(1);
-				String query = "INSERT INTO matching VALUES (" + questionID + ", "
-						+ answer1 + ", " + answer2 + ");";
+				String query = "INSERT INTO matching VALUES (\"" + questionID + "\", \""
+					      + answer1 + "\", \"" + answer2 + "\");";
 				statement.executeUpdate(query);
 			} catch (SQLException e){
 				System.out.println("Error in addMatchingQuestion");

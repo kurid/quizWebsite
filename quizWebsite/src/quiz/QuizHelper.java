@@ -19,7 +19,8 @@ public class QuizHelper {
 				String quizName = resultset.getString("name");
 				String description = resultset.getString("description");
 				int authorID = resultset.getInt("authorID");
-				quizzes.add(new QuizDB(quizName, description, authorID));
+				int quizID = resultset.getInt("quizID");
+				quizzes.add(new QuizDB(quizName, description, authorID,quizID));
 			}
 		} catch (SQLException e) {
 			System.out.println("Error in updatePopularQuizes");
@@ -36,7 +37,8 @@ public class QuizHelper {
 				String quizName = resultset.getString("name");
 				String description = resultset.getString("description");
 				int authorID = resultset.getInt("authorID");
-				quizzes.add(new QuizDB(quizName, description, authorID));
+				int quizID = resultset.getInt("quizID");
+				quizzes.add(new QuizDB(quizName, description, authorID,quizID));
 			}
 		} catch (SQLException e) {
 			System.out.println("Error in updateNewQuizes");
