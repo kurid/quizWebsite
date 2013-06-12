@@ -14,4 +14,6 @@ public interface QuestionInterface{
 	int addToDB();
 	
 	String getJspName();
+	
+	int checkAnswer(RecievedAnswer answer);
 }
