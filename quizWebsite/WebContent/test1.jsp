@@ -13,10 +13,10 @@
 </head>
 <body>
 <a> <%
- 	//Integer text = (Integer)request.getAttribute("ID");
- 		//session.setAttribute("account", new Account(1));
+ 	Integer text = (Integer)request.getAttribute("ID");
+ 		session.setAttribute("account", new Account(1));
  %></a>
-	<h1> <%=text%> 
+	<h1> <%= text%> 
 		dasatesti gverdi
 		<a href="QuizzesHistory" > notifications </a>
 		

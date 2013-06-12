@@ -16,7 +16,7 @@
 				<td width="15%"> <a href="Quizzes.jsp" target="ActualInfo"> Quizzes</a> </td>
 				<td width="15%"> <a href="Accounts.jsp" target="ActualInfo"> Accounts</a>  </td>
 				<td width="15%"> <a href="Friends.jsp" target="ActualInfo"> Friends </a> </td>
-				<td width="15%"> <a href="QuizzesDone.jsp" target="ActualInfo"> Quizzes Done </a> </td>
+				<td width="15%"> <a href="QuizzesDone" target="ActualInfo"> Quizzes Done </a> </td>
 				<td width="15%"> <a href="Notifications" target="ActualInfo"> Notifications </a> </td>
 			</tr>
 		</table>
