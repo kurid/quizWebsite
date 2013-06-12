@@ -12,6 +12,7 @@
 			<option value="SingleAnswer">Single answer question</option>
 			<option value="AddImageQuestion">Image question</option>
 			<option value="AddMultipleChoiceQuestion">Multiple choice</option>
+			<option value="AddMatchingQuestion">Matching Question</option>
 		</select>
 		<input type="submit" value="CreateQestion" />
 	</form>
