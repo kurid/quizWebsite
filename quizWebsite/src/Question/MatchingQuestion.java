@@ -67,8 +67,8 @@ public class MatchingQuestion extends Question {
 	private boolean pairIsCorrect(List<List<String>> correctAnswers,
 			List<String> pair) {
 		for(int i = 0; i < correctAnswers.size(); i++){
-			if(correctAnswers.get(i).equals(pair.get(0)) 
-					&& correctAnswers.get(i).equals(pair.get(1))){
+			if(correctAnswers.get(i).get(0).equals(pair.get(0)) 
+					&& correctAnswers.get(i).get(1).equals(pair.get(1))){
 				return true;
 			}
 		}

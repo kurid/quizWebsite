@@ -61,7 +61,7 @@ public class QuizzesDone extends HttpServlet {
 		}
 		request.setAttribute("quizzesDone",quizzesDone);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("test1.jsp");
-		dispatcher.forward(requests, response);
+		dispatcher.forward(request, response);
 	}
 
 }

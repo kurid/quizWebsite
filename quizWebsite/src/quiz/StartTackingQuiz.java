@@ -44,7 +44,6 @@ public class StartTackingQuiz extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		ResultSet rs = MyDB.getQuizInfo(quizID);
 		int authorID = -1;
-		System.out.println(quizID);
 		String name = null, description = null;
 		try {
 			rs.next();

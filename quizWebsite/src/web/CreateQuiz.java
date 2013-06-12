@@ -43,7 +43,6 @@ public class CreateQuiz extends HttpServlet {
 		String quizName = request.getParameter("quizName");
 		String description = request.getParameter("description");
 		int numberOfQuestions = Integer.parseInt(request.getParameter("numberOfQuestions"));
-		System.out.println(numberOfQuestions);
 		HttpSession session = request.getSession(true);
 		List<Question> questions= new ArrayList<Question>();
 		session.setAttribute("quizName",quizName);

@@ -70,6 +70,7 @@ public class AddMatchingQuestion extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		}
+		int score = answers.size();
 		String questionText = request.getParameter("questionText");
 		List<Question> questions = (List<Question>) session
 				.getAttribute("questions");
@@ -77,7 +78,7 @@ public class AddMatchingQuestion extends HttpServlet {
 				.getAttribute("currentNumberOfQuestion");
 		int numberOfQuestions = (Integer) session
 				.getAttribute("numberOfQuestions");
-		int score = Integer.parseInt(request.getParameter("Score"));
+		
 		CorrectAnswer correctAnswer = new MMAnswer(answers);
 		Question question = new MatchingQuestion(currentNumberOfQuestion,
 				questionText, correctAnswer, score);

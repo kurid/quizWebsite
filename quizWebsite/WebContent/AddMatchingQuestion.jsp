@@ -20,7 +20,6 @@
 			}
 		%>
 		  
-		<%@include file="ChooseScore.jsp" %>
 		<button type="submit">AddQuestion</button>
 	</form>
 </body>
