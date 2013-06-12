@@ -1,5 +1,7 @@
 package Question;
 
+import java.util.List;
+
 import web.MyDB;
 
 public class ImageQuestion extends Question{
@@ -48,8 +50,19 @@ public class ImageQuestion extends Question{
 		return MyDB.addImageQuestion(this);
 	}
 	
+	
 	@Override
 	public String getJspName() {
 		return IMAGE_QUESTION_JSP;
+	}
+	
+	@Override
+	public int checkAnswer(RecievedAnswer answer) {
+		MultipleAnswer ma = (MultipleAnswer)correctAnswer;
+		List<String> answers = ma.getAnswer();
+		String recieved = (String) answer.getRecievedAnswer();
+		if(answers.contains(recieved))
+			return score;
+		return 0;
 	}
 }

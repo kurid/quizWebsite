@@ -77,7 +77,6 @@ public class AddImageQuestion extends HttpServlet {
 			session.setAttribute("currentNumberOfQuestion", currentNumberOfQuestion);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
-		//System.out.println(jsp);
 		dispatcher.forward(request, response);
 
 	}

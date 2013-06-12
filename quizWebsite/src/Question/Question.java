@@ -40,5 +40,10 @@ public class Question implements QuestionInterface, QuestionFinals {
 	public String getJspName() {
 		return null;
 	}
+	
+	@Override
+	public int checkAnswer(RecievedAnswer answer){
+		return 0;
+	}
 
 }

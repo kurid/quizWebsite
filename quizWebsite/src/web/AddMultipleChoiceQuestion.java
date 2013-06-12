@@ -73,7 +73,7 @@ public class AddMultipleChoiceQuestion extends HttpServlet {
 					dispatcher.forward(request, response);
 					return;
 				}else if (c == i) {
-					correctAnswer = new SingleAnswer(choice);
+					correctAnswer = new SingleAnswer(choice);					
 				}
 				if(!choice.equals(""))choices.add(choice);
 			}

@@ -1,5 +1,7 @@
 package Question;
 
+import java.util.List;
+
 import web.MyDB;
 
 public class QuestionResponse extends Question{
@@ -44,5 +46,15 @@ public class QuestionResponse extends Question{
 	@Override
 	public String getJspName() {
 		return QUESTION_RESPONSE_JSP;
+	}
+	
+	@Override
+	public int checkAnswer(RecievedAnswer answer) {
+		MultipleAnswer ma = (MultipleAnswer)correctAnswer;
+		List<String> answers = ma.getAnswer();
+		String recieved = (String) answer.getRecievedAnswer();
+		if(answers.contains(recieved))
+			return score;
+		return 0;
 	}
 }

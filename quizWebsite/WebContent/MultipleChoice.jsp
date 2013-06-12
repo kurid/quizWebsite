@@ -25,11 +25,11 @@
 		<h2 align="center"> Question <%=(index + 1) %>  </h2>
 		<p align="center"> <%=questionText %> </p>
 		<br>
-		<form action="TakeQuizServlet" method="POST">
+		<form action="CheckSingleFieldAnswer" method="POST">
 			<fieldset>
 			<%
 				for(String pAns: pAnswers){
-					out.println("<p align=\"center\"> <input type=\"radio\" name=\"check\"/>" + pAns +  "</p>");
+					out.println("<p align=\"center\"> <input type=\"radio\" name=\"field1\" value = \""+pAns+"\"/>" + pAns +  "</p>");
 				}
 			%>
 			</fieldset>

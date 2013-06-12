@@ -25,7 +25,7 @@
 		<img src=<%=Url %>>
 		<p> <%=questionText %> </p>
 		<br>
-		<form action="TakeQuizServlet" method="POST">
+		<form action="CheckSingleFieldAnswer" method="POST">
 			<input type="text" name="field1">
 			<input type="submit" name="but" value="submit">	
 		</form>
