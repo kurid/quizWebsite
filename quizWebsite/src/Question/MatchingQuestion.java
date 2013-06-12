@@ -57,7 +57,7 @@ public class MatchingQuestion extends Question {
 		int finalScore = 0;
 		for(int i = 0; i < recieved.size(); i++){
 			if(pairIsCorrect(correctAnswers, recieved.get(i))){
-				finalScore += score;
+				finalScore += 1;
 			}
 		}
 		
