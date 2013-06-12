@@ -416,7 +416,7 @@ public class MyDB {
 	
 	public static String getURL(int questionId){
 		ResultSet res = null;
-		String query ="SELECT url FROM imigeQuestion  WHERE questionID = " + questionId +" ;";
+		String query ="SELECT url FROM imageQuestion  WHERE questionID = " + questionId +" ;";
 		try {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
