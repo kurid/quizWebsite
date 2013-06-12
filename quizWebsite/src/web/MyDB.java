@@ -52,7 +52,7 @@ public class MyDB {
 	
 	public static ResultSet getDoneQuizzes(int accountID){
 		ResultSet res = null;
-		String query = "select * from takenquizes where accountID = "+ accountID +" order by quiz_date desc ;";
+		String query = "select * from doneQuizzes where accountID = " + accountID + " ;" ;
 		try {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {

@@ -1,3 +1,7 @@
+<%@page import="java.util.List"%>
+<%@page import="quiz.DoneQuize"%>
+<%@page import="quiz.QuizDB"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page import="web.Account"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -8,14 +12,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a> <% Integer text = (Integer)request.getAttribute("ID");
-		session.setAttribute("account", new Account(1));
-	%></a>
-	<h1> <%= text %> 
+<a> <%
+ 	//Integer text = (Integer)request.getAttribute("ID");
+ 		//session.setAttribute("account", new Account(1));
+ %></a>
+	<h1> <%=text%> 
 		dasatesti gverdi
 		<a href="QuizzesHistory" > notifications </a>
-			
-		<a href="Notifications" target="Notifications.jsp"> notifications </a> 
+		
+		<%
+					List<DoneQuize> quizzesDone = (List<DoneQuize>) request.getAttribute("quizzesDone");
+						
+					for(DoneQuize doneQuiz : quizzesDone){
+						out.println("<p> "+ doneQuiz.getAccountID() +"  " + doneQuiz.getQuiz().getName() 
+								+ "  " + doneQuiz.getTime() +"  " + doneQuiz.getQuizTakeDate() +" " + "</p>");
+					}
+				%> 
 		
 	</h1>
 </body>
