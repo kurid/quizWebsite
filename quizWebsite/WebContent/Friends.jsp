@@ -15,9 +15,10 @@
 	<h2 align="center"> Friends </h2>
 	<%
 		List<Account> friendList = (List<Account>)request.getAttribute("friendList");
-		for(int i=0;i<friendList.size();i++){
-			String friend = friendList.get(i).getName();
-			out.println(friend);
+		for (Account acc : friendList) {
+			out.println("<li><a href=\"AccountServlet?ID=" + acc.getId()
+				+ "\" target =\"AccountWindow\"> " + acc.getNickname()
+				+ "</a></li>");
 		}
 	%>
 

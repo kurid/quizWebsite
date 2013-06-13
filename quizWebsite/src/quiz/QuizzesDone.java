@@ -43,6 +43,9 @@ public class QuizzesDone extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Account user = (Account) request.getSession(true).getAttribute("account");
+		if((Boolean)request.getSession(true).getAttribute("isLookingUp")){
+			user = (Account) request.getSession(true).getAttribute("userAccount");
+		}
 		ResultSet res = MyDB.getDoneQuizzes(user.getId());
 		List<DoneQuize> quizzesDone = new ArrayList<DoneQuize>();
 		try {

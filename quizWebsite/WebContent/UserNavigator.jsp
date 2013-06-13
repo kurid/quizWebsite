@@ -11,7 +11,7 @@
 		<tr>
 			<td width="20%"> <a href="UserProfile.jsp" target ="ActualInfo"> Profile </a> </td>
 			<td width="20%"> <a href="Friends.jsp" target ="ActualInfo"> Friends </a> </td>
-			<td width="20%"> <a href="QuizzesDone.jsp" target ="ActualInfo"> Quizzes Done </a> </td>
+			<td width="20%"> <a href="QuizzesDone" target ="ActualInfo"> Quizzes Done </a> </td>
 			<td width="20%"> <a href="QuizzesCreated.jsp" target ="ActualInfo"> Quizzes Created </a> </td>
 		</tr>
 	</table>

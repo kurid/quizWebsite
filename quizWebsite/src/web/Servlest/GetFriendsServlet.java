@@ -34,7 +34,7 @@ public class GetFriendsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doPost(request, response);
 	}
 
 	/**
@@ -42,6 +42,7 @@ public class GetFriendsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession Session = request.getSession(true);
+		
 		Account account = (Account) Session.getAttribute("account");
 		List<Integer> friendListIDs = MyDB.getFriends(account.getId());
 		List<Account> friendList = new ArrayList<Account>();
