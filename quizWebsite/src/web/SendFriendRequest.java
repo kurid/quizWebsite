@@ -37,9 +37,9 @@ public class SendFriendRequest extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession Session = request.getSession(true);
-		Account account = (Account) Session.getAttribute("account");
+		Account myAccount = (Account) Session.getAttribute("account");
 		Account userAccount = (Account) Session.getAttribute("userAccount");
-		MyDB.sendFriendRequest(userAccount.getId(), account.getId());
+		MyDB.sendFriendRequest(userAccount.getId(), myAccount.getId());
 		Session.setAttribute("friendRequestExists", true);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("UserProfile.jsp");
 		dispatcher.forward(request, response);

@@ -51,6 +51,8 @@ public class AccountServlet extends HttpServlet {
 			boolean isFriend = checkFriend(friendList,userAccount.getId());
 			Session.setAttribute("isFriend", isFriend);
 			if (!isFriend){
+				boolean counterFriendRequestExists = MyDB.friendRequestExists(userAccount.getId(),myAccount.getId());
+				Session.setAttribute("counterFriendRequestExists", counterFriendRequestExists);
 				boolean friendRequestExists = MyDB.friendRequestExists(myAccount.getId(),userAccount.getId());
 				Session.setAttribute("friendRequestExists",friendRequestExists);
 			}

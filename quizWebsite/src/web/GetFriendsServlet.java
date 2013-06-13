@@ -2,6 +2,7 @@ package web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,8 +40,8 @@ public class GetFriendsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession Session = request.getSession(true);
 		Account account = (Account) Session.getAttribute("account");
-		ArrayList<Integer> friendListIDs = (ArrayList<Integer>) MyDB.getFriends(account.getId());
-		ArrayList<Account> friendList = new ArrayList<Account>();
+		List<Integer> friendListIDs = MyDB.getFriends(account.getId());
+		List<Account> friendList = new ArrayList<Account>();
 		for (int i=0; i<friendListIDs.size(); i++){
 			Account tmp = new Account(friendListIDs.get(i));
 			friendList.add(tmp);

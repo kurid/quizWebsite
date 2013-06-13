@@ -37,9 +37,9 @@ public class DeleteFriend extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession Session = request.getSession(true);
-		Account account = (Account) Session.getAttribute("account");
+		Account myAccount = (Account) Session.getAttribute("account");
 		Account userAccount = (Account) Session.getAttribute("userAccount");
-		MyDB.deleteFriendship(account.getId(),userAccount.getId());
+		MyDB.deleteFriendship(myAccount.getId(),userAccount.getId());
 		Session.setAttribute("isFriend", false);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
 		dispatcher.forward(request, response);
