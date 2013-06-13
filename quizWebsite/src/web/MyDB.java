@@ -425,7 +425,7 @@ public class MyDB {
 	
 	public static void sendFriendRequest(int idTo, int idFrom) {
 		String date = getCurrentTime();
-		String query = "INSERT INTO  friendrequests VALUES (" + idTo + ", " + idFrom + ", " + date + ");";
+		String query = "INSERT INTO  friendrequests VALUES (" + idTo + ", " + idFrom + ", \"" + date + "\");";
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
