@@ -45,19 +45,24 @@ public class FriendRequestResponse extends HttpServlet {
 		if (answer.equals("Accept"))
 			accept=true;
 		Account myAccount = (Account) Session.getAttribute("account");
-		Account userAccount = (Account) Session.getAttribute("userAccount");
-		if (accept)
-			MyDB.addFriend(myAccount.getId(), userAccount.getId());
-		MyDB.deleteFriendRequest(userAccount.getId(),myAccount.getId());
 		Boolean isLookingUp = (Boolean) Session.getAttribute("isLookingUp");
-		String jsp = "showFriendRequests.jsp";
+		String destination = null;
 		if (isLookingUp != null && isLookingUp){
-			jsp = "UserProfile.jsp";
-			boolean counterFriendRequestExists = (Boolean) Session.getAttribute("counterFriendRequestExists");
+			Account userAccount = (Account) Session.getAttribute("userAccount");
+			if (accept)
+				MyDB.addFriend(myAccount.getId(), userAccount.getId());
+			MyDB.deleteFriendRequest(userAccount.getId(),myAccount.getId());
+			destination = "UserProfile.jsp";
 			Session.removeAttribute("counterFriendRequestExists");
 			Session.setAttribute("isFriend", accept);
+		} else {
+			destination = "FriendRequestServlet";
+			int senderID = Integer.parseInt(request.getParameter("senderID"));
+			if (accept)
+				MyDB.addFriend(myAccount.getId(), senderID);
+			MyDB.deleteFriendRequest(senderID,myAccount.getId());		
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(destination);
 		dispatcher.forward(request, response);
 	}
 }
