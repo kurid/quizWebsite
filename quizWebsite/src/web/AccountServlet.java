@@ -51,7 +51,7 @@ public class AccountServlet extends HttpServlet {
 			boolean isFriend = checkFriend(friendList,userAccount.getId());
 			Session.setAttribute("isFriend", isFriend);
 		}
-		Session.setAttribute("isLookingUp", isMyAccount);
+		Session.setAttribute("isLookingUp", !isMyAccount);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
 		dispatcher.forward(request, response);
 	}
