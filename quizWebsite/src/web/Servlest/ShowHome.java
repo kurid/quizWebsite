@@ -37,7 +37,7 @@ public class ShowHome extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession Session = request.getSession(true);
-		Session.removeAttribute("isLookingUp");
+		Session.setAttribute("isLookingUp", false);
 		Session.removeAttribute("isFriend");
 		Session.removeAttribute("userAccount");
 		Session.removeAttribute("friendRequestExists");
