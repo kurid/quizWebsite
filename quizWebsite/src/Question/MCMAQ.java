@@ -1,5 +1,6 @@
 package Question;
 
+import java.util.List;
 import java.util.Set;
 
 import web.MyDB;
@@ -55,6 +56,20 @@ public class MCMAQ extends Question implements ChooseQuestion{
 	@Override
 	public String getJspName() {
 		return MCMA_JSP;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public int checkAnswer(RecievedAnswer answer){
+		MultipleAnswer ma = (MultipleAnswer) correctAnswer;
+		List<String> correctAnswers = ma.getAnswer();
+		List<String> recieved = (List<String>) answer.getRecievedAnswer();
+		int finalScore = 0;
+		for(int i = 0; i < recieved.size(); i++){
+			if(correctAnswers.contains(recieved.get(i)))
+				finalScore += score;
+		}
+		return finalScore;
 	}
 
 }
