@@ -9,7 +9,16 @@
 </head>
 <body>
 	<%
+		Account ac = new Account(2);
+		session.setAttribute("userAccount", ac);
+		session.setAttribute("isFriend", false);
 		Account userAcc = (Account)session.getAttribute("userAccount");
+		Boolean isFriend = (Boolean)session.getAttribute("isFriend");
+		String statement = new String();
+		if(!isFriend){
+			statement = "<tr><td> <form action=\"AddFriendServlet\" method=\"post\">" 
+				+"<input type=\"submit\" value=\"AddFriend\"/>" + "</form> </td></tr>";
+		}
 	%>
 	<h2 align="center"> <%=userAcc.getNickname() %> </h2>
 		<table align="center" width="40%">
@@ -25,13 +34,7 @@
 				<td> User Surname: </td>
 				<td><%=userAcc.getSurname() %></td>
 			</tr>
-			<tr>
-				<td> 
-					<form action="AddFriendServlet" method="post">
-						<input type="submit" value="Add Friend"/> 
-					</form> 
-				</td>
-			</tr>
+			<%=statement %>
 		</table>
 </body>
 </html>
