@@ -1,4 +1,4 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
 
@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import web.Account;
+import web.MyDB;
+
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class Notifications
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/Notifications")
+public class Notifications extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public Notifications() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,8 +38,10 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession(true).setAttribute("isLoggedIn", false);
-		request.getSession(true).removeAttribute("account");
-		response.sendRedirect("HomePage");
+		Account user = (Account) request.getSession(true).getAttribute("account");
+		request.setAttribute("notifications", MyDB.getNotifications(user.getId()));
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Notifications.jsp");
+		dispatcher.forward(request, response);
 	}
+
 }

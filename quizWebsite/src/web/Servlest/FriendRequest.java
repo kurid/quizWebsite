@@ -1,6 +1,8 @@
-package web;
+package web.Servlest;
 
 import java.util.Date;
+
+import web.Notification;
 
 public class FriendRequest extends Notification{
 	

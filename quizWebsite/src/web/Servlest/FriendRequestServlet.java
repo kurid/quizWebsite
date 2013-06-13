@@ -1,6 +1,8 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,17 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import web.Account;
+import web.MyDB;
+
 /**
- * Servlet implementation class Notifications
+ * Servlet implementation class FriendRequestServlet
  */
-@WebServlet("/Notifications")
-public class Notifications extends HttpServlet {
+@WebServlet("/FriendRequestServlet")
+public class FriendRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Notifications() {
+    public FriendRequestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,9 +40,15 @@ public class Notifications extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Account user = (Account) request.getSession(true).getAttribute("account");
-		request.setAttribute("notifications", MyDB.getNotifications(user.getId()));
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Notifications.jsp");
+		Account user = (Account)request.getSession(true).getAttribute("account");
+		List<FriendRequest> requests = MyDB.getRequest(user.getId());
+		List<String> names = new ArrayList<String>();
+		for(int i = 0; i < requests.size(); i++){
+			names.add(MyDB.getNickName(requests.get(i).sender()));
+		}
+		request.setAttribute("names", names);
+		request.setAttribute("friendRequests", requests);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowFriendRequests.jsp");
 		dispatcher.forward(request, response);
 	}
 
