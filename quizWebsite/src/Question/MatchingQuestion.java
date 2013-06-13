@@ -1,9 +1,12 @@
 package Question;
 
 import java.util.List;
-
-import sun.reflect.generics.visitor.Reifier;
 import web.MyDB;
+
+/**
+ * In MatchinQuestion you have two row of answers and
+ * one should match them correspondingly.
+ */
 
 public class MatchingQuestion extends Question {
 	

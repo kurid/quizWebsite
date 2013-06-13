@@ -1,16 +1,9 @@
 package quiz;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-
-import web.MyDB;
 
 /**
  * Application Lifecycle Listener implementation class ContexttListener

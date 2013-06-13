@@ -5,6 +5,12 @@ import java.util.List;
 
 import web.MyDB;
 
+/**
+ * MultiAnswerQuestion is very similar to QuestionResponse.
+ * only difference is that here may be several empty fields to fill, so
+ * several correct answers are requested.
+ */
+
 public class MultiAnswerQuestion extends Question{
 
 	public MultiAnswerQuestion(int index, String questionText, CorrectAnswer correctAnswer, int score){

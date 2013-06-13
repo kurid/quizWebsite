@@ -1,9 +1,6 @@
 package quiz;
 
 import java.sql.Date;
-
-import javax.xml.crypto.Data;
-
 import web.Account;
 
 public class DoneQuize {

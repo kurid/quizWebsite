@@ -1,9 +1,12 @@
 package Question;
 
-import java.util.List;
 import java.util.Set;
-
 import web.MyDB;
+
+/**
+ * Well known question type - Multiple Choice!
+ * you've got several possible answers and one of them is correct.
+ */
 
 public class MultipleChoiceQuestion extends Question 
 	implements ChooseQuestion{
