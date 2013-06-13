@@ -10,7 +10,12 @@ import javax.servlet.ServletContext;
 import web.MyDB;
 
 public class QuizHelper {
-	
+	/**
+	 * 
+	 * @param context
+	 * aganerirebs popularul quizebs imis mixedvit ramden adamians aqvs es quiz gavlili
+	 * 
+	 */
 	public static void updatePopularQuizes(ServletContext context){
 		ResultSet resultset = MyDB.popularQuizzes();
 		List<QuizDB> quizzes = new ArrayList<QuizDB>();
@@ -28,7 +33,12 @@ public class QuizHelper {
 		}
 		context.setAttribute("popularQuizzes", quizzes);
 	}
-	
+	/**
+	 * 
+	 * @param context
+	 * 
+	 * agenerirebs bolos sheqminil, uaxles quizzes
+	 */
 	public static void updateNewQuizes(ServletContext context){
 		ResultSet resultset = MyDB.newQuizzes();
 		List<QuizDB> quizzes = new ArrayList<QuizDB>();

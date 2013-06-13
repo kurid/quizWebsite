@@ -16,10 +16,26 @@ public class QuizDB implements QuizInterface{
 	private int quizID;
 	private int totalScore;
 	
+	
+	/**
+	 * @param quizName
+	 * @param description
+	 * @param authorID
+	 * constructor2
+	 */
 	public QuizDB(String quizName, String description,int authorID) {
 		this(quizName,description,authorID,0);
 	}
 	
+	
+	/**
+	 * 
+	 * @param quizName
+	 * @param description
+	 * @param authorID
+	 * @param quizID
+	 *  constructor1
+	 */
 	public QuizDB(String quizName, String description,int authorID, int quizID) {
 		this.quizID = quizID;
 		this.quizName = quizName;
@@ -30,22 +46,38 @@ public class QuizDB implements QuizInterface{
 	}
 	
 	
+	
+	/**
+	 * returns quiz name
+	 */
 	@Override
 	public String getName() {
 		return quizName;
 	}
 
+	
+	/**
+	 * returns quiz description
+	 */
 	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	
+	/**
+	 * returns quiz author
+	 */
 	@Override
 	public int getAuthor() {
-		return authorID; 
-		
+		return authorID;	
 	}
 	
+	
+	
+	/**
+	 * generates questions
+	 */
 	@Override
 	public List<Question> generateQuestions(){
 		ArrayList<Integer> questionIDs = (ArrayList<Integer>) MyDB.getQuestions(getID());
@@ -61,6 +93,10 @@ public class QuizDB implements QuizInterface{
 		return questions;
 	}
 
+	
+	/**
+	 * return quiz ID
+	 */
 	@Override
 	public int getID() {
 		if(quizID == 0){

@@ -3,7 +3,11 @@ package quiz;
 import java.util.List;
 
 import Question.Question;
-
+/**
+ * 
+ * @author User 
+ * Quiz interface
+ */
 public interface QuizInterface {
 
 	public int getID();
