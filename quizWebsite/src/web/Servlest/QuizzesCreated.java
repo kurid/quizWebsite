@@ -21,14 +21,14 @@ import web.MyDB;
 /**
  * Servlet implementation class QuizesCreated
  */
-@WebServlet("/QuizesCreated")
-public class QuizesCreated extends HttpServlet {
+@WebServlet("/QuizzesCreated")
+public class QuizzesCreated extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuizesCreated() {
+    public QuizzesCreated() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -61,7 +61,7 @@ public class QuizesCreated extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("quizList", quizList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizesCreated.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizzesCreated.jsp");
 		dispatcher.forward(request, response);
 	}
 
