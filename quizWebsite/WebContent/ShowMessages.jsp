@@ -11,10 +11,13 @@
 </head>
 <body>
 	<table>
-		<% 
+		<%
+		List<String> names = (List<String>)request.getAttribute("names");
+		int i = 0;
 		for(Message message : messages ){
-			Account sender = message.sender();
-			String name = sender.getNickname();
+			int sender = message.sender();
+			String name = names.get(i);
+			i++;
 			out.println("<tr><td> From: "+ name + "</br> message: "+ message.getText() + "<td><tr> ");
 		}
 		%>
