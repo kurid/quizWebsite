@@ -22,7 +22,7 @@
 	<% if(searchedAccounts != null){
 			for (Account acc : searchedAccounts) {
 				out.println("<li><a href=\"AccountServlet?ID=" + acc.getId()
-					+ "\" target =\"AccountWindow\"> " + acc.getName()
+					+ "\" target =\"AccountWindow\"> " + acc.getNickname()
 					+ "</a></li>");
 			}
 		}
