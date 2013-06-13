@@ -7,12 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table>
+	<table align="center">
 		<tr>
-			<td> <a href="UserProfile.jsp" target ="ActualInfo"> Profile </a> </td>
-			<td> <a href="Friends.jsp" target ="ActualInfo"> Friends </a> </td>
-			<td> <a href="QuizzesDone.jsp" target ="ActualInfo"> Quizzes Done </a> </td>
-			<td> <a href="QuizzesCreated.jsp" target ="ActualInfo"> Quizzes Created </a> </td>
+			<td width="20%"> <a href="UserProfile.jsp" target ="ActualInfo"> Profile </a> </td>
+			<td width="20%"> <a href="Friends.jsp" target ="ActualInfo"> Friends </a> </td>
+			<td width="20%"> <a href="QuizzesDone.jsp" target ="ActualInfo"> Quizzes Done </a> </td>
+			<td width="20%"> <a href="QuizzesCreated.jsp" target ="ActualInfo"> Quizzes Created </a> </td>
 		</tr>
 	</table>
 </body>

@@ -16,7 +16,7 @@
 	%>
 	<table>
 		<tr>
-			<td><a href="AccountWindow.jsp" target="AccountWindow"> <%=accountName %> </a></td>
+			<td><a href="ShowHome" target="AccountWindow"> <%=accountName %> </a></td>
 		</tr>
 		<tr>
 			<td><a href="StartCreatingQuiz" target="AccountWindow">

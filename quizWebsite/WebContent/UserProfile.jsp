@@ -9,17 +9,24 @@
 </head>
 <body>
 	<%
-		Account ac = new Account(2);
-		session.setAttribute("userAccount", ac);
-		session.setAttribute("isFriend", false);
 		Account userAcc = (Account)session.getAttribute("userAccount");
 		Boolean isFriend = (Boolean)session.getAttribute("isFriend");
 		String statement = new String();
 		if(!isFriend){
-			statement = "<tr><td> <form action=\"AddFriendServlet\" method=\"post\">" 
+			if((Boolean)session.getAttribute("counterFriendRequestExists")){
+				statement = "<tr><td> <form action=\"FriendRequestResponse\" method=\"post\">" 
+						+"<input type=\"submit\" value=\"Accept\"/>" + "</form> </td></tr>"
+					+ "<tr><td> <form action=\"FriendRequestResponse\" method=\"post\">" 
+						+"<input type=\"submit\" value=\"Reject\"/>" + "</form> </td></tr>";
+			}else if((Boolean)session.getAttribute("friendRequestExists")){
+				statement = "<tr><td> Friend request already sent, waiting for response... </td></tr>";
+			}else statement = "<tr><td> <form action=\"SendFriendRequest\" method=\"post\">" 
 				+"<input type=\"submit\" value=\"AddFriend\"/>" + "</form> </td></tr>";
+		}else{
+			statement = "<tr><td> <form action=\"DeleteFriend\" method=\"post\">" 
+					+"<input type=\"submit\" value=\"Delete Friend\"/>" + "</form> </td></tr>";
 		}
-	%>
+	%>	
 	<h2 align="center"> <%=userAcc.getNickname() %> </h2>
 		<table align="center" width="40%">
 			<tr>
