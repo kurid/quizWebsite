@@ -41,16 +41,23 @@ public class FriendRequestResponse extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession Session = request.getSession(true);
 		boolean accept = false;
-		String answer = request.getParameter("answer");
-		if (answer.equals("accept"))
+		String answer = request.getParameter("act");
+		if (answer.equals("Accept"))
 			accept=true;
 		Account myAccount = (Account) Session.getAttribute("account");
 		Account userAccount = (Account) Session.getAttribute("userAccount");
 		if (accept)
 			MyDB.addFriend(myAccount.getId(), userAccount.getId());
 		MyDB.deleteFriendRequest(userAccount.getId(),myAccount.getId());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
+		Boolean isLookingUp = (Boolean) Session.getAttribute("isLookingUp");
+		String jsp = "showFriendRequests.jsp";
+		if (isLookingUp != null && isLookingUp){
+			jsp = "UserProfile.jsp";
+			boolean counterFriendRequestExists = (Boolean) Session.getAttribute("counterFriendRequestExists");
+			Session.removeAttribute("counterFriendRequestExists");
+			Session.setAttribute("isFriend", accept);
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
 		dispatcher.forward(request, response);
 	}
-
 }
