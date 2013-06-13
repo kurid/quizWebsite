@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ShowHome
+ * Servlet implementation class SendFriendRequest
  */
-@WebServlet("/ShowHome")
-public class ShowHome extends HttpServlet {
+@WebServlet("/SendFriendRequest")
+public class SendFriendRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowHome() {
+    public SendFriendRequest() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,12 +37,12 @@ public class ShowHome extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession Session = request.getSession(true);
-		Session.removeAttribute("isLookingUp");
-		Session.removeAttribute("isFriend");
-		Session.removeAttribute("userAccount");
-		Session.removeAttribute("friendRequestExists");
+		Account account = (Account) Session.getAttribute("account");
+		Account userAccount = (Account) Session.getAttribute("userAccount");
+		MyDB.sendFriendRequest(userAccount.getId(), account.getId());
+		Session.setAttribute("friendRequestExists", true);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
-		dispatcher.forward(request, response);		
+		dispatcher.forward(request, response);
 	}
 
 }

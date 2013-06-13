@@ -50,6 +50,10 @@ public class AccountServlet extends HttpServlet {
 			ArrayList<Integer> friendList = (ArrayList<Integer>) MyDB.getFriends(user.getId());
 			boolean isFriend = checkFriend(friendList,userAccount.getId());
 			Session.setAttribute("isFriend", isFriend);
+			if (!isFriend){
+				boolean friendRequestExists = MyDB.friendRequestExists(user.getId(),userAccount.getId());
+				Session.setAttribute("friendRequestExists",friendRequestExists);
+			}
 		}
 		Session.setAttribute("isLookingUp", !isMyAccount);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
