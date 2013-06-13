@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -38,6 +39,11 @@ public class ChallengeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Account user = (Account)request.getSession(true).getAttribute("account");
 		List<Challenge> challenges = MyDB.getChallenges(user.getId());
+		List<String> names = new ArrayList<String>();
+		for(int i = 0; i < challenges.size(); i++){
+			names.add(MyDB.getNickName(challenges.get(i).sender()));
+		}
+		request.setAttribute("names", names);
 		request.setAttribute("challenges", challenges);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowChallenges.jsp");
 		dispatcher.forward(request, response);

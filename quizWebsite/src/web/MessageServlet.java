@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -39,6 +40,11 @@ public class MessageServlet extends HttpServlet {
 		Account user = (Account)request.getSession(true).getAttribute("account");
 		List<Message> messages = MyDB.getMessages(user.getId());
 		request.setAttribute("messages", messages);
+		List<String> names = new ArrayList<String>();
+		for(int i = 0; i < messages.size(); i++){
+			names.add(MyDB.getNickName(messages.get(i).sender()));
+		}
+		request.setAttribute("names", names);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowMessages.jsp");
 		dispatcher.forward(request, response);
 	}

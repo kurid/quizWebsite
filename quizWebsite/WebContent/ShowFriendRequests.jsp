@@ -14,12 +14,16 @@
 <body>
 
 	<table>
-		<% for(FriendRequest friendRequest : friendRequests ){
-		Account sender = friendRequest.sender();
-		String name = sender.getNickname();
-		out.println("<tr><td> Friend Request From: "+ name );
-		out.println("<input type=\"submit\"  name=\"YES\" value=\"YES\"  /><td>");
-		out.println("<td> <input type=\"submit\" name=\"NO\" value=\"NO\" /> </td> </tr>");
+		<% 
+		List<String> names = (List<String>)request.getAttribute("names");
+		int i = 0;
+		for(FriendRequest friendRequest : friendRequests ){
+			int sender = friendRequest.sender();
+			String name = names.get(i);
+			i++;
+			out.println("<tr><td> Friend Request From: "+ name );
+			out.println("<input type=\"submit\"  name=\"YES\" value=\"YES\"  /><td>");
+			out.println("<td> <input type=\"submit\" name=\"NO\" value=\"NO\" /> </td> </tr>");
 		}%>
 	</table>
 	
