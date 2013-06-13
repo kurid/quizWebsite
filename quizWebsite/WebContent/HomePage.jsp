@@ -6,7 +6,7 @@
 
 <style type="text/css">a {text-decoration: none}</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Quizz Website</title>
+<title>QuizWebsite</title>
 
 </head>
 	<frameset rows="5%,20%,*"  frameborder="no" border="0" framespacing="0">

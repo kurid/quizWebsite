@@ -1,6 +1,6 @@
+<%@page import="web.FriendRequest"%>
 <%@page import="web.Account"%>
 <%@page import="web.MyDB"%>
-<%@page import="web.FriendRequest"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -9,7 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Friend Request</title>
-<% List<FriendRequest> friendRequests = (List<FriendRequest> ) request.getAttribute("friendRequests"); %>
+<% 
+	List<FriendRequest> friendRequests = (List<FriendRequest>) request.getAttribute("friendRequests");
+%>
 </head>
 <body>
 
