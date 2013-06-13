@@ -1,4 +1,4 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CreateQuiz
+ * Servlet implementation class ChooseQuestionToAdd
  */
-@WebServlet("/StartCreatingQuiz")
-public class StartCreatingQuiz extends HttpServlet {
+@WebServlet("/ChooseQuestionToAdd")
+public class ChooseQuestionToAdd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StartCreatingQuiz() {
+    public ChooseQuestionToAdd() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,21 +28,17 @@ public class StartCreatingQuiz extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		boolean isLoggedIn = (Boolean)request.getSession(true).getAttribute("isLoggedIn");
-		String jsp="CreateQuiz.jsp";
-		if(isLoggedIn == false){
-			request.getSession().setAttribute("enterText", "To create quez you have to log in.");
-			jsp="Login.jsp";
-		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
-		dispatcher.forward(request, response);
+		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String question = request.getParameter("question");
+		request.getSession(true).setAttribute("errorText", "");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(question+".jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

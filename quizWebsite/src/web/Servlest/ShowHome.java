@@ -1,4 +1,4 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
 
@@ -8,18 +8,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ChooseQuestionToAdd
+ * Servlet implementation class ShowHome
  */
-@WebServlet("/ChooseQuestionToAdd")
-public class ChooseQuestionToAdd extends HttpServlet {
+@WebServlet("/ShowHome")
+public class ShowHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChooseQuestionToAdd() {
+    public ShowHome() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,17 +29,20 @@ public class ChooseQuestionToAdd extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doPost(request,response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String question = request.getParameter("question");
-		request.getSession(true).setAttribute("errorText", "");
-		RequestDispatcher dispatcher = request.getRequestDispatcher(question+".jsp");
-		dispatcher.forward(request, response);
+		HttpSession Session = request.getSession(true);
+		Session.removeAttribute("isLookingUp");
+		Session.removeAttribute("isFriend");
+		Session.removeAttribute("userAccount");
+		Session.removeAttribute("friendRequestExists");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
+		dispatcher.forward(request, response);		
 	}
 
 }

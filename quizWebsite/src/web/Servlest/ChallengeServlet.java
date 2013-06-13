@@ -1,4 +1,4 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,17 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import web.Account;
+import web.Challenge;
+import web.MyDB;
+
 /**
- * Servlet implementation class MessageServlet
+ * Servlet implementation class ChallengeServlet
  */
-@WebServlet("/MessageServlet")
-public class MessageServlet extends HttpServlet {
+@WebServlet("/ChallengeServlet")
+public class ChallengeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MessageServlet() {
+    public ChallengeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,14 +42,14 @@ public class MessageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Account user = (Account)request.getSession(true).getAttribute("account");
-		List<Message> messages = MyDB.getMessages(user.getId());
-		request.setAttribute("messages", messages);
+		List<Challenge> challenges = MyDB.getChallenges(user.getId());
 		List<String> names = new ArrayList<String>();
-		for(int i = 0; i < messages.size(); i++){
-			names.add(MyDB.getNickName(messages.get(i).sender()));
+		for(int i = 0; i < challenges.size(); i++){
+			names.add(MyDB.getNickName(challenges.get(i).sender()));
 		}
 		request.setAttribute("names", names);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowMessages.jsp");
+		request.setAttribute("challenges", challenges);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowChallenges.jsp");
 		dispatcher.forward(request, response);
 	}
 

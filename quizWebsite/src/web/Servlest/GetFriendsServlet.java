@@ -1,4 +1,4 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,19 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Question.Question;
+import web.Account;
+import web.MyDB;
 
 /**
- * Servlet implementation class CreateQuiz
+ * Servlet implementation class GetFriendsServlet
  */
-@WebServlet("/CreateQuiz")
-public class CreateQuiz extends HttpServlet {
+@WebServlet("/GetFriendsServlet")
+public class GetFriendsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateQuiz() {
+    public GetFriendsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,17 +41,16 @@ public class CreateQuiz extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String quizName = request.getParameter("quizName");
-		String description = request.getParameter("description");
-		int numberOfQuestions = Integer.parseInt(request.getParameter("numberOfQuestions"));
-		HttpSession session = request.getSession(true);
-		List<Question> questions= new ArrayList<Question>();
-		session.setAttribute("quizName",quizName);
-		session.setAttribute("quizDescription",description);
-		session.setAttribute("numberOfQuestions",numberOfQuestions);		
-		session.setAttribute("questions",questions);
-		session.setAttribute("currentNumberOfQuestion",1);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ChooseQuestionToAdd.jsp");
+		HttpSession Session = request.getSession(true);
+		Account account = (Account) Session.getAttribute("account");
+		List<Integer> friendListIDs = MyDB.getFriends(account.getId());
+		List<Account> friendList = new ArrayList<Account>();
+		for (int i=0; i<friendListIDs.size(); i++){
+			Account tmp = new Account(friendListIDs.get(i));
+			friendList.add(tmp);
+		}
+		request.setAttribute("friendList", friendList);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Friends.jsp");
 		dispatcher.forward(request, response);
 	}
 

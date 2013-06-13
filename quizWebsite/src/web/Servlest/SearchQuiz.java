@@ -1,6 +1,8 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,17 +13,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import quiz.QuizDB;
+import web.MyDB;
+
 /**
- * Servlet implementation class SearchAccount
+ * Servlet implementation class SearchQuiz
  */
-@WebServlet("/SearchAccount")
-public class SearchAccount extends HttpServlet {
+@WebServlet("/SearchQuiz")
+public class SearchQuiz extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchAccount() {
+    public SearchQuiz() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,15 +42,21 @@ public class SearchAccount extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Integer> ID = MyDB.searchUser((String)request.getParameter("accountName"));
-		List<Account> searchedAccounts = new ArrayList<Account>();
-		for(Integer id : ID){
-			searchedAccounts.add(new Account(id));
+		ResultSet resultset = MyDB.searchQuiz((String)request.getParameter("quizzName"));
+		List<QuizDB> searchesQuizzes = new ArrayList<QuizDB>();
+		try {
+			while(resultset.next()){
+				String quizName = resultset.getString("name");
+				String description = resultset.getString("description");
+				int authorID = resultset.getInt("authorID");
+				searchesQuizzes.add(new QuizDB(quizName, description, authorID));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		request.setAttribute("searchedAccount", searchedAccounts);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Accounts.jsp");
+		
+		request.setAttribute("searchedQuizzes", searchesQuizzes);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Quizzes.jsp");
 		dispatcher.forward(request, response);
 	}
-	
-
 }

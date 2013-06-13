@@ -1,4 +1,4 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
 
@@ -10,17 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import web.Account;
+import web.MyDB;
+
 /**
- * Servlet implementation class DeleteFriend
+ * Servlet implementation class SendFriendRequest
  */
-@WebServlet("/DeleteFriend")
-public class DeleteFriend extends HttpServlet {
+@WebServlet("/SendFriendRequest")
+public class SendFriendRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteFriend() {
+    public SendFriendRequest() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,9 +42,9 @@ public class DeleteFriend extends HttpServlet {
 		HttpSession Session = request.getSession(true);
 		Account myAccount = (Account) Session.getAttribute("account");
 		Account userAccount = (Account) Session.getAttribute("userAccount");
-		MyDB.deleteFriendship(myAccount.getId(),userAccount.getId());
-		Session.setAttribute("isFriend", false);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
+		MyDB.sendFriendRequest(userAccount.getId(), myAccount.getId());
+		Session.setAttribute("friendRequestExists", true);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UserProfile.jsp");
 		dispatcher.forward(request, response);
 	}
 

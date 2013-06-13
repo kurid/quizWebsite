@@ -1,6 +1,6 @@
 <%@page import="web.Account"%>
 <%@page import="web.MyDB"%>
-<%@page import="web.Servlest.FriendRequest"%>
+<%@page import="web.FriendRequest"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>

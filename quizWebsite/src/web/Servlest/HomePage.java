@@ -1,26 +1,27 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import quiz.QuizHelper;
 
 /**
- * Servlet implementation class ShowHome
+ * Servlet implementation class HomePage
  */
-@WebServlet("/ShowHome")
-public class ShowHome extends HttpServlet {
+@WebServlet("/HomePage")
+public class HomePage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowHome() {
+    public HomePage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +30,16 @@ public class ShowHome extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request,response);
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession Session = request.getSession(true);
-		Session.removeAttribute("isLookingUp");
-		Session.removeAttribute("isFriend");
-		Session.removeAttribute("userAccount");
-		Session.removeAttribute("friendRequestExists");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
-		dispatcher.forward(request, response);		
+		ServletContext context = request.getServletContext();
+		QuizHelper.updatePopularQuizes(context);
+		QuizHelper.updateNewQuizes(context);
+		response.sendRedirect("HomePage.jsp");
 	}
-
 }

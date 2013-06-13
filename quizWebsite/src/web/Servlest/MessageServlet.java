@@ -1,8 +1,6 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,19 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import quiz.QuizDB;
+import web.Account;
+import web.Message;
+import web.MyDB;
 
 /**
- * Servlet implementation class SearchQuiz
+ * Servlet implementation class MessageServlet
  */
-@WebServlet("/SearchQuiz")
-public class SearchQuiz extends HttpServlet {
+@WebServlet("/MessageServlet")
+public class MessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchQuiz() {
+    public MessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,28 +34,23 @@ public class SearchQuiz extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ResultSet resultset = MyDB.searchQuiz((String)request.getParameter("quizzName"));
-		List<QuizDB> searchesQuizzes = new ArrayList<QuizDB>();
-		try {
-			while(resultset.next()){
-				String quizName = resultset.getString("name");
-				String description = resultset.getString("description");
-				int authorID = resultset.getInt("authorID");
-				searchesQuizzes.add(new QuizDB(quizName, description, authorID));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		Account user = (Account)request.getSession(true).getAttribute("account");
+		List<Message> messages = MyDB.getMessages(user.getId());
+		request.setAttribute("messages", messages);
+		List<String> names = new ArrayList<String>();
+		for(int i = 0; i < messages.size(); i++){
+			names.add(MyDB.getNickName(messages.get(i).sender()));
 		}
-		
-		request.setAttribute("searchedQuizzes", searchesQuizzes);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Quizzes.jsp");
+		request.setAttribute("names", names);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowMessages.jsp");
 		dispatcher.forward(request, response);
 	}
+
 }

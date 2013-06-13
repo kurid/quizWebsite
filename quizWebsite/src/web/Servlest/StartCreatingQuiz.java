@@ -1,4 +1,4 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
 
@@ -9,22 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.Session;
-import org.apache.catalina.mbeans.UserMBean;
-
-import com.sun.xml.internal.ws.client.dispatch.MessageDispatch;
-
 /**
- * Servlet implementation class Enter
+ * Servlet implementation class CreateQuiz
  */
-@WebServlet(description = "when user enters", urlPatterns = { "/Enter" })
-public class Enter extends HttpServlet {
+@WebServlet("/StartCreatingQuiz")
+public class StartCreatingQuiz extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Enter() {
+    public StartCreatingQuiz() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,25 +28,20 @@ public class Enter extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		boolean isLoggedIn = (Boolean)request.getSession(true).getAttribute("isLoggedIn");
+		String jsp="CreateQuiz.jsp";
+		if(isLoggedIn == false){
+			request.getSession().setAttribute("enterText", "To create quez you have to log in.");
+			jsp="Login.jsp";
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
+		dispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nickname = request.getParameter("nickname");
-		String password = request.getParameter("password");
-		AccountManager manager  = new AccountManager();
-		String jsp = "Login.jsp";
-		if(manager.isCorrect(nickname, password)){
-			jsp = "HomePage";
-			request.getSession(true).setAttribute("account", new Account(MyDB.getId(nickname)));
-			request.getSession(true).setAttribute("isLoggedIn", true);	
-		}else{
-			request.getSession(true).setAttribute("enterText", "Username or password is incorrect.");
-		}
-		response.sendRedirect(jsp);
 		
 	}
 

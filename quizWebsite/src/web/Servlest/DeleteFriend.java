@@ -1,8 +1,6 @@
-package web;
+package web.Servlest;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,18 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import web.Account;
+import web.MyDB;
 
 /**
- * Servlet implementation class ChallengeServlet
+ * Servlet implementation class DeleteFriend
  */
-@WebServlet("/ChallengeServlet")
-public class ChallengeServlet extends HttpServlet {
+@WebServlet("/DeleteFriend")
+public class DeleteFriend extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChallengeServlet() {
+    public DeleteFriend() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,22 +32,19 @@ public class ChallengeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		doPost(request,response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Account user = (Account)request.getSession(true).getAttribute("account");
-		List<Challenge> challenges = MyDB.getChallenges(user.getId());
-		List<String> names = new ArrayList<String>();
-		for(int i = 0; i < challenges.size(); i++){
-			names.add(MyDB.getNickName(challenges.get(i).sender()));
-		}
-		request.setAttribute("names", names);
-		request.setAttribute("challenges", challenges);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowChallenges.jsp");
+		HttpSession Session = request.getSession(true);
+		Account myAccount = (Account) Session.getAttribute("account");
+		Account userAccount = (Account) Session.getAttribute("userAccount");
+		MyDB.deleteFriendship(myAccount.getId(),userAccount.getId());
+		Session.setAttribute("isFriend", false);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
 		dispatcher.forward(request, response);
 	}
 
