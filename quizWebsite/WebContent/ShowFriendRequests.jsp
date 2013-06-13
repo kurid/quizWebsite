@@ -10,9 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Friend Request</title>
 <% 
-	System.out.println((String)request.getAttribute("rame")); 
 	List<FriendRequest> friendRequests = (List<FriendRequest>) request.getAttribute("friendRequests");
-	System.out.println(friendRequests);
 %>
 </head>
 <body>
@@ -20,7 +18,6 @@
 	<table>
 		<% 
 		List<String> names = (List<String>)request.getAttribute("names");
-		System.out.println(names);
 		int i = 0;
 		for(FriendRequest friendRequest : friendRequests ){
 			int sender = friendRequest.sender();
