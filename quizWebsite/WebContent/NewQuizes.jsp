@@ -1,3 +1,4 @@
+<%@page import="web.Account"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="quiz.*"%>
@@ -19,9 +20,10 @@
 			List<QuizDB> newQuizzes = (List<QuizDB>) request
 					.getServletContext().getAttribute("newQuizzes");
 			for (QuizDB quiz : newQuizzes) {
+				Account autor = new Account(quiz.getAuthor());
 				out.println("<li><a href=\"StartTackingQuiz?ID=" + quiz.getID()
 						+ "\" target =\"AccountWindow\"> " + quiz.getName()
-						+ "</a></li>");
+						+ "</a> © "+autor.getName()+"</li>");
 			}
 		%>
 	</ol>

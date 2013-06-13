@@ -1,8 +1,6 @@
 package web.Servlest;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,16 +14,16 @@ import web.Account;
 import web.MyDB;
 
 /**
- * Servlet implementation class GetFriendsServlet
+ * Servlet implementation class SendMessage
  */
-@WebServlet("/GetFriendsServlet")
-public class GetFriendsServlet extends HttpServlet {
+@WebServlet("/SendMessage")
+public class SendMessage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetFriendsServlet() {
+    public SendMessage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,27 +32,19 @@ public class GetFriendsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession Session = request.getSession(true);
-		
-		Account account = (Account) Session.getAttribute("account");
-		if((Boolean)request.getSession(true).getAttribute("isLookingUp")){
-			account = (Account) Session.getAttribute("userAccount");
-		}
-		List<Integer> friendListIDs = MyDB.getFriends(account.getId());
-		List<Account> friendList = new ArrayList<Account>();
-		for (int i=0; i<friendListIDs.size(); i++){
-			Account tmp = new Account(friendListIDs.get(i));
-			friendList.add(tmp);
-		}
-		request.setAttribute("friendList", friendList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Friends.jsp");
+		HttpSession session = request.getSession();
+		Account sender = (Account)session.getAttribute("account");
+		Account receiver = (Account)session.getAttribute("account");
+		String messageText = request.getParameter("messageText");
+		MyDB.sendMessage(receiver.getId(), sender.getId(), messageText);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
 		dispatcher.forward(request, response);
 	}
 
