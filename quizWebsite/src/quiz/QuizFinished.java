@@ -49,7 +49,6 @@ public class QuizFinished extends HttpServlet {
 		long startTime = (Long) session.getAttribute("startTime");
 		long quizTimeInSeconds = TimeUnit.MILLISECONDS.toSeconds(endTime - startTime);
 		int score = countCorrectAnswers((ArrayList<Integer>) session.getAttribute("answersCorrectness"));
-		System.out.println(score+" scoreeeeee");
 		MyDB.addQuizResult(accountID,quizID,score,quizTimeInSeconds);
 		QuizDB quiz = (QuizDB) session.getAttribute("quizDB");
 		request.setAttribute("quizName", quiz.getName());
