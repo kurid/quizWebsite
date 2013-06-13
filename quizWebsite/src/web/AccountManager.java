@@ -71,7 +71,7 @@ public class AccountManager implements Manager {
 	 * validuria tu ara
 	 */
 	private boolean mailIsValid(String mail) {
-		return mail.contains("@") && mail.indexOf("@") != 0;
+		return new EmailValidator().emailIsValid(mail);
 	}
 
 	private boolean filedIsEmpty(String name, String surname, String nickName,
