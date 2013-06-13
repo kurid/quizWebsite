@@ -38,9 +38,9 @@ public class ShowHome extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession Session = request.getSession(true);
 		Session.setAttribute("isLookingUp", false);
-		Session.removeAttribute("isFriend");
-		Session.removeAttribute("userAccount");
-		Session.removeAttribute("friendRequestExists");
+		Session.setAttribute("isFriend", false);
+		Session.setAttribute("userAccount", false);
+		Session.setAttribute("friendRequestExists", false);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
 		dispatcher.forward(request, response);		
 	}

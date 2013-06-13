@@ -26,6 +26,8 @@ public class SessionListener implements HttpSessionListener {
     public void sessionCreated(HttpSessionEvent arg0) {
     	arg0.getSession().setAttribute("isLoggedIn", new Boolean(false));
     	arg0.getSession().setAttribute("isLookingUp", new Boolean(false));
+    	arg0.getSession().setAttribute("counterFriendRequestExists", new Boolean(false));
+    	arg0.getSession().setAttribute("friendRequestExists", new Boolean(false));
     }
 
 	/**

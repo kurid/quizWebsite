@@ -47,7 +47,7 @@ public class FriendRequestResponse extends HttpServlet {
 		Account myAccount = (Account) Session.getAttribute("account");
 		Boolean isLookingUp = (Boolean) Session.getAttribute("isLookingUp");
 		String destination = null;
-		if (isLookingUp != null && isLookingUp){
+		if (isLookingUp){
 			Account userAccount = (Account) Session.getAttribute("userAccount");
 			if (accept)
 				MyDB.addFriend(myAccount.getId(), userAccount.getId());

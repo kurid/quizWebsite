@@ -44,7 +44,7 @@ public class DeleteFriend extends HttpServlet {
 		Account userAccount = (Account) Session.getAttribute("userAccount");
 		MyDB.deleteFriendship(myAccount.getId(),userAccount.getId());
 		Session.setAttribute("isFriend", false);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UserProfile.jsp");
 		dispatcher.forward(request, response);
 	}
 

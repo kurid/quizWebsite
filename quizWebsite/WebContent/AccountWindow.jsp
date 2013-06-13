@@ -17,7 +17,7 @@
 	%>
 	<frameset rows="15%,*"  frameborder="no" border="0" framespacing="0">
 		<frame src= <%=upperJsp %> name = "AccountInfo"> 
-		<frame src= <%=lowerJsp %> name="ActualInfo">
+		<frame src= <%=lowerJsp %> name = "ActualInfo">
 	</frameset>
 
 
