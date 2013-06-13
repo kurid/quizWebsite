@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import Question.*;
+import Question.Finals;
 import web.*;
 
 /**
@@ -116,8 +117,8 @@ public class TakeQuizServlet extends HttpServlet {
 		ArrayList<Integer> answersCorrectness = (ArrayList<Integer>) request.getSession(true).getAttribute("answersCorrectness");
 		int score=0;
 		switch(q.getType()){
-		case QuestionFinals.QUESTION_RESPONSE:
-		case QuestionFinals.IMAGE_QUESTION:
+		case Finals.QUESTION_RESPONSE:
+		case Finals.IMAGE_QUESTION:
 			String answer = (String) request.getParameter("field1");
 			ArrayList<String> correctAnswers = (ArrayList<String>) q.getCorrectAnswer().getAnswer();
 			System.out.println("amdeni shesadzlo swori pasuxi maqvs: "+correctAnswers.size());
@@ -129,12 +130,12 @@ public class TakeQuizServlet extends HttpServlet {
 				}
 			}
 			break;
-		case QuestionFinals.MULTIPLE_CHOICE:
+		case Finals.MULTIPLE_CHOICE:
 			answer = (String) request.getParameter("answer");
 			if (answer != null && ((String)q.getCorrectAnswer().getAnswer()).equals(answer))
 					score=q.getScore();
 			break;
-		case QuestionFinals.MULTIPLE_ANSWER:
+		case Finals.MULTIPLE_ANSWER:
 			ArrayList<String> answers = (ArrayList<String>) request.getAttribute("answer");
 			ArrayList<List<String> > correctAnswersMA = (ArrayList<List<String> >) q.getCorrectAnswer().getAnswer();
 			int countCorrects=0;
@@ -152,7 +153,7 @@ public class TakeQuizServlet extends HttpServlet {
 					score=q.getScore();
 			}
 			break;
-		case QuestionFinals.MCMA:
+		case Finals.MCMA:
 			answers = (ArrayList<String>) request.getAttribute("answer");
 			correctAnswers = (ArrayList<String>) q.getCorrectAnswer().getAnswer();
 			if (answers.size() == correctAnswers.size()){
@@ -161,7 +162,7 @@ public class TakeQuizServlet extends HttpServlet {
 				if (sAnswers.containsAll(sCorrectAnswers))score = q.getScore();
 			}
 			break;
-		case QuestionFinals.MATCHING:
+		case Finals.MATCHING:
 			
 			break;
 		default:;

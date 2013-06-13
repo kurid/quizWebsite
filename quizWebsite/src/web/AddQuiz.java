@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Question.Question;
-import Question.QuestionFinals;
+import Question.Finals;
 
 /**
  * Servlet implementation class AddQuize
