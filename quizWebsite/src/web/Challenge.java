@@ -10,7 +10,7 @@ public class Challenge extends Notification{
 	private QuizDB quiz;
 	
 	public Challenge(int to, int from, Date date, int quizID){
-		sender = new Account(from);
+		sender = from;
 		recieverID = to;
 		this.date = date;
 		createQuiz(quizID);

@@ -5,11 +5,11 @@ import java.util.Date;
 public class Notification implements NotificationInterface{
 	
 	protected int recieverID;
-	protected Account sender;
+	protected int sender;
 	protected Date date;
 	
 	@Override
-	public Account sender() {
+	public int sender() {
 		return sender;
 	}
 
