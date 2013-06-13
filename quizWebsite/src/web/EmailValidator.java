@@ -2,7 +2,12 @@ package web;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+	
+	/**
+	 * 
+	 * @author User kurid
+	 * this class will help to check if mail is valid or not
+	 */
 	public class EmailValidator {
 		 
 		private Pattern pattern;

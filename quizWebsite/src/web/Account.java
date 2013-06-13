@@ -11,19 +11,35 @@ public class Account {
 		surname = MyDB.getSurname(id);
 		nickname = MyDB.getNickName(id);
 	}
-
+	/**
+	 * 
+	 * @return account id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @return account name
+	 */
 	public String getName() {
 		return name;
 	}
-
+	
+	/**
+	 * 
+	 * @return account surname
+	 */
 	public String getSurname() {
 		return surname;
 	}
 
+	
+	/**
+	 * 
+	 * @return account nickname
+	 */
 	public String getNickname() {
 		return nickname;
 	}

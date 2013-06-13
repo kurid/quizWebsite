@@ -4,6 +4,11 @@ import java.sql.*;
 import java.util.Date;
 
 import quiz.QuizDB;
+/**
+ * 
+ * @author User
+ * Challenge class extends Notification  
+ */
 
 public class Challenge extends Notification{
 	
@@ -16,6 +21,10 @@ public class Challenge extends Notification{
 		createQuiz(quizID);
 	}
 	
+	/**
+	 * 
+	 * @param quizID create quiz according quiz id
+	 */
 	private void createQuiz(int quizID){
 		ResultSet rs = MyDB.getQuizInfo(quizID);
 		System.out.println(rs);
@@ -33,6 +42,11 @@ public class Challenge extends Notification{
 		quiz = new QuizDB(name, description, authorID);
 	}
 	
+	
+	/**
+	 * 
+	 * @return quiz
+	 */
 	public QuizDB getQuiz(){
 		return quiz;
 	}

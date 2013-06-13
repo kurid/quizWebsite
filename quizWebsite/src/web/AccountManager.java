@@ -2,20 +2,38 @@ package web;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+/**
+ * 
+ * @author User Kurid 
+ * class witch implements Manager interface 
+ * using data base
+ *
+ */
 public class AccountManager implements Manager {
 
-	private int id;
 	private static MessageDigest messageDigest;
 
-	public AccountManager() {
-		// TODO Auto-generated constructor stub
-	}
-
+	
+	/**
+	 * 
+	 * @param nickName nickName
+	 * @return true if nickNameExist in data base and return false if it's not
+	 */
 	private boolean nickNameExist(String nickName) {
 		return MyDB.nickNameExist(nickName);
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param nickName nickName
+	 * @param password password
+	 * @return checks if users password is correct
+	 * 
+	 * uses SHA algorithm for hashing password 
+	 */
+	
 	private boolean passwordIsCorrect(String nickName, String password) {
 		try {
 			messageDigest = MessageDigest.getInstance("SHA");
@@ -28,11 +46,26 @@ public class AccountManager implements Manager {
 		return realPass.equals(passwordHash);
 	}
 
+	
+	
+	/**
+	 * checks if password and nickName pare is correct
+	 */
 	@Override
 	public boolean isCorrect(String nickName, String password) {
 		return nickNameExist(nickName) && passwordIsCorrect(nickName, password);
 	}
-
+	
+	
+	
+	/**
+	 * @param name
+	 * @param surName
+	 * @param nickName
+	 * @param password
+	 * @param mail
+	 * @return tries adding new account in data base returns int according the result
+	 */
 	private int addInDataBase(String name, String surName, String nickName,
 			String password, String mail) {
 		try {
@@ -46,10 +79,11 @@ public class AccountManager implements Manager {
 		return MyDB.getId(nickName);
 	}
 
-	/*
+	
+	/**
 	 * Given a byte[] array, produces a hex String, such as "234a6f". with 2
 	 * chars for each byte in the array. (provided code)
-	 */
+	 **/
 	public static String hexToString(byte[] bytes) {
 		StringBuffer buff = new StringBuffer();
 		for (int i = 0; i < bytes.length; i++) {
@@ -62,18 +96,38 @@ public class AccountManager implements Manager {
 		return buff.toString();
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param mail mail
+	 * @return checks if such mail already exist
+	 */
 	private boolean mailExists(String mail) {
 		return MyDB.mailExist(mail);
 	}
 
-	/*
-	 * shegvidzlia davamatot damatebiti shemowmebebi imis dasadgenad maili
-	 * validuria tu ara
+	
+	
+	/**
+	 * 
+	 * @param mail mail
+	 * @return true or false, check if mail is valid or not  
 	 */
 	private boolean mailIsValid(String mail) {
 		return new EmailValidator().emailIsValid(mail);
 	}
 
+	
+	/**
+	 * 
+	 * @param name
+	 * @param surname
+	 * @param nickName
+	 * @param password
+	 * @param mail
+	 * @return checks if one of the filed is Empty 
+	 */
 	private boolean filedIsEmpty(String name, String surname, String nickName,
 			String password, String mail) {
 		return name.length() == 0 || surname.length() == 0
@@ -82,14 +136,10 @@ public class AccountManager implements Manager {
 	}
 
 	
-	public static final int EMPTY_FIELD = -1;
-	public static final int NICKNAME_EXISTS = -2;
-	public static final int INCORRECT_MAIL = -3;
-	public static final int MAIL_EXISTS = -4;
-	public static final int SHORT_NICKNAME = -5;
-	public static final int LONG_NICKNAME = -6;
-
 	
+	/**
+	 * adding new account, returns error code if it's impossible for some reason
+	 */
 	@Override
 	public int addAccount(String name, String surname, String nickName,
 			String Password, String mail) {
@@ -103,6 +153,10 @@ public class AccountManager implements Manager {
 		return addInDataBase(name, surname, nickName, Password, mail);
 	}
 
+	
+	/**
+	 * Delete Account
+	 */
 	@Override
 	public void deleteAccount(String nickName) {
 		MyDB.deleteAccount(nickName);

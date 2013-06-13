@@ -9,15 +9,21 @@ public interface Manager {
 	public static final int SHORT_NICKNAME = -5;
 	public static final int LONG_NICKNAME = -6;
 
-	// amowmebs sworia tu ara sheyvanili nickname da password
+	/**
+	 * checks if password and nickName pare is correct
+	 */
 	public boolean isCorrect(String nickName, String Password);
 	
-	/*
-	 * ambrunebs int-s imis shesabamisad ra 
-	 * shedegit dasrulda account-is sheqmis mcdeloboba
+	
+	/**
+	 * adding new account, returns error code if it's impossible for some reason
 	 */
 	public int addAccount(String name, String surname, String nickName, String password, String mail);
 	
+	
+	/**
+	 * Delete Account
+	 */
 	public void deleteAccount(String nickName);
 	
 }
