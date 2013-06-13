@@ -20,11 +20,13 @@
 		</tr>
 	</table>
 	<% if(searchedAccounts != null){
-				for(Account account : searchedAccounts){
-				out.println("<li><a href=\"http://localhost:8080/quizWebsite/test1.jsp?ID="); 
-				out.println(account.getId() + "\">" + account.getNickname()+ "</a></li>");
+			for (Account acc : searchedAccounts) {
+				out.println("<li><a href=\"AccountServlet?ID=" + acc.getId()
+					+ "\" target =\"AccountWindow\"> " + acc.getName()
+					+ "</a></li>");
 			}
-		}%>
+		}
+	%>
 	</form>
 	
 </body>

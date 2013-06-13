@@ -6,10 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-
+	<%
+		Boolean isLookingUp = (Boolean) session.getAttribute("isLookingUp");
+		String upperJsp = "AccountInfo.jsp";
+		String lowerJsp = "Home.jsp";
+		if(isLookingUp != null && isLookingUp){
+			upperJsp = "UserNavigator.jsp";
+			lowerJsp = "UserProfile.jsp";
+		}
+	%>
 	<frameset rows="15%,*"  frameborder="no" border="0" framespacing="0">
-		<frame src="AccountInfo.jsp" name = "AccountInfo"> 
-		<frame src="Home.jsp" name="ActualInfo">
+		<frame src= <%=upperJsp %> name = "AccountInfo"> 
+		<frame src= <%=lowerJsp %> name="ActualInfo">
 	</frameset>
 
 
