@@ -744,5 +744,12 @@ public class MyDB {
 		}
 		return false;
 	}
+
+
+
+	public static void deleteFriendRequest(int id, int id2) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
