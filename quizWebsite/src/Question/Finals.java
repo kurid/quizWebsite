@@ -1,8 +1,8 @@
 package Question;
 
 /**
- * კონსტანტ ცვლადები, რომლებიც გამოიყენება მთლიან პროექტში.
- * ზუსტი აღწერა მათსავე სახელებშია. 
+ * constants for the entire project.
+ * their names give more precise description about them.
  */
 public interface Finals {
 	

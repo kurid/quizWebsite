@@ -1,7 +1,7 @@
 package Question;
 
 /**
- * ზოგადად კითხვაზე პასუხის ინტერფეისი.
+ * General answer interface.
  */
 
 public interface AnswerInterface {

@@ -4,6 +4,12 @@ import java.util.List;
 
 import web.MyDB;
 
+/**
+ * Image Type question.
+ * This question is very similar to QuestionResponse.
+ * The only difference is given image, which is the subject
+ * of the question.
+ */
 public class ImageQuestion extends Question{
 	
 	private String URL;
