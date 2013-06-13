@@ -1,3 +1,4 @@
+<%@page import="Question.Finals"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,7 +24,7 @@
 				<td> Number Of Questions: </td>
 				<td> <select name = "numberOfQuestions"> 
 				<%
-					for(int i=2;i<=15;i++){
+					for(int i=Finals.minNumberOfQuestions;i<=Finals.maxNumberOfQuestions;i++){
 						out.println("<option value=\""+i+"\">"+i+"</option>");
 					}
 				%> </select> </td>
