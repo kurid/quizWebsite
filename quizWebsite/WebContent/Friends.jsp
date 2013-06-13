@@ -1,3 +1,4 @@
+<%@page import="web.Account"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="quiz.*"%>
@@ -13,7 +14,11 @@
 
 	<h2 align="center"> Friends </h2>
 	<%
-		
+		List<Account> friendList = (List<Account>)request.getAttribute("friendList");
+		for(int i=0;i<friendList.size();i++){
+			String friend = friendList.get(i).getName();
+			out.println(friend);
+		}
 	%>
 
 </body>

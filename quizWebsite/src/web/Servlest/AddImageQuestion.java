@@ -48,12 +48,10 @@ public class AddImageQuestion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BB");
 		String questionText = request.getParameter("questionText");
 		int score = Integer.parseInt(request.getParameter("Score"));
 		String answersNum = request.getParameter("answersNum");
 		String url = request.getParameter("imageUrl");
-		System.out.println(answersNum);
 		HttpSession session = request.getSession(true);
 		int currentNumberOfQuestion = (Integer) session
 				.getAttribute("currentNumberOfQuestion");
