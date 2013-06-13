@@ -14,8 +14,9 @@
 %>
 </head>
 <body>
-
-	<table>
+	
+	<form action="FriendRequestResponse" method="post">
+		<table>
 		<% 
 		List<String> names = (List<String>)request.getAttribute("names");
 		int i = 0;
@@ -24,10 +25,15 @@
 			String name = names.get(i);
 			i++;
 			out.println("<tr><td> Friend Request From: "+ name );
-			out.println("<input type=\"submit\"  name=\"YES\" value=\"YES\"  /><td>");
-			out.println("<td> <input type=\"submit\" name=\"NO\" value=\"NO\" /> </td> </tr>");
+			out.println("<input type=\"submit\"  name=\"act\" value=\"Accept\"  /><td>");
+			out.println("<input type=\"hidden\"  name=\"sender\" value=\"" + friendRequest.sender() +"\"");
+			out.println("<td> <input type=\"submit\" name=\"act\" value=\"Reject\" /> </td> </tr>");
+			
 		}%>
-	</table>
+		
+		</table>
+	</form>
+	
 	
 
 </body>
