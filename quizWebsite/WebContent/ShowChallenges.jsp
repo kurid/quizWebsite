@@ -10,18 +10,23 @@
 <% List<Challenge> challenges = (List<Challenge>)request.getAttribute("challenges"); %>
 </head>
 <body>
-	<%
-	List<String> names = (List<String>)request.getAttribute("names");
-	int i = 0;
-	for(Challenge challenge : challenges ){
-		int sender = challenge.sender();
-		String name = names.get(i);
-		i++;
-		out.println("Challange From: "+ name + "</br>");
-		out.println("Quiz : "+ challenge.getQuiz().getName() + "</br>");
-		out.println("<input type=\"submit\"  name=\"YES\" value=\"YES\"  />");
-		out.println("<td> <input type=\"submit\" name=\"NO\" value=\"NO\" /> </td>");
-	}%>
+	
+	<table>
+		<%
+		List<String> names = (List<String>)request.getAttribute("names");
+		int i = 0;
+		for(Challenge challenge : challenges ){
+			int sender = challenge.sender();
+			String name = names.get(i);
+			i++;
+			out.println("<tr> <td> Challange From: "+ name + "</td></tr>");
+			out.println("<tr> <td> Quiz : "+ challenge.getQuiz().getName() + "</td></tr>");
+			out.println("<tr> <td> <input type=\"submit\"  name=\"YES\" value=\"Reject\"/> </td></tr>");
+			out.println("<tr> <td> <input type=\"submit\" name=\"Reject\" value=\"Reject\" /> </td></tr>");
+		}
+		%>
+	</table>
+	
 
 
 </body>
