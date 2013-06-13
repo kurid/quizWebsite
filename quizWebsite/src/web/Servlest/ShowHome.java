@@ -39,8 +39,9 @@ public class ShowHome extends HttpServlet {
 		HttpSession Session = request.getSession(true);
 		Session.setAttribute("isLookingUp", false);
 		Session.setAttribute("isFriend", false);
-		Session.setAttribute("userAccount", false);
+		Session.setAttribute("userAccount", null);
 		Session.setAttribute("friendRequestExists", false);
+		Session.setAttribute("achievement", null);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
 		dispatcher.forward(request, response);		
 	}
