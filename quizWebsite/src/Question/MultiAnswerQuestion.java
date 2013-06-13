@@ -57,7 +57,7 @@ public class MultiAnswerQuestion extends Question{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public int checkAnswer(RecievedAnswer answer){
+	public int checkAnswer(ReceivedAnswer answer){
 		MMAnswer mma = (MMAnswer)correctAnswer;
 		List<List<String> > correctAnswers = mma.getAnswer();
 		List<String> recieved =  (List<String>) answer.getRecievedAnswer();

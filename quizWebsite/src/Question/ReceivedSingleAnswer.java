@@ -1,9 +1,12 @@
 package Question;
 
-public class RecievedSingleAnswer extends RecievedAnswer{
+/**
+ * received answer with only one string.
+ */
+public class ReceivedSingleAnswer extends ReceivedAnswer{
 	private String recivedAnswer;
 	
-	public RecievedSingleAnswer(String recivedAnswer){
+	public ReceivedSingleAnswer(String recivedAnswer){
 		this.recivedAnswer = recivedAnswer;
 	}
 	

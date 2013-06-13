@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Question.Question;
-import Question.RecievedAnswer;
-import Question.RecievedSingleAnswer;
+import Question.ReceivedAnswer;
+import Question.ReceivedSingleAnswer;
 
 /**
  * Servlet implementation class QuestionResponse
@@ -54,7 +54,7 @@ public class CheckSingleFieldAnswer extends HttpServlet {
 		ArrayList<Integer> answersCorrectness = (ArrayList<Integer>) session
 				.getAttribute("answersCorrectness");
 		String answer = request.getParameter("field1");
-		RecievedAnswer recivedAnswer = new RecievedSingleAnswer(answer);
+		ReceivedAnswer recivedAnswer = new ReceivedSingleAnswer(answer);
 		answersCorrectness.add(q.checkAnswer(recivedAnswer));
 		session.setAttribute("answersCorrectness", answersCorrectness);
 		String jsp = null;

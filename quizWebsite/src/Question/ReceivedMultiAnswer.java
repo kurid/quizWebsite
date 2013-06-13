@@ -2,11 +2,15 @@ package Question;
 
 import java.util.List;
 
-public class RecievedMultiAnswer extends RecievedAnswer{
+/**
+ * received answer with several strings.
+ */
+
+public class ReceivedMultiAnswer extends ReceivedAnswer{
 	
 	private List<String> userAnswersList;
 	
-	public RecievedMultiAnswer(List<String> recievedAnswersList){
+	public ReceivedMultiAnswer(List<String> recievedAnswersList){
 		userAnswersList = recievedAnswersList;
 	}
 	

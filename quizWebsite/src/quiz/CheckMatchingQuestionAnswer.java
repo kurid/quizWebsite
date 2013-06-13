@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import Question.CorrectAnswer;
 import Question.Question;
-import Question.RecievedAnswer;
-import Question.RecievedMatchingAnswer;
+import Question.ReceivedAnswer;
+import Question.ReceivedMatchingAnswer;
 
 /**
  * Servlet implementation class CheckMatchingQuestionAnswer
@@ -65,7 +65,7 @@ public class CheckMatchingQuestionAnswer extends HttpServlet {
 			pair.add(matching2);
 			recivedAnswers.add(pair);
 		}
-		RecievedAnswer recivedAnswer = new RecievedMatchingAnswer(recivedAnswers);
+		ReceivedAnswer recivedAnswer = new ReceivedMatchingAnswer(recivedAnswers);
 		answersCorrectness.add(q.checkAnswer(recivedAnswer));
 		session.setAttribute("answersCorrectness", answersCorrectness);
 		String jsp = null;

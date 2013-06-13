@@ -53,7 +53,7 @@ public class MultipleChoiceQuestion extends Question
 	}
 	
 	@Override
-	public int checkAnswer(RecievedAnswer answer) {
+	public int checkAnswer(ReceivedAnswer answer) {
 		SingleAnswer sa = (SingleAnswer)correctAnswer;
 		String correctAnswer = sa.getAnswer();
 		String recieved = (String) answer.getRecievedAnswer();

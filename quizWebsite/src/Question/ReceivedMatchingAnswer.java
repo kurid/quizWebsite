@@ -2,11 +2,15 @@ package Question;
 
 import java.util.List;
 
-public class RecievedMatchingAnswer extends RecievedAnswer{
+/**
+ * received answer which may be Matching, or Multiple answer question.
+ */
+
+public class ReceivedMatchingAnswer extends ReceivedAnswer{
 	
 	private List<List<String>> userAnswersList; 
 	
-	public RecievedMatchingAnswer(List<List<String>> answerList){
+	public ReceivedMatchingAnswer(List<List<String>> answerList){
 		userAnswersList = answerList;
 	}
 	

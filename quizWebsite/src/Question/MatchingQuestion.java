@@ -53,7 +53,7 @@ public class MatchingQuestion extends Question {
 	}
 	
 	@Override
-	public int checkAnswer(RecievedAnswer answer){
+	public int checkAnswer(ReceivedAnswer answer){
 		MMAnswer mma = (MMAnswer)correctAnswer;
 		List<List<String> > correctAnswers = mma.getAnswer();
 		List<List<String> > recieved = (List<List<String> >) answer.getRecievedAnswer();

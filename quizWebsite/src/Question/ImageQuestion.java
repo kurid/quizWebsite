@@ -63,7 +63,7 @@ public class ImageQuestion extends Question{
 	}
 	
 	@Override
-	public int checkAnswer(RecievedAnswer answer) {
+	public int checkAnswer(ReceivedAnswer answer) {
 		MultipleAnswer ma = (MultipleAnswer)correctAnswer;
 		List<String> answers = ma.getAnswer();
 		String recieved = (String) answer.getRecievedAnswer();

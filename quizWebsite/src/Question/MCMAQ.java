@@ -68,7 +68,7 @@ public class MCMAQ extends Question implements ChooseQuestion{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public int checkAnswer(RecievedAnswer answer){
+	public int checkAnswer(ReceivedAnswer answer){
 		MultipleAnswer ma = (MultipleAnswer) correctAnswer;
 		List<String> correctAnswers = ma.getAnswer();
 		List<String> recieved = (List<String>) answer.getRecievedAnswer();

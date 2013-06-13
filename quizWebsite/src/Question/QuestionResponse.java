@@ -4,6 +4,12 @@ import java.util.List;
 
 import web.MyDB;
 
+/**
+ * in this type of question you are given a question and
+ * you should write answer in empty field.
+ * there may be several identical possible correct answers. 
+ */
+
 public class QuestionResponse extends Question{
 
 	public QuestionResponse(int index, String questionText, CorrectAnswer correctAnswer, int score){
@@ -49,7 +55,7 @@ public class QuestionResponse extends Question{
 	}
 	
 	@Override
-	public int checkAnswer(RecievedAnswer answer) {
+	public int checkAnswer(ReceivedAnswer answer) {
 		MultipleAnswer ma = (MultipleAnswer)correctAnswer;
 		List<String> answers = ma.getAnswer();
 		String recieved = (String) answer.getRecievedAnswer();
