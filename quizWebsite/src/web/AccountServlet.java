@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ChallengeServlet
@@ -36,16 +37,17 @@ public class AccountServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Account user = (Account)request.getSession(true).getAttribute("account");
+		HttpSession Session = request.getSession(true);
+		Account user = (Account)Session.getAttribute("account");
 		int clickedID = Integer.parseInt(request.getParameter("ID"));
 		boolean isMyAccount = false;
 		if (clickedID == user.getId()){
 			isMyAccount=true;
 		} else {
 			Account userAccount = new Account(clickedID);
-			request.getSession().setAttribute("nickname", userAccount);
+			Session.setAttribute("nickname", userAccount);
 		}
-		request.setAttribute("isLookingUp", isMyAccount);
+		Session.setAttribute("isLookingUp", isMyAccount);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
 		dispatcher.forward(request, response);
 	}
