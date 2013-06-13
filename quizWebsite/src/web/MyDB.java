@@ -274,7 +274,7 @@ public class MyDB {
 
 	public static List<FriendRequest> getRequest(int idTo) {
 		ResultSet res;
-		String query = "SELECT * FROM messages WHERE accountIdTo = " + idTo + ";";
+		String query = "SELECT * FROM friendrequests WHERE accountIdTo = " + idTo + ";";
 		List<FriendRequest> friendRequests = new ArrayList<FriendRequest>();
 		try {
 			res = statement.executeQuery(query);

@@ -49,6 +49,7 @@ public class FriendRequestServlet extends HttpServlet {
 		}
 		request.setAttribute("names", names);
 		request.setAttribute("friendRequests", requests);
+		request.setAttribute("rame", "rame");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowFriendRequests.jsp");
 		dispatcher.forward(request, response);
 	}
