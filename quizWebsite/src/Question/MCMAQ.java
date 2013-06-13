@@ -5,6 +5,14 @@ import java.util.Set;
 
 import web.MyDB;
 
+/**
+ * This is Multiple Choice and Multiple Answer type question, where
+ * there are several possible answers and from them may be several
+ * correct answers.
+ * That's why it implements ChooseQuestion and it's correctAnswer
+ * is MultipleAnswer.
+ */
+
 public class MCMAQ extends Question implements ChooseQuestion{
 	
 	private Set<String> possibleAnswers;

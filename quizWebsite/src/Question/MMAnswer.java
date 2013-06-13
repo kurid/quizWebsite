@@ -2,6 +2,11 @@ package Question;
 
 import java.util.List;
 
+/**
+ * correct answer, which consists of List<List<String> >
+ * for example, MultiAnswer question and Matching.
+ */
+
 public class MMAnswer extends CorrectAnswer{
 	
 	private List<List<String> > correctAnswer;
