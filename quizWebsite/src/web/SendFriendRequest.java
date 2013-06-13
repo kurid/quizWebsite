@@ -41,7 +41,7 @@ public class SendFriendRequest extends HttpServlet {
 		Account userAccount = (Account) Session.getAttribute("userAccount");
 		MyDB.sendFriendRequest(userAccount.getId(), account.getId());
 		Session.setAttribute("friendRequestExists", true);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UserProfile.jsp");
 		dispatcher.forward(request, response);
 	}
 

@@ -39,19 +39,19 @@ public class AccountServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession Session = request.getSession(true);
-		Account user = (Account)Session.getAttribute("account");
+		Account myAccount = (Account)Session.getAttribute("account");
 		int clickedID = Integer.parseInt(request.getParameter("ID"));
 		boolean isMyAccount = false;
-		if (clickedID == user.getId()){
+		if (clickedID == myAccount.getId()){
 			isMyAccount=true;
 		} else {
 			Account userAccount = new Account(clickedID);
 			Session.setAttribute("userAccount", userAccount);
-			ArrayList<Integer> friendList = (ArrayList<Integer>) MyDB.getFriends(user.getId());
+			ArrayList<Integer> friendList = (ArrayList<Integer>) MyDB.getFriends(myAccount.getId());
 			boolean isFriend = checkFriend(friendList,userAccount.getId());
 			Session.setAttribute("isFriend", isFriend);
 			if (!isFriend){
-				boolean friendRequestExists = MyDB.friendRequestExists(user.getId(),userAccount.getId());
+				boolean friendRequestExists = MyDB.friendRequestExists(myAccount.getId(),userAccount.getId());
 				Session.setAttribute("friendRequestExists",friendRequestExists);
 			}
 		}
