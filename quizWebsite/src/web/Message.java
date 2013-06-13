@@ -8,7 +8,7 @@ public class Message extends Notification{
 	boolean isUnread;
 	
 	public Message(int to, int from, Date date, String text, boolean isUnread){
-		sender = new Account(from);
+		sender = from;
 		recieverID = to;
 		this.date = date;
 		this.text = text;
