@@ -1,6 +1,6 @@
 package Question;
 
-public class Question implements QuestionInterface, QuestionFinals {
+public class Question implements QuestionInterface, Finals {
 	protected int index;
 	protected int score;
 	protected String questionText;
