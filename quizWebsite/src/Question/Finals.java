@@ -1,5 +1,9 @@
 package Question;
 
+/**
+ * კონსტანტ ცვლადები, რომლებიც გამოიყენება მთლიან პროექტში.
+ * ზუსტი აღწერა მათსავე სახელებშია. 
+ */
 public interface Finals {
 	
 	public static final int QUESTION_RESPONSE = 1;
