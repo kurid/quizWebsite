@@ -71,7 +71,8 @@ public class AccountManager implements Manager {
 	 * validuria tu ara
 	 */
 	private boolean mailIsValid(String mail) {
-		return new EmailValidator().emailIsValid(mail);
+		return true;
+		//return new EmailValidator().emailIsValid(mail);
 	}
 
 	private boolean filedIsEmpty(String name, String surname, String nickName,

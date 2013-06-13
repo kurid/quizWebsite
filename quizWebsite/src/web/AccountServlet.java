@@ -37,7 +37,7 @@ public class AccountServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Account user = (Account)request.getSession(true).getAttribute("account");
-		int clickedID = MyDB.getId(request.getParameter("nickname"));
+		int clickedID = Integer.parseInt(request.getParameter("ID"));
 		boolean isMyAccount = false;
 		if (clickedID == user.getId()){
 			isMyAccount=true;
