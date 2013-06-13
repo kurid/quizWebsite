@@ -26,7 +26,7 @@
 			i++;
 			out.println("<tr><td> Friend Request From: "+ name );
 			out.println("<input type=\"submit\"  name=\"act\" value=\"Accept\"  /><td>");
-			out.println("<input type=\"hidden\"  name=\"sender\" value=\"" + friendRequest.sender() +"\"");
+			out.println("<input type=\"hidden\"  name=\"senderID\" value=\"" + friendRequest.sender() +"\"");
 			out.println("<td> <input type=\"submit\" name=\"act\" value=\"Reject\" /> </td> </tr>");
 			
 		}%>
