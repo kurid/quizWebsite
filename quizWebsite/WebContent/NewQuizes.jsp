@@ -23,7 +23,7 @@
 				Account autor = new Account(quiz.getAuthor());
 				out.println("<li><a href=\"StartTackingQuiz?ID=" + quiz.getID()
 						+ "\" target =\"AccountWindow\"> " + quiz.getName()
-						+ "</a> © "+autor.getName()+"</li>");
+						+ "</a> © "+autor.getNickname()+"</li>");
 			}
 		%>
 	</ol>

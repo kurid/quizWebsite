@@ -31,7 +31,7 @@
 					out.println("<li><a href=\"StartTackingQuiz?ID=");
 					out.println(quiz.getID() + "\"target=\"AccountWindow\""
 							+ "\">" + quiz.getName() + "</a> © "
-							+ autor.getName() + "</li>");
+							+ autor.getNickname() + "</li>");
 				}
 			}
 		%>
