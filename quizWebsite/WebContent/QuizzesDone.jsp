@@ -14,13 +14,15 @@
 	<%
 		List<DoneQuize> quizzesDone = (List<DoneQuize>) request
 				.getAttribute("quizzesDone");
-		for (DoneQuize doneQuiz : quizzesDone) {
+		for (int i=quizzesDone.size()-1;i>=0;i--) {
+			DoneQuize doneQuiz = quizzesDone.get(i);
 			out.println("<li><a href=\"StartTackingQuiz?ID="
 					+ doneQuiz.getQuiz().getID()
 					+ "\" target =\"AccountWindow\"> "
-					+ doneQuiz.getQuiz().getName() + "  </a> "
-					+ doneQuiz.getTime() + "  "
-					+ doneQuiz.getQuizTakeDate() + " " + "</li>");
+					+ doneQuiz.getQuiz().getName() + "</a> .  time : "
+					+ doneQuiz.getTime() + "  date :  "
+					+ doneQuiz.getQuizTakeDate() + " . score: "
+					+ doneQuiz.getTotalScore() + " </li>");
 
 		}
 	%>
