@@ -49,13 +49,18 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
+	/**
+	 * 
+	 * @param accountID 
+	 * @return accountis Ids mixedvit igebs am eqauntis mier ganvlil qvizebs
+	 */
 	public static ResultSet getDoneQuizzes(int accountID) {
 		ResultSet res = null;
 		String query = "SELECT * FROM doneQuizzes WHERE accountID = ? ;";
 		try {
-			PreparedStatement prst = (PreparedStatement) connection
-					.prepareStatement(query);
+			PreparedStatement prst = (PreparedStatement) connection.prepareStatement(query);
 			prst.setInt(1, accountID);
 			res = prst.executeQuery();
 		} catch (SQLException e) {
@@ -65,6 +70,11 @@ public class MyDB {
 		return res;
 	}
 
+	
+	/**
+	 * 
+	 * @return bazashi bolos chamatebuli 5 qvizi
+	 */
 	public static ResultSet newQuizzes() {
 		ResultSet res = null;
 		String query = "SELECT * FROM quizes ORDER BY quiz_create_date DESC LIMIT 0,5;";
@@ -79,6 +89,10 @@ public class MyDB {
 		return res;
 	}
 
+	/**
+	 * 
+	 * @return yvelaze popularuli 5 qvizi
+	 */
 	public static ResultSet popularQuizzes() {
 		ResultSet res = null;
 		try {
@@ -93,6 +107,12 @@ public class MyDB {
 		return res;
 	}
 
+	
+	
+	/**
+	 * 
+	 * @return lists of friends
+	 */
 	public static List<Integer> getFriends(int id) {
 		List<Integer> friends = new ArrayList<Integer>();
 		ResultSet res;
@@ -119,7 +139,7 @@ public class MyDB {
 		return friends;
 	}
 
-	/*
+	/**
 	 * svadasxva type-ebis( name, surname, nickname...) geteri.
 	 */
 	private static String getter(int id, String type) {
@@ -143,27 +163,62 @@ public class MyDB {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @return Name according ID
+	 */
 	public static String getName(int id) {
 		return getter(id, "name");
 	}
-
+	
+	
+	/**
+	 * 
+	 * @param id
+	 * @return surname according ID
+	 */
 	public static String getSurname(int id) {
 		return getter(id, "surname");
 	}
 
+	
+	/**
+	 * 
+	 * @param id
+	 * @return nickname according ID
+	 */
 	public static String getNickName(int id) {
 		return getter(id, "nick");
 	}
 
+	
+	/**
+	 * 
+	 * @param id
+	 * @return password according ID
+	 */
 	public static String getPassword(int id) {
 
 		return getter(id, "password");
 	}
 
+	
+	/**
+	 * 
+	 * @param id
+	 * @return mail according ID
+	 */
 	public static String getMail(int id) {
 		return getter(id, "mail");
 	}
-
+	
+	
+	/**
+	 * 
+	 * @param nickName
+	 * @return accountID
+	 */
 	public static int getId(String nickName) {
 		int id = 0;
 		ResultSet res;
@@ -182,6 +237,13 @@ public class MyDB {
 		return id;
 	}
 
+	
+	/**
+	 * 
+	 * @param type mail or nickname
+	 * @param stringToSearch 
+	 * @return true or false if exist string whit type 'type'
+	 */
 	private static boolean exist(String type, String stringToSearch) {
 		boolean b = false;
 		ResultSet res;
@@ -200,14 +262,33 @@ public class MyDB {
 		return b;
 	}
 
+	/**
+	 * 
+	 * @param nickName
+	 * @return  nickName exist in data base
+	 */
 	public static boolean nickNameExist(String nickName) {
 		return exist("nick", nickName);
 	}
+	
+	
 
+	/**
+	 * 
+	 * @param mail
+	 * @return  mail exist in data base
+	 */
 	public static boolean mailExist(String mail) {
 		return exist("mail", mail);
 	}
 
+	
+	/**
+	 * 
+	 * @param nickName
+	 * 
+	 * deletes account
+	 */
 	public static void deleteAccount(String nickName) {
 		try {
 			statement.executeUpdate("DELETE FROM accounts WHERE nick = \""
@@ -219,8 +300,8 @@ public class MyDB {
 		}
 	}
 
-	/*
-	 * abrunebs marto ricxvebs
+	/**
+	 * returns only numbers
 	 */
 	public static int[] getNotifications(int id) {
 		int[] arr = new int[3];
@@ -230,6 +311,11 @@ public class MyDB {
 		return arr;
 	}
 
+	/**
+	 * @param id
+	 * @param table
+	 * @return counts Notifications
+	 */
 	private static int getNotificationCount(int id, String table) {
 		int count = 0;
 		ResultSet res;
@@ -249,8 +335,14 @@ public class MyDB {
 		return count;
 	}
 
+	
+	/**
+	 * 
+	 * @param idTo
+	 * @return abrunebs challenges romelic am account-s miuvida
+	 */
 	public static List<Challenge> getChallenges(int idTo) {
-		String query = "SELECT * FROM chalangeQuiz WHERE accountIdTo = " + idTo
+		String query = "SELECT * FROM challengeQuiz WHERE accountIdTo = " + idTo
 				+ ";";
 		ResultSet res;
 		List<Challenge> challanges = new ArrayList<Challenge>();
@@ -269,6 +361,12 @@ public class MyDB {
 		return challanges;
 	}
 
+	
+	/**
+	 * 
+	 * @param idTo
+	 * @return abrunebs messages romelic am account-s miuvida
+	 */
 	public static List<Message> getMessages(int idTo) {
 		ResultSet res;
 		String query = "SELECT * FROM messages WHERE accountIdTo = ? ;";
@@ -289,6 +387,12 @@ public class MyDB {
 		return messages;
 	}
 
+	
+	/**
+	 * 
+	 * @param idTo
+	 * @return abrunebs friend request romelic am account-s miuvida
+	 */
 	public static List<FriendRequest> getRequest(int idTo) {
 		ResultSet res;
 		String query = "SELECT * FROM friendrequests WHERE accountIdTo = "
@@ -306,6 +410,15 @@ public class MyDB {
 		return friendRequests;
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param idTo
+	 * @param idFrom
+	 * @param text
+	 * send Message, saves in data base
+	 */
 	public static void sendMessage(int idTo, int idFrom, String text) {
 		String date = getCurrentTime();
 		try {
@@ -324,6 +437,14 @@ public class MyDB {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param name
+	 * @param description
+	 * @param accountID
+	 * @return QuizId after creating quiz 
+	 */
 	public static int createQuiz(String name, String description, int accountID) {
 		String date = getCurrentTime();
 		String sql = "INSERT INTO quizes(authorID,name,quiz_create_date,description) VALUES(?,?,?,?);";
@@ -343,6 +464,11 @@ public class MyDB {
 		return getQuizId(name, accountID);
 	}
 
+	/**
+	 * @param name
+	 * @param accountID
+	 * @return quizID
+	 */
 	public static int getQuizId(String name, int accountID) {
 		ResultSet res;
 		String sql = "SELECT quizID FROM quizes WHERE name = ? AND authorID = ? ;";
@@ -364,6 +490,12 @@ public class MyDB {
 		return 0;
 	}
 
+	
+	/**
+	 * 
+	 * @param quizID
+	 * @return information about quiz
+	 */
 	public static ResultSet getQuizInfo(int quizID) {
 		ResultSet res = null;
 		try {
@@ -376,6 +508,11 @@ public class MyDB {
 		return res;
 	}
 
+	/**
+	 * 
+	 * @param questionID
+	 * @return information about question
+	 */
 	public static ResultSet getQuestionInfo(int questionID) {
 		ResultSet res = null;
 		String query = "SELECT * FROM questions WHERE questionID ="
@@ -388,6 +525,12 @@ public class MyDB {
 		return res;
 	}
 
+	
+	/**
+	 * 
+	 * @param questionID
+	 * @return Multiple Choice quistions
+	 */
 	public static ResultSet MultipleChoice(int questionID) {
 		ResultSet res = null;
 		String query = "SELECT * FROM multiplechoice WHERE questionID ="
@@ -400,6 +543,11 @@ public class MyDB {
 		return res;
 	}
 
+	/**
+	 * 
+	 * @param questionID
+	 * @return correct answers for questions 
+	 */
 	public static ResultSet answers(int questionID) {
 		ResultSet res = null;
 		String query = "SELECT * FROM answers WHERE questionID =" + questionID
@@ -412,7 +560,13 @@ public class MyDB {
 		return res;
 	}
 
-	// public static ResultSet
+	/**
+	 * 
+	 * @param idTo
+	 * @param idFrom
+	 * @param quizID
+	 * sends challenge, quiz
+	 */
 
 	public static void sendChallenge(int idTo, int idFrom, int quizID) {
 
@@ -433,6 +587,16 @@ public class MyDB {
 
 	}
 
+	
+	/**
+	 * 
+	 * @param name
+	 * @param surName
+	 * @param nickName
+	 * @param password
+	 * @param mail
+	 * add account in data base
+	 */
 	public static void addAccount(String name, String surName, String nickName,
 			String password, String mail) {
 		String achievement = "Newbie";
@@ -454,6 +618,13 @@ public class MyDB {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param idTo
+	 * @param idFrom
+	 * send friend request
+	 */
 	public static void sendFriendRequest(int idTo, int idFrom) {
 		String date = getCurrentTime();
 		String query = "INSERT INTO  friendrequests VALUES (" + idTo + ", "
@@ -465,6 +636,12 @@ public class MyDB {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param questionId
+	 * @return matching question 
+	 */
 	public static ResultSet getMatching(int questionId) {
 		ResultSet res = null;
 		String query = "SELECT * FROM matching  WHERE questionID = "
@@ -477,6 +654,12 @@ public class MyDB {
 		return res;
 	}
 
+	
+	/**
+	 * 
+	 * @param questionId
+	 * @return url fror question
+	 */
 	public static String getURL(int questionId) {
 		ResultSet res = null;
 		String query = "SELECT url FROM imageQuestion  WHERE questionID = "
@@ -494,7 +677,13 @@ public class MyDB {
 		}
 		return "";
 	}
-
+	
+	/**
+	 * 
+	 * @param id1
+	 * @param id2
+	 * makes friend sheap
+	 */
 	public static void addFriend(int id1, int id2) {
 		try {
 			CallableStatement cs = (CallableStatement) connection
@@ -508,6 +697,12 @@ public class MyDB {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param q
+	 * @return questionResponse id after adding in data base
+	 */
 	public static int addQuestionResponse(Question q) {
 		int questionID = addQuestion(q);
 		MultipleAnswer answer = (MultipleAnswer) q.getCorrectAnswer();
@@ -517,6 +712,11 @@ public class MyDB {
 
 	}
 
+	/**
+	 * 
+	 * @param q
+	 * @return MultiAnswerQuestion id after adding in data base
+	 */
 	public static int addMultiAnswerQuestion(Question q) {
 		int questionID = addQuestion(q);
 		MMAnswer answer = (MMAnswer) q.getCorrectAnswer();
@@ -527,6 +727,12 @@ public class MyDB {
 		return questionID;
 	}
 
+	
+	/**
+	 * 
+	 * @param q
+	 * @return ImageQuestion id after adding in data base
+	 */
 	public static int addImageQuestion(ImageQuestion q) {
 		int questionID = addQuestion(q);
 		MultipleAnswer answer = (MultipleAnswer) q.getCorrectAnswer();
@@ -547,6 +753,13 @@ public class MyDB {
 		return questionID;
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param q
+	 * @return MatchingQuestion id after adding in data base
+	 */
 	public static int addMatchingQuestion(Question q) {
 		int questionID = addQuestion(q);
 		MMAnswer answer = (MMAnswer) q.getCorrectAnswer();
@@ -570,6 +783,12 @@ public class MyDB {
 		return questionID;
 	}
 
+	
+	/**
+	 * 
+	 * @param q
+	 * @return MultipleChoiceQuestion id after adding in data base
+	 */
 	public static int addMultipleChoiceQuestion(MultipleChoiceQuestion q) {
 		int questionID = addQuestion(q);
 		SingleAnswer ans = (SingleAnswer) q.getCorrectAnswer();
@@ -597,6 +816,13 @@ public class MyDB {
 		return questionID;
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param q
+	 * @return MCMAQuestion id after adding in data base
+	 */
 	public static int addMCMAQuestion(MCMAQ q) {
 		int questionID = addQuestion(q);
 		MultipleAnswer ma = (MultipleAnswer) q.getCorrectAnswer();
@@ -624,6 +850,8 @@ public class MyDB {
 		return questionID;
 	}
 
+	
+
 	private static int addQuestion(Question q) {
 		int questionID = -1;
 		try {
@@ -648,6 +876,14 @@ public class MyDB {
 		return questionID;
 	}
 
+	
+	/**
+	 * 
+	 * @param answers
+	 * @param questionID
+	 * @param answerNumber
+	 * adds ansswer
+	 */
 	private static void addAnswers(List<String> answers, int questionID,
 			int answerNumber) {
 		try {
@@ -666,6 +902,13 @@ public class MyDB {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param quizID
+	 * @param questionID
+	 * adds question to quiz
+	 */
 	public static void addQuestionToQuiz(int quizID, int questionID) {
 		try {
 			statement
@@ -677,6 +920,12 @@ public class MyDB {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param subName
+	 * @return list of searched Users according nick name
+	 */
 	public static List<Integer> searchUser(String subName) {
 		List<Integer> result = new ArrayList<Integer>();
 		String query = "SELECT accountID FROM accounts WHERE nick LIKE \"%"
@@ -694,6 +943,12 @@ public class MyDB {
 		return result;
 	}
 
+	
+	/**
+	 * 
+	 * @param subName
+	 * @return list of searched quizzes according quiz name
+	 */
 	public static ResultSet searchQuiz(String subName) {
 		ResultSet result = null;
 		try {
@@ -705,14 +960,6 @@ public class MyDB {
 			e.printStackTrace();
 		}
 		return result;
-	}
-
-	public static void close() {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public static List<Integer> getQuestions(int quizID) {
@@ -855,6 +1102,17 @@ public class MyDB {
 			statement.executeUpdate(update);
 		} catch (SQLException e) {
 			System.out.println(update);
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	public static void close() {
+		try {
+			connection.close();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
