@@ -125,10 +125,9 @@ public class MyDB {
 		ResultSet res;
 		PreparedStatement stat = null;
 		try {
-			String sql = "SELECT ? FROM accounts where accountID = ?";
+			String sql = "SELECT " + type + " FROM accounts WHERE accountID = ?";
 			stat = (PreparedStatement) connection.prepareStatement(sql);
-			stat.setString(1, type);
-			stat.setInt(2, id);
+			stat.setInt(1, id);
 			res = stat.executeQuery();
 			res.next();
 			result = res.getString(type);
@@ -206,7 +205,7 @@ public class MyDB {
 	
 	public static void deleteAccount(String nickName){
 		try {
-			statement.executeUpdate("delete from accounts where nick = \""  + nickName + "\";");					
+			statement.executeUpdate("DELETE FROM accounts WHERE nick = \""  + nickName + "\";");					
 		} catch (SQLException e) {
 			System.out.println( "query-s gashvebisas moxda shecdoma. (deleteAccount).");
 			e.printStackTrace();
@@ -257,10 +256,12 @@ public class MyDB {
 
 	public static List<Message> getMessages(int idTo) {
 		ResultSet res;
-		String query = "SELECT * FROM messages WHERE accountIdTo = " + idTo + ";";
+		String query = "SELECT * FROM messages WHERE accountIdTo = ? ;";
 		List<Message> messages = new ArrayList<Message>();
 		try {
-			res = statement.executeQuery(query);
+			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(query);
+			stat.setInt(1, idTo);
+			res = stat.executeQuery();
 			while(res.next()){
 				messages.add(new Message(idTo, res.getInt("accountIdFrom"), 
 						res.getDate("sendTime"), res.getString("text"), res.getBoolean("read_unread")));
@@ -289,28 +290,29 @@ public class MyDB {
 	public static void sendMessage(int idTo, int idFrom, String text) {
 		String date = getCurrentTime();
 		try {
-			String query = "INSERT INTO messages (accountIdTo,accountIdFrom,text,read_unread ,sendTime )VALUES("
-					+ idTo
-					+ ","
-					+ idFrom
-					+ ",\""
-					+ text
-					+ "\",false,\"" + date + "\");";
-			statement.executeUpdate(query);
-
+			String sql = "INSERT INTO messages VALUES(?, ?, ?, false, ?);";
+			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			stat.setInt(1, idTo);
+			stat.setInt(2, idFrom);
+			stat.setString(3, text);
+			stat.setString(4, date);
+			stat.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println( "query-s gashvebisas moxda shecdoma. (sendMessage).");
 			e.printStackTrace();
-			return;
 		}
 	}
 
 	public static int createQuiz(String name, String description, int accountID){
 		String date = getCurrentTime();
-		String query = "INSERT INTO quizes(authorID,name,quiz_create_date,description) values(" 
-				+ accountID + ",\"" + name + "\",\""  + date + "\",\"" + description + "\" );" ;
+		String sql = "INSERT INTO quizes(authorID,name,quiz_create_date,description) VALUES(?,?,?,?);";
 		try {
-			statement.executeUpdate(query);
+			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			stat.setInt(1, accountID);
+			stat.setString(2, name);
+			stat.setString(3, date);
+			stat.setString(4, description);
+			stat.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println( "query-s gashvebisas moxda shecdoma. (createQuiz).");
 			e.printStackTrace();
@@ -321,9 +323,12 @@ public class MyDB {
 	
 	public static int getQuizId(String name, int accountID) {
 		ResultSet res;
+		String sql = "SELECT quizID FROM quizes WHERE name = ? AND authorID = ? ;";
 		try {
-			res = statement.executeQuery("SELECT quizID FROM quizes " +
-								"WHERE name = \"" + name + "\" AND authorID = " + accountID + "; ");
+			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			stat.setString(1, name);
+			stat.setInt(2, accountID);
+			res = stat.executeQuery();
 			if (res.next()) 
 				return res.getInt(1);
 			else return 0;
