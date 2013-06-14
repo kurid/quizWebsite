@@ -15,7 +15,7 @@
 			lowerJsp = "UserProfile.jsp";
 		}
 	%>
-	<frameset rows="15%,*"  frameborder="no" border="0" framespacing="0">
+	<frameset rows="17%,*"  frameborder="no" border="0" framespacing="0">
 		<frame src= <%=upperJsp %> name = "AccountInfo"> 
 		<frame src= <%=lowerJsp %> name = "ActualInfo">
 	</frameset>

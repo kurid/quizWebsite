@@ -24,17 +24,19 @@
 				<td><input type="submit" name="search" value="Search" /></td>
 			</tr>
 		</table>
+		 <table align="center">
 		<%
 			if (searchedQuizzes != null) {
 				for (QuizDB quiz : searchedQuizzes) {
 					Account autor = new Account(quiz.getAuthor());
-					out.println("<li><a href=\"StartTackingQuiz?ID=");
+					out.println("<tr><td> <li><a href=\"StartTackingQuiz?ID=");
 					out.println(quiz.getID() + "\"target=\"AccountWindow\""
-							+ "\">" + quiz.getName() + "</a> © "
-							+ autor.getNickname() + "</li>");
+							+ "\">" + quiz.getName() + "</a> </li> </td> <td> © "
+							+ autor.getNickname() + "</td> </tr>");
 				}
 			}
 		%>
+		</table>
 
 	</form>
 
