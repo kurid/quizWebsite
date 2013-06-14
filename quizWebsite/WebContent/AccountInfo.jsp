@@ -1,3 +1,4 @@
+<%@page import="web.Account"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,13 +12,14 @@
 		
 		<table align="center"> 
 			<tr> 
-				<td width="15%"> <a href="News.jsp" target="ActualInfo">News</a>  </td>
-				<td width="15%"> <a href="Home.jsp" target="ActualInfo">Home</a>  </td>
-				<td width="15%"> <a href="Quizzes.jsp" target="ActualInfo"> Quizzes</a> </td>
-				<td width="15%"> <a href="Accounts.jsp" target="ActualInfo"> Accounts</a>  </td>
-				<td width="15%"> <a href="GetFriendsServlet" target="ActualInfo"> Friends </a> </td>
-				<td width="15%"> <a href="QuizzesDone" target="ActualInfo"> Quizzes Done </a> </td>
-				<td width="15%"> <a href="Notifications" target="ActualInfo"> Notifications </a> </td>
+				<td width="10%"> <a href="News.jsp" target="ActualInfo">News</a>  </td>
+				<td width="10%"> <a href="Home.jsp" target="ActualInfo">Home</a>  </td>
+				<td width="10%"> <a href="Quizzes.jsp" target="ActualInfo"> Quizzes</a> </td>
+				<td width="10%"> <a href="Accounts.jsp" target="ActualInfo"> Accounts</a>  </td>
+				<td width="10%"> <a href="GetFriendsServlet" target="ActualInfo"> Friends </a> </td>
+				<td width="10%"> <a href="QuizzesDone" target="ActualInfo"> Quizzes Done </a> </td>
+				<td width="10%"> <a href="Notifications" target="ActualInfo"> Notifications </a> </td>
+				<td width="10%"> <a href="QuizzesCreated" target="ActualInfo"> Quizzes Created </a> </td>
 			</tr>
 		</table>
 		<hr>

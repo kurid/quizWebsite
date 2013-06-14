@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import quiz.QuizDB;
 
+import web.Account;
 import web.MyDB;
 
 /**
@@ -44,7 +45,13 @@ public class QuizzesCreated extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int ID = Integer.parseInt(request.getParameter("userID"));
+		HttpSession session = request.getSession(true);
+		boolean isLookingUp = (Boolean)session.getAttribute("isLookingUp");
+		Account user = (Account) session.getAttribute("account");
+		if(isLookingUp){
+			user = (Account)session.getAttribute("userAccount");
+		}
+		int ID = user.getId();
 		ResultSet res = MyDB.getCreatedQuizes(ID);
 		List<QuizDB> quizList = new ArrayList<QuizDB>();
 		try {

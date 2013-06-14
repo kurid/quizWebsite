@@ -9,16 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% 
-		Account userAcc = (Account)session.getAttribute("userAccount");
-		String servletName = "QuizzesCreated?userID=" + userAcc.getId(); 
-	%>
+	
 	<table align="center">
 		<tr>
 			<td width="20%"> <a href="UserProfile" target ="ActualInfo"> Profile </a> </td>
 			<td width="20%"> <a href="GetFriendsServlet" target ="ActualInfo"> Friends </a> </td>
 			<td width="20%"> <a href="QuizzesDone" target ="ActualInfo"> Quizzes Done </a> </td>
-			<td width="20%"> <a href= <%=servletName %> target = "ActualInfo"> Quizzes Created </a> </td>
+			<td width="20%"> <a href="QuizzesCreated" target = "ActualInfo"> Quizzes Created </a> </td>
 		</tr>
 	</table>
 </body>
