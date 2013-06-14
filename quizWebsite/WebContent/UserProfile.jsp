@@ -15,9 +15,9 @@
 		if(!isFriend){
 			if((Boolean)session.getAttribute("counterFriendRequestExists")){
 				statement = "<tr><td> <form action=\"FriendRequestResponse\" method=\"post\">" 
-						+"<input type=\"submit\" value=\"Accept\"/>" + "</form> </td></tr>"
+						+ "<input type=\"submit\" name=\"act\" value=\"Accept\"/>" + "</form> </td></tr>"
 					+ "<tr><td> <form action=\"FriendRequestResponse\" method=\"post\">" 
-						+"<input type=\"submit\" value=\"Reject\"/>" + "</form> </td></tr>";
+						+ "<input type=\"submit\" name=\"act\" value=\"Reject\"/>" + "</form> </td></tr>";
 			}else if((Boolean)session.getAttribute("friendRequestExists")){
 				statement = "<tr><td> Friend request already sent, waiting for response... </td></tr>";
 			}else statement = "<tr><td> <form action=\"SendFriendRequest\" method=\"post\">" 
