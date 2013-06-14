@@ -405,21 +405,17 @@ public class MyDB {
 
 	public static void addAccount(String name, String surName, String nickName,
 			String password, String mail) {
-		String Achievements = "Glexi";
+		String achievement = "Newbie";
+		String sql = "INSERT INTO accounts (nick,name,surname,password,mail,Achievements) values(?,?,?,?,?,?)";
 		try {
-			statement
-					.executeUpdate("INSERT INTO accounts (nick,name,surname,password,mail,Achievements) values(\""
-							+ nickName
-							+ "\",\""
-							+ name
-							+ "\",\""
-							+ surName
-							+ "\",\""
-							+ password
-							+ "\",\""
-							+ mail
-							+ "\",\""
-							+ Achievements + "\")");
+			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			stat.setString(1, nickName);
+			stat.setString(2, name);
+			stat.setString(3, surName);
+			stat.setString(4, password);
+			stat.setString(5, mail);
+			stat.setString(6, achievement);
+			stat.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println( "query-s gashvebisas moxda shecdoma. (addAccount).");
 			e.printStackTrace();
@@ -709,6 +705,13 @@ public class MyDB {
 	public static void deleteFriendship(int id, int id2) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+	public static boolean friendRequestExists(int idFrom, int idTo) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }
