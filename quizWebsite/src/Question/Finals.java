@@ -32,4 +32,7 @@ public interface Finals {
 	public static final int minNumberOfQuestions = 2;
 	public static final int maxNumberOfQuestions = 20;
 	public static final int maxNumberOfMatching = 6;
+	
+	public static final int minLengthNickName = 2;
+	public static final int maxLengthNickName = 16;
 }

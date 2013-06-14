@@ -2,6 +2,8 @@ package web;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import Question.Finals;
 /**
  * 
  * @author User Kurid 
@@ -147,8 +149,8 @@ public class AccountManager implements Manager {
 		if (!mailIsValid(mail))	 return INCORRECT_MAIL;
 		if (nickNameExist(nickName)) return NICKNAME_EXISTS;
 		if (mailExists(mail)) return MAIL_EXISTS;
-		if(nickName.length() < 2) return SHORT_NICKNAME;
-		if(nickName.length() >= 16) return LONG_NICKNAME;
+		if(nickName.length() < Finals.minLengthNickName) return SHORT_NICKNAME;
+		if(nickName.length() >= Finals.maxLengthNickName) return LONG_NICKNAME;
 
 		return addInDataBase(name, surname, nickName, Password, mail);
 	}
