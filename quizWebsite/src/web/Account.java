@@ -45,5 +45,8 @@ public class Account {
 		return nickname;
 	}
 		
+	public boolean isAdmin(){
+		return isAdmin;
+	}
 	
 }
