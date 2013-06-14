@@ -34,12 +34,10 @@ public class MyDB {
 			statement = connection.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.err
-					.println("Update the MySQL constants to correct values!");
+			System.err.println("Update the MySQL constants to correct values!");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.err
-					.println("Add the MySQL jar file to your build path!");
+			System.err.println("Add the MySQL jar file to your build path!");
 		}
 
 		try {
@@ -50,12 +48,12 @@ public class MyDB {
 		}
 	}
 
-	
-	public static ResultSet getDoneQuizzes(int accountID){
+	public static ResultSet getDoneQuizzes(int accountID) {
 		ResultSet res = null;
 		String query = "SELECT * FROM doneQuizzes WHERE accountID = ? ;";
 		try {
-			PreparedStatement prst = (PreparedStatement) connection.prepareStatement(query);
+			PreparedStatement prst = (PreparedStatement) connection
+					.prepareStatement(query);
 			prst.setInt(1, accountID);
 			res = prst.executeQuery();
 		} catch (SQLException e) {
@@ -64,28 +62,27 @@ public class MyDB {
 		}
 		return res;
 	}
-	
-	
-	
-	public static ResultSet newQuizzes(){
+
+	public static ResultSet newQuizzes() {
 		ResultSet res = null;
 		String query = "SELECT * FROM quizes ORDER BY quiz_create_date DESC LIMIT 0,5;";
 		try {
-			PreparedStatement statement = (PreparedStatement) connection.prepareStatement(query);
-			res  = statement.executeQuery();
+			PreparedStatement statement = (PreparedStatement) connection
+					.prepareStatement(query);
+			res = statement.executeQuery();
 		} catch (SQLException e) {
 			System.out.println("Error in newQuizzes");
 			e.printStackTrace();
 		}
 		return res;
 	}
-	
-	public static ResultSet popularQuizzes(){
+
+	public static ResultSet popularQuizzes() {
 		ResultSet res = null;
 		try {
-			String query = "SELECT quizes.quizID,authorID, name,description FROM quizes, popularQuizes " +
-					" WHERE quizes.quizID = popularQuizes.quizID " +
-					" ORDER BY count DESC;";
+			String query = "SELECT quizes.quizID,authorID, name,description FROM quizes, popularQuizes "
+					+ " WHERE quizes.quizID = popularQuizes.quizID "
+					+ " ORDER BY count DESC;";
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
 			System.out.println("Error in popularQuizzes");
@@ -93,25 +90,28 @@ public class MyDB {
 		}
 		return res;
 	}
-	
+
 	public static List<Integer> getFriends(int id) {
 		List<Integer> friends = new ArrayList<Integer>();
 		ResultSet res;
 		try {
-			PreparedStatement stat1 = (PreparedStatement) connection.prepareStatement("SELECT accountID2 FROM friendships WHERE accountID1 = ? ;");
+			PreparedStatement stat1 = (PreparedStatement) connection
+					.prepareStatement("SELECT accountID2 FROM friendships WHERE accountID1 = ? ;");
 			stat1.setInt(1, id);
 			res = stat1.executeQuery();
 			while (res.next()) {
 				friends.add(res.getInt("accountID2"));
 			}
-			PreparedStatement stat2 = (PreparedStatement) connection.prepareStatement("SELECT accountID1 FROM friendships where accountID2 = ? ;");
+			PreparedStatement stat2 = (PreparedStatement) connection
+					.prepareStatement("SELECT accountID1 FROM friendships where accountID2 = ? ;");
 			stat2.setInt(1, id);
 			res = stat2.executeQuery();
 			while (res.next()) {
 				friends.add(res.getInt("accountID1"));
 			}
 		} catch (SQLException e) {
-			System.out.println("getFriends-is dros moxda shecdoma. query-s gashvebisas");
+			System.out
+					.println("getFriends-is dros moxda shecdoma. query-s gashvebisas");
 			e.printStackTrace();
 		}
 		return friends;
@@ -120,26 +120,27 @@ public class MyDB {
 	/*
 	 * svadasxva type-ebis( name, surname, nickname...) geteri.
 	 */
-	private static String getter(int id, String type){
+	private static String getter(int id, String type) {
 		String result = "";
 		ResultSet res;
 		PreparedStatement stat = null;
 		try {
-			String sql = "SELECT " + type + " FROM accounts WHERE accountID = ?";
+			String sql = "SELECT " + type
+					+ " FROM accounts WHERE accountID = ?";
 			stat = (PreparedStatement) connection.prepareStatement(sql);
 			stat.setInt(1, id);
 			res = stat.executeQuery();
 			res.next();
 			result = res.getString(type);
 		} catch (SQLException e) {
-			System.out.println( "query-s gashvebisas moxda shecdoma. (get" + type+ ")");
+			System.out.println("query-s gashvebisas moxda shecdoma. (get"
+					+ type + ")");
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
-	
+
 	public static String getName(int id) {
 		return getter(id, "name");
 	}
@@ -151,49 +152,52 @@ public class MyDB {
 	public static String getNickName(int id) {
 		return getter(id, "nick");
 	}
-	
+
 	public static String getPassword(int id) {
-		
+
 		return getter(id, "password");
 	}
-	
-	public static String getMail(int id){
+
+	public static String getMail(int id) {
 		return getter(id, "mail");
 	}
+
 	public static int getId(String nickName) {
 		int id = 0;
 		ResultSet res;
 		try {
 			String sql = "SELECT accountID FROM accounts WHERE nick = ?";
-			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			PreparedStatement stat = (PreparedStatement) connection
+					.prepareStatement(sql);
 			stat.setString(1, nickName);
 			res = stat.executeQuery();
 			res.next();
 			id = res.getInt("accountID");
 		} catch (SQLException e) {
-			System.out.println( "query-s gashvebisas moxda shecdoma. (getId");
+			System.out.println("query-s gashvebisas moxda shecdoma. (getId");
 			e.printStackTrace();
 		}
 		return id;
 	}
-	
-	
-	private static boolean exist(String type, String stringToSearch){
+
+	private static boolean exist(String type, String stringToSearch) {
 		boolean b = false;
 		ResultSet res;
 		try {
-			String sql =  "SELECT * FROM accounts WHERE " + type + " = ? ;";
-			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			String sql = "SELECT * FROM accounts WHERE " + type + " = ? ;";
+			PreparedStatement stat = (PreparedStatement) connection
+					.prepareStatement(sql);
 			stat.setString(1, stringToSearch);
 			res = stat.executeQuery();
 			b = res.next();
 		} catch (SQLException e) {
-			System.out.println( "query-s gashvebisas moxda shecdoma. (exist" + type+ ")");
+			System.out.println("query-s gashvebisas moxda shecdoma. (exist"
+					+ type + ")");
 			e.printStackTrace();
 		}
 		return b;
 	}
-	
+
 	public static boolean nickNameExist(String nickName) {
 		return exist("nick", nickName);
 	}
@@ -202,17 +206,17 @@ public class MyDB {
 		return exist("mail", mail);
 	}
 
-	
-	public static void deleteAccount(String nickName){
+	public static void deleteAccount(String nickName) {
 		try {
-			statement.executeUpdate("DELETE FROM accounts WHERE nick = \""  + nickName + "\";");					
+			statement.executeUpdate("DELETE FROM accounts WHERE nick = \""
+					+ nickName + "\";");
 		} catch (SQLException e) {
-			System.out.println( "query-s gashvebisas moxda shecdoma. (deleteAccount).");
+			System.out
+					.println("query-s gashvebisas moxda shecdoma. (deleteAccount).");
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	/*
 	 * abrunebs marto ricxvebs
 	 */
@@ -223,29 +227,33 @@ public class MyDB {
 		arr[2] = getNotificationCount(id, "challenges");
 		return arr;
 	}
-	
-	private static int getNotificationCount(int id, String table){
+
+	private static int getNotificationCount(int id, String table) {
 		int count = 0;
 		ResultSet res;
 		try {
-			String query = "SELECT COUNT(*) FROM "+ table + " WHERE accountIdTo = " + id + ";";
+			String query = "SELECT COUNT(*) FROM " + table
+					+ " WHERE accountIdTo = " + id + ";";
 			res = statement.executeQuery(query);
 			res.next();
 			count = Integer.parseInt(res.getString(1));
 		} catch (Exception e) {
-			System.out.println( "query-s gashvebisas moxda shecdoma. (getNotifications).");
+			System.out
+					.println("query-s gashvebisas moxda shecdoma. (getNotifications).");
 		}
 		return count;
 	}
 
 	public static List<Challenge> getChallenges(int idTo) {
-		String query = "SELECT * FROM challenges WHERE accountIdTo = " + idTo + ";";
+		String query = "SELECT * FROM challenges WHERE accountIdTo = " + idTo
+				+ ";";
 		ResultSet res;
 		List<Challenge> challanges = new ArrayList<Challenge>();
 		try {
 			res = statement.executeQuery(query);
-			while(res.next()){
-				challanges.add(new Challenge(idTo, res.getInt("accountIdFrom"), res.getDate("sendTime"), res.getInt("quizID")));
+			while (res.next()) {
+				challanges.add(new Challenge(idTo, res.getInt("accountIdFrom"),
+						res.getDate("sendTime"), res.getInt("quizID")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -259,12 +267,14 @@ public class MyDB {
 		String query = "SELECT * FROM messages WHERE accountIdTo = ? ;";
 		List<Message> messages = new ArrayList<Message>();
 		try {
-			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(query);
+			PreparedStatement stat = (PreparedStatement) connection
+					.prepareStatement(query);
 			stat.setInt(1, idTo);
 			res = stat.executeQuery();
-			while(res.next()){
-				messages.add(new Message(idTo, res.getInt("accountIdFrom"), 
-						res.getDate("sendTime"), res.getString("text"), res.getBoolean("read_unread")));
+			while (res.next()) {
+				messages.add(new Message(idTo, res.getInt("accountIdFrom"), res
+						.getDate("sendTime"), res.getString("text"), !res
+						.getBoolean("read_unread")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -274,12 +284,14 @@ public class MyDB {
 
 	public static List<FriendRequest> getRequest(int idTo) {
 		ResultSet res;
-		String query = "SELECT * FROM friendrequests WHERE accountIdTo = " + idTo + ";";
+		String query = "SELECT * FROM friendrequests WHERE accountIdTo = "
+				+ idTo + ";";
 		List<FriendRequest> friendRequests = new ArrayList<FriendRequest>();
 		try {
 			res = statement.executeQuery(query);
-			while(res.next()){
-				friendRequests.add(new FriendRequest(idTo, res.getInt("accountIdFrom"), res.getDate("sendTime")));
+			while (res.next()) {
+				friendRequests.add(new FriendRequest(idTo, res
+						.getInt("accountIdFrom"), res.getDate("sendTime")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -291,69 +303,76 @@ public class MyDB {
 		String date = getCurrentTime();
 		try {
 			String sql = "INSERT INTO messages VALUES(?, ?, ?, false, ?);";
-			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			PreparedStatement stat = (PreparedStatement) connection
+					.prepareStatement(sql);
 			stat.setInt(1, idTo);
 			stat.setInt(2, idFrom);
 			stat.setString(3, text);
 			stat.setString(4, date);
 			stat.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println( "query-s gashvebisas moxda shecdoma. (sendMessage).");
+			System.out
+					.println("query-s gashvebisas moxda shecdoma. (sendMessage).");
 			e.printStackTrace();
 		}
 	}
 
-	public static int createQuiz(String name, String description, int accountID){
+	public static int createQuiz(String name, String description, int accountID) {
 		String date = getCurrentTime();
 		String sql = "INSERT INTO quizes(authorID,name,quiz_create_date,description) VALUES(?,?,?,?);";
 		try {
-			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			PreparedStatement stat = (PreparedStatement) connection
+					.prepareStatement(sql);
 			stat.setInt(1, accountID);
 			stat.setString(2, name);
 			stat.setString(3, date);
 			stat.setString(4, description);
 			stat.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println( "query-s gashvebisas moxda shecdoma. (createQuiz).");
+			System.out
+					.println("query-s gashvebisas moxda shecdoma. (createQuiz).");
 			e.printStackTrace();
 		}
 		return getQuizId(name, accountID);
 	}
 
-	
 	public static int getQuizId(String name, int accountID) {
 		ResultSet res;
 		String sql = "SELECT quizID FROM quizes WHERE name = ? AND authorID = ? ;";
 		try {
-			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			PreparedStatement stat = (PreparedStatement) connection
+					.prepareStatement(sql);
 			stat.setString(1, name);
 			stat.setInt(2, accountID);
 			res = stat.executeQuery();
-			if (res.next()) 
+			if (res.next())
 				return res.getInt(1);
-			else return 0;
+			else
+				return 0;
 		} catch (SQLException e) {
-			System.out.println( "query-s gashvebisas moxda shecdoma. (getQuizId).");
+			System.out
+					.println("query-s gashvebisas moxda shecdoma. (getQuizId).");
 			e.printStackTrace();
 		}
 		return 0;
 	}
 
-
 	public static ResultSet getQuizInfo(int quizID) {
 		ResultSet res = null;
 		try {
-			res = statement.executeQuery("SELECT * FROM quizes WHERE quizID = " + quizID+ ";");
+			res = statement.executeQuery("SELECT * FROM quizes WHERE quizID = "
+					+ quizID + ";");
 		} catch (SQLException e) {
 			System.out.println("Error in getQuizInfo");
 			e.printStackTrace();
 		}
 		return res;
 	}
-	
-	public static ResultSet getQuestionInfo(int questionID){
+
+	public static ResultSet getQuestionInfo(int questionID) {
 		ResultSet res = null;
-		String query ="SELECT * FROM questions WHERE questionID =" + questionID +";" ;
+		String query = "SELECT * FROM questions WHERE questionID ="
+				+ questionID + ";";
 		try {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
@@ -361,10 +380,11 @@ public class MyDB {
 		}
 		return res;
 	}
-	
-	public static ResultSet MultipleChoice(int questionID){
+
+	public static ResultSet MultipleChoice(int questionID) {
 		ResultSet res = null;
-		String query = "SELECT * FROM multiplechoice WHERE questionID =" + questionID + ";" ;
+		String query = "SELECT * FROM multiplechoice WHERE questionID ="
+				+ questionID + ";";
 		try {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
@@ -372,10 +392,11 @@ public class MyDB {
 		}
 		return res;
 	}
-	
-	public static ResultSet answers(int questionID){
+
+	public static ResultSet answers(int questionID) {
 		ResultSet res = null;
-		String query = "SELECT * FROM answers WHERE questionID =" + questionID + ";" ;
+		String query = "SELECT * FROM answers WHERE questionID =" + questionID
+				+ ";";
 		try {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
@@ -383,21 +404,23 @@ public class MyDB {
 		}
 		return res;
 	}
-	
-//	public static ResultSet 
-	
+
+	// public static ResultSet
+
 	public static void sendChallenge(int idTo, int idFrom, int quizID) {
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date utilDate = new java.util.Date();
 		String date = sdf.format(utilDate);
+		String query = "INSERT INTO challenges VALUES(" + idTo + ", " + idFrom
+				+ ", " + quizID + ", " + "\"" + date + "\");";
 		try {
-			String query = "INSERT INTO challenges (accountIdTo,accountIdFrom,quizID,sendDate )VALUES("
-					+ idTo + "," + idFrom + "," + quizID + date +");";
 			statement.executeUpdate(query);
 
 		} catch (SQLException e) {
-			System.out.println("shesabamisi id-is qvizi an accounti ar aris sheqmnili");
+			System.out.println(query);
+			System.out
+					.println("shesabamisi id-is qvizi an accounti ar aris sheqmnili");
 			e.printStackTrace();
 		}
 
@@ -408,7 +431,8 @@ public class MyDB {
 		String achievement = "Newbie";
 		String sql = "INSERT INTO accounts (nick,name,surname,password,mail,Achievements) values(?,?,?,?,?,?)";
 		try {
-			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			PreparedStatement stat = (PreparedStatement) connection
+					.prepareStatement(sql);
 			stat.setString(1, nickName);
 			stat.setString(2, name);
 			stat.setString(3, surName);
@@ -417,36 +441,39 @@ public class MyDB {
 			stat.setString(6, achievement);
 			stat.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println( "query-s gashvebisas moxda shecdoma. (addAccount).");
+			System.out
+					.println("query-s gashvebisas moxda shecdoma. (addAccount).");
 			e.printStackTrace();
 		}
-	}	
-	
-	
+	}
+
 	public static void sendFriendRequest(int idTo, int idFrom) {
 		String date = getCurrentTime();
-		String query = "INSERT INTO  friendrequests VALUES (" + idTo + ", " + idFrom + ", \"" + date + "\");";
+		String query = "INSERT INTO  friendrequests VALUES (" + idTo + ", "
+				+ idFrom + ", \"" + date + "\");";
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static ResultSet getMatching(int questionId){
+
+	public static ResultSet getMatching(int questionId) {
 		ResultSet res = null;
-		String query ="SELECT * FROM matching  WHERE questionID = " + questionId +" ;";
+		String query = "SELECT * FROM matching  WHERE questionID = "
+				+ questionId + " ;";
 		try {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return res; 
+		return res;
 	}
-	
-	public static String getURL(int questionId){
+
+	public static String getURL(int questionId) {
 		ResultSet res = null;
-		String query ="SELECT url FROM imageQuestion  WHERE questionID = " + questionId +" ;";
+		String query = "SELECT url FROM imageQuestion  WHERE questionID = "
+				+ questionId + " ;";
 		try {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
@@ -460,10 +487,11 @@ public class MyDB {
 		}
 		return "";
 	}
-	
-	public static void addFriend(int id1, int id2){
+
+	public static void addFriend(int id1, int id2) {
 		try {
-			CallableStatement cs = (CallableStatement) connection.prepareCall("{call addFriend(?,?)}");
+			CallableStatement cs = (CallableStatement) connection
+					.prepareCall("{call addFriend(?,?)}");
 			cs.setInt(1, id1);
 			cs.setInt(2, id2);
 			cs.execute();
@@ -472,7 +500,7 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static int addQuestionResponse(Question q) {
 		int questionID = addQuestion(q);
 		MultipleAnswer answer = (MultipleAnswer) q.getCorrectAnswer();
@@ -481,18 +509,18 @@ public class MyDB {
 		return questionID;
 
 	}
-	
-	public static int addMultiAnswerQuestion(Question q){
+
+	public static int addMultiAnswerQuestion(Question q) {
 		int questionID = addQuestion(q);
 		MMAnswer answer = (MMAnswer) q.getCorrectAnswer();
-		List<List<String> > correctAnswers = answer.getAnswer();
-		for(int i = 0; i < correctAnswers.size(); i++){
-			addAnswers(correctAnswers.get(i), questionID, i+1);
+		List<List<String>> correctAnswers = answer.getAnswer();
+		for (int i = 0; i < correctAnswers.size(); i++) {
+			addAnswers(correctAnswers.get(i), questionID, i + 1);
 		}
 		return questionID;
 	}
-	
-	public static int addImageQuestion(ImageQuestion q){
+
+	public static int addImageQuestion(ImageQuestion q) {
 		int questionID = addQuestion(q);
 		MultipleAnswer answer = (MultipleAnswer) q.getCorrectAnswer();
 		List<String> answers = answer.getAnswer();
@@ -500,7 +528,8 @@ public class MyDB {
 		String url = q.getURL();
 		String sql = "INSERT INTO imageQuestion VALUES(?, ?);";
 		try {
-			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			PreparedStatement stat = (PreparedStatement) connection
+					.prepareStatement(sql);
 			stat.setInt(1, questionID);
 			stat.setString(2, url);
 			stat.executeUpdate();
@@ -510,22 +539,23 @@ public class MyDB {
 		}
 		return questionID;
 	}
-	
+
 	public static int addMatchingQuestion(Question q) {
 		int questionID = addQuestion(q);
 		MMAnswer answer = (MMAnswer) q.getCorrectAnswer();
-		List<List<String> > correctMatches = answer.getAnswer();
-		for(int i = 0; i < correctMatches.size(); i++){
-			try{
+		List<List<String>> correctMatches = answer.getAnswer();
+		for (int i = 0; i < correctMatches.size(); i++) {
+			try {
 				String answer1 = correctMatches.get(i).get(0);
 				String answer2 = correctMatches.get(i).get(1);
 				String sql = "INSERT INTO matching VALUES (?,?,?);";
-				PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+				PreparedStatement stat = (PreparedStatement) connection
+						.prepareStatement(sql);
 				stat.setInt(1, questionID);
 				stat.setString(2, answer1);
 				stat.setString(3, answer2);
 				stat.executeUpdate();
-			} catch (SQLException e){
+			} catch (SQLException e) {
 				System.out.println("Error in addMatchingQuestion");
 				e.printStackTrace();
 			}
@@ -540,13 +570,15 @@ public class MyDB {
 		String answer = ans.getAnswer();
 		String isCorrect = "false";
 		try {
-			for(String possibleAnswer: possibleAnswers){
+			for (String possibleAnswer : possibleAnswers) {
 				if (answer.equals(possibleAnswer))
 					isCorrect = "true";
 				else
 					isCorrect = "false";
-				String sql =  "INSERT INTO multipleChoice VALUES (?,?, " + isCorrect + ");";
-				PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+				String sql = "INSERT INTO multipleChoice VALUES (?,?, "
+						+ isCorrect + ");";
+				PreparedStatement stat = (PreparedStatement) connection
+						.prepareStatement(sql);
 				stat.setInt(1, questionID);
 				stat.setString(2, possibleAnswer);
 				stat.executeUpdate();
@@ -570,8 +602,10 @@ public class MyDB {
 					isCorrect = "true";
 				else
 					isCorrect = "false";
-				String sql = "INSERT INTO multipleChoice VALUES (?, ?, " + isCorrect+ ");";
-				PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+				String sql = "INSERT INTO multipleChoice VALUES (?, ?, "
+						+ isCorrect + ");";
+				PreparedStatement stat = (PreparedStatement) connection
+						.prepareStatement(sql);
 				stat.setInt(1, questionID);
 				stat.setString(2, possibleAnswer);
 				stat.executeUpdate();
@@ -582,16 +616,17 @@ public class MyDB {
 		}
 		return questionID;
 	}
-	
+
 	private static int addQuestion(Question q) {
 		int questionID = -1;
 		try {
 			String query = "SELECT addQuestion(" + q.getType() + ", \""
 					+ q.getQuestionText() + "\", " + q.getScore() + ", "
 					+ q.getIndex() + ");";
-			
+
 			String sql = "SELECT addQuestion(?, ?, ?, ?);";
-			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			PreparedStatement stat = (PreparedStatement) connection
+					.prepareStatement(sql);
 			stat.setInt(1, q.getType());
 			stat.setString(2, q.getQuestionText());
 			stat.setInt(3, q.getScore());
@@ -605,8 +640,9 @@ public class MyDB {
 		}
 		return questionID;
 	}
-	
-	private static void addAnswers(List<String> answers, int questionID, int answerNumber){
+
+	private static void addAnswers(List<String> answers, int questionID,
+			int answerNumber) {
 		try {
 			CallableStatement cs;
 			for (int i = 0; i < answers.size(); i++) {
@@ -622,23 +658,26 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void addQuestionToQuiz(int quizID, int questionID ){
+
+	public static void addQuestionToQuiz(int quizID, int questionID) {
 		try {
-			statement.executeUpdate("INSERT INTO questiontoquiz(quizID, questionID) VALUES (" + quizID +" ," + questionID + ");");
+			statement
+					.executeUpdate("INSERT INTO questiontoquiz(quizID, questionID) VALUES ("
+							+ quizID + " ," + questionID + ");");
 		} catch (SQLException e) {
 			System.out.println("Error in addQuestionToQuiz");
 			e.printStackTrace();
 		}
 	}
-	
-	public static List<Integer> searchUser(String subName){
+
+	public static List<Integer> searchUser(String subName) {
 		List<Integer> result = new ArrayList<Integer>();
-		String query = "SELECT accountID FROM accounts WHERE nick LIKE \"%" + subName + "%\";";
+		String query = "SELECT accountID FROM accounts WHERE nick LIKE \"%"
+				+ subName + "%\";";
 		ResultSet res;
 		try {
 			res = statement.executeQuery(query);
-			while(res.next())
+			while (res.next())
 				result.add(res.getInt(1));
 		} catch (SQLException e) {
 			System.out.println("Error in searchUser.");
@@ -647,11 +686,12 @@ public class MyDB {
 		}
 		return result;
 	}
-	
-	public static ResultSet searchQuiz(String subName){
+
+	public static ResultSet searchQuiz(String subName) {
 		ResultSet result = null;
 		try {
-			String query = "SELECT * FROM quizes WHERE name LIKE \"%" + subName + "%\";";
+			String query = "SELECT * FROM quizes WHERE name LIKE \"%" + subName
+					+ "%\";";
 			result = statement.executeQuery(query);
 		} catch (SQLException e) {
 			System.out.println("Error in searchQuiz.");
@@ -659,8 +699,7 @@ public class MyDB {
 		}
 		return result;
 	}
-	
-	
+
 	public static void close() {
 		try {
 			connection.close();
@@ -672,9 +711,10 @@ public class MyDB {
 	public static List<Integer> getQuestions(int quizID) {
 		List<Integer> result = new ArrayList<Integer>();
 		try {
-			String query = "SELECT questionID FROM questionToQuiz WHERE quizID = " + quizID + ";";
+			String query = "SELECT questionID FROM questionToQuiz WHERE quizID = "
+					+ quizID + ";";
 			ResultSet res = statement.executeQuery(query);
-			while(res.next()){
+			while (res.next()) {
 				result.add(res.getInt(1));
 			}
 			return result;
@@ -683,8 +723,8 @@ public class MyDB {
 		}
 		return result;
 	}
-	
-	private static String getCurrentTime(){
+
+	private static String getCurrentTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		java.util.Date utilDate = new java.util.Date();
 		String date = sdf.format(utilDate);
@@ -694,9 +734,9 @@ public class MyDB {
 	public static void addQuizResult(int accountID, int quizID, int score,
 			long quizTimeInSeconds) {
 		String date = getCurrentTime();
-		String update = "INSERT INTO takenQuizes VALUES " +
-				"(" + accountID + ", " + quizID + ", " + score 
-					+ ", " + quizTimeInSeconds + ", \"" + date + "\");";
+		String update = "INSERT INTO takenQuizes VALUES " + "(" + accountID
+				+ ", " + quizID + ", " + score + ", " + quizTimeInSeconds
+				+ ", \"" + date + "\");";
 		try {
 			statement.executeUpdate(update);
 		} catch (SQLException e) {
@@ -704,11 +744,12 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-	
-	public static ResultSet getTakenQuizes(int accountID){
+
+	public static ResultSet getTakenQuizes(int accountID) {
 		ResultSet res = null;
-		String query = "SELECT * FROM quizes q, takenQuizes tq"+
-				 " WHERE q.quizID = tq.quizID AND tq.accountID = " + accountID + ";";
+		String query = "SELECT * FROM quizes q, takenQuizes tq"
+				+ " WHERE q.quizID = tq.quizID AND tq.accountID = " + accountID
+				+ ";";
 		try {
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
@@ -716,8 +757,6 @@ public class MyDB {
 		}
 		return res;
 	}
-
-
 
 	public static void deleteFriendship(int id1, int id2) {
 		String update = "DELETE FROM friendships WHERE " + "(accountID1 = "
@@ -730,13 +769,12 @@ public class MyDB {
 		}
 	}
 
-
-
 	public static boolean friendRequestExists(int idFrom, int idTo) {
-		String query  = "SELECT * FROM friendRequests WHERE accountIdTo = "+ idTo + " AND accountIdFrom = " + idFrom + ";";
+		String query = "SELECT * FROM friendRequests WHERE accountIdTo = "
+				+ idTo + " AND accountIdFrom = " + idFrom + ";";
 		try {
 			ResultSet res = statement.executeQuery(query);
-			if(res.next()){
+			if (res.next()) {
 				return true;
 			}
 		} catch (SQLException e) {
@@ -745,12 +783,11 @@ public class MyDB {
 		return false;
 	}
 
-
-
 	public static void deleteFriendRequest(int id1, int id2) {
 		String update = "DELETE FROM friendRequests WHERE " + "(accountIDTo = "
-				+ id1 + " AND accountIDFrom = " + id2 + ") OR (accountIDFrom = "
-				+ id1 + " AND accountIDTo = " + id2 + ");";
+				+ id1 + " AND accountIDFrom = " + id2
+				+ ") OR (accountIDFrom = " + id1 + " AND accountIDTo = " + id2
+				+ ");";
 		try {
 			statement.executeUpdate(update);
 		} catch (SQLException e) {
@@ -759,9 +796,10 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void addTagToQuiz(int quizID, int tagID){
-		String update = "INSERT INTO tagToQuiz VALUES(" + quizID + ", " +tagID + ");";
+
+	public static void addTagToQuiz(int quizID, int tagID) {
+		String update = "INSERT INTO tagToQuiz VALUES(" + quizID + ", " + tagID
+				+ ");";
 		try {
 			statement.executeUpdate(update);
 		} catch (SQLException e) {
@@ -769,10 +807,10 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void makeAsAdmin(int userID){
-		String update = 
-				"UPDATE accounts SET Achievements = \"Admin\" WHERE accountID = " + userID + ";";  
+
+	public static void makeAsAdmin(int userID) {
+		String update = "UPDATE accounts SET Achievements = \"Admin\" WHERE accountID = "
+				+ userID + ";";
 		try {
 			statement.executeUpdate(update);
 		} catch (SQLException e) {
@@ -780,20 +818,20 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-	
-	public static ResultSet getCreatedQuizes(int authorID){
+
+	public static ResultSet getCreatedQuizes(int authorID) {
 		ResultSet res = null;
 		String sql = "SELECT * FROM quizes WHERE authorID = " + authorID + ";";
 		try {
-			res = statement.executeQuery(sql); 
+			res = statement.executeQuery(sql);
 		} catch (SQLException e) {
 			System.out.println(sql);
 			e.printStackTrace();
 		}
 		return res;
 	}
-	
-	public static void deleteQuiz(int quizID){
+
+	public static void deleteQuiz(int quizID) {
 		String sql = "DELETE FROM quizes WHERE quizID = " + quizID + ";";
 		try {
 			statement.executeUpdate(sql);
@@ -802,5 +840,16 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public static void markAsRead(int idTo) {
+		String update = "UPDATE messages SET read_unread = true WHERE accountIdTo = "
+				+ idTo + ";";
+		try {
+			statement.executeUpdate(update);
+		} catch (SQLException e) {
+			System.out.println(update);
+			e.printStackTrace();
+		}
+	}
+
 }

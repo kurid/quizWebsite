@@ -4,9 +4,13 @@ import junit.framework.TestCase;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import quiz.QuizDB;
 
 import Question.MultipleAnswer;
 import Question.Question;
@@ -138,16 +142,69 @@ public class MyDbTest extends TestCase {
 		MyDB.deleteAccount("nickName3");
 	}
 	
-//	public void test123(){
-//		List<String> l = new ArrayList<String>();
-//		l.add("txai");
-//		l.add("txai2");
-//		l.add("txai3");
-//		MultipleAnswer a = new MultipleAnswer(l);
-//		Question q = new QuestionResponse(1, "rai?", a, 13);
-//		MyDB.addQuestionResponse(q);
-//		System.out.println("chavamate");
-//	}
+	public void testQuizTest(){
+		MyDB.addAccount("Shikamaru", "Nara", "nickName1", "password1", "mail1@gmail.com");
+		int authorID = MyDB.getId("nickName1");
+		List<String> l = new ArrayList<String>();
+		l.add("answer");
+		MultipleAnswer a = new MultipleAnswer(l);
+		Question q = new QuestionResponse(1, "rai?", a, 13);
+		int quizID = MyDB.createQuiz("myquiz", "description", authorID);
+		int questionID = MyDB.addQuestionResponse(q);
+		MyDB.addQuestionToQuiz(quizID, questionID);
+		try {
+			ResultSet res =  MyDB.getCreatedQuizes(authorID);
+			res.next();
+			assertEquals(authorID, res.getInt("authorID"));
+			res.close();
+			ResultSet res1 =  MyDB.getCreatedQuizes(authorID);
+			res1.next();
+			assertEquals("myquiz", res1.getString("name"));
+			assertEquals(quizID, MyDB.getQuizId("myquiz", authorID));
+		} catch (SQLException e) {
+			return;
+		}
+		MyDB.deleteQuiz(quizID);
+		MyDB.deleteAccount("nickName1");
+	}
+	
+	public void testQuiz(){
+		MyDB.addAccount("Shikamaru", "Nara", "nickName1", "password1", "mail1@gmail.com");
+		int authorID = MyDB.getId("nickName1");
+		List<String> l = new ArrayList<String>();
+		l.add("answer");
+		MultipleAnswer a = new MultipleAnswer(l);
+		Question q = new QuestionResponse(1, "rai?", a, 13);
+		int quizID = MyDB.createQuiz("myquiz", "description", authorID);
+		int questionID = MyDB.addQuestionResponse(q);
+		MyDB.addQuestionToQuiz(quizID, questionID);
+		ResultSet res =  MyDB.newQuizzes();
+			try {
+			assertEquals(true, res.next());
+			res.close();
+			ResultSet rs = MyDB.getQuizInfo(quizID);
+			rs.next();
+			assertEquals("description", rs.getString("description"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		MyDB.deleteQuiz(quizID);
+		MyDB.deleteAccount("nickName1");
+	}
+	
+	public void testQuestion(){
+		MyDB.addAccount("Shikamaru", "Nara", "nickName1", "password1", "mail1@gmail.com");
+		MyDB.addAccount("Choji", "Akimichi", "nickName2", "password2", "mail2@gmail.com");
+		int shika = MyDB.getId("nickName1");
+		int cho = MyDB.getId("nickName2");
+		int quizID  = MyDB.createQuiz("quiz", "", shika);
+		MyDB.sendChallenge(cho, shika, quizID);
+		assertEquals(1, MyDB.getChallenges(cho).size());
+		MyDB.deleteQuiz(quizID);
+		MyDB.deleteAccount("nickName1");
+		MyDB.deleteAccount("nickName2");
+	}
+	
 	
 //	public void testGetURl(){
 //		assertEquals("asd", MyDB.getURL(1));
