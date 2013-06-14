@@ -200,3 +200,11 @@ select accountID, quiz_time, quiz_take_date,total_score,
 quizes.quizID, authorID, name, description
 from takenquizes, quizes
 where quizes.quizID = takenquizes.quizID;
+
+
+drop view if EXISTS chalangeQuiz;
+
+create view chalangeQuiz as
+select accountIdTo,accountIdFrom,challenges.quizID, sendTime,authorID, name, quiz_create_date, description
+from challenges, quizes
+where challenges.quizID = quizes.quizID

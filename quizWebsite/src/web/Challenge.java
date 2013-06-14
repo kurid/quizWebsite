@@ -14,11 +14,11 @@ public class Challenge extends Notification{
 	
 	private QuizDB quiz;
 	
-	public Challenge(int to, int from, Date date, int quizID){
+	public Challenge(int to, int from, Date date, QuizDB quiz){
 		sender = from;
 		recieverID = to;
 		this.date = date;
-		createQuiz(quizID);
+		this.quiz = quiz;
 	}
 	
 	/**

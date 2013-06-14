@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import quiz.QuizDB;
+
 import Question.*;
 
 import com.mysql.jdbc.CallableStatement;
@@ -232,8 +234,11 @@ public class MyDB {
 		int count = 0;
 		ResultSet res;
 		try {
-			String query = "SELECT COUNT(*) FROM " + table
-					+ " WHERE accountIdTo = " + id + ";";
+			String query = "SELECT COUNT(*) FROM " + table + " WHERE accountIdTo = " + id ;
+			if(table == "messages"){
+				query += " and read_unread = false";
+			}
+			query += ";";
 			res = statement.executeQuery(query);
 			res.next();
 			count = Integer.parseInt(res.getString(1));
@@ -245,15 +250,17 @@ public class MyDB {
 	}
 
 	public static List<Challenge> getChallenges(int idTo) {
-		String query = "SELECT * FROM challenges WHERE accountIdTo = " + idTo
+		String query = "SELECT * FROM chalangeQuiz WHERE accountIdTo = " + idTo
 				+ ";";
 		ResultSet res;
 		List<Challenge> challanges = new ArrayList<Challenge>();
 		try {
 			res = statement.executeQuery(query);
 			while (res.next()) {
+				QuizDB quiz = new QuizDB(res.getString("name"), res.getString("description"),
+						res.getInt("authorID"), res.getInt("quizID"));
 				challanges.add(new Challenge(idTo, res.getInt("accountIdFrom"),
-						res.getDate("sendTime"), res.getInt("quizID")));
+						res.getDate("sendTime"), quiz));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
