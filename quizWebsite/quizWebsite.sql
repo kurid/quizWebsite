@@ -19,6 +19,8 @@ DROP PROCEDURE IF EXISTS addFriend;
 DROP PROCEDURE IF EXISTS removeFriend;
 DROP PROCEDURE IF EXISTS addAnswer;
 DROP FUNCTION IF EXISTS addQuestion;
+DROP TABLE IF EXISTS tagToQuiz;
+DROP TABLE IF EXISTS tags;
 
 create table accounts(
 	accountID int primary key AUTO_INCREMENT,
@@ -66,7 +68,6 @@ create table questions(
 	num int
 );
 
-
 -- pasuxebic aq weria
 create table multipleChoice(
 	questionID int,
@@ -74,7 +75,6 @@ create table multipleChoice(
 	isCorrect bool,
 	foreign key (questionID) references questions (questionID)  ON DELETE CASCADE
 );
-
 
 create table answers(
 	questionID int,
@@ -90,14 +90,6 @@ create table matching(
 	foreign key (questionID) references questions (questionID)  ON DELETE CASCADE
 );
 
-
-create table tags(
-	quizID int,
-	tagType int,
-	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE
-);
-
-
 -- num sheidzleba saxeli shevucvalot
 create table questionToQuiz(
 	quizID int,
@@ -105,8 +97,6 @@ create table questionToQuiz(
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE,
 	foreign key (questionID) references questions (questionID)  ON DELETE CASCADE
 );
-
-
 
 create table challenges(
 	accountIdTo int,
@@ -140,16 +130,23 @@ create table takenQuizes(
 	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE
 );
 
-
-
-
 create table imageQuestion(
 	questionID int,
 	url varchar(512),
 	foreign key (questionID) references questions (questionID)  ON DELETE CASCADE
 );
 
+create table tags(
+	tagID int primary key AUTO_INCREMENT not null,
+	name varchar(32)
+);
 
+create table tagToQuiz(
+	tagID int,
+	quizID int,
+	foreign key (quizID) references quizes (quizID)  ON DELETE CASCADE,
+	foreign key (tagID) references tags (tagID)  ON DELETE CASCADE
+);
 
 -- addFriend PROCEDURE --
 DELIMITER $$
@@ -195,8 +192,6 @@ create VIEW popularQuizes as
 select quizID, 
 count(quizID) as count FROM takenquizes
 GROUP BY quizID ORDER BY count desc limit 0,5;
-
-
 
 drop view if EXISTS doneQuizzes;
 
