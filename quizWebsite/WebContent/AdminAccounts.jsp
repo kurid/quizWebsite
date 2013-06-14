@@ -30,10 +30,8 @@
 						+ "<form action=\"DeleteAccount\" method=\"post\"> "
 						+ acc.getNickname()
 						+ "<input type = \"submit\" value = \"delete\" /> <input type=\"hidden\" name=\"name\" value=\""
-						+ acc.getId() + "\"> </form></td></tr>");
-				out.println("<tr><td>"
-						+ "<form action=\"PromoteAccount\" method=\"post\"> "
-						+ acc.getNickname()
+						+ acc.getNickname() + "\"> </form>");
+				out.println( "<form action=\"PromoteAccount\" method=\"post\"> "
 						+ "<input type = \"submit\" value = \"promote\" /> <input type=\"hidden\" name=\"name\" value=\""
 						+ acc.getId() + "\"> </form></td></tr>");
 			}

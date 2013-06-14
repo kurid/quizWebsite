@@ -1,6 +1,8 @@
 package web.Servlest;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +40,8 @@ public class DeleteAccount extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nickName = request.getParameter("name");
 		MyDB.deleteAccount(nickName);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("AdminAccounts.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

@@ -1,6 +1,8 @@
 package web.Servlest;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +39,8 @@ public class PromoteAccount extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int accountID = Integer.parseInt(request.getParameter("name"));
 		MyDB.promoteAsAdmin(accountID);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("AdminAccounts.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
