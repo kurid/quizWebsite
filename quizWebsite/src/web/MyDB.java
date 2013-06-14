@@ -13,6 +13,7 @@ import java.util.Set;
 import Question.*;
 
 import com.mysql.jdbc.CallableStatement;
+import com.mysql.jdbc.PreparedStatement;
 
 public class MyDB {
 	private static final String MYSQL_USERNAME = "root";
@@ -52,10 +53,13 @@ public class MyDB {
 	
 	public static ResultSet getDoneQuizzes(int accountID){
 		ResultSet res = null;
-		String query = "select * from doneQuizzes where accountID = " + accountID + " ;" ;
+		String query = "SELECT * FROM doneQuizzes WHERE accountID = ? ;";
 		try {
-			res = statement.executeQuery(query);
+			PreparedStatement prst = (PreparedStatement) connection.prepareStatement(query);
+			prst.setInt(1, accountID);
+			res = prst.executeQuery();
 		} catch (SQLException e) {
+			System.out.println("Error in getDoneQuizzes");
 			e.printStackTrace();
 		}
 		return res;
@@ -65,10 +69,12 @@ public class MyDB {
 	
 	public static ResultSet newQuizzes(){
 		ResultSet res = null;
+		String query = "SELECT * FROM quizes ORDER BY quiz_create_date DESC LIMIT 0,5;";
 		try {
-			res  = statement.executeQuery("SELECT * FROM quizes ORDER BY quiz_create_date DESC LIMIT 0,5;");
+			PreparedStatement statement = (PreparedStatement) connection.prepareStatement(query);
+			res  = statement.executeQuery();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error in newQuizzes");
 			e.printStackTrace();
 		}
 		return res;
@@ -82,7 +88,7 @@ public class MyDB {
 					" ORDER BY count DESC;";
 			res = statement.executeQuery(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error in popularQuizzes");
 			e.printStackTrace();
 		}
 		return res;
@@ -90,17 +96,17 @@ public class MyDB {
 	
 	public static List<Integer> getFriends(int id) {
 		List<Integer> friends = new ArrayList<Integer>();
-		 ResultSet res;
+		ResultSet res;
 		try {
-			res = statement
-					.executeQuery("SELECT accountID2 FROM friendships where accountID1 = \""
-							+ id + "\"");
+			PreparedStatement stat1 = (PreparedStatement) connection.prepareStatement("SELECT accountID2 FROM friendships WHERE accountID1 = ? ;");
+			stat1.setInt(1, id);
+			res = stat1.executeQuery();
 			while (res.next()) {
 				friends.add(res.getInt("accountID2"));
 			}
-			res = statement
-					.executeQuery("SELECT accountID1 FROM friendships where accountID2 = \""
-							+ id + "\"");
+			PreparedStatement stat2 = (PreparedStatement) connection.prepareStatement("SELECT accountID1 FROM friendships where accountID2 = ? ;");
+			stat2.setInt(1, id);
+			res = stat2.executeQuery();
 			while (res.next()) {
 				friends.add(res.getInt("accountID1"));
 			}
@@ -117,9 +123,13 @@ public class MyDB {
 	private static String getter(int id, String type){
 		String result = "";
 		ResultSet res;
+		PreparedStatement stat = null;
 		try {
-			String query = "SELECT "+type +" FROM accounts where accountID = \"" + id + "\"" ;
-			res = statement.executeQuery(query);
+			String sql = "SELECT ? FROM accounts where accountID = ?";
+			stat = (PreparedStatement) connection.prepareStatement(sql);
+			stat.setString(1, type);
+			stat.setInt(2, id);
+			res = stat.executeQuery();
 			res.next();
 			result = res.getString(type);
 		} catch (SQLException e) {
@@ -155,8 +165,10 @@ public class MyDB {
 		int id = 0;
 		ResultSet res;
 		try {
-			String query = "SELECT accountID FROM accounts where nick = \"" + nickName + "\"";
-			res = statement.executeQuery(query);
+			String sql = "SELECT accountID FROM accounts WHERE nick = ?";
+			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			stat.setString(1, nickName);
+			res = stat.executeQuery();
 			res.next();
 			id = res.getInt("accountID");
 		} catch (SQLException e) {
@@ -171,8 +183,10 @@ public class MyDB {
 		boolean b = false;
 		ResultSet res;
 		try {
-			String query = "SELECT * FROM accounts where " + type + " = \"" + stringToSearch + "\" ;";
-			res = statement .executeQuery(query);
+			String sql =  "SELECT * FROM accounts WHERE " + type + " = ? ;";
+			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			stat.setString(1, stringToSearch);
+			res = stat.executeQuery();
 			b = res.next();
 		} catch (SQLException e) {
 			System.out.println( "query-s gashvebisas moxda shecdoma. (exist" + type+ ")");
@@ -683,6 +697,13 @@ public class MyDB {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+
+
+	public static void deleteFriendship(int id, int id2) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
