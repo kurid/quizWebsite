@@ -24,6 +24,10 @@ import Question.SingleAnswer;
 import web.MyDB;
 
 public class QuestionHelper implements Finals{
+	/**
+	 * With given question ID this method creates full question object and returns it.
+	 * There is huge swichcase, which provides every useful information.
+	 */
   public static Question getFullQuestionFromID(int questionID) throws SQLException{
     ResultSet res = MyDB.getQuestionInfo(questionID);
     res.next();
