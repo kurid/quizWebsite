@@ -28,6 +28,7 @@ public class SessionListener implements HttpSessionListener {
     	arg0.getSession().setAttribute("isLookingUp", new Boolean(false));
     	arg0.getSession().setAttribute("counterFriendRequestExists", new Boolean(false));
     	arg0.getSession().setAttribute("friendRequestExists", new Boolean(false));
+    	arg0.getSession().setAttribute("goingToAdminPanel", true);
     }
 
 	/**

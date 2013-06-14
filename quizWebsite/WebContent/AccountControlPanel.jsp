@@ -16,7 +16,7 @@
 		boolean isAdmin = account.isAdmin();
 		String statement = new String();
 		if(isAdmin){
-			statement = "<a href=\"AdminPanel\" target=\"AccountInfo\"> Admin </a>";
+			statement = "<a href=\"LinkAdmin\" target=\"AccountWindow\"> Admin </a>";
 		}else statement = "";
 	%>
 	<table>

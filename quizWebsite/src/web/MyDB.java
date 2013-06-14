@@ -50,18 +50,18 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	/**
 	 * 
-	 * @param accountID 
+	 * @param accountID
 	 * @return accountis Ids mixedvit igebs am eqauntis mier ganvlil qvizebs
 	 */
 	public static ResultSet getDoneQuizzes(int accountID) {
 		ResultSet res = null;
 		String query = "SELECT * FROM doneQuizzes WHERE accountID = ? ;";
 		try {
-			PreparedStatement prst = (PreparedStatement) connection.prepareStatement(query);
+			PreparedStatement prst = (PreparedStatement) connection
+					.prepareStatement(query);
 			prst.setInt(1, accountID);
 			res = prst.executeQuery();
 		} catch (SQLException e) {
@@ -71,7 +71,6 @@ public class MyDB {
 		return res;
 	}
 
-	
 	/**
 	 * 
 	 * @return bazashi bolos chamatebuli 5 qvizi
@@ -108,8 +107,6 @@ public class MyDB {
 		return res;
 	}
 
-	
-	
 	/**
 	 * 
 	 * @return lists of friends
@@ -172,8 +169,7 @@ public class MyDB {
 	public static String getName(int id) {
 		return getter(id, "name");
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param id
@@ -183,7 +179,6 @@ public class MyDB {
 		return getter(id, "surname");
 	}
 
-	
 	/**
 	 * 
 	 * @param id
@@ -193,7 +188,6 @@ public class MyDB {
 		return getter(id, "nick");
 	}
 
-	
 	/**
 	 * 
 	 * @param id
@@ -204,7 +198,6 @@ public class MyDB {
 		return getter(id, "password");
 	}
 
-	
 	/**
 	 * 
 	 * @param id
@@ -213,16 +206,15 @@ public class MyDB {
 	public static String getMail(int id) {
 		return getter(id, "mail");
 	}
-	
+
 	public static Boolean isAdmin(int id) {
-		String admin =  getter(id, "Achievements");
-		if(admin.equals("admin")){
+		String admin = getter(id, "Achievements");
+		if (admin.equals("admin")) {
 			return true;
 		}
 		return false;
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param nickName
@@ -246,11 +238,22 @@ public class MyDB {
 		return id;
 	}
 
-	
+	public static void promoteAsAdmin(int id) {
+		try {
+			String sql = "update accounts set Achievements = \""
+					+ Finals.ADMIN_ACHIEVEMENT + "\" where accountID=1;";
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			System.out.println("query-s gashvebisas moxda shecdoma. (getId");
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 
-	 * @param type mail or nickname
-	 * @param stringToSearch 
+	 * @param type
+	 *            mail or nickname
+	 * @param stringToSearch
 	 * @return true or false if exist string whit type 'type'
 	 */
 	private static boolean exist(String type, String stringToSearch) {
@@ -274,29 +277,26 @@ public class MyDB {
 	/**
 	 * 
 	 * @param nickName
-	 * @return  nickName exist in data base
+	 * @return nickName exist in data base
 	 */
 	public static boolean nickNameExist(String nickName) {
 		return exist("nick", nickName);
 	}
-	
-	
 
 	/**
 	 * 
 	 * @param mail
-	 * @return  mail exist in data base
+	 * @return mail exist in data base
 	 */
 	public static boolean mailExist(String mail) {
 		return exist("mail", mail);
 	}
 
-	
 	/**
 	 * 
 	 * @param nickName
 	 * 
-	 * deletes account
+	 *            deletes account
 	 */
 	public static void deleteAccount(String nickName) {
 		try {
@@ -329,8 +329,9 @@ public class MyDB {
 		int count = 0;
 		ResultSet res;
 		try {
-			String query = "SELECT COUNT(*) FROM " + table + " WHERE accountIdTo = " + id ;
-			if(table == "messages"){
+			String query = "SELECT COUNT(*) FROM " + table
+					+ " WHERE accountIdTo = " + id;
+			if (table == "messages") {
 				query += " and read_unread = false";
 			}
 			query += ";";
@@ -344,22 +345,22 @@ public class MyDB {
 		return count;
 	}
 
-	
 	/**
 	 * 
 	 * @param idTo
 	 * @return abrunebs challenges romelic am account-s miuvida
 	 */
 	public static List<Challenge> getChallenges(int idTo) {
-		String query = "SELECT * FROM challengeQuiz WHERE accountIdTo = " + idTo
-				+ ";";
+		String query = "SELECT * FROM challengeQuiz WHERE accountIdTo = "
+				+ idTo + ";";
 		ResultSet res;
 		List<Challenge> challanges = new ArrayList<Challenge>();
 		try {
 			res = statement.executeQuery(query);
 			while (res.next()) {
-				QuizDB quiz = new QuizDB(res.getString("name"), res.getString("description"),
-						res.getInt("authorID"), res.getInt("quizID"));
+				QuizDB quiz = new QuizDB(res.getString("name"),
+						res.getString("description"), res.getInt("authorID"),
+						res.getInt("quizID"));
 				challanges.add(new Challenge(idTo, res.getInt("accountIdFrom"),
 						res.getDate("sendTime"), quiz));
 			}
@@ -370,7 +371,6 @@ public class MyDB {
 		return challanges;
 	}
 
-	
 	/**
 	 * 
 	 * @param idTo
@@ -396,7 +396,6 @@ public class MyDB {
 		return messages;
 	}
 
-	
 	/**
 	 * 
 	 * @param idTo
@@ -419,14 +418,12 @@ public class MyDB {
 		return friendRequests;
 	}
 
-	
-	
 	/**
 	 * 
 	 * @param idTo
 	 * @param idFrom
 	 * @param text
-	 * send Message, saves in data base
+	 *            send Message, saves in data base
 	 */
 	public static void sendMessage(int idTo, int idFrom, String text) {
 		String date = getCurrentTime();
@@ -446,13 +443,12 @@ public class MyDB {
 		}
 	}
 
-	
 	/**
 	 * 
 	 * @param name
 	 * @param description
 	 * @param accountID
-	 * @return QuizId after creating quiz 
+	 * @return QuizId after creating quiz
 	 */
 	public static int createQuiz(String name, String description, int accountID) {
 		String date = getCurrentTime();
@@ -499,7 +495,6 @@ public class MyDB {
 		return 0;
 	}
 
-	
 	/**
 	 * 
 	 * @param quizID
@@ -534,7 +529,6 @@ public class MyDB {
 		return res;
 	}
 
-	
 	/**
 	 * 
 	 * @param questionID
@@ -555,7 +549,7 @@ public class MyDB {
 	/**
 	 * 
 	 * @param questionID
-	 * @return correct answers for questions 
+	 * @return correct answers for questions
 	 */
 	public static ResultSet answers(int questionID) {
 		ResultSet res = null;
@@ -574,7 +568,7 @@ public class MyDB {
 	 * @param idTo
 	 * @param idFrom
 	 * @param quizID
-	 * sends challenge, quiz
+	 *            sends challenge, quiz
 	 */
 
 	public static void sendChallenge(int idTo, int idFrom, int quizID) {
@@ -596,7 +590,6 @@ public class MyDB {
 
 	}
 
-	
 	/**
 	 * 
 	 * @param name
@@ -604,7 +597,7 @@ public class MyDB {
 	 * @param nickName
 	 * @param password
 	 * @param mail
-	 * add account in data base
+	 *            add account in data base
 	 */
 	public static void addAccount(String name, String surName, String nickName,
 			String password, String mail) {
@@ -627,12 +620,11 @@ public class MyDB {
 		}
 	}
 
-	
 	/**
 	 * 
 	 * @param idTo
 	 * @param idFrom
-	 * send friend request
+	 *            send friend request
 	 */
 	public static void sendFriendRequest(int idTo, int idFrom) {
 		String date = getCurrentTime();
@@ -645,11 +637,10 @@ public class MyDB {
 		}
 	}
 
-	
 	/**
 	 * 
 	 * @param questionId
-	 * @return matching question 
+	 * @return matching question
 	 */
 	public static ResultSet getMatching(int questionId) {
 		ResultSet res = null;
@@ -663,7 +654,6 @@ public class MyDB {
 		return res;
 	}
 
-	
 	/**
 	 * 
 	 * @param questionId
@@ -686,12 +676,12 @@ public class MyDB {
 		}
 		return "";
 	}
-	
+
 	/**
 	 * 
 	 * @param id1
 	 * @param id2
-	 * makes friend sheap
+	 *            makes friend sheap
 	 */
 	public static void addFriend(int id1, int id2) {
 		try {
@@ -706,7 +696,6 @@ public class MyDB {
 		}
 	}
 
-	
 	/**
 	 * 
 	 * @param q
@@ -736,7 +725,6 @@ public class MyDB {
 		return questionID;
 	}
 
-	
 	/**
 	 * 
 	 * @param q
@@ -762,8 +750,6 @@ public class MyDB {
 		return questionID;
 	}
 
-	
-	
 	/**
 	 * 
 	 * @param q
@@ -792,7 +778,6 @@ public class MyDB {
 		return questionID;
 	}
 
-	
 	/**
 	 * 
 	 * @param q
@@ -825,8 +810,6 @@ public class MyDB {
 		return questionID;
 	}
 
-	
-	
 	/**
 	 * 
 	 * @param q
@@ -859,8 +842,6 @@ public class MyDB {
 		return questionID;
 	}
 
-	
-
 	private static int addQuestion(Question q) {
 		int questionID = -1;
 		try {
@@ -885,13 +866,12 @@ public class MyDB {
 		return questionID;
 	}
 
-	
 	/**
 	 * 
 	 * @param answers
 	 * @param questionID
 	 * @param answerNumber
-	 * adds ansswer
+	 *            adds ansswer
 	 */
 	private static void addAnswers(List<String> answers, int questionID,
 			int answerNumber) {
@@ -911,12 +891,11 @@ public class MyDB {
 		}
 	}
 
-	
 	/**
 	 * 
 	 * @param quizID
 	 * @param questionID
-	 * adds question to quiz
+	 *            adds question to quiz
 	 */
 	public static void addQuestionToQuiz(int quizID, int questionID) {
 		try {
@@ -929,7 +908,6 @@ public class MyDB {
 		}
 	}
 
-	
 	/**
 	 * 
 	 * @param subName
@@ -952,7 +930,6 @@ public class MyDB {
 		return result;
 	}
 
-	
 	/**
 	 * 
 	 * @param subName
@@ -1114,13 +1091,12 @@ public class MyDB {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static int notificationsNum(int id) {
 		int[] a = getNotifications(id);
 		return a[0] + a[1] + a[2];
 	}
-	
-	
+
 	public static void close() {
 		try {
 			connection.close();

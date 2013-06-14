@@ -24,6 +24,7 @@ public class ContextListener implements ServletContextListener {
 	 */
 	public void contextInitialized(ServletContextEvent request) {
 		ServletContext context = request.getServletContext();
+		context.setAttribute("announcement", "Welcome To our WebSite");
 		QuizHelper.updatePopularQuizes(context);
 		QuizHelper.updateNewQuizes(context);
 	}

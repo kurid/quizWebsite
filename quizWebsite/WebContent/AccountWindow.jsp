@@ -10,7 +10,10 @@
 		Boolean isLookingUp = (Boolean) session.getAttribute("isLookingUp");
 		String upperJsp = "AccountInfo.jsp";
 		String lowerJsp = "Home.jsp";
-		if(isLookingUp){
+		if((Boolean)session.getAttribute("goingToAdminPanel")){
+			upperJsp = "AdminPanel.jsp";
+			lowerJsp = "Announcement.jsp";
+		}else if(isLookingUp){
 			upperJsp = "UserNavigator.jsp";
 			lowerJsp = "UserProfile.jsp";
 		}

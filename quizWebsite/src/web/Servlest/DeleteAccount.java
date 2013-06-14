@@ -1,30 +1,24 @@
 package web.Servlest;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import web.Account;
-import web.MyDB;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class SearchAccount
+ * Servlet implementation class DeleteAccount
  */
-@WebServlet("/SearchAccount")
-public class SearchAccount extends HttpServlet {
+@WebServlet("/DeleteAccount")
+public class DeleteAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchAccount() {
+    public DeleteAccount() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,19 +34,7 @@ public class SearchAccount extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Integer> ID = MyDB.searchUser((String)request.getParameter("accountName"));
-		List<Account> searchedAccounts = new ArrayList<Account>();
-		for(Integer id : ID){
-			searchedAccounts.add(new Account(id));
-		}
-		request.setAttribute("searchedAccount", searchedAccounts);
-		String jsp = "Accounts.jsp";
-		if((Boolean)request.getSession(true).getAttribute("goingToAdminPanel")){
-			jsp = "AdminAccounts.jsp";
-		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);
-		dispatcher.forward(request, response);
+		//HttpSession session = 
 	}
-	
 
 }

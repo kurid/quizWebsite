@@ -26,10 +26,11 @@
 	<table align="center">
 		<% if(searchedAccounts != null){
 			for (Account acc : searchedAccounts) {
-				out.println("<tr><td>" + acc.getNickname() + "</td>" 
-				    + "<td> <form action=\"DeleteAccount\" method=\"post\"> <input type=\"submit\" name=\"" + acc.getId() + "\" value=\"Delete\"/>" 
-				    + "</form> </td>" + "<td> <form action=\"PromoteAccount\" method=\"post\"> <input type=\"submit\" name=\"" + acc.getId() + "\" value=\"Promote\"/>" 
-						    + "</form> </td></tr>");
+				out.println("<tr><td>"
+						+ "<form action=\"DeleteAccount\" method=\"post\"> "
+						+ acc.getNickname()
+						+ "<input type = \"submit\" value = \"delete\" /> <input type=\"hidden\" name=\"name\" value=\""
+						+ acc.getId() + "\"> </form></td></tr>");
 			}
 		}
 		%>

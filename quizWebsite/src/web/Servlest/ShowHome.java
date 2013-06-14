@@ -45,6 +45,7 @@ public class ShowHome extends HttpServlet {
 		Session.setAttribute("isLookingUp", false);
 		Session.setAttribute("isFriend", false);
 		Session.setAttribute("userAccount", null);
+		Session.setAttribute("goingToAdminPanel", false);
 		Session.setAttribute("friendRequestExists", false);
 		Account myAccount = (Account) Session.getAttribute("account");
 		request.getSession().setAttribute("notificationNum", MyDB.notificationsNum(myAccount.getId()));

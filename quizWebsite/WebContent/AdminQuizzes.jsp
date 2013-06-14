@@ -8,7 +8,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<% List<QuizDB> searchedQuizzes = (List<QuizDB>) request.getAttribute("searchedQuizzes"); %>
+<%
+	List<QuizDB> searchedQuizzes = (List<QuizDB>) request
+			.getAttribute("searchedQuizzes");
+%>
 
 </head>
 <body>
@@ -21,19 +24,23 @@
 				<td><input type="submit" name="search" value="Search" /></td>
 			</tr>
 		</table>
-		
-		<table align="center">
+	</form>
+	<table align="center">
 		<%
 			if (searchedQuizzes != null) {
 				for (QuizDB quiz : searchedQuizzes) {
-					out.println("<tr><td>" + quiz.getName() 
-							+ "<form action=\"DeleteQuiz\" name=\"" + quiz.getID()+ "\" method=\"post\"/> </form></td></tr>");
+					out.println("<tr><td>"
+							+ "<form action=\"DeleteQuiz\" method=\"post\"> "
+							+ quiz.getName()
+							+ "<input type = \"submit\" value = \"delete\" /> <input type=\"hidden\" name=\"name\" value=\""
+							+ quiz.getID() + "\"> </form></td></tr>");
+
 				}
 			}
 		%>
-		</table>
+	</table>
 
-	</form>
+
 
 </body>
 </html>

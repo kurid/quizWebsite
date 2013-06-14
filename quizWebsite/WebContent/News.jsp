@@ -8,5 +8,6 @@
 </head>
 <body>
 	 <h2 align="center"> Quiz Website News </h2>
+	 <p><%=(String)application.getAttribute("announcement")%></p>
 </body>
 </html>
