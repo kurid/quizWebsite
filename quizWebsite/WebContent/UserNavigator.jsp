@@ -12,7 +12,7 @@
 	
 	<table align="center">
 		<tr>
-			<td width="20%"> <a href="UserProfile" target ="ActualInfo"> Profile </a> </td>
+			<td width="20%"> <a href="UserProfile.jsp" target ="ActualInfo"> Profile </a> </td>
 			<td width="20%"> <a href="GetFriendsServlet" target ="ActualInfo"> Friends </a> </td>
 			<td width="20%"> <a href="QuizzesDone" target ="ActualInfo"> Quizzes Done </a> </td>
 			<td width="20%"> <a href="QuizzesCreated" target = "ActualInfo"> Quizzes Created </a> </td>
