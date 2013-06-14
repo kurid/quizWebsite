@@ -25,6 +25,7 @@ public class MyDB {
 
 	private static Connection connection;
 	private static Statement statement;
+	public static Object notificationsNum;
 
 	static {
 		try {
@@ -1106,7 +1107,10 @@ public class MyDB {
 		}
 	}
 	
-	
+	public static int notificationsNum(int id) {
+		int[] a = getNotifications(id);
+		return a[0] + a[1] + a[2];
+	}
 	
 	
 	public static void close() {
