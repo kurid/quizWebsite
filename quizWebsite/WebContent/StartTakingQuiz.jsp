@@ -23,14 +23,25 @@
 	<p><%=name%></p>
 	<p><%=description%></p>
 	<%
-		
-		out.println("by : "+autor.getNickname());
-		
+		//if((Boolean)session.getAttribute("isLoggedIn")){
+
+		//}else{
+		//out.println("by : "+autor.getNickname());
+		//}
+		if ((Boolean) session.getAttribute("isLoggedIn")
+				&& ((Account) session.getAttribute("account")).getId() != autor
+						.getId()) {
+			out.println("<a href=\"AccountServlet?ID=" + autor.getId()
+					+ "\" target =\"AccountWindow\"> " + " by: "
+					+ autor.getNickname() + "</a>");
+		} else {
+			out.println("by : " + autor.getNickname());
+		}
+
 		out.println("<br>");
 	%>
 	<form action="BeforeFirstQuestion" method="post" target=<%=target%>>
-		<br>
-		<input type="submit" name="Submit" value="Start Quiz!" />
+		<br> <input type="submit" name="Submit" value="Start Quiz!" />
 	</form>
 </body>
 </html>

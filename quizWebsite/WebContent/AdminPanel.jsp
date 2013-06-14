@@ -7,13 +7,11 @@
 <title>Admin</title>
 </head>
 <body>
-		<table align="center" cellspacing="20">
+		<table align="center" cellpadding="10">
 			<tr> 
-				<td>
-					<a href="Announcement.jsp" target = "ActualInfo"> New Announcement </a>
-					<a href="AdminQuizzes.jsp" target = "ActualInfo"> Quizzes </a>
-					<a href="AdminAccounts.jsp" target = "ActualInfo"> Profiles </a>
-				</td>
+				<td> <a href="Announcement.jsp" target = "ActualInfo"> New Announcement </a> </td>
+				<td> <a href="AdminQuizzes.jsp" target = "ActualInfo"> Quizzes </a> </td>
+				<td> <a href="AdminAccounts.jsp" target = "ActualInfo"> Profiles </a> </td>
 			</tr>
 		</table>
 </body>
