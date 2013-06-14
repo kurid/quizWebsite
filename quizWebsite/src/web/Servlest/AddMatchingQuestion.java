@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.sun.org.apache.xalan.internal.xsltc.dom.MatchingIterator;
-
 import Question.CorrectAnswer;
 import Question.MMAnswer;
 import Question.MatchingQuestion;

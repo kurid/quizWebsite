@@ -16,8 +16,6 @@ import web.Account;
 import web.AccountManager;
 import web.MyDB;
 
-import com.sun.xml.internal.ws.client.dispatch.MessageDispatch;
-
 /**
  * Servlet implementation class Enter
  */
