@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<h1>Enter text here</h1>
+	<form action="AddAnnouncement" method = "post">		
+		<textarea cols="40" rows="10" name="messageText" >enter message text here;	
+		</textarea>
+		<br>
+		<input type="submit" value="Submit"/>
+	</form>
 </body>
 </html>

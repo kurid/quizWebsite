@@ -31,6 +31,11 @@
 						+ acc.getNickname()
 						+ "<input type = \"submit\" value = \"delete\" /> <input type=\"hidden\" name=\"name\" value=\""
 						+ acc.getId() + "\"> </form></td></tr>");
+				out.println("<tr><td>"
+						+ "<form action=\"PromoteAccount\" method=\"post\"> "
+						+ acc.getNickname()
+						+ "<input type = \"submit\" value = \"promote\" /> <input type=\"hidden\" name=\"name\" value=\""
+						+ acc.getId() + "\"> </form></td></tr>");
 			}
 		}
 		%>

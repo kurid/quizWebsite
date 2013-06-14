@@ -6,21 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import web.MyDB;
 
 /**
- * Servlet implementation class DeleteAccount
+ * Servlet implementation class PromoteAccount
  */
-@WebServlet("/DeleteAccount")
-public class DeleteAccount extends HttpServlet {
+@WebServlet("/PromoteAccount")
+public class PromoteAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteAccount() {
+    public PromoteAccount() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,8 +33,7 @@ public class DeleteAccount extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nickName = request.getParameter("name");
-		MyDB.deleteAccount(nickName);
+		// TODO Auto-generated method stub
 	}
 
 }
