@@ -10,7 +10,9 @@
 <h4><%=errotText %></h4>
 <body>
 	<form action="AddMultipleChoiceQuestion" method="post">
-		Question : <input type="text" name="questionText"><br>
+		<textarea cols="40" rows="10" name="questionText" >enter question text here;	
+		</textarea> 
+		<br>
 		First choice : <input type="text" name="1">
 		<input type="radio" name="choice" value="1"><br>
 		Second choice: <input type="text" name="2">

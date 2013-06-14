@@ -18,7 +18,9 @@
 			<tr>
 			<tr>
 				<td> Enter description: </td>
-				<td> <input type="text" name="description"> </td>
+				<td> 
+				<textarea cols="40" rows="10" name="description" >enter description here;	
+		</textarea></td>
 			<tr>
 			<tr>
 				<td> Number Of Questions: </td>

@@ -11,7 +11,7 @@
 	<%Account receiver = (Account)session.getAttribute("userAccount"); %>
 	<h4>you are sending message to <%=receiver.getNickname() %></h4>
 	<form action="SendMessage" method = "post">		
-		<textarea cols="40" rows="10" name="messageText">		
+		<textarea cols="40" rows="10" name="messageText" >enter message text here;	
 		</textarea>
 		<br>
 		<input type="submit" value="Submit"/>

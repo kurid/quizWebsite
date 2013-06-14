@@ -12,7 +12,9 @@
 <h4><%=errotText %></h4>
 <body>
 	<form action="AddMatchingQuestion" method="post">
-		QuestionText: <input type="text" name="questionText"><br> 
+		QuestionText: <textarea cols="40" rows="10" name="questionText" >enter question text here;	
+		</textarea> 
+		<br>
 		<%
 			for (int i = 2; i <= Finals.maxNumberOfMatching*2; i += 2) {
 				out.println("Matching " + (i / 2)

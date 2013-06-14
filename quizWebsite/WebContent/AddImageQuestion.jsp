@@ -9,7 +9,10 @@
 <body>
 	<form action="AddImageQuestion" method = "post">
 		Image URL :  <input type="text" name="imageUrl"><br> 
-		QuestionText: <input type="text" name="questionText"><br> 
+		QuestionText:
+		<textarea cols="40" rows="10" name="questionText" >enter question text here;	
+		</textarea> 
+		<br>
 		Answer1: <input type="text" name="answer1"><br> 
 		Answer2: <input type="text" name="answer2"><br> 
 		Answer3: <input type="text" name="answer3"><br> 
