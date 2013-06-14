@@ -760,4 +760,37 @@ public class MyDB {
 		}
 	}
 	
+	public static void addTagToQuiz(int quizID, int tagID){
+		String update = "INSERT INTO tagToQuiz VALUES(" + quizID + ", " +tagID + ");";
+		try {
+			statement.executeUpdate(update);
+		} catch (SQLException e) {
+			System.out.println(update);
+			e.printStackTrace();
+		}
+	}
+	
+	public static void makeAsAdmin(int userID){
+		String update = 
+				"UPDATE accounts SET Achievements = \"Admin\" WHERE accountID = " + userID + ";";  
+		try {
+			statement.executeUpdate(update);
+		} catch (SQLException e) {
+			System.out.println(update);
+			e.printStackTrace();
+		}
+	}
+	
+	public static ResultSet getCreatedQuizes(int authorID){
+		ResultSet res = null;
+		String sql = "SELECT * FROM quizes WHERE authorID = " + authorID + ";";
+		try {
+			res = statement.executeQuery(sql); 
+		} catch (SQLException e) {
+			System.out.println(sql);
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 }
