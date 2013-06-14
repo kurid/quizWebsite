@@ -10,13 +10,13 @@
 <% List<DoneQuize> quizzesDone = (List<DoneQuize>) request.getAttribute("quizzesDone"); %>
 </head>
 <style>
-	table, td, th{border:1px solid blue;}
-	th{background-color:blue; color:white;}
+	table, td, th{border:1px solid DarkBlue;}
+	th{background-color:DarkBlue; color:white;}
 </style>
 </head>
 <body>
 	<h2 align="center">Quizzes History</h2>
-	<table>
+<table>
 	<tr>
 		<th>QUIZ NAME</th>
 		<th>TIME</th>
@@ -35,5 +35,6 @@
 			out.println("<tr>");
 		}
 	%>
+</table>
 </body>
 </html>

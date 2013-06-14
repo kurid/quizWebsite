@@ -9,23 +9,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<style>
+	table, td, th{border:1px solid DarkBlue;}
+	th{background-color:DarkBlue; color:white;}
+</style>
 </head>
 
 <body>
-
-	<h3>New Quizzes</h3>
-	<ol>
-
+<table>
+	<tr> 
+	<th> New Quizzes</th>
+	</tr>
 		<%
-			List<QuizDB> newQuizzes = (List<QuizDB>) request
-					.getServletContext().getAttribute("newQuizzes");
+			List<QuizDB> newQuizzes = (List<QuizDB>) request.getServletContext().getAttribute("newQuizzes");
 			for (QuizDB quiz : newQuizzes) {
+				out.println("<tr>");
 				Account autor = new Account(quiz.getAuthor());
-				out.println("<li><a href=\"StartTackingQuiz?ID=" + quiz.getID()
+				out.println("<td><a href=\"StartTackingQuiz?ID=" + quiz.getID()
 						+ "\" target =\"AccountWindow\"> " + quiz.getName()
-						+ "</a> © "+autor.getNickname()+"</li>");
+						+ "</a> © "+autor.getNickname()+"</td>");
+				out.println("</tr>");
 			}
 		%>
-	</ol>
+</table>
 </body>
 </html>

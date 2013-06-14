@@ -8,24 +8,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<style>
+	table, td, th{border:1px solid DarkBlue;}
+	th{background-color:DarkBlue; color:white;}
+</style>
 <title>Insert title here</title>
 </head>
 
 <body>
-
-	<h3>Popular Quizzes</h3>
-	<ol>
+<table>
+	<tr> 
+	<th>Popular Quizzes </th>
+	</tr>
 
 		<%
 			List<QuizDB> popularQuizzes = (List<QuizDB>) request
 					.getServletContext().getAttribute("popularQuizzes");
-			for (QuizDB quiz : popularQuizzes) {				
+			for (QuizDB quiz : popularQuizzes) {
+				out.println("<tr> ");
 				Account autor = new Account(quiz.getAuthor());
-				out.println("<li><a href=\"StartTackingQuiz?ID=" + quiz.getID()
+				out.println("<td><a href=\"StartTackingQuiz?ID=" + quiz.getID()
 						+ "\" target =\"AccountWindow\"> " + quiz.getName()
-						+ "</a> © "+autor.getNickname()+"</li>");
+						+ "</a> © "+autor.getNickname()+"</td>");
+				out.println(" </tr> ");
 			}
 		%>
-	</ol>
+</table>
 </body>
 </html>
