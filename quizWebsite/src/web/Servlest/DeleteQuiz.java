@@ -39,7 +39,7 @@ public class DeleteQuiz extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int quizID = Integer.parseInt(request.getParameter("name"));
 		MyDB.deleteQuiz(quizID);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("AdminQuizzes.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("HomePage");
 		dispatcher.forward(request, response);
 	}
 

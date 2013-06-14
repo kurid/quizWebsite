@@ -30,7 +30,7 @@
 			if (searchedQuizzes != null) {
 				for (QuizDB quiz : searchedQuizzes) {
 					out.println("<tr><td>"
-							+ "<form action=\"DeleteQuiz\" method=\"post\"> "
+							+ "<form action=\"DeleteQuiz\" method=\"post\" target = \"_top\" > "
 							+ quiz.getName()
 							+ "<input type = \"submit\" value = \"delete\" /> <input type=\"hidden\" name=\"name\" value=\""
 							+ quiz.getID() + "\"> </form></td></tr>");

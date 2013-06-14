@@ -241,7 +241,7 @@ public class MyDB {
 	public static void promoteAsAdmin(int id) {
 		try {
 			String sql = "update accounts set Achievements = \""
-					+ Finals.ADMIN_ACHIEVEMENT + "\" where accountID=1;";
+					+ Finals.ADMIN_ACHIEVEMENT + "\" where accountID=\""+id+"\";";
 			statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			System.out.println("query-s gashvebisas moxda shecdoma. (getId");

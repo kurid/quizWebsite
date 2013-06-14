@@ -26,14 +26,16 @@
 	<table align="center">
 		<% if(searchedAccounts != null){
 			for (Account acc : searchedAccounts) {
-				out.println("<tr><td>"
-						+ "<form action=\"DeleteAccount\" method=\"post\"> "
-						+ acc.getNickname()
-						+ "<input type = \"submit\" value = \"delete\" /> <input type=\"hidden\" name=\"name\" value=\""
-						+ acc.getNickname() + "\"> </form>");
-				out.println( "<form action=\"PromoteAccount\" method=\"post\"> "
-						+ "<input type = \"submit\" value = \"promote\" /> <input type=\"hidden\" name=\"name\" value=\""
-						+ acc.getId() + "\"> </form></td></tr>");
+				if(acc.getId()!=((Account)session.getAttribute("account")).getId()){
+					out.println("<tr><td>"
+							+ "<form action=\"DeleteAccount\" method=\"post\"> "
+							+ acc.getNickname()
+							+ "<input type = \"submit\" value = \"delete\" /> <input type=\"hidden\" name=\"name\" value=\""
+							+ acc.getNickname() + "\"> </form>");
+					out.println( "<form action=\"PromoteAccount\" method=\"post\"> "
+							+ "<input type = \"submit\" value = \"promote\" /> <input type=\"hidden\" name=\"name\" value=\""
+							+ acc.getId() + "\"> </form></td></tr>");
+				}
 			}
 		}
 		%>
