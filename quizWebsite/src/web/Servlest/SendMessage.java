@@ -41,9 +41,9 @@ public class SendMessage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Account sender = (Account)session.getAttribute("account");
-		Account receiver = (Account)session.getAttribute("account");
+		Account receiver = (Account)session.getAttribute("userAccount");
 		String messageText = request.getParameter("messageText");
-		MyDB.sendMessage(receiver.getId(), sender.getId(), messageText);
+		MyDB.sendMessage( receiver.getId(),sender.getId(), messageText);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("UserProfile.jsp");
 		dispatcher.forward(request, response);
 	}

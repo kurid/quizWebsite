@@ -47,6 +47,7 @@ public class MessageServlet extends HttpServlet {
 		List<String> names = new ArrayList<String>();
 		for(int i = 0; i < messages.size(); i++){
 			names.add(MyDB.getNickName(messages.get(i).sender()));
+			MyDB.markAsRead(messages.get(i).reciever());
 		}
 		request.setAttribute("names", names);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ShowMessages.jsp");
