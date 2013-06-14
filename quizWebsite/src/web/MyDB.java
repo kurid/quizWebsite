@@ -214,6 +214,14 @@ public class MyDB {
 		return getter(id, "mail");
 	}
 	
+	public static Boolean isAdmin(int id) {
+		String admin =  getter(id, "Achievements");
+		if(admin.equals("admin")){
+			return true;
+		}
+		return false;
+	}
+	
 	
 	/**
 	 * 

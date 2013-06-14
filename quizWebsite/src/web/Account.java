@@ -4,12 +4,13 @@ public class Account {
 	
 	private int id;
 	private String name, surname, nickname;
-	
+	boolean isAdmin;
 	public Account(int id){
 		this.id = id;
 		name = MyDB.getName(id);
 		surname = MyDB.getSurname(id);
 		nickname = MyDB.getNickName(id);
+		isAdmin = MyDB.isAdmin(id);
 	}
 	/**
 	 * 
