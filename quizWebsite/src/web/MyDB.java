@@ -274,7 +274,7 @@ public class MyDB {
 
 	public static List<FriendRequest> getRequest(int idTo) {
 		ResultSet res;
-		String query = "SELECT * FROM messages WHERE accountIdTo = " + idTo + ";";
+		String query = "SELECT * FROM friendrequests WHERE accountIdTo = " + idTo + ";";
 		List<FriendRequest> friendRequests = new ArrayList<FriendRequest>();
 		try {
 			res = statement.executeQuery(query);
@@ -747,9 +747,17 @@ public class MyDB {
 
 
 
-	public static void deleteFriendRequest(int id, int id2) {
-		// TODO Auto-generated method stub
-		
+	public static void deleteFriendRequest(int id1, int id2) {
+		String update = "DELETE FROM friendRequests WHERE " + "(accountIDTo = "
+				+ id1 + " AND accountIDFrom = " + id2 + ") OR (accountIDFrom = "
+				+ id1 + " AND accountIDTo = " + id2 + ");";
+		try {
+			statement.executeUpdate(update);
+		} catch (SQLException e) {
+			System.out.println("Error in deleteFriendRequest");
+			System.out.println(update);
+			e.printStackTrace();
+		}
 	}
 	
 }
