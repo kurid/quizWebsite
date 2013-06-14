@@ -1,6 +1,8 @@
 package web.Servlest;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import web.Account;
+import web.MyDB;
 
 /**
  * Servlet implementation class ShowHome
@@ -41,9 +46,27 @@ public class ShowHome extends HttpServlet {
 		Session.setAttribute("isFriend", false);
 		Session.setAttribute("userAccount", null);
 		Session.setAttribute("friendRequestExists", false);
-		Session.setAttribute("achievement", null);
+		Account myAccount = (Account) Session.getAttribute("account");
+		Session.setAttribute("achievement", getAchievement(myAccount.getId()));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
 		dispatcher.forward(request, response);		
+	}
+	
+	private String getAchievement(int clickedID) {
+		ResultSet res = MyDB.getDoneQuizzes(clickedID);
+		int count=0;
+		try {
+			while (res.next())
+				count++;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (count<Question.Finals.NEWBIE) return "No Achievements";
+		if (count<Question.Finals.QUIZ_SOLVER) return "Newbie";
+		if (count<Question.Finals.EXPERIENCED_SOLVER) return "Quiz solver";
+		if (count<Question.Finals.NOT_BAD) return "Experienced solver";
+		else return "Not bad, human! let's fuck.";
 	}
 
 }

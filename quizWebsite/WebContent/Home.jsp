@@ -10,6 +10,7 @@
 <body>
 		<%
 			Account acc = (Account)session.getAttribute("account");
+			String achievements = (String)session.getAttribute("achievement");
 		%>
 		<h2 align="center"> Home </h2>
 		<table align="center" width="40%">
@@ -24,6 +25,10 @@
 			<tr>
 				<td> User Surname: </td>
 				<td><%=acc.getSurname() %></td>
+			</tr>
+			<tr>
+				<td> achievements: </td>
+				<td> <%=achievements %> </td>
 			</tr>
 		</table>
 </body>

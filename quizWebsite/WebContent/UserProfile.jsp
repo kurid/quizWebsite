@@ -26,6 +26,7 @@
 			statement = "<tr><td> <form action=\"DeleteFriend\" method=\"post\">" 
 					+"<input type=\"submit\" value=\"Delete Friend\"/>" + "</form> </td></tr>";
 		}
+		String achievements = (String)session.getAttribute("achievement");
 	%>	
 	<h2 align="center"> <%=userAcc.getNickname() %> </h2>
 		<table align="center" width="40%">
@@ -40,6 +41,10 @@
 			<tr>
 				<td> User Surname: </td>
 				<td><%=userAcc.getSurname() %></td>
+			</tr>
+			<tr>
+				<td> achievements: </td>
+				<td> <%=achievements %> </td>
 			</tr>
 			<%=statement %>
 		</table>
