@@ -23,7 +23,9 @@
 				<td> <a href="Accounts.jsp" target="ActualInfo"> Accounts</a>  </td>
 				<td> <a href="GetFriendsServlet" target="ActualInfo"> Friends </a> </td>
 				<td> <a href="QuizzesDone" target="ActualInfo"> Quizzes Done </a> </td>
-				<td> <a href="Notifications" target="ActualInfo"> Notifications </a> </td>
+				<% 
+				out.println("<td> <a href=\"Notifications\" target=\"ActualInfo\"> Notifications("+ session.getAttribute("notificationNum") + ") </a> </td>");
+				%>
 				<td> <a href="QuizzesCreated" target="ActualInfo"> Quizzes Created </a> </td>
 			</tr>
 		</table>

@@ -65,8 +65,10 @@ public class RegisterServlet extends HttpServlet {
 		}else if(result == Manager.LONG_NICKNAME){
 			errorText = "Nickname is too long";
 		}else{		
-			request.getSession(true).setAttribute("account", new Account(result));
-			request.getSession(true).setAttribute("isLoggedIn", true);			
+			Account account = new Account(result);
+			request.getSession(true).setAttribute("account", account );
+			request.getSession(true).setAttribute("isLoggedIn", true);	
+			request.getSession().setAttribute("notificationNum", MyDB.notificationsNum(account.getId()));
 			jsp = "HomePage";		
 		}
 		request.getSession(true).setAttribute("registerText", errorText);

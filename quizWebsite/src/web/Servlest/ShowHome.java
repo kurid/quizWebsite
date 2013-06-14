@@ -47,6 +47,7 @@ public class ShowHome extends HttpServlet {
 		Session.setAttribute("userAccount", null);
 		Session.setAttribute("friendRequestExists", false);
 		Account myAccount = (Account) Session.getAttribute("account");
+		request.getSession().setAttribute("notificationNum", MyDB.notificationsNum(myAccount.getId()));
 		Session.setAttribute("achievement", getAchievement(myAccount.getId()));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
 		dispatcher.forward(request, response);		

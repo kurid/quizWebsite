@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import quiz.QuizHelper;
+import web.Account;
+import web.MyDB;
 
 /**
  * Servlet implementation class HomePage
