@@ -424,7 +424,8 @@ public class MyDB {
 	
 	
 	public static void sendFriendRequest(int idTo, int idFrom) {
-		String query = "INSERT INTO  friendrequests VALUES (" + idTo + "," + idFrom + ");";
+		String date = getCurrentTime();
+		String query = "INSERT INTO  friendrequests VALUES (" + idTo + ", " + idFrom + ", " + date + ");";
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
@@ -497,8 +498,12 @@ public class MyDB {
 		List<String> answers = answer.getAnswer();
 		addAnswers(answers, questionID, 1);
 		String url = q.getURL();
+		String sql = "INSERT INTO imageQuestion VALUES(?, ?);";
 		try {
-			statement.executeUpdate("INSERT INTO imageQuestion VALUES("+questionID+", \""+url+"\");" );
+			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			stat.setInt(1, questionID);
+			stat.setString(2, url);
+			stat.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Error in a addImageQuestion");
 			e.printStackTrace();
@@ -514,9 +519,12 @@ public class MyDB {
 			try{
 				String answer1 = correctMatches.get(i).get(0);
 				String answer2 = correctMatches.get(i).get(1);
-				String query = "INSERT INTO matching VALUES (\"" + questionID + "\", \""
-					      + answer1 + "\", \"" + answer2 + "\");";
-				statement.executeUpdate(query);
+				String sql = "INSERT INTO matching VALUES (?,?,?);";
+				PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+				stat.setInt(1, questionID);
+				stat.setString(2, answer1);
+				stat.setString(3, answer2);
+				stat.executeUpdate();
 			} catch (SQLException e){
 				System.out.println("Error in addMatchingQuestion");
 				e.printStackTrace();
@@ -537,10 +545,11 @@ public class MyDB {
 					isCorrect = "true";
 				else
 					isCorrect = "false";
-				String query = "INSERT INTO multipleChoice VALUES (" + questionID
-						+ ",\"" + possibleAnswer + "\", " + isCorrect + ");";
-				System.out.println("query " + query);
-				statement.executeUpdate(query);
+				String sql =  "INSERT INTO multipleChoice VALUES (?,?, " + isCorrect + ");";
+				PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+				stat.setInt(1, questionID);
+				stat.setString(2, possibleAnswer);
+				stat.executeUpdate();
 			}
 		} catch (SQLException e) {
 			System.out.println("Error in addMultipleChoiceQuestion");
@@ -561,10 +570,11 @@ public class MyDB {
 					isCorrect = "true";
 				else
 					isCorrect = "false";
-				String query = "INSERT INTO multipleChoice VALUES ("
-						+ questionID + ", " + possibleAnswer + ", " + isCorrect
-						+ ");";
-				statement.executeUpdate(query);
+				String sql = "INSERT INTO multipleChoice VALUES (?, ?, " + isCorrect+ ");";
+				PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+				stat.setInt(1, questionID);
+				stat.setString(2, possibleAnswer);
+				stat.executeUpdate();
 			}
 		} catch (SQLException e) {
 			System.out.println("Error in addMCMAQuestion");
@@ -579,7 +589,14 @@ public class MyDB {
 			String query = "SELECT addQuestion(" + q.getType() + ", \""
 					+ q.getQuestionText() + "\", " + q.getScore() + ", "
 					+ q.getIndex() + ");";
-			ResultSet res = statement.executeQuery(query);
+			
+			String sql = "SELECT addQuestion(?, ?, ?, ?);";
+			PreparedStatement stat = (PreparedStatement) connection.prepareStatement(sql);
+			stat.setInt(1, q.getType());
+			stat.setString(2, q.getQuestionText());
+			stat.setInt(3, q.getScore());
+			stat.setInt(4, q.getIndex());
+			ResultSet res = stat.executeQuery();
 			res.next();
 			questionID = res.getInt(1);
 		} catch (SQLException e) {
@@ -617,7 +634,7 @@ public class MyDB {
 	
 	public static List<Integer> searchUser(String subName){
 		List<Integer> result = new ArrayList<Integer>();
-		String query = "SELECT accountID FROM accounts WHERE nick like \"%" + subName + "%\";";
+		String query = "SELECT accountID FROM accounts WHERE nick LIKE \"%" + subName + "%\";";
 		ResultSet res;
 		try {
 			res = statement.executeQuery(query);
