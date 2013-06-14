@@ -13,6 +13,11 @@
 	<%
 		Account account  = (Account)session.getAttribute("account");
 		String accountName = account.getNickname();
+		boolean isAdmin = account.isAdmin();
+		String statement = new String();
+		if(isAdmin){
+			statement = "<a href=\"AdminPanel\" target=\"AccountInfo\"> Admin </a>";
+		}else statement = "";
 	%>
 	<table>
 		<tr>
@@ -24,6 +29,9 @@
 		</tr>
 		<tr> 
 			<td><a href="LogoutServlet" target="_top">  Logout</a></td>
+		</tr>
+		<tr> 
+			<td> <%=statement %>
 		</tr>
 	</table>
 	<hr>
