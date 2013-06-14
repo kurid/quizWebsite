@@ -44,7 +44,7 @@ public class SendMessage extends HttpServlet {
 		Account receiver = (Account)session.getAttribute("account");
 		String messageText = request.getParameter("messageText");
 		MyDB.sendMessage(receiver.getId(), sender.getId(), messageText);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("AccountWindow.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UserProfile.jsp");
 		dispatcher.forward(request, response);
 	}
 
