@@ -793,4 +793,14 @@ public class MyDB {
 		return res;
 	}
 	
+	public static void deleteQuiz(int quizID){
+		String sql = "DELETE FROM quizes WHERE quizID = " + quizID + ";";
+		try {
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			System.out.println(sql);
+			e.printStackTrace();
+		}
+	}
+	
 }
