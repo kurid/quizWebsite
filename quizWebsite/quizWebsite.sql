@@ -202,9 +202,9 @@ from takenquizes, quizes
 where quizes.quizID = takenquizes.quizID;
 
 
-drop view if EXISTS chalangeQuiz;
+drop view if EXISTS challengeQuiz;
 
-create view chalangeQuiz as
+create view challengeQuiz as
 select accountIdTo,accountIdFrom,challenges.quizID, sendTime,authorID, name, quiz_create_date, description
 from challenges, quizes
-where challenges.quizID = quizes.quizID
+where challenges.quizID = quizes.quizID;
