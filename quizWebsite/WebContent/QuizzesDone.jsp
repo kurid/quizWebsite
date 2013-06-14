@@ -17,6 +17,7 @@
 <body>
 	<h2 align="center">Quizzes History</h2>
 <table>
+
 	<tr>
 		<th>QUIZ NAME</th>
 		<th>TIME</th>
