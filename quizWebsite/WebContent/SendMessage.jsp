@@ -10,8 +10,10 @@
 <body>
 	<%Account receiver = (Account)session.getAttribute("userAccount"); %>
 	<h4>you are sending message to <%=receiver.getNickname() %></h4>
-	<form action="SendMessage" method = "post">
-		<input type="text" name="messageText">
+	<form action="SendMessage" method = "post">		
+		<textarea cols="40" rows="10" name="messageText">		
+		</textarea>
+		<br>
 		<input type="submit" value="Submit"/>
 	</form>
 </body>
