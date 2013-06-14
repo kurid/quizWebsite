@@ -719,15 +719,29 @@ public class MyDB {
 
 
 
-	public static void deleteFriendship(int id, int id2) {
-		// TODO Auto-generated method stub
-		
+	public static void deleteFriendship(int id1, int id2) {
+		String update = "DELETE FROM friendships WHERE " + "(accountID1 = "
+				+ id1 + " AND accountID2 = " + id2 + ") OR (accountID2 = "
+				+ id1 + " AND accountID1 = " + id2 + ");";
+		try {
+			statement.executeUpdate(update);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 
 	public static boolean friendRequestExists(int idFrom, int idTo) {
-		// TODO Auto-generated method stub
+		String query  = "SELECT * FROM friendRequests WHERE accountIdTo = "+ idTo + " AND accountIdFrom = " + idFrom + ";";
+		try {
+			ResultSet res = statement.executeQuery(query);
+			if(res.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
