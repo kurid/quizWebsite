@@ -23,13 +23,9 @@
 	<p><%=name%></p>
 	<p><%=description%></p>
 	<%
-		if((Boolean)session.getAttribute("isLoggedIn")){
-			out.println("<a href=\"AccountServlet?ID=" + autor.getId()
-					+ "\" target =\"AccountWindow\"> " +" by: " +autor.getNickname()
-					+ "</a>");
-		}else{
-			out.println("by : "+autor.getNickname());
-		}
+		
+		out.println("by : "+autor.getNickname());
+		
 		out.println("<br>");
 	%>
 	<form action="BeforeFirstQuestion" method="post" target=<%=target%>>
