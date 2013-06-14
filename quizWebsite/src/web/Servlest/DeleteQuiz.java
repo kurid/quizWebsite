@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import web.MyDB;
+
 /**
  * Servlet implementation class DeleteQuiz
  */
@@ -33,7 +35,8 @@ public class DeleteQuiz extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("name"));
+		int quizID = Integer.parseInt(request.getParameter("name"));
+		MyDB.deleteQuiz(quizID);
 	}
 
 }
