@@ -9,14 +9,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<table align="center">
+	<%
+		boolean isFriend = (Boolean)session.getAttribute("isFriend");
+		String statement;
+		if(isFriend){
+			statement = "<td> <a href=\"GetFriendsServlet\" target =\"ActualInfo\"> Friends </a> </td>"
+					+ "<td> <a href=\"QuizzesDone\" target =\"ActualInfo\"> Quizzes Done </a> </td>" 
+					+ "<td> <a href=\"QuizzesCreated\" target = \"ActualInfo\"> Quizzes Created </a> </td>"
+					+ "<td> <a href=\"SendMessage.jsp\" target = \"ActualInfo\"> Send Message </a> </td>";
+		}else statement = ""; 
+	%>
+	<table align="center" cellspacing="20">
 		<tr>
-			<td width="20%"> <a href="UserProfile.jsp" target ="ActualInfo"> Profile </a> </td>
-			<td width="20%"> <a href="GetFriendsServlet" target ="ActualInfo"> Friends </a> </td>
-			<td width="20%"> <a href="QuizzesDone" target ="ActualInfo"> Quizzes Done </a> </td>
-			<td width="20%"> <a href="QuizzesCreated" target = "ActualInfo"> Quizzes Created </a> </td>
-			<td width="20%"> <a href="SendMessage.jsp" target = "ActualInfo"> Send Message </a> </td>
+			<td> <a href="UserProfile.jsp" target ="ActualInfo"> Profile </a> </td>
+			<%=statement %>
 		</tr>
 	</table>
 </body>
